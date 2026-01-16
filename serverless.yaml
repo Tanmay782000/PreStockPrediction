@@ -1,0 +1,163 @@
+service: SP-DynamoDB-Tables
+
+provider:
+  name: aws
+  region: ap-south-1
+
+resources:
+  Resources:
+    CountryTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Country
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: countryId
+            AttributeType: N
+        KeySchema:
+          - AttributeName: countryId
+            KeyType: HASH
+
+ 
+    SiteReferencesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: SiteReferences
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: insightId
+            AttributeType: N
+          - AttributeName: countryId
+            AttributeType: N   # Optional if you want to index by country
+        KeySchema:
+          - AttributeName: insightId
+            KeyType: HASH
+        GlobalSecondaryIndexes:                # Optional, if you want queries by country
+          - IndexName: CountryIndex
+            KeySchema:
+              - AttributeName: countryId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+
+    StockTermsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: StockTerms
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: termId
+            AttributeType: N
+        KeySchema:
+          - AttributeName: termId
+            KeyType: HASH
+
+
+    StockCategoryTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: StockCategory
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: stockCategoryId
+            AttributeType: N
+          - AttributeName: countryId
+            AttributeType: N
+
+        KeySchema:
+          - AttributeName: stockCategoryId
+            KeyType: HASH
+
+        GlobalSecondaryIndexes:
+          - IndexName: CountryIndex
+            KeySchema:
+              - AttributeName: countryId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+
+
+    ResearchStepsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ResearchSteps
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: stepId
+            AttributeType: N
+
+        KeySchema:
+          - AttributeName: stepId
+            KeyType: HASH
+
+
+
+    UserCFTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: UserCF
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: cfId
+            AttributeType: N
+          - AttributeName: userIP
+            AttributeType: S
+
+        KeySchema:
+          - AttributeName: cfId
+            KeyType: HASH
+
+        GlobalSecondaryIndexes:
+          - IndexName: UserIPIndex
+            KeySchema:
+              - AttributeName: userIP
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+
+
+
+    StockPredictionsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: StockPredictions
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: bcktId
+            AttributeType: N
+          - AttributeName: cfId
+            AttributeType: N
+
+        KeySchema:
+          - AttributeName: bcktId
+            KeyType: HASH
+
+        GlobalSecondaryIndexes:
+          - IndexName: CFIndex
+            KeySchema:
+              - AttributeName: cfId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+
+
+    TokenHistory:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: TokenHistory
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: tokenId
+            AttributeType: N
+          - AttributeName: createdDate
+            AttributeType: S  
+
+        KeySchema:
+          - AttributeName: tokenId
+            KeyType: HASH
+          - AttributeName: createdDate
+            KeyType: RANGE

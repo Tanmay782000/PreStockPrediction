@@ -1,0 +1,924 @@
+{
+  "D:\\TMZ\\PreMarketStockPrediction\\serverless.yaml": {
+    "versionFramework": "4.30.0",
+    "servicePath": "D:\\TMZ\\PreMarketStockPrediction\\serverless.yaml",
+    "serviceConfigFileName": "serverless.yaml",
+    "service": {
+      "service": "SP-DynamoDB-Tables",
+      "provider": {
+        "name": "aws",
+        "region": "ap-south-1",
+        "stage": "dev",
+        "versionFunctions": true,
+        "compiledCloudFormationTemplate": {
+          "AWSTemplateFormatVersion": "2010-09-09",
+          "Description": "The AWS CloudFormation template for this Serverless application",
+          "Resources": {
+            "CountryTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "Country",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "countryId",
+                    "AttributeType": "N"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "countryId",
+                    "KeyType": "HASH"
+                  }
+                ]
+              }
+            },
+            "SiteReferencesTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "SiteReferences",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "insightId",
+                    "AttributeType": "N"
+                  },
+                  {
+                    "AttributeName": "countryId",
+                    "AttributeType": "N"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "insightId",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "GlobalSecondaryIndexes": [
+                  {
+                    "IndexName": "CountryIndex",
+                    "KeySchema": [
+                      {
+                        "AttributeName": "countryId",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "Projection": {
+                      "ProjectionType": "ALL"
+                    }
+                  }
+                ]
+              }
+            },
+            "StockTermsTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "StockTerms",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "termId",
+                    "AttributeType": "N"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "termId",
+                    "KeyType": "HASH"
+                  }
+                ]
+              }
+            },
+            "StockCategoryTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "StockCategory",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "stockCategoryId",
+                    "AttributeType": "N"
+                  },
+                  {
+                    "AttributeName": "countryId",
+                    "AttributeType": "N"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "stockCategoryId",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "GlobalSecondaryIndexes": [
+                  {
+                    "IndexName": "CountryIndex",
+                    "KeySchema": [
+                      {
+                        "AttributeName": "countryId",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "Projection": {
+                      "ProjectionType": "ALL"
+                    }
+                  }
+                ]
+              }
+            },
+            "ResearchStepsTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "ResearchSteps",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "stepId",
+                    "AttributeType": "N"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "stepId",
+                    "KeyType": "HASH"
+                  }
+                ]
+              }
+            },
+            "UserCFTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "UserCF",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "cfId",
+                    "AttributeType": "N"
+                  },
+                  {
+                    "AttributeName": "userIP",
+                    "AttributeType": "S"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "cfId",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "GlobalSecondaryIndexes": [
+                  {
+                    "IndexName": "UserIPIndex",
+                    "KeySchema": [
+                      {
+                        "AttributeName": "userIP",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "Projection": {
+                      "ProjectionType": "ALL"
+                    }
+                  }
+                ]
+              }
+            },
+            "StockPredictionsTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "StockPredictions",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "bcktId",
+                    "AttributeType": "N"
+                  },
+                  {
+                    "AttributeName": "cfId",
+                    "AttributeType": "N"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "bcktId",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "GlobalSecondaryIndexes": [
+                  {
+                    "IndexName": "CFIndex",
+                    "KeySchema": [
+                      {
+                        "AttributeName": "cfId",
+                        "KeyType": "HASH"
+                      }
+                    ],
+                    "Projection": {
+                      "ProjectionType": "ALL"
+                    }
+                  }
+                ]
+              }
+            },
+            "TokenHistory": "<REDACTED>"
+          },
+          "Outputs": {
+            "ServerlessDeploymentBucketName": {
+              "Value": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+              "Export": {
+                "Name": "sls-SP-DynamoDB-Tables-dev-ServerlessDeploymentBucketName"
+              }
+            }
+          }
+        }
+      },
+      "resources": {
+        "Resources": {
+          "CountryTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "Country",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "countryId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "SiteReferencesTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "SiteReferences",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "insightId",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "insightId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "CountryIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "countryId",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ]
+            }
+          },
+          "StockTermsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "StockTerms",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "termId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "termId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "StockCategoryTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "StockCategory",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "stockCategoryId",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "stockCategoryId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "CountryIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "countryId",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ]
+            }
+          },
+          "ResearchStepsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "ResearchSteps",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "stepId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "stepId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "UserCFTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "UserCF",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "cfId",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "userIP",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "cfId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "UserIPIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "userIP",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ]
+            }
+          },
+          "StockPredictionsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "StockPredictions",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "bcktId",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "cfId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "bcktId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "CFIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "cfId",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ]
+            }
+          },
+          "TokenHistory": "<REDACTED>"
+        },
+        "Outputs": {}
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "region": "ap-south-1",
+      "stage": "dev",
+      "versionFunctions": true,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "CountryTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "Country",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "countryId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "SiteReferencesTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "SiteReferences",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "insightId",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "insightId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "CountryIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "countryId",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ]
+            }
+          },
+          "StockTermsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "StockTerms",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "termId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "termId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "StockCategoryTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "StockCategory",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "stockCategoryId",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "stockCategoryId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "CountryIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "countryId",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ]
+            }
+          },
+          "ResearchStepsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "ResearchSteps",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "stepId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "stepId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "UserCFTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "UserCF",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "cfId",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "userIP",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "cfId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "UserIPIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "userIP",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ]
+            }
+          },
+          "StockPredictionsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "StockPredictions",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "bcktId",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "cfId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "bcktId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "CFIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "cfId",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ]
+            }
+          },
+          "TokenHistory": "<REDACTED>"
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+            "Export": {
+              "Name": "sls-SP-DynamoDB-Tables-dev-ServerlessDeploymentBucketName"
+            }
+          }
+        }
+      }
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "serviceRawFile": "service: SP-DynamoDB-Tables\r\n\r\nprovider:\r\n  name: aws\r\n  region: ap-south-1\r\n\r\nresources:\r\n  Resources:\r\n    CountryTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: Country\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: countryId\r\n            KeyType: HASH\r\n\r\n \r\n    SiteReferencesTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: SiteReferences\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: insightId\r\n            AttributeType: N\r\n          - AttributeName: countryId\r\n            AttributeType: N   # Optional if you want to index by country\r\n        KeySchema:\r\n          - AttributeName: insightId\r\n            KeyType: HASH\r\n        GlobalSecondaryIndexes:                # Optional, if you want queries by country\r\n          - IndexName: CountryIndex\r\n            KeySchema:\r\n              - AttributeName: countryId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n    StockTermsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: StockTerms\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: termId\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: termId\r\n            KeyType: HASH\r\n\r\n\r\n    StockCategoryTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: StockCategory\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: stockCategoryId\r\n            AttributeType: N\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n\r\n        KeySchema:\r\n          - AttributeName: stockCategoryId\r\n            KeyType: HASH\r\n\r\n        GlobalSecondaryIndexes:\r\n          - IndexName: CountryIndex\r\n            KeySchema:\r\n              - AttributeName: countryId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n\r\n    ResearchStepsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: ResearchSteps\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: stepId\r\n            AttributeType: N\r\n\r\n        KeySchema:\r\n          - AttributeName: stepId\r\n            KeyType: HASH\r\n\r\n\r\n\r\n    UserCFTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: UserCF\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: cfId\r\n            AttributeType: N\r\n          - AttributeName: userIP\r\n            AttributeType: S\r\n\r\n        KeySchema:\r\n          - AttributeName: cfId\r\n            KeyType: HASH\r\n\r\n        GlobalSecondaryIndexes:\r\n          - IndexName: UserIPIndex\r\n            KeySchema:\r\n              - AttributeName: userIP\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n\r\n\r\n    StockPredictionsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: StockPredictions\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: bcktId\r\n            AttributeType: N\r\n          - AttributeName: cfId\r\n            AttributeType: N\r\n\r\n        KeySchema:\r\n          - AttributeName: bcktId\r\n            KeyType: HASH\r\n\r\n        GlobalSecondaryIndexes:\r\n          - IndexName: CFIndex\r\n            KeySchema:\r\n              - AttributeName: cfId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n\r\n    TokenHistory:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: TokenHistory\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: tokenId\r\n            AttributeType: N\r\n          - AttributeName: createdDate\r\n            AttributeType: S  \r\n\r\n        KeySchema:\r\n          - AttributeName: tokenId\r\n            KeyType: HASH\r\n          - AttributeName: createdDate\r\n            KeyType: RANGE",
+    "command": [
+      "deploy"
+    ],
+    "options": {},
+    "orgId": "5cb16750-759b-47b4-bad5-efd30d5e6a1e",
+    "orgName": "heliossolutions2024",
+    "userId": "zSs7GbfMkf1LNlTcsn",
+    "userName": "heliossolutions2024",
+    "serviceProviderAwsAccountId": "332717545786",
+    "serviceProviderAwsCfStackName": "SP-DynamoDB-Tables-dev",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ap-south-1:332717545786:stack/SP-DynamoDB-Tables-dev/3fb797f0-f04d-11f0-80ef-0aa932e61479",
+    "serviceProviderAwsCfStackCreated": "2026-01-13T06:58:22.159Z",
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": "CREATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+        "ExportName": "sls-SP-DynamoDB-Tables-dev-ServerlessDeploymentBucketName"
+      }
+    ],
+    "compiledCloudFormationTemplate": {
+      "AWSTemplateFormatVersion": "2010-09-09",
+      "Description": "The AWS CloudFormation template for this Serverless application",
+      "Resources": {
+        "CountryTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "Country",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "countryId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "countryId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
+        },
+        "SiteReferencesTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "SiteReferences",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "insightId",
+                "AttributeType": "N"
+              },
+              {
+                "AttributeName": "countryId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "insightId",
+                "KeyType": "HASH"
+              }
+            ],
+            "GlobalSecondaryIndexes": [
+              {
+                "IndexName": "CountryIndex",
+                "KeySchema": [
+                  {
+                    "AttributeName": "countryId",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "Projection": {
+                  "ProjectionType": "ALL"
+                }
+              }
+            ]
+          }
+        },
+        "StockTermsTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "StockTerms",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "termId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "termId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
+        },
+        "StockCategoryTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "StockCategory",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "stockCategoryId",
+                "AttributeType": "N"
+              },
+              {
+                "AttributeName": "countryId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "stockCategoryId",
+                "KeyType": "HASH"
+              }
+            ],
+            "GlobalSecondaryIndexes": [
+              {
+                "IndexName": "CountryIndex",
+                "KeySchema": [
+                  {
+                    "AttributeName": "countryId",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "Projection": {
+                  "ProjectionType": "ALL"
+                }
+              }
+            ]
+          }
+        },
+        "ResearchStepsTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "ResearchSteps",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "stepId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "stepId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
+        },
+        "UserCFTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "UserCF",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "cfId",
+                "AttributeType": "N"
+              },
+              {
+                "AttributeName": "userIP",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "cfId",
+                "KeyType": "HASH"
+              }
+            ],
+            "GlobalSecondaryIndexes": [
+              {
+                "IndexName": "UserIPIndex",
+                "KeySchema": [
+                  {
+                    "AttributeName": "userIP",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "Projection": {
+                  "ProjectionType": "ALL"
+                }
+              }
+            ]
+          }
+        },
+        "StockPredictionsTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "StockPredictions",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "bcktId",
+                "AttributeType": "N"
+              },
+              {
+                "AttributeName": "cfId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "bcktId",
+                "KeyType": "HASH"
+              }
+            ],
+            "GlobalSecondaryIndexes": [
+              {
+                "IndexName": "CFIndex",
+                "KeySchema": [
+                  {
+                    "AttributeName": "cfId",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "Projection": {
+                  "ProjectionType": "ALL"
+                }
+              }
+            ]
+          }
+        },
+        "TokenHistory": "<REDACTED>"
+      },
+      "Outputs": {
+        "ServerlessDeploymentBucketName": {
+          "Value": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+          "Export": {
+            "Name": "sls-SP-DynamoDB-Tables-dev-ServerlessDeploymentBucketName"
+          }
+        }
+      }
+    }
+  }
+}
