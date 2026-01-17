@@ -161,3 +161,7 @@ resources:
             KeyType: HASH
           - AttributeName: createdDate
             KeyType: RANGE
+
+
+
+    
