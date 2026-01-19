@@ -17,7 +17,6 @@ resources:
         KeySchema:
           - AttributeName: countryId
             KeyType: HASH
-
  
     SiteReferencesTable:
       Type: AWS::DynamoDB::Table
@@ -52,7 +51,6 @@ resources:
           - AttributeName: termId
             KeyType: HASH
 
-
     StockCategoryTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -76,7 +74,6 @@ resources:
             Projection:
               ProjectionType: ALL
 
-
     ResearchStepsTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -91,8 +88,6 @@ resources:
           - AttributeName: stepId
             KeyType: HASH
 
-
-
     UserCFTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -101,7 +96,7 @@ resources:
 
         AttributeDefinitions:
           - AttributeName: cfId
-            AttributeType: N
+            AttributeType: S
           - AttributeName: userIP
             AttributeType: S
 
@@ -116,8 +111,6 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: ALL
-
-
 
     StockPredictionsTable:
       Type: AWS::DynamoDB::Table
@@ -143,7 +136,6 @@ resources:
             Projection:
               ProjectionType: ALL
 
-
     TokenHistory:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -151,17 +143,10 @@ resources:
         BillingMode: PAY_PER_REQUEST
 
         AttributeDefinitions:
-          - AttributeName: tokenId
-            AttributeType: N
-          - AttributeName: createdDate
-            AttributeType: S  
+          - AttributeName: username
+            AttributeType: S
 
         KeySchema:
-          - AttributeName: tokenId
+          - AttributeName: username
             KeyType: HASH
-          - AttributeName: createdDate
-            KeyType: RANGE
 
-
-
-    

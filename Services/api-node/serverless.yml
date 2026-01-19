@@ -1,0 +1,40 @@
+service: SP-Node-Lambda-Functions
+provider:
+  name: aws
+  region: ap-south-1
+  runtime: nodejs18.x
+  environment:
+    JWT_SECRET: "iamworkinginheliosassoftwareengineer"
+    CountryTable: Country
+    TokenHistoryTable: TokenHistory
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:Query
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+          Resource:
+            - arn:aws:dynamodb:ap-south-1:332717545786:table/*
+
+plugins:
+  - serverless-offline
+
+functions:
+  getCountries:
+    handler: handlers/country.get
+    events:
+      - http:
+          path: countries
+          method: get
+
+  postToken:
+    handler: Common/auth.tokengeneration
+    events:
+      - http:
+          path: tokengeneration
+          method: put

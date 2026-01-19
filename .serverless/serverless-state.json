@@ -152,7 +152,7 @@
               "AttributeDefinitions": [
                 {
                   "AttributeName": "cfId",
-                  "AttributeType": "N"
+                  "AttributeType": "S"
                 },
                 {
                   "AttributeName": "userIP",
@@ -225,22 +225,14 @@
               "BillingMode": "PAY_PER_REQUEST",
               "AttributeDefinitions": [
                 {
-                  "AttributeName": "tokenId",
-                  "AttributeType": "N"
-                },
-                {
-                  "AttributeName": "createdDate",
+                  "AttributeName": "username",
                   "AttributeType": "S"
                 }
               ],
               "KeySchema": [
                 {
-                  "AttributeName": "tokenId",
+                  "AttributeName": "username",
                   "KeyType": "HASH"
-                },
-                {
-                  "AttributeName": "createdDate",
-                  "KeyType": "RANGE"
                 }
               ]
             }
@@ -399,7 +391,7 @@
             "AttributeDefinitions": [
               {
                 "AttributeName": "cfId",
-                "AttributeType": "N"
+                "AttributeType": "S"
               },
               {
                 "AttributeName": "userIP",
@@ -472,22 +464,14 @@
             "BillingMode": "PAY_PER_REQUEST",
             "AttributeDefinitions": [
               {
-                "AttributeName": "tokenId",
-                "AttributeType": "N"
-              },
-              {
-                "AttributeName": "createdDate",
+                "AttributeName": "username",
                 "AttributeType": "S"
               }
             ],
             "KeySchema": [
               {
-                "AttributeName": "tokenId",
+                "AttributeName": "username",
                 "KeyType": "HASH"
-              },
-              {
-                "AttributeName": "createdDate",
-                "KeyType": "RANGE"
               }
             ]
           }
@@ -511,7 +495,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1768287499309-2026-01-13T06:58:19.309Z",
+    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1768826133676-2026-01-19T12:35:33.676Z",
     "artifact": ""
   }
 }
