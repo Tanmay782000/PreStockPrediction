@@ -7,7 +7,8 @@ provider:
     JWT_SECRET: "iamworkinginheliosassoftwareengineer"
     CountryTable: Country
     TokenHistoryTable: TokenHistory
-
+    StockTermTable: StockTerms
+    
   iam:
     role:
       statements:
@@ -38,3 +39,17 @@ functions:
       - http:
           path: tokengeneration
           method: put
+
+  getStockTerms:
+    handler: handlers/stockTerm.get
+    events:
+      - http:
+          path: stockterms
+          method: get
+
+  getStockCategory:
+    handler: handlers/stockCategory.get
+    events:
+      - http:
+          path: stockcategory
+          method: get

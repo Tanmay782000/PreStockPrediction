@@ -61,11 +61,9 @@ resources:
             AttributeType: N
           - AttributeName: countryId
             AttributeType: N
-
         KeySchema:
           - AttributeName: stockCategoryId
             KeyType: HASH
-
         GlobalSecondaryIndexes:
           - IndexName: CountryIndex
             KeySchema:

@@ -20,7 +20,7 @@ exports.get = async (event) => {
     console.log("Error fetching countries:", err);
     return {
       statusCode: err.statusCode,
-      body: JSON.stringify({ error: err.message }),
+      body: JSON.stringify({ error: err }),
     };
   }
 };

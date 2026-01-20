@@ -8,6 +8,24 @@
         "LogGroupName": "/aws/lambda/SP-Node-Lambda-Functions-dev-getCountries"
       }
     },
+    "PostTokenLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/SP-Node-Lambda-Functions-dev-postToken"
+      }
+    },
+    "GetStockTermsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/SP-Node-Lambda-Functions-dev-getStockTerms"
+      }
+    },
+    "GetStockCategoryLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/SP-Node-Lambda-Functions-dev-getStockCategory"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -102,7 +120,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1768814549852-2026-01-19T09:22:29.852Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1768911207312-2026-01-20T12:13:27.312Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/country.get",
         "Runtime": "nodejs18.x",
@@ -111,7 +129,10 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "CountryTable": "Country"
+            "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
+            "CountryTable": "Country",
+            "TokenHistoryTable": "TokenHistory",
+            "StockTermTable": "StockTerms"
           }
         },
         "Role": {
@@ -125,14 +146,137 @@
         "GetCountriesLogGroup"
       ]
     },
-    "GetCountriesLambdaVersionTZ4vt83QimafX8CV0knK2XyOHPbuEZoHEI1NMUQg": {
+    "PostTokenLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1768911207312-2026-01-20T12:13:27.312Z/SP-Node-Lambda-Functions.zip"
+        },
+        "Handler": "Common/auth.tokengeneration",
+        "Runtime": "nodejs18.x",
+        "FunctionName": "SP-Node-Lambda-Functions-dev-postToken",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
+            "CountryTable": "Country",
+            "TokenHistoryTable": "TokenHistory",
+            "StockTermTable": "StockTerms"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "PostTokenLogGroup"
+      ]
+    },
+    "GetStockTermsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1768911207312-2026-01-20T12:13:27.312Z/SP-Node-Lambda-Functions.zip"
+        },
+        "Handler": "handlers/stockTerm.get",
+        "Runtime": "nodejs18.x",
+        "FunctionName": "SP-Node-Lambda-Functions-dev-getStockTerms",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
+            "CountryTable": "Country",
+            "TokenHistoryTable": "TokenHistory",
+            "StockTermTable": "StockTerms"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetStockTermsLogGroup"
+      ]
+    },
+    "GetStockCategoryLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1768911207312-2026-01-20T12:13:27.312Z/SP-Node-Lambda-Functions.zip"
+        },
+        "Handler": "handlers/stockCategory.get",
+        "Runtime": "nodejs18.x",
+        "FunctionName": "SP-Node-Lambda-Functions-dev-getStockCategory",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
+            "CountryTable": "Country",
+            "TokenHistoryTable": "TokenHistory",
+            "StockTermTable": "StockTerms"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetStockCategoryLogGroup"
+      ]
+    },
+    "GetCountriesLambdaVersionAV3JLfzCF7RE2I2ZiNnlgLh0anFQGihWG74c6PM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetCountriesLambdaFunction"
         },
-        "CodeSha256": "MG81TD1rSo17pIScMUqkEzzUp3FjxmSvxT6R+oJ4l40="
+        "CodeSha256": "pXa7pQBrM3FhX7c/FnkhVvQcDmsO144K186CmhnV2VY="
+      }
+    },
+    "PostTokenLambdaVersionXQVVHIX6DaFcgsCzqDDjXzbbMUuEPuSuxpYNnVOdU": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "PostTokenLambdaFunction"
+        },
+        "CodeSha256": "pXa7pQBrM3FhX7c/FnkhVvQcDmsO144K186CmhnV2VY="
+      }
+    },
+    "GetStockTermsLambdaVersionIc2yj0hHpUAFOBQB50OS8h2XBJfNpZyhE2O2Sk3Q": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetStockTermsLambdaFunction"
+        },
+        "CodeSha256": "pXa7pQBrM3FhX7c/FnkhVvQcDmsO144K186CmhnV2VY="
+      }
+    },
+    "GetStockCategoryLambdaVersionp6C8ar3J5CKwnW5DPP45BPtQtaMZAUvacrfmlMtto": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetStockCategoryLambdaFunction"
+        },
+        "CodeSha256": "pXa7pQBrM3FhX7c/FnkhVvQcDmsO144K186CmhnV2VY="
       }
     },
     "ApiGatewayRestApi": {
@@ -157,6 +301,51 @@
           ]
         },
         "PathPart": "countries",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceTokengeneration": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "tokengeneration",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceStockterms": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "stockterms",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceStockcategory": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "stockcategory",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -208,7 +397,145 @@
         "GetCountriesLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1768814542616": {
+    "ApiGatewayMethodTokengenerationPut": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "PUT",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceTokengeneration"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "PostTokenLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "PostTokenLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodStocktermsGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceStockterms"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetStockTermsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetStockTermsLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayMethodStockcategoryGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceStockcategory"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetStockCategoryLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "GetStockCategoryLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayDeployment1768911190525": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -217,7 +544,10 @@
         "StageName": "dev"
       },
       "DependsOn": [
-        "ApiGatewayMethodCountriesGet"
+        "ApiGatewayMethodCountriesGet",
+        "ApiGatewayMethodTokengenerationPut",
+        "ApiGatewayMethodStocktermsGet",
+        "ApiGatewayMethodStockcategoryGet"
       ]
     },
     "GetCountriesLambdaPermissionApiGateway": {
@@ -226,6 +556,117 @@
         "FunctionName": {
           "Fn::GetAtt": [
             "GetCountriesLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "PostTokenLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PostTokenLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetStockTermsLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetStockTermsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetStockCategoryLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetStockCategoryLambdaFunction",
             "Arn"
           ]
         },
@@ -268,10 +709,37 @@
     "GetCountriesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetCountriesLambdaVersionTZ4vt83QimafX8CV0knK2XyOHPbuEZoHEI1NMUQg"
+        "Ref": "GetCountriesLambdaVersionAV3JLfzCF7RE2I2ZiNnlgLh0anFQGihWG74c6PM"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetCountriesLambdaFunctionQualifiedArn"
+      }
+    },
+    "PostTokenLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "PostTokenLambdaVersionXQVVHIX6DaFcgsCzqDDjXzbbMUuEPuSuxpYNnVOdU"
+      },
+      "Export": {
+        "Name": "sls-SP-Node-Lambda-Functions-dev-PostTokenLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetStockTermsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetStockTermsLambdaVersionIc2yj0hHpUAFOBQB50OS8h2XBJfNpZyhE2O2Sk3Q"
+      },
+      "Export": {
+        "Name": "sls-SP-Node-Lambda-Functions-dev-GetStockTermsLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetStockCategoryLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetStockCategoryLambdaVersionp6C8ar3J5CKwnW5DPP45BPtQtaMZAUvacrfmlMtto"
+      },
+      "Export": {
+        "Name": "sls-SP-Node-Lambda-Functions-dev-GetStockCategoryLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
