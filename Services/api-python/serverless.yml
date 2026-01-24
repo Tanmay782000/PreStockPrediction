@@ -1,10 +1,29 @@
 service: sp-python-functions
-
 provider:
   name: aws
-  runtime: python3.11
   region: ap-south-1
+  runtime: python3.11
+
+plugins:
+  - serverless-offline
 
 functions:
-  getthecountrywisep:
+  marketSentimentLambda:
     handler: handlers/marketSentiment.handler
+    description: Internal Python Lambda invoked by Node Lambda
+    timeout: 30
+    # memorySize: 256
+
+outputs:
+  marketSentiment:
+    Description: ARN of internal Python Lambda
+    Value:
+      Fn::GetAtt:
+        - TargetLambdaLambdaFunction
+        - Arn
+    Export:
+      Name: sp-python-functions-dev-marketSentiment
+
+custom:
+  pythonRequirements:
+    dockerizePip: true

@@ -9,6 +9,8 @@ provider:
     TokenHistoryTable: TokenHistory
     StockTermTable: StockTerms
     UserCFTable: UserCF
+    #Lambdas
+
 
   iam:
     role:
@@ -22,6 +24,11 @@ provider:
             - dynamodb:UpdateItem
           Resource:
             - arn:aws:dynamodb:ap-south-1:332717545786:table/*
+        - Effect: Allow
+          Action:
+            - lambda:InvokeFunction
+          Resource: "*"
+
 
 plugins:
   - serverless-offline
@@ -62,3 +69,10 @@ functions:
       - http:
           path: userflow
           method: put
+
+  TestouterCall:
+    handler: handlers/test.apiHandler
+    events:
+      - http:
+          path: invoke
+          method: post

@@ -2571,5 +2571,226 @@
         }
       }
     }
+  },
+  "D:\\PreMarketAnalysis\\Services\\api-node\\serverless.yml": {
+    "versionFramework": "4.31.0",
+    "servicePath": "D:\\PreMarketAnalysis\\Services\\api-node\\serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "SP-Node-Lambda-Functions",
+      "provider": {
+        "name": "aws",
+        "region": "ap-south-1",
+        "runtime": "nodejs18.x",
+        "environment": {
+          "JWT_SECRET": "<REDACTED>",
+          "CountryTable": "Country",
+          "TokenHistoryTable": "<REDACTED>",
+          "StockTermTable": "StockTerms",
+          "UserCFTable": "UserCF"
+        },
+        "iam": {
+          "role": {
+            "statements": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "dynamodb:Scan",
+                  "dynamodb:GetItem",
+                  "dynamodb:Query",
+                  "dynamodb:PutItem",
+                  "dynamodb:UpdateItem"
+                ],
+                "Resource": [
+                  "arn:aws:dynamodb:ap-south-1:332717545786:table/*"
+                ]
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "lambda:InvokeFunction"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        },
+        "stage": "dev",
+        "versionFunctions": true
+      },
+      "plugins": [
+        "serverless-offline"
+      ],
+      "functions": {
+        "getCountries": {
+          "handler": "handlers/country.get",
+          "events": [
+            {
+              "http": {
+                "path": "countries",
+                "method": "get"
+              }
+            }
+          ]
+        },
+        "postToken": "<REDACTED>",
+        "getStockTerms": {
+          "handler": "handlers/stockTerm.get",
+          "events": [
+            {
+              "http": {
+                "path": "stockterms",
+                "method": "get"
+              }
+            }
+          ]
+        },
+        "getStockCategory": {
+          "handler": "handlers/stockCategory.get",
+          "events": [
+            {
+              "http": {
+                "path": "stockcategory",
+                "method": "get"
+              }
+            }
+          ]
+        },
+        "userFlow": {
+          "handler": "handlers/userFlow.get",
+          "events": [
+            {
+              "http": {
+                "path": "userflow",
+                "method": "put"
+              }
+            }
+          ]
+        },
+        "TestouterCall": {
+          "handler": "handler/test.apiHandler",
+          "events": [
+            {
+              "http": {
+                "path": "invoke",
+                "method": "post"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "region": "ap-south-1",
+      "runtime": "nodejs18.x",
+      "environment": {
+        "JWT_SECRET": "<REDACTED>",
+        "CountryTable": "Country",
+        "TokenHistoryTable": "<REDACTED>",
+        "StockTermTable": "StockTerms",
+        "UserCFTable": "UserCF"
+      },
+      "iam": {
+        "role": {
+          "statements": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Scan",
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem"
+              ],
+              "Resource": [
+                "arn:aws:dynamodb:ap-south-1:332717545786:table/*"
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "lambda:InvokeFunction"
+              ],
+              "Resource": "*"
+            }
+          ]
+        }
+      },
+      "stage": "dev",
+      "versionFunctions": true
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "error": {
+      "message": "Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.",
+      "stack": "ServerlessError2: Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.\n    at PluginManager.resolveServicePlugins (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:1801:4565)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async PluginManager.loadAllPlugins (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:1801:2753)\n    at async Serverless.init (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:1808:9844)\n    at async runFramework (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:1835:843)\n    at async TraditionalRunner.run (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:1831:28223)\n    at async route (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:2006:2848)\n    at async Object.run (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:2007:3879)\n    at async run2 (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:2007:5033)",
+      "code": "PLUGIN_NOT_FOUND"
+    },
+    "serviceRawFile": "service: SP-Node-Lambda-Functions\r\nprovider:\r\n  name: aws\r\n  region: ap-south-1\r\n  runtime: nodejs18.x\r\n  environment:\r\n    JWT_SECRET: \"iamworkinginheliosassoftwareengineer\"\r\n    CountryTable: Country\r\n    TokenHistoryTable: TokenHistory\r\n    StockTermTable: StockTerms\r\n    UserCFTable: UserCF\r\n    #Lambdas\r\n\r\n\r\n  iam:\r\n    role:\r\n      statements:\r\n        - Effect: Allow\r\n          Action:\r\n            - dynamodb:Scan\r\n            - dynamodb:GetItem\r\n            - dynamodb:Query\r\n            - dynamodb:PutItem\r\n            - dynamodb:UpdateItem\r\n          Resource:\r\n            - arn:aws:dynamodb:ap-south-1:332717545786:table/*\r\n        - Effect: Allow\r\n          Action:\r\n            - lambda:InvokeFunction\r\n          Resource: \"*\"\r\n\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nfunctions:\r\n  getCountries:\r\n    handler: handlers/country.get\r\n    events:\r\n      - http:\r\n          path: countries\r\n          method: get\r\n\r\n  postToken:\r\n    handler: Common/auth.tokengeneration\r\n    events:\r\n      - http:\r\n          path: tokengeneration\r\n          method: put\r\n\r\n  getStockTerms:\r\n    handler: handlers/stockTerm.get\r\n    events:\r\n      - http:\r\n          path: stockterms\r\n          method: get\r\n\r\n  getStockCategory:\r\n    handler: handlers/stockCategory.get\r\n    events:\r\n      - http:\r\n          path: stockcategory\r\n          method: get\r\n\r\n\r\n  userFlow:\r\n    handler: handlers/userFlow.get\r\n    events:\r\n      - http:\r\n          path: userflow\r\n          method: put\r\n\r\n  TestouterCall:\r\n    handler: handler/test.apiHandler\r\n    events:\r\n      - http:\r\n          path: invoke\r\n          method: post\r\n",
+    "command": [
+      "offline"
+    ],
+    "options": {},
+    "orgId": "5cb16750-759b-47b4-bad5-efd30d5e6a1e",
+    "orgName": "heliossolutions2024",
+    "userId": "zSs7GbfMkf1LNlTcsn",
+    "userName": "heliossolutions2024",
+    "serviceProviderAwsAccountId": "332717545786",
+    "serviceProviderAwsCfStackName": "SP-Node-Lambda-Functions-dev",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ap-south-1:332717545786:stack/SP-Node-Lambda-Functions-dev/5861c980-f514-11f0-9933-02e3748c6e57",
+    "serviceProviderAwsCfStackCreated": "2026-01-19T08:53:38.023Z",
+    "serviceProviderAwsCfStackUpdated": "2026-01-21T09:24:41.438Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "GetStockCategoryLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:332717545786:function:SP-Node-Lambda-Functions-dev-getStockCategory:3",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-SP-Node-Lambda-Functions-dev-GetStockCategoryLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UserFlowLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:332717545786:function:SP-Node-Lambda-Functions-dev-userFlow:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-SP-Node-Lambda-Functions-dev-UserFlowLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetStockTermsLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:332717545786:function:SP-Node-Lambda-Functions-dev-getStockTerms:3",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-SP-Node-Lambda-Functions-dev-GetStockTermsLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "PostTokenLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:332717545786:function:SP-Node-Lambda-Functions-dev-postToken:6",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-SP-Node-Lambda-Functions-dev-PostTokenLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetCountriesLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:332717545786:function:SP-Node-Lambda-Functions-dev-getCountries:8",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-SP-Node-Lambda-Functions-dev-GetCountriesLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServiceEndpoint",
+        "OutputValue": "https://d4guxgoca0.execute-api.ap-south-1.amazonaws.com/dev",
+        "Description": "URL of the service endpoint",
+        "ExportName": "sls-SP-Node-Lambda-Functions-dev-ServiceEndpoint"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+        "ExportName": "sls-SP-Node-Lambda-Functions-dev-ServerlessDeploymentBucketName"
+      }
+    ]
   }
 }
