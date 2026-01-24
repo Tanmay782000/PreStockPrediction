@@ -1,0 +1,10 @@
+service: sp-python-functions
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: ap-south-1
+
+functions:
+  getthecountrywisep:
+    handler: handlers/marketSentiment.handler

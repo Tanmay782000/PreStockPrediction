@@ -95,7 +95,7 @@ resources:
         AttributeDefinitions:
           - AttributeName: cfId
             AttributeType: S
-          - AttributeName: userIP
+          - AttributeName: tokenId
             AttributeType: S
 
         KeySchema:
@@ -103,9 +103,9 @@ resources:
             KeyType: HASH
 
         GlobalSecondaryIndexes:
-          - IndexName: UserIPIndex
+          - IndexName: UserTokenIndex
             KeySchema:
-              - AttributeName: userIP
+              - AttributeName: tokenId
                 KeyType: HASH
             Projection:
               ProjectionType: ALL

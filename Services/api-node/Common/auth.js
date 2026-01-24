@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { PutCommand } = require("@aws-sdk/lib-dynamodb");
+const { PutCommand,ScanCommand } = require("@aws-sdk/lib-dynamodb");
 const { client } = require("../db/dynamo.client");
 const { v4: uuid4 } = require('uuid');
 const TABLE = process.env.TokenHistoryTable;
@@ -15,7 +15,21 @@ module.exports.tokengeneration = async (event) => {
   console.log(username);
   // create token
   const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" });
-  const tokenId = uuid4(); 
+  let tokenId = uuid4(); 
+ 
+  const existingToken = await client.send(new ScanCommand({ 
+    TableName: TABLE, 
+    Key: { username: username }
+  }))
+
+  console.log("Existing Token:", existingToken.Items);
+  console.log("Existing Token Id:", existingToken.Items.tokenId);
+  if(existingToken.Items.length > 0){
+    console.log("Updating existing token for user:", username);
+    tokenId = existingToken.Items[0].tokenId;  
+  }
+
+  console.log("TOKEN ID",tokenId);
 
   // store token
   await client.send(new PutCommand({

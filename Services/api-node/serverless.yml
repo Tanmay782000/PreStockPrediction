@@ -8,7 +8,8 @@ provider:
     CountryTable: Country
     TokenHistoryTable: TokenHistory
     StockTermTable: StockTerms
-    
+    UserCFTable: UserCF
+
   iam:
     role:
       statements:
@@ -53,3 +54,11 @@ functions:
       - http:
           path: stockcategory
           method: get
+
+
+  userFlow:
+    handler: handlers/userFlow.get
+    events:
+      - http:
+          path: userflow
+          method: put

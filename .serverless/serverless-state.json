@@ -155,7 +155,7 @@
                   "AttributeType": "S"
                 },
                 {
-                  "AttributeName": "userIP",
+                  "AttributeName": "tokenId",
                   "AttributeType": "S"
                 }
               ],
@@ -167,10 +167,10 @@
               ],
               "GlobalSecondaryIndexes": [
                 {
-                  "IndexName": "UserIPIndex",
+                  "IndexName": "UserTokenIndex",
                   "KeySchema": [
                     {
-                      "AttributeName": "userIP",
+                      "AttributeName": "tokenId",
                       "KeyType": "HASH"
                     }
                   ],
@@ -394,7 +394,7 @@
                 "AttributeType": "S"
               },
               {
-                "AttributeName": "userIP",
+                "AttributeName": "tokenId",
                 "AttributeType": "S"
               }
             ],
@@ -406,10 +406,10 @@
             ],
             "GlobalSecondaryIndexes": [
               {
-                "IndexName": "UserIPIndex",
+                "IndexName": "UserTokenIndex",
                 "KeySchema": [
                   {
-                    "AttributeName": "userIP",
+                    "AttributeName": "tokenId",
                     "KeyType": "HASH"
                   }
                 ],
@@ -495,7 +495,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1768909014222-2026-01-20T11:36:54.222Z",
+    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1768975576686-2026-01-21T06:06:16.686Z",
     "artifact": ""
   }
 }

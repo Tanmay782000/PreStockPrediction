@@ -144,7 +144,7 @@
             "AttributeType": "S"
           },
           {
-            "AttributeName": "userIP",
+            "AttributeName": "tokenId",
             "AttributeType": "S"
           }
         ],
@@ -156,10 +156,10 @@
         ],
         "GlobalSecondaryIndexes": [
           {
-            "IndexName": "UserIPIndex",
+            "IndexName": "UserTokenIndex",
             "KeySchema": [
               {
-                "AttributeName": "userIP",
+                "AttributeName": "tokenId",
                 "KeyType": "HASH"
               }
             ],

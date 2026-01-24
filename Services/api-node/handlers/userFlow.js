@@ -1,30 +1,67 @@
-const { ScanCommand } = require("@aws-sdk/client-dynamodb");
-
-TABLE_TOKEN = "TokenHistory";
-TABLE_USER = "UserCF"
+const { PutCommand,ScanCommand } = require("@aws-sdk/lib-dynamodb");
+const { client } = require("../db/dynamo.client");
+const { verify } = require("../Common/auth.middleware");
+const { v4: uuid4 } = require('uuid');
+TABLE_TOKEN = process.env.TokenHistoryTable;
+TABLE_USER = process.env.UserCFTable
 
 exports.get = async (event) => {
 try{
     await verify(event);
-    const tokenid = event.body.tokenId 
 
-    const getTokeninfo = await client.send(new ScanCommand({
+    const { tokenId, stepId, typeId, value } = JSON.parse(event.body || "{}");
+
+    if (!tokenId) 
+      return { statusCode: 400, body: "tokenId required" }; 
+
+    const tokenRes  = await client.send(new ScanCommand({
         TableName: TABLE_TOKEN,
-        Key:{ tokenId: tokenid }
+        Key:{ tokenId: tokenId }
     }));
 
+    if (!tokenRes.Items)
+      return { statusCode: 400, body: "user not found" };
 
-    if(result.Items.length != 0){
-       //ADD LOGIC OF UPDATE
+    const userRes  = await client.send(new ScanCommand({ TableName: TABLE_USER, Key :  { tokenId: tokenRes.Items[0].tokenId }}));
+    const now = Date.now().toString();
+
+    let item = userRes.Item || {
+      cfId: uuid4(),
+      tokenId,
+      userStepId: stepId,
+      countryId: 1,
+      termId: 1,
+      stockCategoryId: 1,
+      createdDate: now
+    };
+
+    // apply change
+    switch(typeId){
+      case "countryChange": item.countryId = value; break;
+      case "termChange": item.termId = value; break;
+      case "stockCategoryChange": item.stockCategoryId = value; break;
+      default:
+        return { statusCode: 400, body: "invalid typeId" };
     }
+
+    item.userStepId = stepId;
+    item.modifiedDate = now;
+
+     await client.send(new PutCommand({
+      TableName: TABLE_USER,
+      Item: item
+    }));
+    
     return {
       statusCode: 200,
       body: JSON.stringify({
-        stockTerms: result.Items.sort((a, b) => a.termId - b.termId),
+        userData: "Record Inserted Successfully",
       }),
     };
 }
 catch(err) {
-
-}
-}
+  console.log("Error in user flow:", err);
+  return{
+    statusCode: err.statusCode,
+    body: JSON.stringify({ error: err }),
+  }}}
