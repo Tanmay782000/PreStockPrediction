@@ -21,10 +21,10 @@ module.exports.invokeLambda = async ({
 
     console.log("gone well");
   if (response.FunctionError) {
-    throw new Error(response.Payload);
+    throw new Error(JSON.parse(Buffer.from(response.Payload).toString("utf-8")));
   }
 
-  console.log("payload",response);
+  console.log("payload",JSON.parse(Buffer.from(response.Payload).toString("utf-8")));
 
   return response.Payload
     ? JSON.parse(Buffer.from(response.Payload).toString("utf-8"))

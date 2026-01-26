@@ -98,14 +98,62 @@
                   ]
                 }
               }
+            },
+            "MarketSentimentLambdaLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+                  "S3Key": "serverless/sp-python-functions/dev/1769451467431-2026-01-26T18:17:47.431Z/sp-python-functions.zip"
+                },
+                "Handler": "handlers/marketSentiment.handler",
+                "Runtime": "python3.11",
+                "FunctionName": "sp-python-functions-dev-marketSentimentLambda",
+                "MemorySize": 1024,
+                "Timeout": 30,
+                "Description": "Internal Python Lambda invoked by Node Lambda",
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "MarketSentimentLambdaLogGroup"
+              ]
+            },
+            "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "MarketSentimentLambdaLambdaFunction"
+                },
+                "CodeSha256": "cvdqDvM/JIUXvW0AxrKM3+28mkLAmY/ZHXwnx9tAv2I=",
+                "Description": "Internal Python Lambda invoked by Node Lambda"
+              }
             }
           },
           "Outputs": {
             "ServerlessDeploymentBucketName": {
-              "Value": "serverless-framework-deployments-ap-south-1-c93cf11a-8362"
+              "Value": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+              "Export": {
+                "Name": "sls-sp-python-functions-dev-ServerlessDeploymentBucketName"
+              }
+            },
+            "MarketSentimentLambdaLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E"
+              },
+              "Export": {
+                "Name": "sls-sp-python-functions-dev-MarketSentimentLambdaLambdaFunctionQualifiedArn"
+              }
             }
           }
-        }
+        },
+        "vpc": {}
       },
       "plugins": [
         "serverless-offline"
@@ -117,7 +165,11 @@
           "timeout": 30,
           "events": [],
           "name": "sp-python-functions-dev-marketSentimentLambda",
-          "module": "."
+          "package": {},
+          "memory": 1024,
+          "runtime": "python3.11",
+          "vpc": {},
+          "versionLogicalId": "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E"
         }
       },
       "outputs": {
@@ -132,11 +184,6 @@
           "Export": {
             "Name": "sp-python-functions-dev-marketSentiment"
           }
-        }
-      },
-      "custom": {
-        "pythonRequirements": {
-          "dockerizePip": true
         }
       }
     },
@@ -233,14 +280,62 @@
                 ]
               }
             }
+          },
+          "MarketSentimentLambdaLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+                "S3Key": "serverless/sp-python-functions/dev/1769451467431-2026-01-26T18:17:47.431Z/sp-python-functions.zip"
+              },
+              "Handler": "handlers/marketSentiment.handler",
+              "Runtime": "python3.11",
+              "FunctionName": "sp-python-functions-dev-marketSentimentLambda",
+              "MemorySize": 1024,
+              "Timeout": 30,
+              "Description": "Internal Python Lambda invoked by Node Lambda",
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "MarketSentimentLambdaLogGroup"
+            ]
+          },
+          "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "MarketSentimentLambdaLambdaFunction"
+              },
+              "CodeSha256": "cvdqDvM/JIUXvW0AxrKM3+28mkLAmY/ZHXwnx9tAv2I=",
+              "Description": "Internal Python Lambda invoked by Node Lambda"
+            }
           }
         },
         "Outputs": {
           "ServerlessDeploymentBucketName": {
-            "Value": "serverless-framework-deployments-ap-south-1-c93cf11a-8362"
+            "Value": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+            "Export": {
+              "Name": "sls-sp-python-functions-dev-ServerlessDeploymentBucketName"
+            }
+          },
+          "MarketSentimentLambdaLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E"
+            },
+            "Export": {
+              "Name": "sls-sp-python-functions-dev-MarketSentimentLambdaLambdaFunctionQualifiedArn"
+            }
           }
         }
-      }
+      },
+      "vpc": {}
     },
     "dashboard": {
       "isEnabledForService": false,
@@ -251,12 +346,7 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "error": {
-      "message": "`docker version` Exited with code 1",
-      "stack": "Error: `docker version` Exited with code 1\n    at ChildProcess.<anonymous> (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:325:62220)\n    at ChildProcess.emit (node:events:508:28)\n    at ChildProcess.emit (node:domain:489:12)\n    at cp.emit (file:///C:/Users/user/.serverless/releases/4.31.0/package/dist/sf-core.js:325:48593)\n    at maybeClose (node:internal/child_process:1101:16)\n    at ChildProcess._handle.onexit (node:internal/child_process:305:5)",
-      "code": 1
-    },
-    "serviceRawFile": "service: sp-python-functions\r\nprovider:\r\n  name: aws\r\n  region: ap-south-1\r\n  runtime: python3.11\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nfunctions:\r\n  marketSentimentLambda:\r\n    handler: handlers/marketSentiment.handler\r\n    description: Internal Python Lambda invoked by Node Lambda\r\n    timeout: 30\r\n    # memorySize: 256\r\n\r\noutputs:\r\n  marketSentiment:\r\n    Description: ARN of internal Python Lambda\r\n    Value:\r\n      Fn::GetAtt:\r\n        - TargetLambdaLambdaFunction\r\n        - Arn\r\n    Export:\r\n      Name: sp-python-functions-dev-marketSentiment\r\n\r\ncustom:\r\n  pythonRequirements:\r\n    dockerizePip: true",
+    "serviceRawFile": "service: sp-python-functions\r\nprovider:\r\n  name: aws\r\n  region: ap-south-1\r\n  runtime: python3.11\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nfunctions:\r\n  marketSentimentLambda:\r\n    handler: handlers/marketSentiment.handler\r\n    description: Internal Python Lambda invoked by Node Lambda\r\n    timeout: 30\r\n    # memorySize: 256\r\n\r\noutputs:\r\n  marketSentiment:\r\n    Description: ARN of internal Python Lambda\r\n    Value:\r\n      Fn::GetAtt:\r\n        - TargetLambdaLambdaFunction\r\n        - Arn\r\n    Export:\r\n      Name: sp-python-functions-dev-marketSentiment\r\n",
     "command": [
       "deploy"
     ],
@@ -269,12 +359,12 @@
     "serviceProviderAwsCfStackName": "sp-python-functions-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ap-south-1:332717545786:stack/sp-python-functions-dev/f56bf200-f91f-11f0-a2ca-0256e631c371",
     "serviceProviderAwsCfStackCreated": "2026-01-24T12:26:50.602Z",
-    "serviceProviderAwsCfStackUpdated": "2026-01-24T14:41:05.148Z",
+    "serviceProviderAwsCfStackUpdated": "2026-01-26T18:13:29.545Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "MarketSentimentLambdaLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:332717545786:function:sp-python-functions-dev-marketSentimentLambda:2",
+        "OutputValue": "arn:aws:lambda:ap-south-1:332717545786:function:sp-python-functions-dev-marketSentimentLambda:4",
         "Description": "Current Lambda function version",
         "ExportName": "sls-sp-python-functions-dev-MarketSentimentLambdaLambdaFunctionQualifiedArn"
       },
@@ -283,6 +373,148 @@
         "OutputValue": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
         "ExportName": "sls-sp-python-functions-dev-ServerlessDeploymentBucketName"
       }
-    ]
+    ],
+    "compiledCloudFormationTemplate": {
+      "AWSTemplateFormatVersion": "2010-09-09",
+      "Description": "The AWS CloudFormation template for this Serverless application",
+      "Resources": {
+        "MarketSentimentLambdaLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/sp-python-functions-dev-marketSentimentLambda"
+          }
+        },
+        "IamRoleLambdaExecution": {
+          "Type": "AWS::IAM::Role",
+          "Properties": {
+            "AssumeRolePolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Principal": {
+                    "Service": [
+                      "lambda.amazonaws.com"
+                    ]
+                  },
+                  "Action": [
+                    "sts:AssumeRole"
+                  ]
+                }
+              ]
+            },
+            "Policies": [
+              {
+                "PolicyName": {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      "sp-python-functions",
+                      "dev",
+                      "lambda"
+                    ]
+                  ]
+                },
+                "PolicyDocument": {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                    {
+                      "Effect": "Allow",
+                      "Action": [
+                        "logs:CreateLogStream",
+                        "logs:CreateLogGroup",
+                        "logs:TagResource"
+                      ],
+                      "Resource": [
+                        {
+                          "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sp-python-functions-dev*:*"
+                        }
+                      ]
+                    },
+                    {
+                      "Effect": "Allow",
+                      "Action": [
+                        "logs:PutLogEvents"
+                      ],
+                      "Resource": [
+                        {
+                          "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sp-python-functions-dev*:*:*"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "Path": "/",
+            "RoleName": {
+              "Fn::Join": [
+                "-",
+                [
+                  "sp-python-functions",
+                  "dev",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  "lambdaRole"
+                ]
+              ]
+            }
+          }
+        },
+        "MarketSentimentLambdaLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+              "S3Key": "serverless/sp-python-functions/dev/1769451467431-2026-01-26T18:17:47.431Z/sp-python-functions.zip"
+            },
+            "Handler": "handlers/marketSentiment.handler",
+            "Runtime": "python3.11",
+            "FunctionName": "sp-python-functions-dev-marketSentimentLambda",
+            "MemorySize": 1024,
+            "Timeout": 30,
+            "Description": "Internal Python Lambda invoked by Node Lambda",
+            "Role": {
+              "Fn::GetAtt": [
+                "IamRoleLambdaExecution",
+                "Arn"
+              ]
+            }
+          },
+          "DependsOn": [
+            "MarketSentimentLambdaLogGroup"
+          ]
+        },
+        "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "MarketSentimentLambdaLambdaFunction"
+            },
+            "CodeSha256": "cvdqDvM/JIUXvW0AxrKM3+28mkLAmY/ZHXwnx9tAv2I=",
+            "Description": "Internal Python Lambda invoked by Node Lambda"
+          }
+        }
+      },
+      "Outputs": {
+        "ServerlessDeploymentBucketName": {
+          "Value": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+          "Export": {
+            "Name": "sls-sp-python-functions-dev-ServerlessDeploymentBucketName"
+          }
+        },
+        "MarketSentimentLambdaLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E"
+          },
+          "Export": {
+            "Name": "sls-sp-python-functions-dev-MarketSentimentLambdaLambdaFunctionQualifiedArn"
+          }
+        }
+      }
+    }
   }
 }

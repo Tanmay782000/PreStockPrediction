@@ -23,7 +23,3 @@ outputs:
         - Arn
     Export:
       Name: sp-python-functions-dev-marketSentiment
-
-custom:
-  pythonRequirements:
-    dockerizePip: true

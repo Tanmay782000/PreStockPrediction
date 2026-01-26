@@ -71,7 +71,7 @@ functions:
           method: put
 
   TestouterCall:
-    handler: handlers/test.apiHandler
+    handler: External/marketSentiment.post
     events:
       - http:
           path: invoke

@@ -1,25 +1,35 @@
-import yfinance as yf
+import sys
+sys.path.append("./python")
+
+import json
+import requests
 
 def handler(event, context):
-    # Fetch data for a stock (e.g., Apple)
-    ticker = yf.Ticker("AAPL")
-    
-    # Get historical data (last 1 month)
-    hist = ticker.history(period="1mo")
-    print(hist)
-    
-    # Get current info
-    info = ticker.info
-    current_price = info.get('currentPrice')
-    market_cap = info.get('marketCap')
-    pe_ratio = info.get('trailingPE')
-    
-    print("Current Price:", current_price)
-    print("Market Cap:", market_cap)
-    print("PE Ratio:", pe_ratio)
-    
+    url = "https://query1.finance.yahoo.com/v8/finance/chart/AAPL"
+
+    headers = {
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "application/json",
+    }
+
+    response = requests.get(url, headers=headers, timeout=5)
+
+    # DEBUG SAFETY
+    if response.status_code != 200:
+        return {
+            "statusCode": response.status_code,
+            "body": response.text[:200]
+        }
+
+    data = response.json()
+
+    meta = data["chart"]["result"][0]["meta"]
+
     return {
-        "Current Price": current_price,
-        "Market Cap": market_cap,
-        "PE Ratio": pe_ratio
+        "statusCode": 200,
+        "body": json.dumps({
+            "price": meta.get("regularMarketPrice"),
+            "currency": meta.get("currency"),
+            "exchange": meta.get("exchangeName")
+        })
     }
