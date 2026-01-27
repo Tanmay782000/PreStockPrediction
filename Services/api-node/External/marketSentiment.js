@@ -1,5 +1,5 @@
 const { invokeLambda } = require("../Common/invokeLambda");
-
+const { verify } = require("../Common/auth.middleware");
 
 exports.post = async (event) => {
   try {

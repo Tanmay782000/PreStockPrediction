@@ -103,7 +103,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/sp-python-functions/dev/1769451467431-2026-01-26T18:17:47.431Z/sp-python-functions.zip"
+                "S3Key": "serverless/sp-python-functions/dev/1769524824911-2026-01-27T14:40:24.911Z/sp-python-functions.zip"
               },
               "Handler": "handlers/marketSentiment.handler",
               "Runtime": "python3.11",
@@ -122,14 +122,14 @@
               "MarketSentimentLambdaLogGroup"
             ]
           },
-          "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E": {
+          "MarketSentimentLambdaLambdaVersionfUICd3bl4ufcP8MaeLQb6jklQoAmkOjo5Arahca18GU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "MarketSentimentLambdaLambdaFunction"
               },
-              "CodeSha256": "cvdqDvM/JIUXvW0AxrKM3+28mkLAmY/ZHXwnx9tAv2I=",
+              "CodeSha256": "wwboX+H2Y0dpTm73KySUpK/nmq64LcbQzSg/D86kXjs=",
               "Description": "Internal Python Lambda invoked by Node Lambda"
             }
           }
@@ -144,7 +144,7 @@
           "MarketSentimentLambdaLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E"
+              "Ref": "MarketSentimentLambdaLambdaVersionfUICd3bl4ufcP8MaeLQb6jklQoAmkOjo5Arahca18GU"
             },
             "Export": {
               "Name": "sls-sp-python-functions-dev-MarketSentimentLambdaLambdaFunctionQualifiedArn"
@@ -153,6 +153,12 @@
         }
       },
       "vpc": {}
+    },
+    "custom": {
+      "serverless-offline": {
+        "httpPort": 3000,
+        "lambdaTimeout": 30
+      }
     },
     "plugins": [
       "serverless-offline"
@@ -169,7 +175,7 @@
         "memory": 1024,
         "runtime": "python3.11",
         "vpc": {},
-        "versionLogicalId": "MarketSentimentLambdaLambdaVersionvAAf1hkGcRTIvgw9eOKiwGRt4vdeLNJ25kMTSUiA8E"
+        "versionLogicalId": "MarketSentimentLambdaLambdaVersionfUICd3bl4ufcP8MaeLQb6jklQoAmkOjo5Arahca18GU"
       }
     },
     "configValidationMode": "warn",
@@ -184,6 +190,9 @@
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
+      },
+      "custom": {
+        "$ref": "$[\"service\"][\"custom\"]"
       },
       "outputs": {
         "marketSentiment": {
@@ -206,10 +215,10 @@
     "outputs": {
       "$ref": "$[\"service\"][\"initialServerlessConfig\"][\"outputs\"]"
     },
-    "artifact": "D:\\PreMarketAnalysis\\Services\\api-python\\.serverless\\sp-python-functions.zip"
+    "artifact": "D:\\TMZ\\PreMarketStockPrediction\\PreStockPrediction\\Services\\api-python\\.serverless\\sp-python-functions.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/sp-python-functions/dev/1769451467431-2026-01-26T18:17:47.431Z",
+    "artifactDirectoryName": "serverless/sp-python-functions/dev/1769524824911-2026-01-27T14:40:24.911Z",
     "artifact": "sp-python-functions.zip"
   }
 }
