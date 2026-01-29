@@ -3,7 +3,8 @@ provider:
   name: aws
   region: ap-south-1
   runtime: python3.11
-
+  timeout: 30
+  
 plugins:
   - serverless-offline
 

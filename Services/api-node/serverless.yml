@@ -3,12 +3,14 @@ provider:
   name: aws
   region: ap-south-1
   runtime: nodejs18.x
+  timeout: 30
   environment:
     JWT_SECRET: "iamworkinginheliosassoftwareengineer"
     CountryTable: Country
     TokenHistoryTable: TokenHistory
     StockTermTable: StockTerms
     UserCFTable: UserCF
+    NewsTable: NewsRawData
     #Lambdas
 
 
@@ -76,3 +78,5 @@ functions:
       - http:
           path: invoke
           method: post
+
+  

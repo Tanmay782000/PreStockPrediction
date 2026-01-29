@@ -236,6 +236,25 @@
                 }
               ]
             }
+          },
+          "NewsRawDataTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "NewsRawData",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "countryId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
           }
         },
         "Outputs": {
@@ -475,6 +494,25 @@
               }
             ]
           }
+        },
+        "NewsRawDataTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "NewsRawData",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "countryId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "countryId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
         }
       },
       "Outputs": {}
@@ -495,7 +533,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1768975576686-2026-01-21T06:06:16.686Z",
+    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1769682125931-2026-01-29T10:22:05.931Z",
     "artifact": ""
   }
 }

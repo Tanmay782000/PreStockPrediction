@@ -148,3 +148,16 @@ resources:
           - AttributeName: username
             KeyType: HASH
 
+    NewsRawDataTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: NewsRawData
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: countryId
+            AttributeType: N
+
+        KeySchema:
+          - AttributeName: countryId
+            KeyType: HASH

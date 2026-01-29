@@ -139,20 +139,21 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769524971705-2026-01-27T14:42:51.705Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769686582906-2026-01-29T11:36:22.906Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/country.get",
         "Runtime": "nodejs18.x",
         "FunctionName": "SP-Node-Lambda-Functions-dev-getCountries",
         "MemorySize": 1024,
-        "Timeout": 6,
+        "Timeout": 30,
         "Environment": {
           "Variables": {
             "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
             "CountryTable": "Country",
             "TokenHistoryTable": "TokenHistory",
             "StockTermTable": "StockTerms",
-            "UserCFTable": "UserCF"
+            "UserCFTable": "UserCF",
+            "NewsTable": "NewsRawData"
           }
         },
         "Role": {
@@ -171,20 +172,21 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769524971705-2026-01-27T14:42:51.705Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769686582906-2026-01-29T11:36:22.906Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "Common/auth.tokengeneration",
         "Runtime": "nodejs18.x",
         "FunctionName": "SP-Node-Lambda-Functions-dev-postToken",
         "MemorySize": 1024,
-        "Timeout": 6,
+        "Timeout": 30,
         "Environment": {
           "Variables": {
             "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
             "CountryTable": "Country",
             "TokenHistoryTable": "TokenHistory",
             "StockTermTable": "StockTerms",
-            "UserCFTable": "UserCF"
+            "UserCFTable": "UserCF",
+            "NewsTable": "NewsRawData"
           }
         },
         "Role": {
@@ -203,20 +205,21 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769524971705-2026-01-27T14:42:51.705Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769686582906-2026-01-29T11:36:22.906Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/stockTerm.get",
         "Runtime": "nodejs18.x",
         "FunctionName": "SP-Node-Lambda-Functions-dev-getStockTerms",
         "MemorySize": 1024,
-        "Timeout": 6,
+        "Timeout": 30,
         "Environment": {
           "Variables": {
             "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
             "CountryTable": "Country",
             "TokenHistoryTable": "TokenHistory",
             "StockTermTable": "StockTerms",
-            "UserCFTable": "UserCF"
+            "UserCFTable": "UserCF",
+            "NewsTable": "NewsRawData"
           }
         },
         "Role": {
@@ -235,20 +238,21 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769524971705-2026-01-27T14:42:51.705Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769686582906-2026-01-29T11:36:22.906Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/stockCategory.get",
         "Runtime": "nodejs18.x",
         "FunctionName": "SP-Node-Lambda-Functions-dev-getStockCategory",
         "MemorySize": 1024,
-        "Timeout": 6,
+        "Timeout": 30,
         "Environment": {
           "Variables": {
             "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
             "CountryTable": "Country",
             "TokenHistoryTable": "TokenHistory",
             "StockTermTable": "StockTerms",
-            "UserCFTable": "UserCF"
+            "UserCFTable": "UserCF",
+            "NewsTable": "NewsRawData"
           }
         },
         "Role": {
@@ -267,20 +271,21 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769524971705-2026-01-27T14:42:51.705Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769686582906-2026-01-29T11:36:22.906Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/userFlow.get",
         "Runtime": "nodejs18.x",
         "FunctionName": "SP-Node-Lambda-Functions-dev-userFlow",
         "MemorySize": 1024,
-        "Timeout": 6,
+        "Timeout": 30,
         "Environment": {
           "Variables": {
             "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
             "CountryTable": "Country",
             "TokenHistoryTable": "TokenHistory",
             "StockTermTable": "StockTerms",
-            "UserCFTable": "UserCF"
+            "UserCFTable": "UserCF",
+            "NewsTable": "NewsRawData"
           }
         },
         "Role": {
@@ -299,20 +304,21 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769524971705-2026-01-27T14:42:51.705Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1769686582906-2026-01-29T11:36:22.906Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/marketSentiment.post",
         "Runtime": "nodejs18.x",
         "FunctionName": "SP-Node-Lambda-Functions-dev-TestouterCall",
         "MemorySize": 1024,
-        "Timeout": 6,
+        "Timeout": 30,
         "Environment": {
           "Variables": {
             "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
             "CountryTable": "Country",
             "TokenHistoryTable": "TokenHistory",
             "StockTermTable": "StockTerms",
-            "UserCFTable": "UserCF"
+            "UserCFTable": "UserCF",
+            "NewsTable": "NewsRawData"
           }
         },
         "Role": {
@@ -326,64 +332,64 @@
         "TestouterCallLogGroup"
       ]
     },
-    "GetCountriesLambdaVersionwkCA84oTFgZWTejluHSpFkOle2PzKsRovmgGHrcNQ": {
+    "GetCountriesLambdaVersion14KL8ZIsVDyHhDdNPrQS4As9izPhBsZXE2Hl5NGLt7A": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetCountriesLambdaFunction"
         },
-        "CodeSha256": "aekL7dNOe/ypRzAEstnCmSAfA/tu3ews4IxgdnlHQB0="
+        "CodeSha256": "eqhuytZQIEoR/xLYIMjbeDUFt1U9VkWJyux1M0pnwlY="
       }
     },
-    "PostTokenLambdaVersion4rlS7E5eqL8y8jHQFUGFNAOXOdzOPf5ibsb71Zdns": {
+    "PostTokenLambdaVersion7f54EFCipp7x8okkLIgs5SMo5pEgRwOBr8V44oGsls": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PostTokenLambdaFunction"
         },
-        "CodeSha256": "aekL7dNOe/ypRzAEstnCmSAfA/tu3ews4IxgdnlHQB0="
+        "CodeSha256": "eqhuytZQIEoR/xLYIMjbeDUFt1U9VkWJyux1M0pnwlY="
       }
     },
-    "GetStockTermsLambdaVersionAvw5mnFHTwWvjAPiaaPSd4Aw7dwzqVs6iAzT8HIGEw": {
+    "GetStockTermsLambdaVersiono4XYqNNrLcOtuQ6HyycbPZ3iW9d445FiKSqoDOpofaY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetStockTermsLambdaFunction"
         },
-        "CodeSha256": "aekL7dNOe/ypRzAEstnCmSAfA/tu3ews4IxgdnlHQB0="
+        "CodeSha256": "eqhuytZQIEoR/xLYIMjbeDUFt1U9VkWJyux1M0pnwlY="
       }
     },
-    "GetStockCategoryLambdaVersionzBhqTAGayCr9UIOEx3tiqUlu9C4RHtE4obL48lvaI": {
+    "GetStockCategoryLambdaVersionK7e8GLk9R4xKlqI8tOneWM9e6kdVCXTzf4ZFVuVRMFM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetStockCategoryLambdaFunction"
         },
-        "CodeSha256": "aekL7dNOe/ypRzAEstnCmSAfA/tu3ews4IxgdnlHQB0="
+        "CodeSha256": "eqhuytZQIEoR/xLYIMjbeDUFt1U9VkWJyux1M0pnwlY="
       }
     },
-    "UserFlowLambdaVersion1BUzPkoPe8TslQmJWyNZv8jPjlRRI69FjGyVrN5lsc": {
+    "UserFlowLambdaVersionb8Kg4GUbOsRLPZzz8gLi938A8rLkO3Gl1A7tbZDRlY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UserFlowLambdaFunction"
         },
-        "CodeSha256": "aekL7dNOe/ypRzAEstnCmSAfA/tu3ews4IxgdnlHQB0="
+        "CodeSha256": "eqhuytZQIEoR/xLYIMjbeDUFt1U9VkWJyux1M0pnwlY="
       }
     },
-    "TestouterCallLambdaVersionTvlC9tOsduSxVWWzBwWQkda3kurtUJh8GiapYVSI8": {
+    "TestouterCallLambdaVersionms6THQN3EA5sPjTHqulNMueH8iwrQVY2HgXVINoAo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "TestouterCallLambdaFunction"
         },
-        "CodeSha256": "aekL7dNOe/ypRzAEstnCmSAfA/tu3ews4IxgdnlHQB0="
+        "CodeSha256": "eqhuytZQIEoR/xLYIMjbeDUFt1U9VkWJyux1M0pnwlY="
       }
     },
     "ApiGatewayRestApi": {
@@ -764,7 +770,7 @@
         "TestouterCallLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1769524960659": {
+    "ApiGatewayDeployment1769686574438": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1014,7 +1020,7 @@
     "GetCountriesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetCountriesLambdaVersionwkCA84oTFgZWTejluHSpFkOle2PzKsRovmgGHrcNQ"
+        "Ref": "GetCountriesLambdaVersion14KL8ZIsVDyHhDdNPrQS4As9izPhBsZXE2Hl5NGLt7A"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetCountriesLambdaFunctionQualifiedArn"
@@ -1023,7 +1029,7 @@
     "PostTokenLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostTokenLambdaVersion4rlS7E5eqL8y8jHQFUGFNAOXOdzOPf5ibsb71Zdns"
+        "Ref": "PostTokenLambdaVersion7f54EFCipp7x8okkLIgs5SMo5pEgRwOBr8V44oGsls"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-PostTokenLambdaFunctionQualifiedArn"
@@ -1032,7 +1038,7 @@
     "GetStockTermsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetStockTermsLambdaVersionAvw5mnFHTwWvjAPiaaPSd4Aw7dwzqVs6iAzT8HIGEw"
+        "Ref": "GetStockTermsLambdaVersiono4XYqNNrLcOtuQ6HyycbPZ3iW9d445FiKSqoDOpofaY"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetStockTermsLambdaFunctionQualifiedArn"
@@ -1041,7 +1047,7 @@
     "GetStockCategoryLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetStockCategoryLambdaVersionzBhqTAGayCr9UIOEx3tiqUlu9C4RHtE4obL48lvaI"
+        "Ref": "GetStockCategoryLambdaVersionK7e8GLk9R4xKlqI8tOneWM9e6kdVCXTzf4ZFVuVRMFM"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetStockCategoryLambdaFunctionQualifiedArn"
@@ -1050,7 +1056,7 @@
     "UserFlowLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UserFlowLambdaVersion1BUzPkoPe8TslQmJWyNZv8jPjlRRI69FjGyVrN5lsc"
+        "Ref": "UserFlowLambdaVersionb8Kg4GUbOsRLPZzz8gLi938A8rLkO3Gl1A7tbZDRlY"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-UserFlowLambdaFunctionQualifiedArn"
@@ -1059,7 +1065,7 @@
     "TestouterCallLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "TestouterCallLambdaVersionTvlC9tOsduSxVWWzBwWQkda3kurtUJh8GiapYVSI8"
+        "Ref": "TestouterCallLambdaVersionms6THQN3EA5sPjTHqulNMueH8iwrQVY2HgXVINoAo"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-TestouterCallLambdaFunctionQualifiedArn"
