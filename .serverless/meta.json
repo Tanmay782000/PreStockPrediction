@@ -1,6 +1,6 @@
 {
   "D:\\TMZ\\PreMarketStockPrediction\\PreStockPrediction\\serverless.yaml": {
-    "versionFramework": "4.31.2",
+    "versionFramework": "4.32.0",
     "servicePath": "D:\\TMZ\\PreMarketStockPrediction\\PreStockPrediction\\serverless.yaml",
     "serviceConfigFileName": "serverless.yaml",
     "service": {
@@ -126,25 +126,6 @@
                 ]
               }
             },
-            "ResearchStepsTable": {
-              "Type": "AWS::DynamoDB::Table",
-              "Properties": {
-                "TableName": "ResearchSteps",
-                "BillingMode": "PAY_PER_REQUEST",
-                "AttributeDefinitions": [
-                  {
-                    "AttributeName": "stepId",
-                    "AttributeType": "N"
-                  }
-                ],
-                "KeySchema": [
-                  {
-                    "AttributeName": "stepId",
-                    "KeyType": "HASH"
-                  }
-                ]
-              }
-            },
             "UserCFTable": {
               "Type": "AWS::DynamoDB::Table",
               "Properties": {
@@ -182,48 +163,30 @@
                 ]
               }
             },
-            "StockPredictionsTable": {
-              "Type": "AWS::DynamoDB::Table",
-              "Properties": {
-                "TableName": "StockPredictions",
-                "BillingMode": "PAY_PER_REQUEST",
-                "AttributeDefinitions": [
-                  {
-                    "AttributeName": "bcktId",
-                    "AttributeType": "N"
-                  },
-                  {
-                    "AttributeName": "cfId",
-                    "AttributeType": "N"
-                  }
-                ],
-                "KeySchema": [
-                  {
-                    "AttributeName": "bcktId",
-                    "KeyType": "HASH"
-                  }
-                ],
-                "GlobalSecondaryIndexes": [
-                  {
-                    "IndexName": "CFIndex",
-                    "KeySchema": [
-                      {
-                        "AttributeName": "cfId",
-                        "KeyType": "HASH"
-                      }
-                    ],
-                    "Projection": {
-                      "ProjectionType": "ALL"
-                    }
-                  }
-                ]
-              }
-            },
             "TokenHistory": "<REDACTED>",
             "NewsRawDataTable": {
               "Type": "AWS::DynamoDB::Table",
               "Properties": {
                 "TableName": "NewsRawData",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "countryId",
+                    "AttributeType": "N"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "countryId",
+                    "KeyType": "HASH"
+                  }
+                ]
+              }
+            },
+            "FilteredNewsTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "FilteredNews",
                 "BillingMode": "PAY_PER_REQUEST",
                 "AttributeDefinitions": [
                   {
@@ -364,25 +327,6 @@
               ]
             }
           },
-          "ResearchStepsTable": {
-            "Type": "AWS::DynamoDB::Table",
-            "Properties": {
-              "TableName": "ResearchSteps",
-              "BillingMode": "PAY_PER_REQUEST",
-              "AttributeDefinitions": [
-                {
-                  "AttributeName": "stepId",
-                  "AttributeType": "N"
-                }
-              ],
-              "KeySchema": [
-                {
-                  "AttributeName": "stepId",
-                  "KeyType": "HASH"
-                }
-              ]
-            }
-          },
           "UserCFTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
@@ -420,48 +364,30 @@
               ]
             }
           },
-          "StockPredictionsTable": {
-            "Type": "AWS::DynamoDB::Table",
-            "Properties": {
-              "TableName": "StockPredictions",
-              "BillingMode": "PAY_PER_REQUEST",
-              "AttributeDefinitions": [
-                {
-                  "AttributeName": "bcktId",
-                  "AttributeType": "N"
-                },
-                {
-                  "AttributeName": "cfId",
-                  "AttributeType": "N"
-                }
-              ],
-              "KeySchema": [
-                {
-                  "AttributeName": "bcktId",
-                  "KeyType": "HASH"
-                }
-              ],
-              "GlobalSecondaryIndexes": [
-                {
-                  "IndexName": "CFIndex",
-                  "KeySchema": [
-                    {
-                      "AttributeName": "cfId",
-                      "KeyType": "HASH"
-                    }
-                  ],
-                  "Projection": {
-                    "ProjectionType": "ALL"
-                  }
-                }
-              ]
-            }
-          },
           "TokenHistory": "<REDACTED>",
           "NewsRawDataTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
               "TableName": "NewsRawData",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "countryId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "FilteredNewsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "FilteredNews",
               "BillingMode": "PAY_PER_REQUEST",
               "AttributeDefinitions": [
                 {
@@ -602,25 +528,6 @@
               ]
             }
           },
-          "ResearchStepsTable": {
-            "Type": "AWS::DynamoDB::Table",
-            "Properties": {
-              "TableName": "ResearchSteps",
-              "BillingMode": "PAY_PER_REQUEST",
-              "AttributeDefinitions": [
-                {
-                  "AttributeName": "stepId",
-                  "AttributeType": "N"
-                }
-              ],
-              "KeySchema": [
-                {
-                  "AttributeName": "stepId",
-                  "KeyType": "HASH"
-                }
-              ]
-            }
-          },
           "UserCFTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
@@ -658,48 +565,30 @@
               ]
             }
           },
-          "StockPredictionsTable": {
-            "Type": "AWS::DynamoDB::Table",
-            "Properties": {
-              "TableName": "StockPredictions",
-              "BillingMode": "PAY_PER_REQUEST",
-              "AttributeDefinitions": [
-                {
-                  "AttributeName": "bcktId",
-                  "AttributeType": "N"
-                },
-                {
-                  "AttributeName": "cfId",
-                  "AttributeType": "N"
-                }
-              ],
-              "KeySchema": [
-                {
-                  "AttributeName": "bcktId",
-                  "KeyType": "HASH"
-                }
-              ],
-              "GlobalSecondaryIndexes": [
-                {
-                  "IndexName": "CFIndex",
-                  "KeySchema": [
-                    {
-                      "AttributeName": "cfId",
-                      "KeyType": "HASH"
-                    }
-                  ],
-                  "Projection": {
-                    "ProjectionType": "ALL"
-                  }
-                }
-              ]
-            }
-          },
           "TokenHistory": "<REDACTED>",
           "NewsRawDataTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
               "TableName": "NewsRawData",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "countryId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "FilteredNewsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "FilteredNews",
               "BillingMode": "PAY_PER_REQUEST",
               "AttributeDefinitions": [
                 {
@@ -735,7 +624,7 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "serviceRawFile": "service: SP-DynamoDB-Tables\r\n\r\nprovider:\r\n  name: aws\r\n  region: ap-south-1\r\n\r\nresources:\r\n  Resources:\r\n    CountryTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: Country\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: countryId\r\n            KeyType: HASH\r\n \r\n    SiteReferencesTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: SiteReferences\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: insightId\r\n            AttributeType: N\r\n          - AttributeName: countryId\r\n            AttributeType: N   # Optional if you want to index by country\r\n        KeySchema:\r\n          - AttributeName: insightId\r\n            KeyType: HASH\r\n        GlobalSecondaryIndexes:                # Optional, if you want queries by country\r\n          - IndexName: CountryIndex\r\n            KeySchema:\r\n              - AttributeName: countryId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n    StockTermsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: StockTerms\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: termId\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: termId\r\n            KeyType: HASH\r\n\r\n    StockCategoryTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: StockCategory\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: stockCategoryId\r\n            AttributeType: N\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: stockCategoryId\r\n            KeyType: HASH\r\n        GlobalSecondaryIndexes:\r\n          - IndexName: CountryIndex\r\n            KeySchema:\r\n              - AttributeName: countryId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n    ResearchStepsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: ResearchSteps\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: stepId\r\n            AttributeType: N\r\n\r\n        KeySchema:\r\n          - AttributeName: stepId\r\n            KeyType: HASH\r\n\r\n    UserCFTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: UserCF\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: cfId\r\n            AttributeType: S\r\n          - AttributeName: tokenId\r\n            AttributeType: S\r\n\r\n        KeySchema:\r\n          - AttributeName: cfId\r\n            KeyType: HASH\r\n\r\n        GlobalSecondaryIndexes:\r\n          - IndexName: UserTokenIndex\r\n            KeySchema:\r\n              - AttributeName: tokenId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n    StockPredictionsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: StockPredictions\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: bcktId\r\n            AttributeType: N\r\n          - AttributeName: cfId\r\n            AttributeType: N\r\n\r\n        KeySchema:\r\n          - AttributeName: bcktId\r\n            KeyType: HASH\r\n\r\n        GlobalSecondaryIndexes:\r\n          - IndexName: CFIndex\r\n            KeySchema:\r\n              - AttributeName: cfId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n    TokenHistory:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: TokenHistory\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: username\r\n            AttributeType: S\r\n\r\n        KeySchema:\r\n          - AttributeName: username\r\n            KeyType: HASH\r\n\r\n    NewsRawDataTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: NewsRawData\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n\r\n        KeySchema:\r\n          - AttributeName: countryId\r\n            KeyType: HASH",
+    "serviceRawFile": "service: SP-DynamoDB-Tables\r\n\r\nprovider:\r\n  name: aws\r\n  region: ap-south-1\r\n\r\nresources:\r\n  Resources:\r\n    CountryTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: Country\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: countryId\r\n            KeyType: HASH\r\n \r\n    SiteReferencesTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: SiteReferences\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: insightId\r\n            AttributeType: N\r\n          - AttributeName: countryId\r\n            AttributeType: N   # Optional if you want to index by country\r\n        KeySchema:\r\n          - AttributeName: insightId\r\n            KeyType: HASH\r\n        GlobalSecondaryIndexes:                # Optional, if you want queries by country\r\n          - IndexName: CountryIndex\r\n            KeySchema:\r\n              - AttributeName: countryId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n    StockTermsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: StockTerms\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: termId\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: termId\r\n            KeyType: HASH\r\n\r\n    StockCategoryTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: StockCategory\r\n        BillingMode: PAY_PER_REQUEST\r\n        AttributeDefinitions:\r\n          - AttributeName: stockCategoryId\r\n            AttributeType: N\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: stockCategoryId\r\n            KeyType: HASH\r\n        GlobalSecondaryIndexes:\r\n          - IndexName: CountryIndex\r\n            KeySchema:\r\n              - AttributeName: countryId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n    UserCFTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: UserCF\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: cfId\r\n            AttributeType: S\r\n          - AttributeName: tokenId\r\n            AttributeType: S\r\n\r\n        KeySchema:\r\n          - AttributeName: cfId\r\n            KeyType: HASH\r\n\r\n        GlobalSecondaryIndexes:\r\n          - IndexName: UserTokenIndex\r\n            KeySchema:\r\n              - AttributeName: tokenId\r\n                KeyType: HASH\r\n            Projection:\r\n              ProjectionType: ALL\r\n\r\n    TokenHistory:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: TokenHistory\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: username\r\n            AttributeType: S\r\n\r\n        KeySchema:\r\n          - AttributeName: username\r\n            KeyType: HASH\r\n\r\n    NewsRawDataTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: NewsRawData\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n\r\n        KeySchema:\r\n          - AttributeName: countryId\r\n            KeyType: HASH\r\n\r\n    FilteredNewsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: FilteredNews\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n        AttributeDefinitions:\r\n          - AttributeName: countryId\r\n            AttributeType: N\r\n\r\n        KeySchema:\r\n          - AttributeName: countryId\r\n            KeyType: HASH",
     "command": [
       "deploy"
     ],
@@ -748,7 +637,7 @@
     "serviceProviderAwsCfStackName": "SP-DynamoDB-Tables-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ap-south-1:332717545786:stack/SP-DynamoDB-Tables-dev/3fb797f0-f04d-11f0-80ef-0aa932e61479",
     "serviceProviderAwsCfStackCreated": "2026-01-13T06:58:22.159Z",
-    "serviceProviderAwsCfStackUpdated": "2026-01-29T10:21:39.363Z",
+    "serviceProviderAwsCfStackUpdated": "2026-02-18T12:03:24.167Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
@@ -873,25 +762,6 @@
             ]
           }
         },
-        "ResearchStepsTable": {
-          "Type": "AWS::DynamoDB::Table",
-          "Properties": {
-            "TableName": "ResearchSteps",
-            "BillingMode": "PAY_PER_REQUEST",
-            "AttributeDefinitions": [
-              {
-                "AttributeName": "stepId",
-                "AttributeType": "N"
-              }
-            ],
-            "KeySchema": [
-              {
-                "AttributeName": "stepId",
-                "KeyType": "HASH"
-              }
-            ]
-          }
-        },
         "UserCFTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
@@ -929,48 +799,30 @@
             ]
           }
         },
-        "StockPredictionsTable": {
-          "Type": "AWS::DynamoDB::Table",
-          "Properties": {
-            "TableName": "StockPredictions",
-            "BillingMode": "PAY_PER_REQUEST",
-            "AttributeDefinitions": [
-              {
-                "AttributeName": "bcktId",
-                "AttributeType": "N"
-              },
-              {
-                "AttributeName": "cfId",
-                "AttributeType": "N"
-              }
-            ],
-            "KeySchema": [
-              {
-                "AttributeName": "bcktId",
-                "KeyType": "HASH"
-              }
-            ],
-            "GlobalSecondaryIndexes": [
-              {
-                "IndexName": "CFIndex",
-                "KeySchema": [
-                  {
-                    "AttributeName": "cfId",
-                    "KeyType": "HASH"
-                  }
-                ],
-                "Projection": {
-                  "ProjectionType": "ALL"
-                }
-              }
-            ]
-          }
-        },
         "TokenHistory": "<REDACTED>",
         "NewsRawDataTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
             "TableName": "NewsRawData",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "countryId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "countryId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
+        },
+        "FilteredNewsTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "FilteredNews",
             "BillingMode": "PAY_PER_REQUEST",
             "AttributeDefinitions": [
               {

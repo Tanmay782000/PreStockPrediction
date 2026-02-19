@@ -72,20 +72,6 @@ resources:
             Projection:
               ProjectionType: ALL
 
-    ResearchStepsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ResearchSteps
-        BillingMode: PAY_PER_REQUEST
-
-        AttributeDefinitions:
-          - AttributeName: stepId
-            AttributeType: N
-
-        KeySchema:
-          - AttributeName: stepId
-            KeyType: HASH
-
     UserCFTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -110,30 +96,6 @@ resources:
             Projection:
               ProjectionType: ALL
 
-    StockPredictionsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: StockPredictions
-        BillingMode: PAY_PER_REQUEST
-
-        AttributeDefinitions:
-          - AttributeName: bcktId
-            AttributeType: N
-          - AttributeName: cfId
-            AttributeType: N
-
-        KeySchema:
-          - AttributeName: bcktId
-            KeyType: HASH
-
-        GlobalSecondaryIndexes:
-          - IndexName: CFIndex
-            KeySchema:
-              - AttributeName: cfId
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL
-
     TokenHistory:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -152,6 +114,20 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: NewsRawData
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: countryId
+            AttributeType: N
+
+        KeySchema:
+          - AttributeName: countryId
+            KeyType: HASH
+
+    FilteredNewsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: FilteredNews
         BillingMode: PAY_PER_REQUEST
 
         AttributeDefinitions:

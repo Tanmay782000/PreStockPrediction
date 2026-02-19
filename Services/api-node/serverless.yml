@@ -11,8 +11,8 @@ provider:
     StockTermTable: StockTerms
     UserCFTable: UserCF
     NewsTable: NewsRawData
+    FilteredNews: FilteredNews
     #Lambdas
-
 
   iam:
     role:
@@ -30,7 +30,15 @@ provider:
           Action:
             - lambda:InvokeFunction
           Resource: "*"
-
+        - Effect: Allow
+          Action:
+            - aws-marketplace:ViewSubscriptions
+            - aws-marketplace:Subscribe
+          Resource: "*"
+        - Effect: Allow
+          Action:
+            - bedrock:InvokeModel
+          Resource: "*"
 
 plugins:
   - serverless-offline
@@ -64,7 +72,6 @@ functions:
           path: stockcategory
           method: get
 
-
   userFlow:
     handler: handlers/userFlow.get
     events:
@@ -72,11 +79,29 @@ functions:
           path: userflow
           method: put
 
-  TestouterCall:
-    handler: External/marketSentiment.post
-    events:
-      - http:
-          path: invoke
-          method: post
+############# Externl Calls ##############
 
+  getNews:
+    handler: External/newsAnalysis.get
+    timeout: 300
+    description: "Fetches news data for a given country and date range"    
   
+  gettermAnalysis:
+    handler: External/termAnalysis.get
+    timeout: 300
+    description: "Generate the term analysis for a given country"
+
+  getcategoryAnalysis:
+    handler: External/categoryAnalysis.get
+    timeout: 300
+    description: "Generate the category analysis for a given country and term name"
+
+  getsectorAnalysis:
+    handler: External/sectorAnalysis.get
+    timeout: 300
+    description: "Generate the sector analysis for a given country, term name and category name"
+
+  getstockAnalysis:
+    handler: External/stockAnalysis.get
+    timeout: 300
+    description: "Generate the stock analysis for a given country, term name, category name and top three sectors"

@@ -125,25 +125,6 @@
               ]
             }
           },
-          "ResearchStepsTable": {
-            "Type": "AWS::DynamoDB::Table",
-            "Properties": {
-              "TableName": "ResearchSteps",
-              "BillingMode": "PAY_PER_REQUEST",
-              "AttributeDefinitions": [
-                {
-                  "AttributeName": "stepId",
-                  "AttributeType": "N"
-                }
-              ],
-              "KeySchema": [
-                {
-                  "AttributeName": "stepId",
-                  "KeyType": "HASH"
-                }
-              ]
-            }
-          },
           "UserCFTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
@@ -181,43 +162,6 @@
               ]
             }
           },
-          "StockPredictionsTable": {
-            "Type": "AWS::DynamoDB::Table",
-            "Properties": {
-              "TableName": "StockPredictions",
-              "BillingMode": "PAY_PER_REQUEST",
-              "AttributeDefinitions": [
-                {
-                  "AttributeName": "bcktId",
-                  "AttributeType": "N"
-                },
-                {
-                  "AttributeName": "cfId",
-                  "AttributeType": "N"
-                }
-              ],
-              "KeySchema": [
-                {
-                  "AttributeName": "bcktId",
-                  "KeyType": "HASH"
-                }
-              ],
-              "GlobalSecondaryIndexes": [
-                {
-                  "IndexName": "CFIndex",
-                  "KeySchema": [
-                    {
-                      "AttributeName": "cfId",
-                      "KeyType": "HASH"
-                    }
-                  ],
-                  "Projection": {
-                    "ProjectionType": "ALL"
-                  }
-                }
-              ]
-            }
-          },
           "TokenHistory": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
@@ -241,6 +185,25 @@
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
               "TableName": "NewsRawData",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "countryId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "FilteredNewsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "FilteredNews",
               "BillingMode": "PAY_PER_REQUEST",
               "AttributeDefinitions": [
                 {
@@ -383,25 +346,6 @@
             ]
           }
         },
-        "ResearchStepsTable": {
-          "Type": "AWS::DynamoDB::Table",
-          "Properties": {
-            "TableName": "ResearchSteps",
-            "BillingMode": "PAY_PER_REQUEST",
-            "AttributeDefinitions": [
-              {
-                "AttributeName": "stepId",
-                "AttributeType": "N"
-              }
-            ],
-            "KeySchema": [
-              {
-                "AttributeName": "stepId",
-                "KeyType": "HASH"
-              }
-            ]
-          }
-        },
         "UserCFTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
@@ -429,43 +373,6 @@
                 "KeySchema": [
                   {
                     "AttributeName": "tokenId",
-                    "KeyType": "HASH"
-                  }
-                ],
-                "Projection": {
-                  "ProjectionType": "ALL"
-                }
-              }
-            ]
-          }
-        },
-        "StockPredictionsTable": {
-          "Type": "AWS::DynamoDB::Table",
-          "Properties": {
-            "TableName": "StockPredictions",
-            "BillingMode": "PAY_PER_REQUEST",
-            "AttributeDefinitions": [
-              {
-                "AttributeName": "bcktId",
-                "AttributeType": "N"
-              },
-              {
-                "AttributeName": "cfId",
-                "AttributeType": "N"
-              }
-            ],
-            "KeySchema": [
-              {
-                "AttributeName": "bcktId",
-                "KeyType": "HASH"
-              }
-            ],
-            "GlobalSecondaryIndexes": [
-              {
-                "IndexName": "CFIndex",
-                "KeySchema": [
-                  {
-                    "AttributeName": "cfId",
                     "KeyType": "HASH"
                   }
                 ],
@@ -513,6 +420,25 @@
               }
             ]
           }
+        },
+        "FilteredNewsTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "FilteredNews",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "countryId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "countryId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
         }
       },
       "Outputs": {}
@@ -533,7 +459,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1769682125931-2026-01-29T10:22:05.931Z",
+    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1771417734193-2026-02-18T12:28:54.193Z",
     "artifact": ""
   }
 }
