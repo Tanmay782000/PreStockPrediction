@@ -1,21 +1,24 @@
-const { BedrockRuntimeClient, InvokeModelCommand } = require("@aws-sdk/client-bedrock-runtime");
-const { PutCommand,ScanCommand } = require("@aws-sdk/lib-dynamodb");
+const {
+  BedrockRuntimeClient,
+  InvokeModelCommand,
+} = require("@aws-sdk/client-bedrock-runtime");
+const { PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
 const { client } = require("../db/dynamo.client");
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
 FILTERED_NEWS = process.env.FilteredNews;
 
 exports.get = async (event) => {
-    try {
-        const countryId = event.countryId;
-        const country = event.country;
-        const termId = event.termId;
-        const termName = event.termName;
-        const categoryId = event.categoryId;
-        const categoryName = event.categoryName;
-        const array = event.array || [];
+  try {
+    const countryId = event.countryId;
+    const country = event.country;
+    const termId = event.termId;
+    const termName = event.termName;
+    const categoryId = event.categoryId;
+    const categoryName = event.categoryName;
+    const array = event.array || [];
 
-const prompt = `
+    const prompt = `
 CATEGORY ANALYSIS
 
 countryId Mapping:
@@ -62,21 +65,17 @@ Consider in analysis -> Nifty 50 is expected to rise for the 3rd consecutive ses
 • Selected category
 • Input data behaviour / signals
 
+CONTEXT:
+Stock market sector prediction.
+
 probabilityArr(variable):
 Contains probability of profit for EACH valid sector of particular country, term and category. and do the ranking based on sequence of sector id in above list with asc.
 
 SUMMARY(variable):
 Explain reasoning in 10 - 15 lines.
 
-CONTEXT:
-Stock market sector prediction.
-
 INPUT DATA:
 ${JSON.stringify(array, null, 2)}
-
-OUTPUT RULES:
-Return ONLY valid JSON.
-No explanations outside JSON.
 
 OUTPUT FORMAT:
 {
@@ -89,78 +88,89 @@ OUTPUT FORMAT:
   "probabilityArr": probabilityArr,
   "summary": SUMMARY
 }
+
+OUTPUT RULES:
+Return ONLY valid JSON.
+No explanations outside JSON.
 `;
 
-const command = new InvokeModelCommand({
-    modelId: "anthropic.claude-3-sonnet-20240229-v1:0", // example
-    contentType: "application/json",
-    accept: "application/json",
-    body: JSON.stringify({
+    const command = new InvokeModelCommand({
+      modelId: "anthropic.claude-3-sonnet-20240229-v1:0", // example
+      contentType: "application/json",
+      accept: "application/json",
+      body: JSON.stringify({
         anthropic_version: "bedrock-2023-05-31",
         max_tokens: 500,
         messages: [
-            {
-                role: "user",
-                content: [{ type: "text", text: prompt }]
-            }
-        ]
-    })
-});
+          {
+            role: "user",
+            content: [{ type: "text", text: prompt }],
+          },
+        ],
+      }),
+    });
 
-console.log("Done the model analysis");
+    console.log("Done the model analysis");
 
-const response = await bedrockClient.send(command);
-const responseBody = JSON.parse(Buffer.from(response.body).toString());
+    const response = await bedrockClient.send(command);
+    const responseBody = JSON.parse(Buffer.from(response.body).toString());
 
-console.log("Parsed response body:", responseBody);
+    console.log("Parsed response body:", responseBody);
 
-let termSumm = "";
-let categorySumm = "";
-let sectorSumm = "";
-let stockName = "";
+    let termSumm = "";
+    let categorySumm = "";
+    let sectorSumm = "";
+    let stockName = "";
 
-   var getnewsData = await client.send(new ScanCommand({
+    var getnewsData = await client.send(
+      new ScanCommand({
         TableName: FILTERED_NEWS,
-        Key: { countryId: Number(countryId) }
-    }));
+        Key: { countryId: Number(countryId) },
+      }),
+    );
 
-    console.log("first scan",getnewsData.Items);
+    console.log("first scan", getnewsData.Items);
 
-    if(getnewsData.Items && getnewsData.Items.length > 0){
-        termSumm = getnewsData.Items[0].termSummery;
-        categorySumm = getnewsData.Items[0].categorySummery;
-        sectorSumm = getnewsData.Items[0].sectorSummery;    
-        stockName = getnewsData.Items[0].stockName;
-     }
+    if (getnewsData.Items && getnewsData.Items.length > 0) {
+      termSumm = getnewsData.Items[0].termSummery;
+      categorySumm = getnewsData.Items[0].categorySummery;
+      sectorSumm = getnewsData.Items[0].sectorSummery;
+      stockName = getnewsData.Items[0].stockName;
+    }
 
     const now = Date.now().toString();
     let item = {
-      countryId : Number(countryId),
+      countryId: Number(countryId),
       termSummery: termSumm,
       categorySummery: categorySumm,
-      sectorSummery: responseBody.content == null || responseBody.content.length == 0 ? sectorSumm : responseBody.content,
+      sectorSummery:
+        responseBody.content == null || responseBody.content.length == 0
+          ? sectorSumm
+          : responseBody.content,
       stockName: stockName,
       createdDate: now,
-      modifiedDate: now
+      modifiedDate: now,
     };
 
- await client.send(new PutCommand({
-      TableName: FILTERED_NEWS,
-      Item: item
-    }));
+    await client.send(
+      new PutCommand({
+        TableName: FILTERED_NEWS,
+        Item: item,
+      }),
+    );
     console.log("second save");
-return {
-    statusCode: 200,
-    body: JSON.stringify(responseBody)
-};
-   } catch (err) {
-        console.log(err);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(responseBody),
+    };
+  } catch (err) {
+    console.log(err);
 
-        return {
-            statusCode: 500,
-            body: JSON.stringify({
-                error: err.message
-            })
-        };
-    }
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: err.message,
+      }),
+    };
+  }
 };

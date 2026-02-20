@@ -78,7 +78,42 @@ functions:
       - http:
           path: userflow
           method: put
+ 
+  getCountry:
+    handler: handlers/country.getCountry
+    events:
+      - http:
+          path: country
+          method: get
 
+  showTermAnalysis:
+    handler: handlers/getAnalysis.showTermAnalysis
+    events:
+      - http:
+          path: showtermanalysis
+          method: get
+
+  showCategoryAnalysis:
+    handler: handlers/getAnalysis.showCategoryAnalysis
+    events:
+      - http:
+          path: showcategoryanalysis
+          method: get
+
+  showSectorAnalysis:
+    handler: handlers/getAnalysis.showSectorAnalysis
+    events:
+      - http:
+          path: showsectoranalysis
+          method: get
+
+  showStockAnalysis:
+    handler: handlers/getAnalysis.showStockAnalysis
+    events:
+      - http:
+          path: showstockanalysis
+          method: get
+          
 ############# Externl Calls ##############
 
   getNews:

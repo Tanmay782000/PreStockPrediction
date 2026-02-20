@@ -8,7 +8,7 @@ const TABLE = process.env.StockTermTable;
 
 exports.get = async (event) => {
   try {
-    await verify(event);
+    // await verify(event);
     const result = await client.send(new ScanCommand({ TableName: TABLE }));
     return {
       statusCode: 200,

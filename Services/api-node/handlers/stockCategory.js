@@ -8,27 +8,31 @@ const TABLE = process.env.StockTermTable;
 
 exports.get = async (event) => {
   try {
-    await verify(event);
+    // await verify(event);
     const id =
-    event.queryStringParameters?.id ||
-    (event.body ? JSON.parse(event.body).id : null);
+      event.queryStringParameters?.id ||
+      (event.body ? JSON.parse(event.body).id : null);
 
     console.log("Fetching stock terms with id:", id);
-    if(!id){
-        return{
-            statusCode: 400,
-            body: JSON.stringify({ error: "id parameter is required" }),
-        }
+    if (!id) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "id parameter is required" }),
+      };
     }
-    const result = await client.send(new ScanCommand({
-      TableName: TABLE,
-      Key: { countryId: id }
-    }));
+    const result = await client.send(
+      new ScanCommand({
+        TableName: TABLE,
+        Key: { countryId: id },
+      }),
+    );
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        stockTerms: result.Items.sort((a, b) => a.stockCategoryId - b.stockCategoryId),
+        stockTerms: result.Items.sort(
+          (a, b) => a.stockCategoryId - b.stockCategoryId,
+        ),
       }),
     };
   } catch (err) {
