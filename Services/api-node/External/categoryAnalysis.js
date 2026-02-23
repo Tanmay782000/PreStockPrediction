@@ -10,20 +10,28 @@ FILTERED_NEWS = process.env.FilteredNews;
 
 exports.get = async (event) => {
   try {
+    //Table declaration
+    const COUNTRY_TABLE = process.env.CountryTable;
+    const CATEGORY_TABLE = process.env.CategoryTable;
+    
+    //Variable declaration
     const countryId = event.countryId;
     const country = event.country;
     const termId = event.termId;
     const termName = event.termName;
     const array = event.array || [];
 
+
+    var countryList = await client.send(new ScanCommand({ TableName: COUNTRY_TABLE }));//{id, countryName}
+    countryList = (countryList.Items || []).filter(c => c.countryId == countryId).map(c => ({countryId: c.countryId, countryName: c.countryName}));
+    var categoryList = await client.send(new ScanCommand({ TableName: CATEGORY_TABLE }));//{categoryId, categoryName}
+    categoryList = (categoryList.Items || []).filter(x => x.countryId == countryId).map(c => ({categoryId: c.stockCategoryId, countryId:c.countryId, categoryName: c.stockCategory}));
+
     const prompt = `
 CATEGORY ANALYSIS
 
 countryId Mapping:
-1 -> India
-2 -> USA
-3 -> China
-4 -> Singapore
+${JSON.stringify(countryList, null, 2)}
 
 Selected countryId: ${countryId}
 Selected country: ${country}
@@ -31,23 +39,7 @@ Selected termId: ${termId}
 Selected termName : ${termName}
 
 Available Categories (from database):
-[
-  { "stockCategoryId": 5,  "countryId": 1, "stockCategory": "Nifty 50" },
-  { "stockCategoryId": 6,  "countryId": 1, "stockCategory": "Nifty Next 50" },
-  { "stockCategoryId": 7,  "countryId": 1, "stockCategory": "Nifty Midcap 150" },
-  { "stockCategoryId": 8,  "countryId": 1, "stockCategory": "Nifty Smallcap 250" },
-  { "stockCategoryId": 1,  "countryId": 2, "stockCategory": "S&P 500" },
-  { "stockCategoryId": 2,  "countryId": 2, "stockCategory": "Nasdaq 100" },
-  { "stockCategoryId": 3,  "countryId": 2, "stockCategory": "Russell 2000" },
-  { "stockCategoryId": 4,  "countryId": 2, "stockCategory": "Dow Jones" },
-  { "stockCategoryId": 9,  "countryId": 3, "stockCategory": "CSI 300" },
-  { "stockCategoryId": 10, "countryId": 3, "stockCategory": "SSE 50" },
-  { "stockCategoryId": 11, "countryId": 3, "stockCategory": "Hang Seng China" }
-  { "stockCategoryId": 12, "countryId": 3, "stockCategory": "STAR Market" },
-  { "stockCategoryId": 13, "countryId": 4, "stockCategory": "STI" },
-  { "stockCategoryId": 14, "countryId": 4, "stockCategory": "FTSE ST Mid Cap" },
-  { "stockCategoryId": 15, "countryId": 4, "stockCategory": "FTSE ST Small Cap" },
-]
+${JSON.stringify(categoryList, null, 2)}
 
 IMPORTANT:
 Only consider categories matching the selected countryId.
@@ -59,9 +51,9 @@ e.g.
 Not to consider in analysis -> Nifty 50 rise for the 2nd consecutive session ; nifty 50 category was good as per 10 key highlights
 Consider in analysis -> Nifty 50 is expected to rise for the 3rd consecutive session as per recent news and data behaviour; nifty 50 category is expected to be good today/tomorrow/afteronwards(based on term).
 
-• Selected country
-• Selected term
-• Input data behaviour / signals
+-> Selected country
+-> Selected term
+-> Input data behaviour / signals
 
 CONTEXT:
 Stock market category prediction.
@@ -139,7 +131,7 @@ No explanations outside JSON.
       stockName = getnewsData.Items[0].stockName;
     }
 
-    const now = Date.now().toString();
+    const now = new Date().toISOString();
     let item = {
       countryId: Number(countryId),
       termSummery: termSumm,

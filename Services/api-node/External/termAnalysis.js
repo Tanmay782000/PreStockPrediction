@@ -4,35 +4,41 @@ const {
 } = require("@aws-sdk/client-bedrock-runtime");
 const { PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
 const { client } = require("../db/dynamo.client");
+const { count } = require("console");
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
 FILTERED_NEWS = process.env.FilteredNews;
 
 exports.get = async (event) => {
   try {
+    //Table declaration
+    const COUNTRY_TABLE = process.env.CountryTable;
+    const TERM_TABLE = process.env.StockTermTable;
+    
+    //Variable declaration
     const countryId = event.countryId;
     const country = event.country;
     const array = event.array || [];
+
+    var countryList = await client.send(new ScanCommand({ TableName: COUNTRY_TABLE }));//{id, countryName}
+    countryList = (countryList.Items || []).filter(c => c.countryId == countryId).map(c => ({countryId: c.countryId, countryName: c.countryName}));
+    var termList = await client.send(new ScanCommand({ TableName: TERM_TABLE }));//{termId, termName}
+    termList = (termList.Items || []).map(t => ({termId: t.termId, termName: t.termName, researchInsight: t.researchInsight}));
 
     const prompt = `
 TERM ANALYSIS
 
 countryId Mapping:
-1 -> India
-2 -> USA
-3 -> China
-4 -> Singapore
+${JSON.stringify(countryList, null, 2)}
 
 Selected countryId: ${countryId}
 Selected country: ${country}
 
 Available Terms:
-short (1)
-mid (2)
-long (3)
+${JSON.stringify(termList, null, 2)}
 
 INSTRUCTION:
-Analyze the input data and determine the best term (short/mid/long).
+Analyze the input data and determine the best term (short/mid/long) also consider the researchInsights into news.
 and another important thing is we are predicting the future of term so consider the news and data behaviour as per current time and give more weightage to recent news and data for prediction.
 e.g. 
 Not to consider in analysis -> Nifty 50 rise for the 2nd consecutive session ; short term was good as per 10 key highlights
@@ -111,7 +117,7 @@ OUTPUT FORMAT:
       sectorSumm = getnewsData.Items[0].sectorSummery;
       stockName = getnewsData.Items[0].stockName;
     }
-    const now = Date.now().toString();
+    const now = new Date().toISOString();
     let item = {
       countryId: Number(countryId),
       termSummery:

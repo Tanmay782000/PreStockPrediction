@@ -8,10 +8,12 @@ provider:
     JWT_SECRET: "iamworkinginheliosassoftwareengineer"
     CountryTable: Country
     TokenHistoryTable: TokenHistory
+    CategoryTable: StockCategory
     StockTermTable: StockTerms
     UserCFTable: UserCF
     NewsTable: NewsRawData
     FilteredNews: FilteredNews
+    SectorDetailsTable: SectorDetails
     #Lambdas
 
   iam:

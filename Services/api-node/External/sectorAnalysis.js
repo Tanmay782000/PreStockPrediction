@@ -10,6 +10,11 @@ FILTERED_NEWS = process.env.FilteredNews;
 
 exports.get = async (event) => {
   try {
+    //Table declaration
+    const COUNTRY_TABLE = process.env.CountryTable;
+    const SECTOR_TABLE = process.env.SectorDetailsTable;
+
+    //Variable declaration
     const countryId = event.countryId;
     const country = event.country;
     const termId = event.termId;
@@ -18,14 +23,15 @@ exports.get = async (event) => {
     const categoryName = event.categoryName;
     const array = event.array || [];
 
+    var countryList = await client.send(new ScanCommand({ TableName: COUNTRY_TABLE }));//{id, countryName}
+    countryList = (countryList.Items || []).filter(c => c.countryId == countryId).map(c => ({countryId: c.countryId, countryName: c.countryName}));
+    var sectorList = await client.send(new ScanCommand({ TableName: SECTOR_TABLE }));//{sectorId, sectorName}
+
     const prompt = `
 CATEGORY ANALYSIS
 
 countryId Mapping:
-1 -> India
-2 -> USA
-3 -> China
-4 -> Singapore
+${JSON.stringify(countryList, null, 2)}
 
 Selected countryId: ${countryId}
 Selected country: ${country}
@@ -35,41 +41,29 @@ Selected categoryId: ${categoryId}
 Selected categoryName: ${categoryName}
 
 Available Sectors (from database):
-
-[
- {"stockSectorId": "1","stockSector": "Information Technology"},
- {"stockSectorId": "2","stockSector": "Financials"},
- {"stockSectorId": "3","stockSector": "Healthcare / Pharmaceuticals"},
- {"stockSectorId": "4","stockSector": "Consumer Discretionary"},
- {"stockSectorId": "5","stockSector": "Consumer Staples"},
- {"stockSectorId": "6","stockSector": "Industrials"},
- {"stockSectorId": "7","stockSector": "Energy"},
- {"stockSectorId": "8","stockSector": "Materials"},
- {"stockSectorId": "9","stockSector": "Utilities"},
- {"stockSectorId": "10","stockSector": "Real Estate"},
- {"stockSectorId": "11","stockSector": "Communication Services"}
-]
+${JSON.stringify(sectorList.Items || [], null, 2)}
 
 IMPORTANT:
 Only consider sectors matching the selected stockSectorId.
 
 INSTRUCTION:
-Analyze the input data and determine the BEST stock sector based on:
-and another important thing is we are predicting the future of sector so consider the news and data behaviour as per current time and give more weightage to recent news and data for prediction.
+Analyze the input data and determine the BEST stock sector based on below details:
+1. Important thing is we are predicting the future of sector so consider the news and data behaviour as per current time and give more weightage to recent news and data for prediction.
 e.g. 
 Not to consider in analysis -> Nifty 50 rise for the 2nd consecutive session ; IT sector was good as per 10 key highlights
 Consider in analysis -> Nifty 50 is expected to rise for the 3rd consecutive session as per recent news and data behaviour; IT sector is expected to be good today/tomorrow/afteronwards(based on term).
 
-• Selected country
-• Selected term
-• Selected category
-• Input data behaviour / signals
+2. Perform stock selection using the following decision logic:
+-> Selected country
+-> Selected term
+-> Selected category
+-> Input data behaviour / signals
 
 CONTEXT:
 Stock market sector prediction.
 
 probabilityArr(variable):
-Contains probability of profit for EACH valid sector of particular country, term and category. and do the ranking based on sequence of sector id in above list with asc.
+Contains probability of profit for EACH valid sector based on INSTRUCTION. and do the ranking based on sequence of sector id in above list with asc.
 
 SUMMARY(variable):
 Explain reasoning in 10 - 15 lines.
@@ -84,7 +78,6 @@ OUTPUT FORMAT:
   "termName": ${termName},
   "categoryId": ${categoryId},
   "categoryName": ${categoryName},
-  "topThreeSectors":[array of top three sectors based on probability with sectorId and sectorName],
   "probabilityArr": probabilityArr,
   "summary": SUMMARY
 }
@@ -138,7 +131,7 @@ No explanations outside JSON.
       stockName = getnewsData.Items[0].stockName;
     }
 
-    const now = Date.now().toString();
+    const now = new Date().toISOString();
     let item = {
       countryId: Number(countryId),
       termSummery: termSumm,

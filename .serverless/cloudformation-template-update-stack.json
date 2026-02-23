@@ -207,6 +207,25 @@
           }
         ]
       }
+    },
+    "SectorDetailsTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "SectorDetails",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "stockSectorId",
+            "AttributeType": "N"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "stockSectorId",
+            "KeyType": "HASH"
+          }
+        ]
+      }
     }
   },
   "Outputs": {
