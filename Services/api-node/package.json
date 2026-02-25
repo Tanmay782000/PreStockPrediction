@@ -15,7 +15,8 @@
     "@aws-sdk/client-lambda": "^3.975.0",
     "@aws-sdk/lib-dynamodb": "^3.500.0",
     "jsonwebtoken": "^9.0.3",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yahoo-finance2": "^2.14.0"
   },
   "devDependencies": {
     "serverless-offline": "^14.4.0"

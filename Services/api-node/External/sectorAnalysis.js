@@ -79,7 +79,9 @@ OUTPUT FORMAT:
   "categoryId": ${categoryId},
   "categoryName": ${categoryName},
   "probabilityArr": probabilityArr,
-  "summary": SUMMARY
+  "summary": SUMMARY,
+  "WINNER_Id":"sectorId",
+  "WINNER_Name":"sectorName"
 }
 
 OUTPUT RULES:

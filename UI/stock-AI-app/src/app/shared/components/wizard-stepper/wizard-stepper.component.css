@@ -1,0 +1,25 @@
+.stepper{
+    margin-left: 70px;
+    margin-right: 70px;
+}
+
+.mat-step-header {
+  padding: 18px 32px;
+}
+
+.mat-step-header .mat-step-icon {
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mat-step-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.mat-stepper-horizontal-line {
+  border-top-width: 2px;
+}
+

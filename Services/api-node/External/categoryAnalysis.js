@@ -80,7 +80,8 @@ OUTPUT FORMAT:
   "categoryName": "categoryName", //e.g. Nifty Midcap 150
   "probabilityArr": probabilityArr,
   "summary": SUMMARY,
-  "WINNER":"stockCategoryId"
+  "WINNER_Id":"stockCategoryId"
+  "WINNER_Name":"categoryName"
 }
 
 OUTPUT RULES:

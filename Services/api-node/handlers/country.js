@@ -27,7 +27,7 @@ exports.get = async (event) => {
 
 exports.getCountry = async (event) => {
   try {
-    // await verify(event);
+    await verify(event);
     const id =
       event.queryStringParameters?.countryId ||
       (event.body ? JSON.parse(event.body).countryId : null);

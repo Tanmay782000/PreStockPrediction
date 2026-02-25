@@ -70,7 +70,8 @@ OUTPUT FORMAT:
   "termName": "termName", //e.g. Short Term/Mid Term/Long Term
   "probabilityArr": probabilityArr,
   "summary": SUMMARY,
-  "WINNER":"termId"
+  "WINNER_Id":"stockCategoryId"
+  "WINNER_Name":"categoryName"
 }
 `;
 

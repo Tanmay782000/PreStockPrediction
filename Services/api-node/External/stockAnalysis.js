@@ -5,6 +5,7 @@ const {
 const { PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
 const { client } = require("../db/dynamo.client");
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
+const YahooFinance = require("yahoo-finance2").default;
 
 FILTERED_NEWS = process.env.FilteredNews;
 
@@ -151,30 +152,6 @@ No explanations outside JSON.
 
     console.log("Parsed response body:", responseBody);
 
-    console.log("*********************************************************************")
-
-    
-    const stockList = responseBody.text[0].topFiveSectors;
-    //if already parsed then good other wise parse the JSON.Parse(stockList)
-    const today = new Date();
-    const period2 = formatDate(today);
-    const threeMonthsAgo = new Date(today);
-    threeMonthsAgo.setMonth(today.getMonth() - 3);
-    const period1 = formatDate(threeMonthsAgo);
-    const tempArray = [];
-    for (var i = 0; i < stockList.length; i++) {
-      var stock = stockList[i];
-      const data = await yahooFinance.historical(stock.stockName, {
-      period1: period1,
-      period2: period2,
-      interval: "1d"
-      });
-      tempArray.push({"stockName":stock.stockName, "dailyData": JSON.stringify(data), "probability": stock.probability});
-    }
-
-    //NOW AGAIN CALL LLM and pass the tempArray
-
-    console.log("*********************************************************************")
     let termSumm = "";
     let categorySumm = "";
     let sectorSumm = "";
@@ -216,6 +193,43 @@ No explanations outside JSON.
         Item: item,
       }),
     );
+
+    console.log("*********************************************************************")
+
+    // var getnewsDataUpdated = await client.send(
+    //   new ScanCommand({
+    //     TableName: FILTERED_NEWS,
+    //     Key: { countryId: Number(countryId) },
+    //   }),
+    // );
+    // const stockList = getnewsDataUpdated.Items[0].stockName;
+    // console.log("stockList", stockList);
+    // const parsed =
+    //     typeof stockList === "string"
+    //         ? JSON.parse(stockList)
+    //         : stockList;
+    // console.log("parsed stockList", parsed);
+    // const today = new Date();
+    // const period2 = formatDate(today);
+    // const threeMonthsAgo = new Date(today);
+    // threeMonthsAgo.setMonth(today.getMonth() - 3);
+    // const period1 = formatDate(threeMonthsAgo);
+    // const tempArray = [];
+    // const yahooFinance = new YahooFinance();
+    // for (var i = 0; i < stockList.length; i++) {
+    //   var stock = stockList[i];
+    //   const data = await yahooFinance.historical(stock.stockName, {
+    //   period1: period1,
+    //   period2: period2,
+    //   interval: "1d"
+    //   });
+    //   tempArray.push({"stockName":stock.stockName, "dailyData": JSON.stringify(data), "probability": stock.probability});
+    // }
+    // console.log("tempArray", tempArray);
+    //NOW AGAIN CALL LLM and pass the tempArray
+
+    console.log("*********************************************************************")
+
     console.log("second save");
     return {
       statusCode: 200,
