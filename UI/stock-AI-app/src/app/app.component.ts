@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
+import { WizardStepperComponent } from './shared/components/wizard-stepper/wizard-stepper.component';
+import { WizardActionsComponent } from './shared/components/wizard-actions/wizard-actions.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,HeaderComponent],
+  imports: [RouterOutlet,HeaderComponent,WizardStepperComponent,WizardActionsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   standalone: true

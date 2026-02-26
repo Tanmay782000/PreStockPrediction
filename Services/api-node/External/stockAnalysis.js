@@ -47,9 +47,9 @@ IMPORTANT:
 Only consider the stocks which are in criteria of selected country, term, category and topFiveSectors. which given factors
 please do proper analysis over stocks which are having high probability of profit.
 
-INSTRUCTION:
+INSTRUCTION: 
 
-Perform stock selection using the following decision logic:
+Perform stock selection using the following decision logic & focus more on recent news based on data and time:
 
 STEP 1 — Strictly took present & future News + Data Analysis
 below insights which not to take in prediction

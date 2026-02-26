@@ -23,3 +23,10 @@
   border-top-width: 2px;
 }
 
+*{
+  background-color: whitesmoke!important;   /* your app background */
+}
+
+::ng-deep .mat-step-header {
+  pointer-events: none;
+}

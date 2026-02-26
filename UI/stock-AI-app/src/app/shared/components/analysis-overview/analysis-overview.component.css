@@ -1,0 +1,16 @@
+.aly_overview{
+    height: 400px;
+    margin-top: -15px;
+}
+
+.content{
+    border-radius: 10px;
+    border: black;
+    border-style: dotted;
+    height: 430px;
+    background-color: white!important;   
+}
+
+.content h5{
+    margin: 10px;
+}

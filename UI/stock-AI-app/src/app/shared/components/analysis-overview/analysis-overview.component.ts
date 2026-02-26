@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-analysis-overview',
   imports: [],
   templateUrl: './analysis-overview.component.html',
-  styleUrl: './analysis-overview.component.css'
+  styleUrl: './analysis-overview.component.css',
+  standalone: true
 })
 export class AnalysisOverviewComponent {
 

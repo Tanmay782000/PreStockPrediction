@@ -45,7 +45,7 @@ IMPORTANT:
 Only consider categories matching the selected countryId.
 
 INSTRUCTION:
-Analyze the input data and determine the BEST stock category based on:
+Analyze the input data and determine the BEST stock category(focus more on recent news based on data and time)
 and another important thing is we are predicting the future of category so consider the news and data behaviour as per current time and give more weightage to recent news and data for prediction.
 e.g. 
 Not to consider in analysis -> Nifty 50 rise for the 2nd consecutive session ; nifty 50 category was good as per 10 key highlights

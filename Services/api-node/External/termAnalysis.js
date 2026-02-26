@@ -38,7 +38,7 @@ Available Terms:
 ${JSON.stringify(termList, null, 2)}
 
 INSTRUCTION:
-Analyze the input data and determine the best term (short/mid/long) also consider the researchInsights into news.
+Analyze the input data and determine the best term (short/mid/long) also consider the researchInsights into news.(focus more on recent news based on data and time)
 and another important thing is we are predicting the future of term so consider the news and data behaviour as per current time and give more weightage to recent news and data for prediction.
 e.g. 
 Not to consider in analysis -> Nifty 50 rise for the 2nd consecutive session ; short term was good as per 10 key highlights

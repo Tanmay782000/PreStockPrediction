@@ -1,0 +1,35 @@
+.country-wrapper {
+  gap: 30px;   /* controls space between columns */
+}
+
+.country-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;   /* LESS vertical spacing */
+}
+
+.country-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 10px;
+}
+
+.country-item img {
+  width: 52px;
+  height: 52px;
+}
+
+.c_selection{
+    margin-top: -15px;
+    height: 400px;
+}
+
+.country-wrapper {
+  background-color: white!important;   /* your app background */
+  border-radius: 20px;
+  border-color: black;
+  border-style: dashed;
+}

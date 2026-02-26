@@ -47,7 +47,7 @@ IMPORTANT:
 Only consider sectors matching the selected stockSectorId.
 
 INSTRUCTION:
-Analyze the input data and determine the BEST stock sector based on below details:
+Analyze the input data and determine the BEST stock sector based on below details and focus more on recent news based on data and time:
 1. Important thing is we are predicting the future of sector so consider the news and data behaviour as per current time and give more weightage to recent news and data for prediction.
 e.g. 
 Not to consider in analysis -> Nifty 50 rise for the 2nd consecutive session ; IT sector was good as per 10 key highlights
