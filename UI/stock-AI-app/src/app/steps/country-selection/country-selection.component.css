@@ -1,11 +1,11 @@
 .country-wrapper {
-  gap: 30px;   /* controls space between columns */
+  gap: 50px;   /* controls space between columns */
 }
 
 .country-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;   /* LESS vertical spacing */
+  gap: 20px;   /* LESS vertical spacing */
 }
 
 .country-item {
@@ -14,7 +14,11 @@
   gap: 10px;
   font-size: 15px;
   font-weight: 500;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
   margin: 10px;
+  padding: 5px;
 }
 
 .country-item img {
@@ -33,3 +37,17 @@
   border-color: black;
   border-style: dashed;
 }
+
+
+.country-item:hover {
+  border: 2px solid #90caf9;
+}
+
+.country-item.selected {
+  border: 2px solid #1976d2;
+  background-color: #e3f2fd;
+}
+
+/* .country-item.selected img {
+  filter: brightness(0) invert(1);
+} */

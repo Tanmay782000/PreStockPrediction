@@ -8,6 +8,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { ViewChild } from '@angular/core';
 import { WizardService } from '../../../services/stepper.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CountryService } from '../../../services/country.service';
 
 @Component({
   selector: 'app-wizard-stepper',
@@ -18,7 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class WizardStepperComponent {
 
- constructor(private wizardService: WizardService, private activatedroute:ActivatedRoute, private router:Router){}
+ constructor(private wizardService: WizardService,private activatedroute:ActivatedRoute, private router:Router){}
 
  private _formBuilder = inject(FormBuilder);
  @ViewChild(MatStepper) stepper!: MatStepper;
@@ -84,7 +85,9 @@ export class WizardStepperComponent {
   });
 
   goNext() {
+    debugger;
   this.stepper.next();
+
   }
 
   goBack() {

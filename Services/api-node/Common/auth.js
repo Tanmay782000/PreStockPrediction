@@ -14,7 +14,7 @@ module.exports.tokengeneration = async (event) => {
   }
   console.log(username);
   // create token
-  const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" });
+  const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "7d" });
   let tokenId = uuid4();
 
   const existingToken = await client.send(

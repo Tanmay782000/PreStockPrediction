@@ -7,7 +7,7 @@ TABLE_USER = process.env.UserCFTable;
 
 exports.get = async (event) => {
   try {
-    // await verify(event);
+    await verify(event);
 
     const { tokenId, stepId, actionName, value } = JSON.parse(event.body || "{}");
 
@@ -67,6 +67,11 @@ exports.get = async (event) => {
 
     return {
       statusCode: 200,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({
         userData: "Record Inserted Successfully",
       }),
@@ -75,6 +80,11 @@ exports.get = async (event) => {
     console.log("Error in user flow:", err);
     return {
       statusCode: err.statusCode,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({ error: err }),
     };
   }

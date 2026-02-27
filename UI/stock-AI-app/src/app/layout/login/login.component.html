@@ -1,0 +1,22 @@
+<div class="overlay">
+  <div class="popup">
+    <div class="row float-end">
+    <span class="close-btn" (click)="close.emit()">X</span>
+    </div>
+    <div class="row align-items-center g-2 mt-5">
+      
+      <div class="col-auto">
+        <label for="token" class="mb-0"><b>Enter Token:</b></label>
+      </div>
+
+      <div class="col">
+        <textarea class="form-control" [(ngModel)]="tokenValue"></textarea>
+      </div>
+
+      <div class="col-auto">
+        <button class="btn btn-primary btn-lg" (click)="Login()">Login</button>
+      </div>
+
+    </div>
+  </div>
+</div>

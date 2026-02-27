@@ -5,7 +5,7 @@
 </span>
   <span class="dropdown">
   <button 
-    class="btn btn-outline-primary dropdown-toggle" 
+    class="btn btn-outline-primary dropdown-toggle btn-lg" 
     type="button" 
     data-bs-toggle="dropdown">
     Select Language
@@ -17,6 +17,8 @@
     <li><a class="dropdown-item" href="#">Chinese</a></li>
   </ul>
 
-    <button class="btn btn-outline-primary" href="#">Login</button>
+    <button class="btn btn-outline-primary btn-lg" href="#" (click)="openPopup()">Login</button>
   </span>
 </nav>
+
+<app-login *ngIf="authService.showLoginPopup" (close)="closePopup()"></app-login>

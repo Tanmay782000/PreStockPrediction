@@ -1,20 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { WizardService } from '../../../services/stepper.service';
+import { CountryService } from '../../../services/country.service';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-wizard-actions',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './wizard-actions.component.html',
   styleUrl: './wizard-actions.component.css',
   standalone:true
 })
 export class WizardActionsComponent {
-constructor(private wizardService: WizardService, private router:Router){}
+constructor(private wizardService: WizardService,private AuthService:AuthService, private countryService:CountryService, private router:Router){}
+
+@Input() public isPrevious:boolean = true;
+@Input() public isNext:boolean = true;
 
 nextStep() {
-  debugger;
+  debugger
   this.wizardService.next();
+  
   console.log(this.wizardService.stepper.selectedIndex)
   if(this.wizardService.stepper.selectedIndex == 0)
     this.router.navigate(['']);

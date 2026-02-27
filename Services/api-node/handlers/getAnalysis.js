@@ -7,7 +7,7 @@ const TABLE = process.env.FilteredNews;
 
 exports.showTermAnalysis = async (event) => {
   try {
-    // await verify(event);
+    await verify(event);
     const id =
       event.queryStringParameters?.countryId ||
       (event.body ? JSON.parse(event.body).countryId : null);
@@ -25,6 +25,11 @@ exports.showTermAnalysis = async (event) => {
 
     return {
       statusCode: 200,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({
         termAnalysis: JSON.parse(item),
       }),
@@ -33,6 +38,11 @@ exports.showTermAnalysis = async (event) => {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({ error: err }),
     };
   }
@@ -40,7 +50,7 @@ exports.showTermAnalysis = async (event) => {
 
 exports.showCategoryAnalysis = async (event) => {
   try {
-    // await verify(event);
+    await verify(event);
     const id =
       event.queryStringParameters?.countryId ||
       (event.body ? JSON.parse(event.body).countryId : null);
@@ -58,6 +68,11 @@ exports.showCategoryAnalysis = async (event) => {
 
     return {
       statusCode: 200,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({
         categoryAnalysis: JSON.parse(item),
       }),
@@ -66,6 +81,11 @@ exports.showCategoryAnalysis = async (event) => {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({ error: err }),
     };
   }
@@ -73,7 +93,7 @@ exports.showCategoryAnalysis = async (event) => {
 
 exports.showSectorAnalysis = async (event) => {
   try {
-    // await verify(event);
+    await verify(event);
     const id =
       event.queryStringParameters?.countryId ||
       (event.body ? JSON.parse(event.body).countryId : null);
@@ -91,6 +111,11 @@ exports.showSectorAnalysis = async (event) => {
 
     return {
       statusCode: 200,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({
         sectorAnalysis: JSON.parse(item),
       }),
@@ -99,6 +124,11 @@ exports.showSectorAnalysis = async (event) => {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({ error: err }),
     };
   }
@@ -106,7 +136,7 @@ exports.showSectorAnalysis = async (event) => {
 
 exports.showStockAnalysis = async (event) => {
   try {
-    // await verify(event);
+    await verify(event);
     const id =
       event.queryStringParameters?.countryId ||
       (event.body ? JSON.parse(event.body).countryId : null);
@@ -122,6 +152,11 @@ exports.showStockAnalysis = async (event) => {
 
     return {
       statusCode: 200,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({
         stockAnalysis: item,
       }),
@@ -130,6 +165,11 @@ exports.showStockAnalysis = async (event) => {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({ error: err }),
     };
   }

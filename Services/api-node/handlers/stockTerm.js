@@ -8,10 +8,15 @@ const TABLE = process.env.StockTermTable;
 
 exports.get = async (event) => {
   try {
-    // await verify(event);
+    await verify(event);
     const result = await client.send(new ScanCommand({ TableName: TABLE }));
     return {
       statusCode: 200,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({
         stockTerms: result.Items.sort((a, b) => a.termId - b.termId),
       }),
@@ -20,6 +25,11 @@ exports.get = async (event) => {
     console.log("Error fetching stock terms:", err);
     return {
       statusCode: err.statusCode,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
       body: JSON.stringify({ error: err }),
     };
   }

@@ -5,11 +5,12 @@ import { CategoryAnalysisComponent } from './steps/category-analysis/category-an
 import { Component } from '@angular/core';
 import { SectorAnalysisComponent } from './steps/sector-analysis/sector-analysis.component';
 import { StockAnalysisComponent } from './steps/stock-analysis/stock-analysis.component';
+import { authGuard } from './services/gaurds/auth.guard';
 
 export const routes: Routes = [
         {path:'', component: CountrySelectionComponent},
-        {path:'term-analysis', component:TermAnalysisComponent},
-        {path:'category-analysis', component:CategoryAnalysisComponent},
-        {path:'sector-analysis', component:SectorAnalysisComponent},
-        {path:'stock-analysis', component:StockAnalysisComponent}
+        {path:'term-analysis', component:TermAnalysisComponent,canActivate: [authGuard]},
+        {path:'category-analysis', component:CategoryAnalysisComponent,canActivate: [authGuard]},
+        {path:'sector-analysis', component:SectorAnalysisComponent,canActivate: [authGuard]},
+        {path:'stock-analysis', component:StockAnalysisComponent,canActivate: [authGuard]}
 ];

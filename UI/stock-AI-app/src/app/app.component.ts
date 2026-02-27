@@ -6,7 +6,7 @@ import { WizardActionsComponent } from './shared/components/wizard-actions/wizar
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,HeaderComponent,WizardStepperComponent,WizardActionsComponent],
+  imports: [RouterOutlet,HeaderComponent,WizardStepperComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   standalone: true
