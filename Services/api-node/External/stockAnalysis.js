@@ -87,8 +87,6 @@ CRITICAL RULES:
 -> NEVER use external knowledge  
 -> NEVER assume missing data  
 
-Note - Apply softmax normalization before scaling to 100 while predicting for probabilityArr.
-
 CONTEXT:
 Stock market stock prediction.
 

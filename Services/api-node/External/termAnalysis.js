@@ -43,7 +43,6 @@ and another important thing is we are predicting the future of term so consider 
 e.g. 
 Not to consider in analysis -> Nifty 50 rise for the 2nd consecutive session ; short term was good as per 10 key highlights
 Consider in analysis -> Nifty 50 is expected to rise for the 3rd consecutive session as per recent news and data behaviour; short term is predicted to perform well today/tomorrow/afteronwards(based on term).
-Note - Apply softmax normalization before scaling to 100 while predicting for probabilityArr.
 
 CONTEXT:
 Stock market term prediction.
