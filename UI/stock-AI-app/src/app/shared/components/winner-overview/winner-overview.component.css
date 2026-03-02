@@ -1,13 +1,16 @@
 .wnr_overview{
+background: white;
+    height: 4spx;
+    margin-top: -15px;
+  border: 1px solid #ccc;   /* skinny border */
     height: 400px;
     margin-top: -15px;
-}
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.15),     /* soft outer */
+    inset 0 1px 3px rgba(0,0,0,0.15); /* soft inner */
 
-.content{
-    border-radius: 10px;
-    border: black;
-    border-style: dotted;
-    height: 430px;
+  border-radius: 6px;
+    height: 465px;
     background-color: white!important;   
 }
 

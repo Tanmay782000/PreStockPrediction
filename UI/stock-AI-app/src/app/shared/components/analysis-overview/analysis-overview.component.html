@@ -1,8 +1,20 @@
 <div class="aly_overview">
-<div class="row text-center">
-    <h3>{{title}}</h3>
+  <div class="row">
+    <div class="col-12">
+      <h4 class="text-center">{{title1}}</h4>
+
+      @for(tra of finalArray; track $index){
+      <div class="term-row">
+        <h5>{{tra.name}}</h5>
+        <p-progressBar [value]="tra.value" class="custom-bar"></p-progressBar>
+      </div>
+      }
+    </div>
   </div>
-  <div class="content">
-    <h5>The morning air carried a quiet kind of promise, the sort that made even ordinary streets feel like the beginning of something unexpected. Sunlight slid between buildings, painting soft patterns on the pavement as people drifted through their routines, half-awake and half-dreaming. Somewhere a dog barked, a bicycle bell chimed, and the city slowly assembled itself into motion. Nothing remarkable seemed to happen, yet beneath the surface, countless small decisions were quietly shaping the day — a turn taken, a word spoken, a moment noticed. In that gentle unfolding, life moved forward as it always does, subtle and unstoppable.</h5>
+  <div class="row">
+    <div class="col-12 d-block content">
+      <h4 class="text-center">{{title2}}</h4>
+      <p class="mr-4">{{summery}}</p>
+    </div>
   </div>
 </div>

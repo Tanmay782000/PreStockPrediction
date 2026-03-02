@@ -59,6 +59,8 @@ Consider in analysis -> Nifty 50 is expected to rise for the 3rd consecutive ses
 -> Selected category
 -> Input data behaviour / signals
 
+Note - Apply softmax normalization before scaling to 100 while predicting for probabilityArr.
+
 CONTEXT:
 Stock market sector prediction.
 

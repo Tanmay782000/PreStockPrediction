@@ -148,8 +148,10 @@ exports.showStockAnalysis = async (event) => {
       }),
     );
 
-    var item = JSON.parse(result.Item.stockName[0].text);
+    var item = result.Item.stockName[0].text;
 
+    console.log("Stock Analysis:", item);
+    
     return {
       statusCode: 200,
       headers:{
@@ -158,7 +160,7 @@ exports.showStockAnalysis = async (event) => {
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
       },
       body: JSON.stringify({
-        stockAnalysis: item,
+        stockAnalysis: JSON.parse(item),
       }),
     };
   } catch (err) {

@@ -1,12 +1,18 @@
 import { HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountryService {
   private baseUrl = 'https://d4guxgoca0.execute-api.ap-south-1.amazonaws.com/dev/';
+
+  //#region INTERNAL
+  private getCurrentCountry = new BehaviorSubject<any>(0);
+  getCurrCountry$ =this.getCurrentCountry.asObservable();
+  //#endregion
+
   constructor(private http: HttpClient) { }
 
   getCountry(countryId:number):Observable<any>
@@ -22,5 +28,17 @@ export class CountryService {
   headers: headers,
   params: params
 });
+  }
+
+  setSelectedCurrentCountry(countryId:any)
+  {
+    debugger;
+    this.getCurrentCountry.next(countryId);
+  }
+
+  getSelectedCurrentCountry()
+  {
+    debugger;
+    return this.getCurrentCountry.getValue()
   }
 }

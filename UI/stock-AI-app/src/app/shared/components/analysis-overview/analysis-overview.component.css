@@ -1,16 +1,33 @@
 .aly_overview{
-    height: 400px;
+background: white;
+    height: 4spx;
     margin-top: -15px;
-}
+  border: 1px solid #ccc;   /* skinny border */
 
-.content{
-    border-radius: 10px;
-    border: black;
-    border-style: dotted;
-    height: 430px;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.15),     /* soft outer */
+    inset 0 1px 3px rgba(0,0,0,0.15); /* soft inner */
+
+  border-radius: 6px;
+    height: 465px;
     background-color: white!important;   
+    overflow-y: auto;
 }
 
-.content h5{
-    margin: 10px;
+.row{
+ margin-top: 30px;
+ margin-left: 15px;
+  margin-right: 15px;   
+}
+
+.term-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.custom-bar {
+  flex: 1;           /* take remaining space */
+  height: 20px;
 }
