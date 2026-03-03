@@ -5,7 +5,7 @@ const {
 const { PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
 const { client } = require("../db/dynamo.client");
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
-const YahooFinance = require("yahoo-finance2").default;
+// const YahooFinance = require("yahoo-finance2").default;
 
 FILTERED_NEWS = process.env.FilteredNews;
 
@@ -96,21 +96,26 @@ rule 1 :- var ctgry = //actual stock category where stock belongs to(dont get fr
 rule 2 :- var prefix = condition(countryId == 1 ? ".NS" : countryId == 3 ? "HK" : countryId == 4 ? "SI" : "")
 rule 4 :- var yfi_stockName = stockName + prefix // we are using yahooFinance for getting stock data and news so consider the stock name with prefix while doing analysis and generating output e.g. "Infosys.NS","DBS.SI" etc..
 e.g. [
-  { "displayName": "Infosys", "stockName":yfi_stockName, "probability": 0.20, "category": ctgry },
-  { "displayName": "HDFC", "stockName":yfi_stockName, "probability": 0.21, "category": ctgry },
-  { "displayName": "TCS", "stockName":yfi_stockName, "probability": 0.32, "category": ctgry },
-  { "displayName": "Dr.Reddy", "stockName":yfi_stockName, "probability": 0.42,"category": ctgry },
-  { "displayName": "Reliance", "stockName":yfi_stockName, "probability": 0.21, "category": ctgry },
+  { "displayName": "Infosys", "stockName":yfi_stockName, "probability": 0.20, "category": ctgry, "KeyCatalysts" : 1 line Key Catalysts why stock will perform well},
+  { "displayName": "HDFC", "stockName":yfi_stockName, "probability": 0.21, "category": ctgry, "KeyCatalysts" :  1 line Key Catalysts why stock will perform well},
+  { "displayName": "TCS", "stockName":yfi_stockName, "probability": 0.32, "category": ctgry, "KeyCatalysts" :  1 line Key Catalysts why stock will perform well},
+  { "displayName": "Dr.Reddy", "stockName":yfi_stockName, "probability": 0.42,"category": ctgry, "KeyCatalysts" :  1 line Key Catalysts why stock will perform well},
+  { "displayName": "Reliance", "stockName":yfi_stockName, "probability": 0.21, "category": ctgry, "KeyCatalysts" :  1 line Key Catalysts why stock will perform well}
 ]
+// IMPORTANT -> ABOVE STOCKS ARRAY IS ONLY FOR EXAMPLE, YOU HAVE TO FETCH THE ACTUAL STOCKS NAME FROM INPUT DATA AND BASED ON GIVEN INSTRUCTION.
 note - ctgry variable contains the instruction regarding analysis and output format
 
 Suggested top five stocks based on probability with stockName, category and sector.
 
 SUMMARY(variable):
-Explain reasoning in 10 - 15 lines.
+Explain reasoning in 20 - 25 lines.[IMPORTANT]
 
 INPUT DATA:
 ${JSON.stringify(array, null, 2)}
+
+OUTPUT RULES:
+Return ONLY valid JSON.
+No explanations outside JSON.
 
 OUTPUT FORMAT:
 {
@@ -123,10 +128,6 @@ OUTPUT FORMAT:
   "probabilityArr": probabilityArr,
   "summary": SUMMARY
 }
-
-OUTPUT RULES:
-Return ONLY valid JSON.
-No explanations outside JSON.
 `;
 
     const command = new InvokeModelCommand({

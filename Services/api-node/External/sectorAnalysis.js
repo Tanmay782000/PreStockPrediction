@@ -66,10 +66,14 @@ probabilityArr(variable):
 Contains probability of profit for EACH valid sector based on INSTRUCTION. and do the ranking based on sequence of sector id in above list with asc.
 
 SUMMARY(variable):
-Explain reasoning in 10 - 15 lines.
+Explain reasoning in 20 - 25 lines.[IMPORTANT]
 
 INPUT DATA:
 ${JSON.stringify(array, null, 2)}
+
+OUTPUT RULES:
+Return ONLY valid JSON.
+No explanations outside JSON.
 
 OUTPUT FORMAT:
 {
@@ -83,10 +87,6 @@ OUTPUT FORMAT:
   "WINNER_Id":"sectorId",
   "WINNER_Name":"sectorName"
 }
-
-OUTPUT RULES:
-Return ONLY valid JSON.
-No explanations outside JSON.
 `;
 
     const command = new InvokeModelCommand({

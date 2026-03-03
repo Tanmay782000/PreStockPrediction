@@ -37,9 +37,8 @@ nextStep() {
 
 previousStep()
 {
-  debugger
   this.wizardService.previous();
-    console.log(this.wizardService.stepper.selectedIndex)
+  console.log(this.wizardService.stepper.selectedIndex)
   if(this.wizardService.stepper.selectedIndex == 0)
     this.router.navigate(['']);
   else if(this.wizardService.stepper.selectedIndex == 1)

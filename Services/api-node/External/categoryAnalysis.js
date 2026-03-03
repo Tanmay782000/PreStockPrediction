@@ -66,10 +66,14 @@ winner(variable):
 Winning stockCategoryId ranked by probability.
 
 SUMMARY(variable):
-Explain reasoning in 10 - 15 lines.
+Explain reasoning in 20 - 25 lines.[IMPORTANT]
 
 INPUT DATA:
 ${JSON.stringify(array, null, 2)}
+
+OUTPUT RULES:
+Return ONLY valid JSON.
+No explanations outside JSON.
 
 OUTPUT FORMAT:
 {
@@ -83,10 +87,6 @@ OUTPUT FORMAT:
   "WINNER_Id":"stockCategoryId"
   "WINNER_Name":"categoryName"
 }
-
-OUTPUT RULES:
-Return ONLY valid JSON.
-No explanations outside JSON.
 `;
 
     const command = new InvokeModelCommand({

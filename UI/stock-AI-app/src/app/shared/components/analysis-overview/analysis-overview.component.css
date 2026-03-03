@@ -28,6 +28,29 @@ background: white;
 }
 
 .custom-bar {
-  flex: 1;           /* take remaining space */
+  flex: 1;           
   height: 20px;
+}
+
+.blur-column {
+    filter: blur(5px);
+    user-select: none; 
+}
+
+.tableContainer{
+  position: relative;
+}
+
+.blur-column {
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.unlock-btn {
+  position: absolute;
+  top: 80px;              /* adjust for header height */
+  left: 83%;              /* align roughly over last 2 columns */
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 6px 16px;
 }

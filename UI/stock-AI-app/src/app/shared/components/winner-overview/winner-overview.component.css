@@ -12,8 +12,11 @@ background: white;
   border-radius: 6px;
     height: 465px;
     background-color: white!important;   
+    overflow-y: auto;
+    overflow-x:hidden;
 }
 
 .content h5{
     margin: 10px;
 }
+

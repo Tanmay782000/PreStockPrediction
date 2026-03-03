@@ -25,7 +25,7 @@ export class CategoryAnalysisComponent implements OnInit {
   public finalArray: any[] = [];
   constructor(    
       private categoryService: CategoryService,
-      private countryService: CountryService,) {}
+      private countryService: CountryService) {}
   ngOnInit(): void {
     debugger;
     const countryId = this.countryService.getSelectedCurrentCountry();

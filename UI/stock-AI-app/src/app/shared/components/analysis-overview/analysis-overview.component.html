@@ -1,14 +1,48 @@
 <div class="aly_overview">
   <div class="row">
     <div class="col-12">
-      <h4 class="text-center">{{title1}}</h4>
-
-      @for(tra of finalArray; track $index){
-      <div class="term-row">
-        <h5>{{tra.name}}</h5>
-        <p-progressBar [value]="tra.value" class="custom-bar"></p-progressBar>
+      <div class="position-relative d-flex align-items-center">
+        <h4 class="mx-auto mb-0">{{ title1 }}</h4>
       </div>
-      }
+      <div *ngIf="!IsStockAnalysis">
+        @for(tra of finalArray; track $index){
+        <div class="term-row">
+          <h5>{{tra.name}}</h5>
+          <p-progressBar [value]="tra.value" class="custom-bar"></p-progressBar>
+        </div>
+        }
+      </div>
+      <div *ngIf="IsStockAnalysis" class="tableContainer">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Stock Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Sector</th>
+              <th scope="col">Probability</th>
+              <th scope="col">Show Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(tra of finalArray; track $index){
+            <tr>
+              <th scope="row">{{tra.displayName}}</th>
+              <td>{{tra.category.ctgry}}</td>
+              <td>{{tra.category.sector}}</td>
+              <td>{{tra.probability}}</td>
+              <td>Show</td> 
+              <!-- class="blur-column -->
+            </tr>
+            }
+          </tbody>
+          <!-- <button class="unlock-btn btn btn-success btn-sm">
+            Unlock Full Access
+          </button> -->
+        </table>
+        <!-- <button class="unlock-btn btn btn-success btn-md" (click)="ShowSubscriptionOption()">
+          Unlock Full Access
+        </button> -->
+      </div>
     </div>
   </div>
   <div class="row">

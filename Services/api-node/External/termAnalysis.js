@@ -54,7 +54,7 @@ winner(variable):
 Winning term id.
 
 SUMMARY(variable):
-Explain reasoning in 10 - 15 lines.
+Explain reasoning in 20 - 25 lines.[IMPORTANT]
 
 INPUT DATA:
 ${JSON.stringify(array, null, 2)}

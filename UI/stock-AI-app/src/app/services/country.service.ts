@@ -32,13 +32,11 @@ export class CountryService {
 
   setSelectedCurrentCountry(countryId:any)
   {
-    debugger;
     this.getCurrentCountry.next(countryId);
   }
 
   getSelectedCurrentCountry()
   {
-    debugger;
     return this.getCurrentCountry.getValue()
   }
 }
