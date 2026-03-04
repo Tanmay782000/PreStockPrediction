@@ -32,6 +32,7 @@ export class CategoryAnalysisComponent implements OnInit {
     if (countryId != 0) {
       this.categoryService.getCategoryAnalysis(countryId).subscribe(
         (res) => {
+          console.log("category",res);
           this.categoryArray = res.categoryAnalysis.probabilityArr;
           this.summery = res.categoryAnalysis.summary
           this.finalArray = this.fixArray.map((name, i) => ({

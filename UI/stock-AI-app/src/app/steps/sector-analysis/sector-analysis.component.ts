@@ -17,7 +17,7 @@ public title1: any = 'Sectors Probability';
   public title2: any = 'Sectors Summery';
   public summery: any = "";
   public sectorArray: number[] = [];
-  public fixArray: any[] = ["Information Technology", "Financials", "Healthcare / Pharmaceuticals", "Consumer Discretionary", "Consumer Staples", "Industrials", "Energy", "Materials", "Utilities", "Real Estate"];
+  public fixArray: any[] = ["Information Technology", "Financials", "Healthcare / Pharmaceuticals", "Consumer Discretionary", "Consumer Staples", "Industrials", "Energy", "Materials", "Utilities", "Real Estate","Communication Services"];
   public finalArray: any[] = [];
   constructor(
     private sectorService: SectorService,
@@ -32,8 +32,9 @@ public title1: any = 'Sectors Probability';
           this.summery = res.sectorAnalysis.summary
           this.finalArray = this.fixArray.map((name, i) => ({
           name,
-          value: Number(this.sectorArray[i]) * 100
+          value: Number((this.sectorArray[i] * 100).toFixed(2))
           }));
+          console.log("final arrrrrrrrr",this.finalArray)
         },
         (err) => {
           console.log(err);

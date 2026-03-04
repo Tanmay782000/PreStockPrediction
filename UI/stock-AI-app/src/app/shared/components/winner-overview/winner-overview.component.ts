@@ -10,10 +10,10 @@ import { Component } from '@angular/core';
 })
 export class WinnerOverviewComponent {
   @Input() finalArr: any =   [{ "Name": "India", "Value": "India" },
-  { "Name": "Mid Term", "Value": "60%" },
-  { "Name": "Midcap 50", "Value": "30%" },
-  { "Name": "Category", "Value": "Information Technology[50%], Financial[34%], Healthcare[60%]" },
-  { "Name": "Stocks", "Value": "Dr.Reddy[40%], TCS[33%], HDFC[55%]" }]
+  { "Name": "Term", "Value": "Mid Term[60%]" },
+  { "Name": "Category", "Value": "Nifty 50[30%]" },
+  { "Name": "Sectors", "Value": "Information Technology[15%], Utilities[13%], Consumer Discretionary[12%]" },
+  { "Name": "Stocks", "Value": "Infosys[32%], Reliance[25%], HDFC Bank[21%], TCS[22%]" }]
 
   constructor(){}
   ngOnInit(){
