@@ -15,9 +15,7 @@ function fetchGdelt(url) {
     https
       .get(url, (res) => {
         let data = "";
-
         res.on("data", (chunk) => (data += chunk));
-
         res.on("end", () => {
           if (res.statusCode !== 200) {
             resolve([]);
@@ -28,7 +26,7 @@ function fetchGdelt(url) {
             const json = JSON.parse(data);
             resolve(json.articles || []);
           } catch {
-            resolve([]);
+            resolve();
           }
         });
       })
@@ -39,26 +37,44 @@ function fetchGdelt(url) {
 exports.get = async () => {
   try {
     const todaydate = today();
-
+    console.log("invoked");
     const countryUrls = {
       1: "https://api.gdeltproject.org/api/v2/doc/doc?query=(NSE%20OR%20BSE%20OR%20Nifty%20OR%20Sensex%20OR%20%22NIFTY%2050%22)&mode=artlist&timespan=1d&maxrecords=100&format=json",
-      // 2: "https://api.gdeltproject.org/api/v2/doc/doc?query=(%22S%26P%20500%22%20OR%20%22Dow%20Jones%22%20OR%20Nasdaq%20OR%20NYSE)&mode=artlist&timespan=1d&maxrecords=100&format=json",
-      // 3: "https://api.gdeltproject.org/api/v2/doc/doc?query=(%22Straits%20Times%20Index%22%20OR%20STI%20OR%20SGX)&mode=artlist&timespan=1d&maxrecords=100&format=json",
-      // 4: "https://api.gdeltproject.org/api/v2/doc/doc?query=(%22Hang%20Seng%20Index%22%20OR%20HSI%20OR%20%22Hang%20Seng%22)&mode=artlist&timespan=1d&maxrecords=100&format=json",
+      2: "https://api.gdeltproject.org/api/v2/doc/doc?query=(%22S%26P%20500%22%20OR%20%22Dow%20Jones%22%20OR%20Nasdaq%20OR%20NYSE)&mode=artlist&timespan=1d&maxrecords=100&format=json",
+      3: "https://api.gdeltproject.org/api/v2/doc/doc?query=(%22Straits%20Times%20Index%22%20OR%20STI%20OR%20SGX)&mode=artlist&timespan=1d&maxrecords=100&format=json",
+      4: "https://api.gdeltproject.org/api/v2/doc/doc?query=(%22Hang%20Seng%20Index%22%20OR%20HSI%20OR%20%22Hang%20Seng%22)&mode=artlist&timespan=1d&maxrecords=100&format=json",
     };
-
+    console.log("invoked2");
     const countrynews = {};
 
     // Fetch + sanitize
     for (const [country, url] of Object.entries(countryUrls)) {
-      const articles = await fetchGdelt(url);
+      let attempts = 0;
+      let mappedArticles = [];
 
-      countrynews[country] = articles.map((a) => ({
-        title: a.title || "No Title",
-        published: a.seendate || todaydate,
-        url: a.url || "No URL",
-      }));
+      while (attempts < 5) {
+        const articles = await fetchGdelt(url);
+        console.log("articles", articles);
+
+        mappedArticles = (articles || []).map((a) => ({
+          title: a?.title ?? "No Title",
+          published: a?.seendate ?? todaydate,
+          url: a?.url ?? "No URL",
+        }));
+
+        // check if at least one article has a real title
+        const hasValidTitle = mappedArticles.some(
+          (a) => a.title !== "No Title",
+        );
+
+        if (hasValidTitle) break;
+
+        attempts++;
+      }
+
+      countrynews[country] = mappedArticles;
     }
+    console.log("invoked3");
 
     // Convert format for DynamoDB
     const countryMap = {};
@@ -68,6 +84,7 @@ exports.get = async () => {
       );
     });
 
+    console.log("invoked4");
     const now = new Date().toISOString();
 
     const scanResult = await client.send(
@@ -75,7 +92,7 @@ exports.get = async () => {
     );
 
     scanResult.Items.sort((a, b) => a.countryId - b.countryId);
-
+    console.log("invoked5");
     for (const element of scanResult.Items) {
       const data = countryMap[element.countryId];
 
@@ -95,6 +112,7 @@ exports.get = async () => {
         );
       }
     }
+    console.log("invoked6");
     return {
       statusCode: 200,
       body: JSON.stringify({

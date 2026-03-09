@@ -39,7 +39,7 @@ ${JSON.stringify(termList, null, 2)}
 
 INSTRUCTION:
 Analyze the input data and determine the best term (short/mid/long) also consider the researchInsights into news.(focus more on recent news based on data and time)
-and another important thing is we are predicting the future of term so consider the news and data behaviour as per current time and give more weightage to recent news and data for prediction.
+and another important thing is we are predicting the future of terms so consider the news and data behaviour as per current time and give more weightage to recent news and data for prediction.
 e.g. 
 Not to consider in analysis -> Nifty 50 rise for the 2nd consecutive session ; short term was good as per 10 key highlights
 Consider in analysis -> Nifty 50 is expected to rise for the 3rd consecutive session as per recent news and data behaviour; short term is predicted to perform well today/tomorrow/afteronwards(based on term).
@@ -48,7 +48,7 @@ CONTEXT:
 Stock market term prediction.
 
 probabilityArr(variable):
-Contains probability of profit and do the ranking based on sequence of category id in above list with asc..
+Contains probability of profit and do the ranking based on sequence of terms id in above list with asc..
 
 winner(variable):
 Winning term id.
@@ -65,9 +65,6 @@ No explanations outside JSON.
 
 OUTPUT FORMAT:
 {
-  "countryId": ${countryId},
-  "termId": winner,
-  "termName": "termName", //e.g. Short Term/Mid Term/Long Term
   "probabilityArr": probabilityArr,
   "summary": SUMMARY,
   "WINNER_Id":"stockCategoryId"

@@ -118,6 +118,11 @@ functions:
           
 ############# Externl Calls ##############
 
+  callMain:
+    handler: External/main.main
+    timeout: 300
+    description: "get news & execute all prompts"
+
   getNews:
     handler: External/newsAnalysis.get
     timeout: 300
