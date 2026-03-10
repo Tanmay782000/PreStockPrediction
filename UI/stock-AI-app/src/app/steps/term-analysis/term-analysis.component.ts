@@ -34,10 +34,7 @@ export class TermAnalysisComponent implements OnInit {
         (res) => {
           this.termArray = res.termAnalysis.probabilityArr;
           this.summery = res.termAnalysis.summary
-          this.finalArray = this.fixArray.map((name, i) => ({
-          name,
-          value: Number(this.termArray[i]) * 100
-          }));
+          this.finalArray = this.termArray;
         },
         (err) => {
           console.log(err);

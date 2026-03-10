@@ -122,7 +122,12 @@ functions:
     handler: External/main.main
     timeout: 300
     description: "get news & execute all prompts"
+    events:
+      - http:
+          path: executeMarketAnalysis
+          method: get
 
+############# Externl Calls ##############
   getNews:
     handler: External/newsAnalysis.get
     timeout: 300
@@ -147,3 +152,8 @@ functions:
     handler: External/stockAnalysis.get
     timeout: 300
     description: "Generate the stock analysis for a given country, term name, category name and top three sectors"
+
+  getmarketAnalysis:
+    handler: External/marketAnalysis.get
+    timeout: 300
+    description: "Term, category and sector analysis"

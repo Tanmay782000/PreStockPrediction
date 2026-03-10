@@ -15,7 +15,7 @@ export class AnalysisOverviewComponent {
 @Input() public finalArray: any[] = [];
 @Input() public summery: any = "";
 @Input() public IsStockAnalysis: boolean = false;
-
+Object = Object;
 
 public ShowSubscriptionOption()
 {

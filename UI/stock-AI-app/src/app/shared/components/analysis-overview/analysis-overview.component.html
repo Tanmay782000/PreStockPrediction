@@ -5,12 +5,10 @@
         <h4 class="mx-auto mb-0">{{ title1 }}</h4>
       </div>
       <div *ngIf="!IsStockAnalysis">
-        @for(tra of finalArray; track $index){
-        <div class="term-row">
-          <h5>{{tra.name}}</h5>
-          <p-progressBar [value]="tra.value" class="custom-bar"></p-progressBar>
+        <div class="term-row" *ngFor="let i of finalArray">
+          <h5>{{Object.keys(i)[0]}}</h5>
+          <p-progressBar [value]="Object.values(i)[0]" class="custom-bar"></p-progressBar>
         </div>
-        }
       </div>
       <div *ngIf="IsStockAnalysis" class="tableContainer">
         <table class="table">

@@ -35,10 +35,7 @@ export class CategoryAnalysisComponent implements OnInit {
           console.log("category",res);
           this.categoryArray = res.categoryAnalysis.probabilityArr;
           this.summery = res.categoryAnalysis.summary
-          this.finalArray = this.fixArray.map((name, i) => ({
-          name,
-          value: Number(this.categoryArray[i]) * 100
-          }));
+          this.finalArray = this.categoryArray
         },
         (err) => {
           console.log(err);

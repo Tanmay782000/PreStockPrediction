@@ -19,9 +19,7 @@ exports.showTermAnalysis = async (event) => {
       }),
     );
 
-    var item = result.Item.termSummery[0].text;
-
-    console.log("Term Analysis:", item);
+    var item = result.Item.termSummery;
 
     return {
       statusCode: 200,
@@ -31,7 +29,7 @@ exports.showTermAnalysis = async (event) => {
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
       },
       body: JSON.stringify({
-        termAnalysis: JSON.parse(item),
+        termAnalysis: item,
       }),
     };
   } catch (err) {
@@ -62,9 +60,7 @@ exports.showCategoryAnalysis = async (event) => {
       }),
     );
 
-    var item = result.Item.categorySummery[0].text;
-
-    console.log("Category Analysis:", item);
+    var item = result.Item.categorySummery;
 
     return {
       statusCode: 200,
@@ -74,7 +70,7 @@ exports.showCategoryAnalysis = async (event) => {
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
       },
       body: JSON.stringify({
-        categoryAnalysis: JSON.parse(item),
+        categoryAnalysis: item,
       }),
     };
   } catch (err) {
@@ -105,9 +101,7 @@ exports.showSectorAnalysis = async (event) => {
       }),
     );
 
-    var item = result.Item.sectorSummery[0].text;
-
-    console.log("Sector Analysis:", item);
+    var item = result.Item.sectorSummery;
 
     return {
       statusCode: 200,
@@ -117,7 +111,7 @@ exports.showSectorAnalysis = async (event) => {
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
       },
       body: JSON.stringify({
-        sectorAnalysis: JSON.parse(item),
+        sectorAnalysis: item,
       }),
     };
   } catch (err) {
@@ -148,10 +142,8 @@ exports.showStockAnalysis = async (event) => {
       }),
     );
 
-    var item = result.Item.stockName[0].text;
+    var item = result.Item.stockName;
 
-    console.log("Stock Analysis:", item);
-    
     return {
       statusCode: 200,
       headers:{
@@ -160,7 +152,7 @@ exports.showStockAnalysis = async (event) => {
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
       },
       body: JSON.stringify({
-        stockAnalysis: JSON.parse(item),
+        stockAnalysis: item,
       }),
     };
   } catch (err) {

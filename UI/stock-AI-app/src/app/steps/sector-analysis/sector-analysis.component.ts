@@ -30,11 +30,7 @@ public title1: any = 'Sectors Probability';
         (res) => {
           this.sectorArray = res.sectorAnalysis.probabilityArr;
           this.summery = res.sectorAnalysis.summary
-          this.finalArray = this.fixArray.map((name, i) => ({
-          name,
-          value: Number((this.sectorArray[i] * 100).toFixed(2))
-          }));
-          console.log("final arrrrrrrrr",this.finalArray)
+          this.finalArray = this.sectorArray;
         },
         (err) => {
           console.log(err);
