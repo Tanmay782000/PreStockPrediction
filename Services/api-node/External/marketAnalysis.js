@@ -13,28 +13,33 @@ exports.get = async (event) => {
   const termList = event.termList;
   const categoryList = event.categoryList;
   const sectorList = event.sectorList;
-  console.log("get the term list", termList);
-
+  const now_d = new Date();
+  const Time = now_d.toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+  });
+  const beforeTime = new Date(Date.now() + 5.5 * 3600000 - 12 * 3600000);
   const prompt = `
 ##Global News_Array : ${JSON.stringify(inputarray, null, 2)}
 ##In Global News Array Convert seendate with UTC to IST
-
+##Please focus more on prediction with dates & time between - ${Time} & ${beforeTime}
+##Return strictly valid JSON and ensure no double quotes, escaped quotes, backticks, or similar characters appear inside any text values (e.g., summary, probabilityArr); rewrite sentences to avoid such characters so the output can be parsed directly without errors.
 ##GLOBAL OUTPUT FORMAT: results of all sections
-[Section1:
+{
+"Section1":
 {
   "probabilityArr": probabilityArr,
   "summary": SUMMARY,
 },
-Section2:
+"Section2":
 {
   "probabilityArr": probabilityArr,
   "summary": SUMMARY,
 },
-Section3:
+"Section3":
 {
   "probabilityArr": probabilityArr,
   "summary": SUMMARY,
-}]
+}}
 
 ##GLOBAL OUTPUT RULES:
 -> Return ONLY valid JSON.
@@ -130,7 +135,6 @@ Explain reasoning of Sectors based on news insights in 30 - 40 lines.[IMPORTANT]
   const responseBody = JSON.parse(Buffer.from(response.body).toString());
   var text = responseBody.content[0].text;
   console.log("kind of format", text);
-  text = text.replace(/Section(\d+):/g, '"Section$1":');
   const finalArr = JSON.parse(text);
 
   var getnewsData = await client.send(
@@ -145,15 +149,15 @@ Explain reasoning of Sectors based on news insights in 30 - 40 lines.[IMPORTANT]
   const now = new Date().toISOString();
   let item = {
     countryId: Number(countryId),
-    termSummery: finalArr[0],
-    categorySummery: finalArr[1],
-    sectorSummery: finalArr[2],
+    termSummery: finalArr.Section1,
+    categorySummery: finalArr.Section2,
+    sectorSummery: finalArr.Section3,
     stockName: getnewsData.Items[0].stockName,
     createdDate: now,
     modifiedDate: now,
   };
 
-  console.log("logging item",item);
+  console.log("logging item", item);
 
   await client.send(
     new PutCommand({
@@ -161,6 +165,27 @@ Explain reasoning of Sectors based on news insights in 30 - 40 lines.[IMPORTANT]
       Item: item,
     }),
   );
-  console.log("put completed",finalArr[0])
+  console.log("put completed");
+
+  console.log("going to do sector analysis");
+
+  const result = await get({
+     inputData,
+  });
+  // console.log("good it's not null");
+  // const payload = {
+  //   inputData,
+  //   termList,
+  //   categoryList,
+  //   sectorList,
+  // };
+  // const command = new InvokeCommand({
+  //   FunctionName: "SP-Node-Lambda-Functions-dev-getmarketAnalysis",
+  //   InvocationType: "RequestResponse",
+  //   Payload: Buffer.from(JSON.stringify(payload))
+  // });
+  // const response = await lambdaClient.send(command);
+  // const result = JSON.parse(Buffer.from(response.Payload).toString());
+
   return finalArr;
 };

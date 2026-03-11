@@ -167,6 +167,12 @@
               "LogGroupName": "/aws/lambda/SP-Node-Lambda-Functions-dev-getmarketAnalysis"
             }
           },
+          "GetstocksAnalysisLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/SP-Node-Lambda-Functions-dev-getstocksAnalysis"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -262,7 +268,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/country.get",
               "Runtime": "nodejs18.x",
@@ -298,7 +304,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "Common/auth.tokengeneration",
               "Runtime": "nodejs18.x",
@@ -334,7 +340,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/stockTerm.get",
               "Runtime": "nodejs18.x",
@@ -370,7 +376,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/stockCategory.get",
               "Runtime": "nodejs18.x",
@@ -406,7 +412,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/userFlow.get",
               "Runtime": "nodejs18.x",
@@ -442,7 +448,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/country.getCountry",
               "Runtime": "nodejs18.x",
@@ -478,7 +484,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/getAnalysis.showTermAnalysis",
               "Runtime": "nodejs18.x",
@@ -514,7 +520,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/getAnalysis.showCategoryAnalysis",
               "Runtime": "nodejs18.x",
@@ -550,7 +556,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/getAnalysis.showSectorAnalysis",
               "Runtime": "nodejs18.x",
@@ -586,7 +592,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "handlers/getAnalysis.showStockAnalysis",
               "Runtime": "nodejs18.x",
@@ -622,13 +628,13 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "External/main.main",
               "Runtime": "nodejs18.x",
               "FunctionName": "SP-Node-Lambda-Functions-dev-callMain",
               "MemorySize": 1024,
-              "Timeout": 300,
+              "Timeout": 600,
               "Description": "get news & execute all prompts",
               "Environment": {
                 "Variables": {
@@ -659,13 +665,13 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "External/newsAnalysis.get",
               "Runtime": "nodejs18.x",
               "FunctionName": "SP-Node-Lambda-Functions-dev-getNews",
               "MemorySize": 1024,
-              "Timeout": 300,
+              "Timeout": 600,
               "Description": "Fetches news data for a given country and date range",
               "Environment": {
                 "Variables": {
@@ -696,7 +702,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "External/termAnalysis.get",
               "Runtime": "nodejs18.x",
@@ -733,14 +739,13 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "External/categoryAnalysis.get",
               "Runtime": "nodejs18.x",
               "FunctionName": "SP-Node-Lambda-Functions-dev-getcategoryAnalysis",
               "MemorySize": 1024,
               "Timeout": 300,
-              "Description": "Generate the category analysis for a given country and term name",
               "Environment": {
                 "Variables": {
                   "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
@@ -770,14 +775,13 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "External/sectorAnalysis.get",
               "Runtime": "nodejs18.x",
               "FunctionName": "SP-Node-Lambda-Functions-dev-getsectorAnalysis",
               "MemorySize": 1024,
               "Timeout": 300,
-              "Description": "Generate the sector analysis for a given country, term name and category name",
               "Environment": {
                 "Variables": {
                   "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
@@ -807,14 +811,13 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "External/stockAnalysis.get",
               "Runtime": "nodejs18.x",
               "FunctionName": "SP-Node-Lambda-Functions-dev-getstockAnalysis",
               "MemorySize": 1024,
               "Timeout": 300,
-              "Description": "Generate the stock analysis for a given country, term name, category name and top three sectors",
               "Environment": {
                 "Variables": {
                   "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
@@ -844,7 +847,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z/SP-Node-Lambda-Functions.zip"
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
               },
               "Handler": "External/marketAnalysis.get",
               "Runtime": "nodejs18.x",
@@ -876,181 +879,226 @@
               "GetmarketAnalysisLogGroup"
             ]
           },
-          "GetCountriesLambdaVersiongdSuZrNnnIoUtn8cx2fut1OYT7SONqCdBtKiRBLmnk": {
+          "GetstocksAnalysisLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
+                "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z/SP-Node-Lambda-Functions.zip"
+              },
+              "Handler": "External/stocksAnalysis.get",
+              "Runtime": "nodejs18.x",
+              "FunctionName": "SP-Node-Lambda-Functions-dev-getstocksAnalysis",
+              "MemorySize": 1024,
+              "Timeout": 300,
+              "Description": "Generate the stocks from insights.",
+              "Environment": {
+                "Variables": {
+                  "JWT_SECRET": "iamworkinginheliosassoftwareengineer",
+                  "CountryTable": "Country",
+                  "TokenHistoryTable": "TokenHistory",
+                  "CategoryTable": "StockCategory",
+                  "StockTermTable": "StockTerms",
+                  "UserCFTable": "UserCF",
+                  "NewsTable": "NewsRawData",
+                  "FilteredNews": "FilteredNews",
+                  "SectorDetailsTable": "SectorDetails"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetstocksAnalysisLogGroup"
+            ]
+          },
+          "GetCountriesLambdaVersionPyCVCjhnBQ2KCdWGHQkwnfFpuI30aLckudlHvSwdoU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetCountriesLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "PostTokenLambdaVersionau6qsTSWObeoxFehQm126OduXUNVKAaiRlm7uqWYg": {
+          "PostTokenLambdaVersionSBez6qkF3Xq60hKEJ8y2Lqx7Ja7EMzCpANY1DNOaNk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PostTokenLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "GetStockTermsLambdaVersioniVBmtGM44BZ1jmLCFP3TXcOFHsB2LD0K7k5axW7UvE": {
+          "GetStockTermsLambdaVersionjSfhDeHyZWXBcvdHteO5vR9TRSXkHaDsLjqPOSCtQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetStockTermsLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "GetStockCategoryLambdaVersiona7288hmg0qBlG2Q14WlG7f1z3wdvc8jK7AhmKRtmno4": {
+          "GetStockCategoryLambdaVersionw0INGBJ45e3rmVhdA4NFZT1NBefexs0w5PkKcqdpQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetStockCategoryLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "UserFlowLambdaVersion0jhpQ3gSZKwiUYd809f5uaxgU09Xf9WyXzySejNQI": {
+          "UserFlowLambdaVersionDPLSdtbTC8ZGy0sZf4BbJ2a898U2kMuM6o7v6oApU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UserFlowLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "GetCountryLambdaVersionNmkRsdhmIn4a7vS55cdA2oVJOJ4UofsSch0TNy5A": {
+          "GetCountryLambdaVersion4qNIOS1ttzoSIzM7rukb9lpP7lqDMKDip7YOxt7lM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetCountryLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "ShowTermAnalysisLambdaVersion8sMaABhdxQuV7Xt3kIFISoPIRhF2pmlhNMxZXggWI": {
+          "ShowTermAnalysisLambdaVersionsLQZRe9COGf8yaoqU9poZpjuhj9dd60AuXQupJ5E": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ShowTermAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "ShowCategoryAnalysisLambdaVersion7tHD2XA1BKBvMvfwPB4Bg9FIjnb77WWysDieF0j5MVE": {
+          "ShowCategoryAnalysisLambdaVersionh6LiZx3Yo6VBbHzvTPiInVG6RNkI5S68x17Akqv0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ShowCategoryAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "ShowSectorAnalysisLambdaVersionqHTyNoUqsf7Cp9giXritb5JzS1SHKbCHRM8J2dxD1Bk": {
+          "ShowSectorAnalysisLambdaVersionuhGpImgmMXKcLaP3MaWA1LiN0zReTQbuaNdve88lY4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ShowSectorAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "ShowStockAnalysisLambdaVersion97jWVZzBdCZXa7eonbSquk9khnL7BTK7HqLcGaHNF4": {
+          "ShowStockAnalysisLambdaVersion8AV0fB8X08qohEoELSZbpr6KMcNYUNvEkLmOQiXE2w": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ShowStockAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y="
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "CallMainLambdaVersionQ0MvQi7zCKAczoNhIbpQdY3B9wsEub2Vo0E0DOi53Nw": {
+          "CallMainLambdaVersiondlSBLPG5k8FgoCDreRKoTUziWgKEFDgb8pQjTfqF9DA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CallMainLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y=",
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU=",
               "Description": "get news & execute all prompts"
             }
           },
-          "GetNewsLambdaVersionD3Wl1RxbJBLMlJkJ7IEWPVgTAxedLw2viwxOFVY9s": {
+          "GetNewsLambdaVersion26EW0cwOOey0zUs08qAOaykt16ANSBLTrRNnTW3JrAE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetNewsLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y=",
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU=",
               "Description": "Fetches news data for a given country and date range"
             }
           },
-          "GettermAnalysisLambdaVersion3vs8rnd0YlXfKlgN22822w89iwknn0DAO1MgDWCruw": {
+          "GettermAnalysisLambdaVersionpuXfNlmWXRbNR28qLhxk15BidRAiumNVolOWfEU19Kc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GettermAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y=",
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU=",
               "Description": "Generate the term analysis for a given country"
             }
           },
-          "GetcategoryAnalysisLambdaVersionSa7OYNh56jR38abwiFHB9ZzTnkvNPuNJnxTfAUc": {
+          "GetcategoryAnalysisLambdaVersionMmnELzrXprFCRRqYpfvCBxFzybVU7f31Tr0IcLDVJU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetcategoryAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y=",
-              "Description": "Generate the category analysis for a given country and term name"
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "GetsectorAnalysisLambdaVersionuRd6CI3S4wYA7xLoyoQLr90IkHLu90uKNCQHIFZd93g": {
+          "GetsectorAnalysisLambdaVersionCfQxscKRpHT96ja7mPYyStZzuWoVMsXMBf30Goef9ck": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetsectorAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y=",
-              "Description": "Generate the sector analysis for a given country, term name and category name"
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "GetstockAnalysisLambdaVersionAjTXX5LNcwxBLezrcISewA8dFml8rdjjp68BIPJAY8": {
+          "GetstockAnalysisLambdaVersionmySr6qb29w63HiVGEM7QIoDFtbET24pgk0a58iAcE0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetstockAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y=",
-              "Description": "Generate the stock analysis for a given country, term name, category name and top three sectors"
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU="
             }
           },
-          "GetmarketAnalysisLambdaVersionofOgO9eHtvWopBd7tWu2O3RytfBEzaArWpmWYZHjBZg": {
+          "GetmarketAnalysisLambdaVersion8nXL32Lt6D1h1EDHMiBDTm9u2yRyzt9AweyA16JLM6E": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetmarketAnalysisLambdaFunction"
               },
-              "CodeSha256": "K5bK/z6zeMjktVPzrVrR/N0xwDPn6SxdpjbJ5CWHW8Y=",
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU=",
               "Description": "Term, category and sector analysis"
+            }
+          },
+          "GetstocksAnalysisLambdaVersionFrNb7cRSznjBYGvYI9CFLIb9f4KUpw1l1GVCVmH58": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetstocksAnalysisLambdaFunction"
+              },
+              "CodeSha256": "xuOC6r+JMGixCkdJV/tL5gOkGtrtJR/Z3pvAeCA30lU=",
+              "Description": "Generate the stocks from insights."
             }
           },
           "ApiGatewayRestApi": {
@@ -1736,7 +1784,7 @@
               "CallMainLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1773152295071": {
+          "ApiGatewayDeployment1773231944477": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2176,7 +2224,7 @@
           "GetCountriesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetCountriesLambdaVersiongdSuZrNnnIoUtn8cx2fut1OYT7SONqCdBtKiRBLmnk"
+              "Ref": "GetCountriesLambdaVersionPyCVCjhnBQ2KCdWGHQkwnfFpuI30aLckudlHvSwdoU"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetCountriesLambdaFunctionQualifiedArn"
@@ -2185,7 +2233,7 @@
           "PostTokenLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostTokenLambdaVersionau6qsTSWObeoxFehQm126OduXUNVKAaiRlm7uqWYg"
+              "Ref": "PostTokenLambdaVersionSBez6qkF3Xq60hKEJ8y2Lqx7Ja7EMzCpANY1DNOaNk"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-PostTokenLambdaFunctionQualifiedArn"
@@ -2194,7 +2242,7 @@
           "GetStockTermsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetStockTermsLambdaVersioniVBmtGM44BZ1jmLCFP3TXcOFHsB2LD0K7k5axW7UvE"
+              "Ref": "GetStockTermsLambdaVersionjSfhDeHyZWXBcvdHteO5vR9TRSXkHaDsLjqPOSCtQ"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetStockTermsLambdaFunctionQualifiedArn"
@@ -2203,7 +2251,7 @@
           "GetStockCategoryLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetStockCategoryLambdaVersiona7288hmg0qBlG2Q14WlG7f1z3wdvc8jK7AhmKRtmno4"
+              "Ref": "GetStockCategoryLambdaVersionw0INGBJ45e3rmVhdA4NFZT1NBefexs0w5PkKcqdpQ"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetStockCategoryLambdaFunctionQualifiedArn"
@@ -2212,7 +2260,7 @@
           "UserFlowLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UserFlowLambdaVersion0jhpQ3gSZKwiUYd809f5uaxgU09Xf9WyXzySejNQI"
+              "Ref": "UserFlowLambdaVersionDPLSdtbTC8ZGy0sZf4BbJ2a898U2kMuM6o7v6oApU"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-UserFlowLambdaFunctionQualifiedArn"
@@ -2221,7 +2269,7 @@
           "GetCountryLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetCountryLambdaVersionNmkRsdhmIn4a7vS55cdA2oVJOJ4UofsSch0TNy5A"
+              "Ref": "GetCountryLambdaVersion4qNIOS1ttzoSIzM7rukb9lpP7lqDMKDip7YOxt7lM"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetCountryLambdaFunctionQualifiedArn"
@@ -2230,7 +2278,7 @@
           "ShowTermAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ShowTermAnalysisLambdaVersion8sMaABhdxQuV7Xt3kIFISoPIRhF2pmlhNMxZXggWI"
+              "Ref": "ShowTermAnalysisLambdaVersionsLQZRe9COGf8yaoqU9poZpjuhj9dd60AuXQupJ5E"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-ShowTermAnalysisLambdaFunctionQualifiedArn"
@@ -2239,7 +2287,7 @@
           "ShowCategoryAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ShowCategoryAnalysisLambdaVersion7tHD2XA1BKBvMvfwPB4Bg9FIjnb77WWysDieF0j5MVE"
+              "Ref": "ShowCategoryAnalysisLambdaVersionh6LiZx3Yo6VBbHzvTPiInVG6RNkI5S68x17Akqv0"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-ShowCategoryAnalysisLambdaFunctionQualifiedArn"
@@ -2248,7 +2296,7 @@
           "ShowSectorAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ShowSectorAnalysisLambdaVersionqHTyNoUqsf7Cp9giXritb5JzS1SHKbCHRM8J2dxD1Bk"
+              "Ref": "ShowSectorAnalysisLambdaVersionuhGpImgmMXKcLaP3MaWA1LiN0zReTQbuaNdve88lY4"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-ShowSectorAnalysisLambdaFunctionQualifiedArn"
@@ -2257,7 +2305,7 @@
           "ShowStockAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ShowStockAnalysisLambdaVersion97jWVZzBdCZXa7eonbSquk9khnL7BTK7HqLcGaHNF4"
+              "Ref": "ShowStockAnalysisLambdaVersion8AV0fB8X08qohEoELSZbpr6KMcNYUNvEkLmOQiXE2w"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-ShowStockAnalysisLambdaFunctionQualifiedArn"
@@ -2266,7 +2314,7 @@
           "CallMainLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CallMainLambdaVersionQ0MvQi7zCKAczoNhIbpQdY3B9wsEub2Vo0E0DOi53Nw"
+              "Ref": "CallMainLambdaVersiondlSBLPG5k8FgoCDreRKoTUziWgKEFDgb8pQjTfqF9DA"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-CallMainLambdaFunctionQualifiedArn"
@@ -2275,7 +2323,7 @@
           "GetNewsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetNewsLambdaVersionD3Wl1RxbJBLMlJkJ7IEWPVgTAxedLw2viwxOFVY9s"
+              "Ref": "GetNewsLambdaVersion26EW0cwOOey0zUs08qAOaykt16ANSBLTrRNnTW3JrAE"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetNewsLambdaFunctionQualifiedArn"
@@ -2284,7 +2332,7 @@
           "GettermAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GettermAnalysisLambdaVersion3vs8rnd0YlXfKlgN22822w89iwknn0DAO1MgDWCruw"
+              "Ref": "GettermAnalysisLambdaVersionpuXfNlmWXRbNR28qLhxk15BidRAiumNVolOWfEU19Kc"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GettermAnalysisLambdaFunctionQualifiedArn"
@@ -2293,7 +2341,7 @@
           "GetcategoryAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetcategoryAnalysisLambdaVersionSa7OYNh56jR38abwiFHB9ZzTnkvNPuNJnxTfAUc"
+              "Ref": "GetcategoryAnalysisLambdaVersionMmnELzrXprFCRRqYpfvCBxFzybVU7f31Tr0IcLDVJU"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetcategoryAnalysisLambdaFunctionQualifiedArn"
@@ -2302,7 +2350,7 @@
           "GetsectorAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetsectorAnalysisLambdaVersionuRd6CI3S4wYA7xLoyoQLr90IkHLu90uKNCQHIFZd93g"
+              "Ref": "GetsectorAnalysisLambdaVersionCfQxscKRpHT96ja7mPYyStZzuWoVMsXMBf30Goef9ck"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetsectorAnalysisLambdaFunctionQualifiedArn"
@@ -2311,7 +2359,7 @@
           "GetstockAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetstockAnalysisLambdaVersionAjTXX5LNcwxBLezrcISewA8dFml8rdjjp68BIPJAY8"
+              "Ref": "GetstockAnalysisLambdaVersionmySr6qb29w63HiVGEM7QIoDFtbET24pgk0a58iAcE0"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetstockAnalysisLambdaFunctionQualifiedArn"
@@ -2320,10 +2368,19 @@
           "GetmarketAnalysisLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetmarketAnalysisLambdaVersionofOgO9eHtvWopBd7tWu2O3RytfBEzaArWpmWYZHjBZg"
+              "Ref": "GetmarketAnalysisLambdaVersion8nXL32Lt6D1h1EDHMiBDTm9u2yRyzt9AweyA16JLM6E"
             },
             "Export": {
               "Name": "sls-SP-Node-Lambda-Functions-dev-GetmarketAnalysisLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetstocksAnalysisLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetstocksAnalysisLambdaVersionFrNb7cRSznjBYGvYI9CFLIb9f4KUpw1l1GVCVmH58"
+            },
+            "Export": {
+              "Name": "sls-SP-Node-Lambda-Functions-dev-GetstocksAnalysisLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -2378,7 +2435,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetCountriesLambdaVersiongdSuZrNnnIoUtn8cx2fut1OYT7SONqCdBtKiRBLmnk"
+        "versionLogicalId": "GetCountriesLambdaVersionPyCVCjhnBQ2KCdWGHQkwnfFpuI30aLckudlHvSwdoU"
       },
       "postToken": {
         "handler": "Common/auth.tokengeneration",
@@ -2397,7 +2454,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "PostTokenLambdaVersionau6qsTSWObeoxFehQm126OduXUNVKAaiRlm7uqWYg"
+        "versionLogicalId": "PostTokenLambdaVersionSBez6qkF3Xq60hKEJ8y2Lqx7Ja7EMzCpANY1DNOaNk"
       },
       "getStockTerms": {
         "handler": "handlers/stockTerm.get",
@@ -2416,7 +2473,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetStockTermsLambdaVersioniVBmtGM44BZ1jmLCFP3TXcOFHsB2LD0K7k5axW7UvE"
+        "versionLogicalId": "GetStockTermsLambdaVersionjSfhDeHyZWXBcvdHteO5vR9TRSXkHaDsLjqPOSCtQ"
       },
       "getStockCategory": {
         "handler": "handlers/stockCategory.get",
@@ -2435,7 +2492,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetStockCategoryLambdaVersiona7288hmg0qBlG2Q14WlG7f1z3wdvc8jK7AhmKRtmno4"
+        "versionLogicalId": "GetStockCategoryLambdaVersionw0INGBJ45e3rmVhdA4NFZT1NBefexs0w5PkKcqdpQ"
       },
       "userFlow": {
         "handler": "handlers/userFlow.get",
@@ -2454,7 +2511,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "UserFlowLambdaVersion0jhpQ3gSZKwiUYd809f5uaxgU09Xf9WyXzySejNQI"
+        "versionLogicalId": "UserFlowLambdaVersionDPLSdtbTC8ZGy0sZf4BbJ2a898U2kMuM6o7v6oApU"
       },
       "getCountry": {
         "handler": "handlers/country.getCountry",
@@ -2473,7 +2530,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetCountryLambdaVersionNmkRsdhmIn4a7vS55cdA2oVJOJ4UofsSch0TNy5A"
+        "versionLogicalId": "GetCountryLambdaVersion4qNIOS1ttzoSIzM7rukb9lpP7lqDMKDip7YOxt7lM"
       },
       "showTermAnalysis": {
         "handler": "handlers/getAnalysis.showTermAnalysis",
@@ -2492,7 +2549,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ShowTermAnalysisLambdaVersion8sMaABhdxQuV7Xt3kIFISoPIRhF2pmlhNMxZXggWI"
+        "versionLogicalId": "ShowTermAnalysisLambdaVersionsLQZRe9COGf8yaoqU9poZpjuhj9dd60AuXQupJ5E"
       },
       "showCategoryAnalysis": {
         "handler": "handlers/getAnalysis.showCategoryAnalysis",
@@ -2511,7 +2568,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ShowCategoryAnalysisLambdaVersion7tHD2XA1BKBvMvfwPB4Bg9FIjnb77WWysDieF0j5MVE"
+        "versionLogicalId": "ShowCategoryAnalysisLambdaVersionh6LiZx3Yo6VBbHzvTPiInVG6RNkI5S68x17Akqv0"
       },
       "showSectorAnalysis": {
         "handler": "handlers/getAnalysis.showSectorAnalysis",
@@ -2530,7 +2587,7 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ShowSectorAnalysisLambdaVersionqHTyNoUqsf7Cp9giXritb5JzS1SHKbCHRM8J2dxD1Bk"
+        "versionLogicalId": "ShowSectorAnalysisLambdaVersionuhGpImgmMXKcLaP3MaWA1LiN0zReTQbuaNdve88lY4"
       },
       "showStockAnalysis": {
         "handler": "handlers/getAnalysis.showStockAnalysis",
@@ -2549,11 +2606,11 @@
         "timeout": 30,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ShowStockAnalysisLambdaVersion97jWVZzBdCZXa7eonbSquk9khnL7BTK7HqLcGaHNF4"
+        "versionLogicalId": "ShowStockAnalysisLambdaVersion8AV0fB8X08qohEoELSZbpr6KMcNYUNvEkLmOQiXE2w"
       },
       "callMain": {
         "handler": "External/main.main",
-        "timeout": 300,
+        "timeout": 600,
         "description": "get news & execute all prompts",
         "events": [
           {
@@ -2569,11 +2626,11 @@
         "memory": 1024,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "CallMainLambdaVersionQ0MvQi7zCKAczoNhIbpQdY3B9wsEub2Vo0E0DOi53Nw"
+        "versionLogicalId": "CallMainLambdaVersiondlSBLPG5k8FgoCDreRKoTUziWgKEFDgb8pQjTfqF9DA"
       },
       "getNews": {
         "handler": "External/newsAnalysis.get",
-        "timeout": 300,
+        "timeout": 600,
         "description": "Fetches news data for a given country and date range",
         "events": [],
         "name": "SP-Node-Lambda-Functions-dev-getNews",
@@ -2581,7 +2638,7 @@
         "memory": 1024,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetNewsLambdaVersionD3Wl1RxbJBLMlJkJ7IEWPVgTAxedLw2viwxOFVY9s"
+        "versionLogicalId": "GetNewsLambdaVersion26EW0cwOOey0zUs08qAOaykt16ANSBLTrRNnTW3JrAE"
       },
       "gettermAnalysis": {
         "handler": "External/termAnalysis.get",
@@ -2593,43 +2650,43 @@
         "memory": 1024,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GettermAnalysisLambdaVersion3vs8rnd0YlXfKlgN22822w89iwknn0DAO1MgDWCruw"
+        "versionLogicalId": "GettermAnalysisLambdaVersionpuXfNlmWXRbNR28qLhxk15BidRAiumNVolOWfEU19Kc"
       },
       "getcategoryAnalysis": {
         "handler": "External/categoryAnalysis.get",
         "timeout": 300,
-        "description": "Generate the category analysis for a given country and term name",
+        "description": "",
         "events": [],
         "name": "SP-Node-Lambda-Functions-dev-getcategoryAnalysis",
         "package": {},
         "memory": 1024,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetcategoryAnalysisLambdaVersionSa7OYNh56jR38abwiFHB9ZzTnkvNPuNJnxTfAUc"
+        "versionLogicalId": "GetcategoryAnalysisLambdaVersionMmnELzrXprFCRRqYpfvCBxFzybVU7f31Tr0IcLDVJU"
       },
       "getsectorAnalysis": {
         "handler": "External/sectorAnalysis.get",
         "timeout": 300,
-        "description": "Generate the sector analysis for a given country, term name and category name",
+        "description": "",
         "events": [],
         "name": "SP-Node-Lambda-Functions-dev-getsectorAnalysis",
         "package": {},
         "memory": 1024,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetsectorAnalysisLambdaVersionuRd6CI3S4wYA7xLoyoQLr90IkHLu90uKNCQHIFZd93g"
+        "versionLogicalId": "GetsectorAnalysisLambdaVersionCfQxscKRpHT96ja7mPYyStZzuWoVMsXMBf30Goef9ck"
       },
       "getstockAnalysis": {
         "handler": "External/stockAnalysis.get",
         "timeout": 300,
-        "description": "Generate the stock analysis for a given country, term name, category name and top three sectors",
+        "description": "",
         "events": [],
         "name": "SP-Node-Lambda-Functions-dev-getstockAnalysis",
         "package": {},
         "memory": 1024,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetstockAnalysisLambdaVersionAjTXX5LNcwxBLezrcISewA8dFml8rdjjp68BIPJAY8"
+        "versionLogicalId": "GetstockAnalysisLambdaVersionmySr6qb29w63HiVGEM7QIoDFtbET24pgk0a58iAcE0"
       },
       "getmarketAnalysis": {
         "handler": "External/marketAnalysis.get",
@@ -2641,7 +2698,19 @@
         "memory": 1024,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetmarketAnalysisLambdaVersionofOgO9eHtvWopBd7tWu2O3RytfBEzaArWpmWYZHjBZg"
+        "versionLogicalId": "GetmarketAnalysisLambdaVersion8nXL32Lt6D1h1EDHMiBDTm9u2yRyzt9AweyA16JLM6E"
+      },
+      "getstocksAnalysis": {
+        "handler": "External/stocksAnalysis.get",
+        "timeout": 300,
+        "description": "Generate the stocks from insights.",
+        "events": [],
+        "name": "SP-Node-Lambda-Functions-dev-getstocksAnalysis",
+        "package": {},
+        "memory": 1024,
+        "runtime": "nodejs18.x",
+        "vpc": {},
+        "versionLogicalId": "GetstocksAnalysisLambdaVersionFrNb7cRSznjBYGvYI9CFLIb9f4KUpw1l1GVCVmH58"
       }
     },
     "configValidationMode": "warn",
@@ -2664,7 +2733,7 @@
     "artifact": "D:\\TMZ\\PreMarketStockPrediction\\PreStockPrediction\\Services\\api-node\\.serverless\\SP-Node-Lambda-Functions.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/SP-Node-Lambda-Functions/dev/1773152307129-2026-03-10T14:18:27.129Z",
+    "artifactDirectoryName": "serverless/SP-Node-Lambda-Functions/dev/1773231959809-2026-03-11T12:25:59.809Z",
     "artifact": "SP-Node-Lambda-Functions.zip"
   }
 }

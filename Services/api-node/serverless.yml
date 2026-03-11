@@ -120,7 +120,7 @@ functions:
 
   callMain:
     handler: External/main.main
-    timeout: 300
+    timeout: 600
     description: "get news & execute all prompts"
     events:
       - http:
@@ -130,7 +130,7 @@ functions:
 ############# Externl Calls ##############
   getNews:
     handler: External/newsAnalysis.get
-    timeout: 300
+    timeout: 600
     description: "Fetches news data for a given country and date range"    
   
   gettermAnalysis:
@@ -141,19 +141,24 @@ functions:
   getcategoryAnalysis:
     handler: External/categoryAnalysis.get
     timeout: 300
-    description: "Generate the category analysis for a given country and term name"
+    description: ""
 
   getsectorAnalysis:
     handler: External/sectorAnalysis.get
     timeout: 300
-    description: "Generate the sector analysis for a given country, term name and category name"
+    description: ""
 
   getstockAnalysis:
     handler: External/stockAnalysis.get
     timeout: 300
-    description: "Generate the stock analysis for a given country, term name, category name and top three sectors"
+    description: ""
 
   getmarketAnalysis:
     handler: External/marketAnalysis.get
     timeout: 300
     description: "Term, category and sector analysis"
+
+  getstocksAnalysis:
+    handler: External/stocksAnalysis.get
+    timeout: 300
+    description: "Generate the stocks from insights."
