@@ -1,39 +1,53 @@
-const {
-  BedrockRuntimeClient,
-  InvokeModelCommand,
-} = require("@aws-sdk/client-bedrock-runtime");
-const { PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
-const { client } = require("../db/dynamo.client");
+import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
+import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { client } from "../db/dynamo.client.js";
+
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
-exports.get = async (event) => {
-  const inputData = event.inputData;
-  console.log("got input data",inputData);
+export const getStockAnalysis = async (event) => {
+  const countryId = event.countryId;
+  const sectorSummery = event.sectorSummerydata;
+  const inputData = event.inputarray;
+  console.log("got input data", inputData);
   const now_d = new Date();
-  const Time = now_d.toLocaleString("en-IN", {
+  const todaydate = now_d.toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
   });
-  const beforeTime = new Date(Date.now() + 5.5 * 3600000 - 12 * 3600000);
+  const beforedate = new Date(Date.now() + 5.5 * 3600000 - 12 * 3600000);
   const Filtered_News = process.env.FilteredNews;
   const prompt = ` 
 ##Global News Array
+${sectorSummery}
 ${JSON.stringify(inputData)}
 
 ##Time Focus
-Prioritize news published between ${Time} and ${beforeTime}.
+Please focus more on prediction with dates & time between - ${todaydate} & ${beforedate}
+Prioritize data from ${todaydate} for prediction; use ${beforedate} only if necessary.
 Give higher weight to more recent news when determining predictions.
 
 ##Processing Instructions
+Include ${sectorSummery} for analysis & better predictions. 
 Extract stock names explicitly mentioned in the news articles.
+Ignore the IPO launch stocks.
 Ignore general market news that does not reference specific companies.
-Convert any news timestamps from UTC to IST (UTC+05:30).
 Predict whether each stock has a higher probability of Profit or Loss based on the news sentiment and catalysts.
 Probability must be an integer between 0 and 100.
 Use the most recent and strongest news signals to determine the prediction.
-Return a maximum of 10 stocks with the strongest predictions.
+Return the stocks which are mentioned in raw data.
 Avoid quotation marks inside text values such as keyCatalysts to prevent JSON parsing issues.
+Classify this news into event categories:
+Earnings,
+Government policy,
+Analyst upgrade,
+Partnership,
+Expansion,
+Management change,
+Litigation,
+Product launch
 
 ##Field Definitions
+stockId
+Numerical value from 1 to n.
 
 displayName
 Stock name mentioned in the news article.
@@ -55,16 +69,27 @@ keyCatalysts
 One short sentence explaining the main reason why the stock is predicted to move in the given direction.
 
 newsDate
-Original news timestamp taken from the input news data and converted from UTC to IST.
+Analyze all news items for the same stock, but in the output return only the latest publish_date among those items.
+
+rawStockNews
+Please retrieve all historical and current news related to this stock, with the exception of key catalysts. 
 
 yahooFinanceFormat
-Ticker formatted for the Yahoo Finance library.
+Ticker formatted for the Yahoo Finance library.Do proper research and fetch the latest ticker format, ensuring it reflects any recent changes made by the company instead of using outdated symbols.
 Example: Reliance → RELIANCE.NS
+
+yahooFinanceSectorFormat
+Ticker formatted for the Yahoo Finance library.
+Example: ^CNXENERGY
+
+eventCategory
+event category based on news insights.
 
 ##Output JSON Schema
 {
 "StocksAnalysis":[
 {
+"stockId":"",
 "displayName":"",
 "Prediction":"",
 "probability":0,
@@ -72,7 +97,10 @@ Example: Reliance → RELIANCE.NS
 "sector":"",
 "keyCatalysts":"",
 "newsDate":"",
-"yahooFinanceFormat":""
+"yahooFinanceFormat":"",
+"yahooFinanceSectorFormat":"",
+"eventCategory","",
+"rawStockNews":""
 }
 ]
 }
@@ -102,7 +130,7 @@ Do not include explanations, markdown, or text outside the JSON structure.
   var text = responseBody.content[0].text;
   console.log("kind of format", text);
   const finalArr = JSON.parse(text);
-  console.log("final array",finalArr);
+  console.log("final array", finalArr);
   var getnewsData = await client.send(
     new ScanCommand({
       TableName: Filtered_News,
@@ -116,18 +144,19 @@ Do not include explanations, markdown, or text outside the JSON structure.
     termSummery: getnewsData.Items[0].termSummery,
     categorySummery: getnewsData.Items[0].categorySummery,
     sectorSummery: getnewsData.Items[0].sectorSummery,
-    stockName: finalArr[0].StocksAnalysis,
+    stockName: finalArr?.StocksAnalysis || [],
     createdDate: now,
     modifiedDate: now,
   };
-   await client.send(
+  await client.send(
     new PutCommand({
       TableName: Filtered_News,
       Item: item,
     }),
   );
+  console.log("stocks done");
   return {
     statusCode: 200,
-    body: "good to go"
-  }
+    body: "good to go",
+  };
 };

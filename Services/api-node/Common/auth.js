@@ -1,11 +1,11 @@
-const jwt = require("jsonwebtoken");
-const { PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
-const { client } = require("../db/dynamo.client");
-const { v4: uuid4 } = require("uuid");
+import jwt from "jsonwebtoken";
+import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { client } from "../db/dynamo.client.js";
+import { v4 as uuid4 } from "uuid";
 const TABLE = process.env.TokenHistoryTable;
 const JWT_SECRET = process.env.JWT_SECRET;
 
-module.exports.tokengeneration = async (event) => {
+export const tokengeneration = async (event) => {
   const body = event.body ? JSON.parse(event.body) : {};
   const username = body.username;
   console.log(body);

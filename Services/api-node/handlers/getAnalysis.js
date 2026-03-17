@@ -1,11 +1,11 @@
-const { client } = require("../db/dynamo.client");
-const { ScanCommand, GetCommand } = require("@aws-sdk/lib-dynamodb");
-const { verify } = require("../Common/auth.middleware");
+import { client } from "../db/dynamo.client.js";
+import { ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
+import { verify } from "../Common/auth.middleware.js";
 
 // Table name from environment variable
 const TABLE = process.env.FilteredNews;
 
-exports.showTermAnalysis = async (event) => {
+export const showTermAnalysis = async (event) => {
   try {
     await verify(event);
     const id =
@@ -46,7 +46,7 @@ exports.showTermAnalysis = async (event) => {
   }
 };
 
-exports.showCategoryAnalysis = async (event) => {
+export const showCategoryAnalysis = async (event) => {
   try {
     await verify(event);
     const id =
@@ -87,7 +87,7 @@ exports.showCategoryAnalysis = async (event) => {
   }
 };
 
-exports.showSectorAnalysis = async (event) => {
+export const showSectorAnalysis = async (event) => {
   try {
     await verify(event);
     const id =
@@ -128,7 +128,7 @@ exports.showSectorAnalysis = async (event) => {
   }
 };
 
-exports.showStockAnalysis = async (event) => {
+export const showStockAnalysis = async (event) => {
   try {
     await verify(event);
     const id =

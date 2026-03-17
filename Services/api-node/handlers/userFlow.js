@@ -1,11 +1,11 @@
-const { PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
-const { client } = require("../db/dynamo.client");
-const { verify } = require("../Common/auth.middleware");
-const { v4: uuid4 } = require("uuid");
+import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { client } from "../db/dynamo.client.js";
+import { verify } from "../Common/auth.middleware.js";
+import { v4 as uuid4 } from "uuid";
 TABLE_TOKEN = process.env.TokenHistoryTable;
 TABLE_USER = process.env.UserCFTable;
 
-exports.get = async (event) => {
+export const get = async (event) => {
   try {
     await verify(event);
 

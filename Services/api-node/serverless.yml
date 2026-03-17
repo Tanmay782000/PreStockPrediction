@@ -115,7 +115,7 @@ functions:
       - http:
           path: showstockanalysis
           method: get
-          
+  
 ############# Externl Calls ##############
 
   callMain:
@@ -127,38 +127,27 @@ functions:
           path: executeMarketAnalysis
           method: get
 
+  executeDeepStockAnalysis:
+    handler: External/stocksDeepAnalysis.get
+    timeout: 600
+    description: "start the analysis over stocks insights"
+    events:
+      - http:
+          path: deepStockAnalysis
+          method: get
+
 ############# Externl Calls ##############
   getNews:
     handler: External/newsAnalysis.get
     timeout: 600
     description: "Fetches news data for a given country and date range"    
-  
-  gettermAnalysis:
-    handler: External/termAnalysis.get
-    timeout: 300
-    description: "Generate the term analysis for a given country"
-
-  getcategoryAnalysis:
-    handler: External/categoryAnalysis.get
-    timeout: 300
-    description: ""
-
-  getsectorAnalysis:
-    handler: External/sectorAnalysis.get
-    timeout: 300
-    description: ""
-
-  getstockAnalysis:
-    handler: External/stockAnalysis.get
-    timeout: 300
-    description: ""
 
   getmarketAnalysis:
-    handler: External/marketAnalysis.get
+    handler: External/marketAnalysis.getAnalysis
     timeout: 300
     description: "Term, category and sector analysis"
 
   getstocksAnalysis:
-    handler: External/stocksAnalysis.get
+    handler: External/stocksAnalysis.getStockAnalysis
     timeout: 300
     description: "Generate the stocks from insights."

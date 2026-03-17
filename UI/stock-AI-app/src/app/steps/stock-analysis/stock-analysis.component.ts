@@ -44,16 +44,8 @@ export class StockAnalysisComponent {
       this.stockService.getStockAnalysis(countryId).subscribe(
         (res) => {
           console.log('ysysysys', res);
-          this.stockArray = res.stockAnalysis.probabilityArr;
-          this.summery = res.stockAnalysis.probabilityArr
-            .map((item: any) => item.KeyCatalysts)
-            .join(' ');
-          this.finalArray = this.stockArray.map((x: any) => ({
-            displayName: x.displayName,
-            stockName: x.stockName,
-            probability: (x.probability * 100).toFixed(0) + '%',
-            category: x.category,
-          }));
+          this.stockArray = res.stockAnalysis;
+          this.finalArray = this.stockArray;
           console.log(this.finalArray);
         },
         (err) => {

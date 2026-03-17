@@ -1,12 +1,14 @@
-const {
+import {
   BedrockRuntimeClient,
   InvokeModelCommand,
-} = require("@aws-sdk/client-bedrock-runtime");
-const { PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
-const { client } = require("../db/dynamo.client");
+} from "@aws-sdk/client-bedrock-runtime";
+import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { client } from "../db/dynamo.client.js";
+import { getStockAnalysis } from "./stocksAnalysis.js";
+
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
-exports.get = async (event) => {
+export const getAnalysis = async (event) => {
   const Filtered_News = process.env.FilteredNews;
   const countryId = event.countryId;
   const inputarray = event.inputData;
@@ -14,14 +16,14 @@ exports.get = async (event) => {
   const categoryList = event.categoryList;
   const sectorList = event.sectorList;
   const now_d = new Date();
-  const Time = now_d.toLocaleString("en-IN", {
+  const todaydate = now_d.toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
   });
-  const beforeTime = new Date(Date.now() + 5.5 * 3600000 - 12 * 3600000);
+  const beforedate = new Date(Date.now() + 5.5 * 3600000 - 12 * 3600000);
   const prompt = `
 ##Global News_Array : ${JSON.stringify(inputarray, null, 2)}
-##In Global News Array Convert seendate with UTC to IST
-##Please focus more on prediction with dates & time between - ${Time} & ${beforeTime}
+##Please focus more on prediction with dates & time between - ${todaydate} & ${beforedate}
+##Prioritize data from ${todaydate} for prediction; use ${beforedate} only if necessary.
 ##Return strictly valid JSON and ensure no double quotes, escaped quotes, backticks, or similar characters appear inside any text values (e.g., summary, probabilityArr); rewrite sentences to avoid such characters so the output can be parsed directly without errors.
 ##GLOBAL OUTPUT FORMAT: results of all sections
 {
@@ -168,24 +170,29 @@ Explain reasoning of Sectors based on news insights in 30 - 40 lines.[IMPORTANT]
   console.log("put completed");
 
   console.log("going to do sector analysis");
+  const sectorSummerydata = item.sectorSummery.summary;
+  const input = { countryId, sectorSummerydata, inputarray };
 
-  const result = await get({
-     inputData,
-  });
-  // console.log("good it's not null");
-  // const payload = {
-  //   inputData,
-  //   termList,
-  //   categoryList,
-  //   sectorList,
-  // };
-  // const command = new InvokeCommand({
-  //   FunctionName: "SP-Node-Lambda-Functions-dev-getmarketAnalysis",
-  //   InvocationType: "RequestResponse",
-  //   Payload: Buffer.from(JSON.stringify(payload))
-  // });
-  // const response = await lambdaClient.send(command);
-  // const result = JSON.parse(Buffer.from(response.Payload).toString());
+  const result = await getStockAnalysis(input);
+  // const result = await ExecuteStocksInsights(input);
+  if (result != null) {
+    console.log("good it's not null", result);
+    console.log("market done");
+  }
 
-  return finalArr;
+  return {
+    statusCode: 200,
+    body: "good to go",
+  };
 };
+
+async function ExecuteStocksInsights(input) {
+  const payload = input;
+  const command = new InvokeCommand({
+    FunctionName: "SP-Node-Lambda-Functions-dev-getstocksAnalysis",
+    InvocationType: "RequestResponse",
+    Payload: Buffer.from(JSON.stringify(payload)),
+  });
+  const response = await lambdaClient.send(command);
+  // const result = JSON.parse(Buffer.from(response.Payload).toString());
+}

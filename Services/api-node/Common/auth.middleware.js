@@ -1,11 +1,11 @@
-const jwt = require("jsonwebtoken");
-const { GetCommand } = require("@aws-sdk/lib-dynamodb");
-const { client } = require("../db/dynamo.client");
+import jwt from "jsonwebtoken";
+import { GetCommand } from "@aws-sdk/lib-dynamodb";
+import { client } from "../db/dynamo.client.js";
 
 const TABLE = process.env.TokenHistoryTable;
 const JWT_SECRET = process.env.JWT_SECRET;
 
-module.exports.verify = async (event) => {
+export const verify = async (event) => {
   // console.log("Verifying token...", event.headers.Authorization);
   const authHeader = event.headers.Authorization || event.headers.authorization;
   // console.log("Auth Header:", authHeader);

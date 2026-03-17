@@ -1,9 +1,10 @@
-const https = require("https");
-const { LambdaClient, InvokeCommand } = require("@aws-sdk/client-lambda");
-const { client } = require("../db/dynamo.client");
+import https from "https";
+import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda";
+import { ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { client } from "../db/dynamo.client.js";
+import { getAnalysis } from "./marketAnalysis.js";
+
 const lambdaClient = new LambdaClient({ region: "ap-south-1" });
-const { ScanCommand } = require("@aws-sdk/lib-dynamodb");
-const { get } = require("./marketAnalysis");
 
 const CountryTable = process.env.CountryTable;
 const TermTable = process.env.StockTermTable;
@@ -60,15 +61,16 @@ async function ExecuteMarketInsights(countryId, inputData) {
   // console.log("sector", JSON.stringify(sectorList));
 
   if ([inputData, termList, categoryList, sectorList].every((v) => v != null)) {
-    const result = await get({
+    const result = await getAnalysis({
       countryId,
       inputData,
       termList,
       categoryList,
       sectorList,
     });
-    // console.log("good it's not null");
+    console.log("good it's not null");
     // const payload = {
+    //   countryId,
     //   inputData,
     //   termList,
     //   categoryList,
@@ -77,18 +79,21 @@ async function ExecuteMarketInsights(countryId, inputData) {
     // const command = new InvokeCommand({
     //   FunctionName: "SP-Node-Lambda-Functions-dev-getmarketAnalysis",
     //   InvocationType: "RequestResponse",
-    //   Payload: Buffer.from(JSON.stringify(payload))
+    //   Payload: Buffer.from(JSON.stringify(payload)),
     // });
     // const response = await lambdaClient.send(command);
     // const result = JSON.parse(Buffer.from(response.Payload).toString());
-    console.log("Response from analysis lambda:");
-    return result;
+    // console.log("Response from analysis lambda:");
+    if (result != null) {
+      return { statusCode: 200, body: "Successfully get the response." };
+    }
+    return { statusCode: 500, body: "Something went wrong" };
   }
 
   return finalArray;
 }
 
-exports.main = async () => {
+export const main = async () => {
   try {
     const getNews = await ExecuteLambda();
     console.log("body here", getNews.body);
@@ -98,19 +103,39 @@ exports.main = async () => {
       console.log("cid", countryId);
       if (countryId == 1 || countryId == "1") {
         const data = await ExecuteMarketInsights(countryId, articles);
-        if(data!=null){
-       return {statusCode: 200,
-        body: "Successfully Completed"
-      };
+        if (data != null) {
+          return {
+            statusCode: 200,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Headers": "Content-Type,Authorization",
+              "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
+            },
+            body: "Getting data successfully!",
+          };
         }
       }
-      return {statusCode: 500 ,
-        body: "Something went wrong"
+      return {
+        statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type,Authorization",
+          "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
+        },
+        body: "Something Went Wrong!",
       };
     }
     console.log("data", JSON.stringify(data));
     return data;
   } catch (err) {
-    console.log(err);
+    return {
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
+      },
+      body: `Catch!!, Something Went Wrong! ${err}`,
+    };
   }
 };

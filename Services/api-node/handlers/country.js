@@ -1,12 +1,12 @@
 // Import your centralized DynamoDB client
-const { client } = require("../db/dynamo.client");
-const { ScanCommand, GetCommand } = require("@aws-sdk/lib-dynamodb");
-const { verify } = require("../Common/auth.middleware");
+import { client } from "../db/dynamo.client.js";
+import { ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
+import { verify } from "../Common/auth.middleware.js";
 
 // Table name from environment variable
 const TABLE = process.env.CountryTable;
 
-exports.get = async (event) => {
+export const get = async (event) => {
   try {
     await verify(event);
     const result = await client.send(new ScanCommand({ TableName: TABLE }));

@@ -17,6 +17,9 @@
               <th scope="col">Stock Name</th>
               <th scope="col">Category</th>
               <th scope="col">Sector</th>
+              <th scope="col">Key Catalysts</th>
+              <th scope="col">Published Date</th>
+              <th scope="col">Prediction</th>
               <th scope="col">Probability</th>
               <!-- <th scope="col">Show Analysis</th> -->
             </tr>
@@ -25,8 +28,11 @@
             @for(tra of finalArray; track $index){
             <tr>
               <th scope="row">{{tra.displayName}}</th>
-              <td>{{tra.category.ctgry}}</td>
-              <td>{{tra.category.sector}}</td>
+              <td>{{tra.category}}</td>
+              <td>{{tra.sector}}</td>
+              <td>{{tra.keyCatalysts}}</td>
+              <td>{{tra.newsDate}}</td>
+              <td>{{tra.Prediction}}</td>
               <th>{{tra.probability}}</th>
               <!-- <td>Show</td>  -->
               <!-- class="blur-column -->
@@ -43,7 +49,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="!IsStockAnalysis">
     <div class="col-12 d-block content">
       <h4 class="text-center">{{title2}}</h4>
       <p class="mr-4">{{summery}}</p>
