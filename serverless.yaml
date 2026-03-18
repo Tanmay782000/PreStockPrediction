@@ -138,7 +138,6 @@ resources:
           - AttributeName: countryId
             KeyType: HASH
 
-
     SectorDetailsTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -151,4 +150,18 @@ resources:
 
         KeySchema:
           - AttributeName: stockSectorId
+            KeyType: HASH
+
+    urlExtractionTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: UrlExtraction
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: countryId
+            AttributeType: N
+
+        KeySchema:
+          - AttributeName: countryId
             KeyType: HASH

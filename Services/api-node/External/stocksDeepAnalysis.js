@@ -62,7 +62,7 @@ export const get = async (event) => {
     }
 
     const res = await callBedrock(JSON.stringify(finalArr));
-
+    
     return finalArr;
   } catch (err) {
     console.log("ERROR:", err);
@@ -118,15 +118,6 @@ async function generateFeatures(
 
     await delay(200);
 
-    // const sectorData = await safeFetch(() =>
-    //   yf.chart(sectorSymbol, {
-    //     period1: "2024-01-01",
-    //     interval: "1d",
-    //   })
-    // );
-
-    await delay(200);
-
     const intradayData = await safeFetch(() =>
       yf.chart(finalStockSymbol, {
         period1: twoDaysAgo,
@@ -143,7 +134,6 @@ async function generateFeatures(
 
     const quotes = stockData.quotes.filter((q) => q.close != null);
     const niftyQuotes = niftyData.quotes.filter((q) => q.close != null);
-    // const sectorQuotes = sectorData.quotes.filter((q) => q.close != null);
 
     const closes = quotes.map((q) => q.close);
     const volumes = quotes.map((q) => q.volume);
@@ -152,11 +142,9 @@ async function generateFeatures(
 
     const last = closes.length - 1;
     const nLast = niftyQuotes.length - 1;
-    // const sLast = sectorQuotes.length - 1;
 
     if (last < 120) throw new Error("Not enough data");
 
-    // ✅ Price fallback
     let currentPrice = closes[last];
 
     if (intradayData && intradayData.quotes.length > 0) {
@@ -225,11 +213,6 @@ async function generateFeatures(
       niftyQuotes[nLast].close,
       niftyQuotes[nLast - 1].close
     );
-
-    // const sector_return = pctChange(
-    //   sectorQuotes[sLast].close,
-    //   sectorQuotes[sLast - 1].close
-    // );
 
     const nifty_20d = pctChange(
       niftyQuotes[nLast].close,
@@ -437,6 +420,7 @@ TechnicalAnalysis
 Output format:
 [
 {
+"StockId": inputData.stockId,
 "Stock": "ABC",
 "Sentiment Score": 0.42,
 "Key Catalyst": "Strong earnings guidance",
@@ -445,7 +429,6 @@ Output format:
 "5-Day Return": 0.021,
 "Volume Ratio": 1.8,
 "Volatility (20D)": 0.034,
-"TechnicalAnalysis":"Generate summery & conclusion based on volumn, chart patterns, movementum, support-resistance and avg returns"
 }
 ]
 

@@ -2,7 +2,7 @@ service: SP-Node-Lambda-Functions
 provider:
   name: aws
   region: ap-south-1
-  runtime: nodejs18.x
+  runtime: nodejs20.x
   timeout: 30
   environment:
     JWT_SECRET: "iamworkinginheliosassoftwareengineer"
@@ -14,6 +14,7 @@ provider:
     NewsTable: NewsRawData
     FilteredNews: FilteredNews
     SectorDetailsTable: SectorDetails
+    UrlExtractionTable: UrlExtraction
     #Lambdas
 
   iam:
@@ -151,3 +152,8 @@ functions:
     handler: External/stocksAnalysis.getStockAnalysis
     timeout: 300
     description: "Generate the stocks from insights."
+
+  geturlExtraction:
+    handler: External/urlExtraction.urlExtraction
+    timeout: 300
+    description: "Fetch the URLs from the raw data."

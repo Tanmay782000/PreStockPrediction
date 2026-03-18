@@ -6,30 +6,16 @@ const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
 export const getStockAnalysis = async (event) => {
   const countryId = event.countryId;
-  const sectorSummery = event.sectorSummerydata;
   const inputData = event.inputarray;
   console.log("got input data", inputData);
-  const now_d = new Date();
-  const todaydate = now_d.toLocaleString("en-IN", {
-    timeZone: "Asia/Kolkata",
-  });
-  const beforedate = new Date(Date.now() + 5.5 * 3600000 - 12 * 3600000);
   const Filtered_News = process.env.FilteredNews;
   const prompt = ` 
 ##Global News Array
-${sectorSummery}
 ${JSON.stringify(inputData)}
 
-##Time Focus
-Please focus more on prediction with dates & time between - ${todaydate} & ${beforedate}
-Prioritize data from ${todaydate} for prediction; use ${beforedate} only if necessary.
-Give higher weight to more recent news when determining predictions.
-
 ##Processing Instructions
-Include ${sectorSummery} for analysis & better predictions. 
 Extract stock names explicitly mentioned in the news articles.
 Ignore the IPO launch stocks.
-Ignore general market news that does not reference specific companies.
 Predict whether each stock has a higher probability of Profit or Loss based on the news sentiment and catalysts.
 Probability must be an integer between 0 and 100.
 Use the most recent and strongest news signals to determine the prediction.
@@ -68,19 +54,12 @@ Industry sector of the stock such as Information Technology, Healthcare, Utiliti
 keyCatalysts
 One short sentence explaining the main reason why the stock is predicted to move in the given direction.
 
-newsDate
-Analyze all news items for the same stock, but in the output return only the latest publish_date among those items.
-
 rawStockNews
-Please retrieve all historical and current news related to this stock, with the exception of key catalysts. 
+information related to stock pick(e.g. target price, stop loss, expected growth, timeduration and technical analysis of stock);
 
 yahooFinanceFormat
 Ticker formatted for the Yahoo Finance library.Do proper research and fetch the latest ticker format, ensuring it reflects any recent changes made by the company instead of using outdated symbols.
 Example: Reliance → RELIANCE.NS
-
-yahooFinanceSectorFormat
-Ticker formatted for the Yahoo Finance library.
-Example: ^CNXENERGY
 
 eventCategory
 event category based on news insights.
@@ -96,9 +75,7 @@ event category based on news insights.
 "category":"",
 "sector":"",
 "keyCatalysts":"",
-"newsDate":"",
 "yahooFinanceFormat":"",
-"yahooFinanceSectorFormat":"",
 "eventCategory","",
 "rawStockNews":""
 }

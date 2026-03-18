@@ -26,11 +26,11 @@ async function ExecuteMarketInsights(countryId, inputData) {
   //get country list
   var countryList = await client.send(
     new ScanCommand({ TableName: CountryTable }),
-  ); //{id, countryName}
+  ); 
   countryList = (countryList.Items || [])
     .filter((c) => c.countryId == countryId)
     .map((c) => ({ countryId: c.countryId, countryName: c.countryName }));
-  // console.log("countryList", JSON.stringify(countryList));
+
 
   //get term list
   var termList = await client.send(new ScanCommand({ TableName: TermTable })); //{termId, termName}
@@ -39,12 +39,10 @@ async function ExecuteMarketInsights(countryId, inputData) {
     termName: t.termName,
     researchInsight: t.researchInsight,
   }));
-  // console.log("termlist", JSON.stringify(termList));
 
-  //get category list
   var categoryList = await client.send(
     new ScanCommand({ TableName: CategoryTable }),
-  ); //{categoryId, categoryName}
+  ); 
   categoryList = (categoryList.Items || [])
     .filter((x) => x.countryId == countryId)
     .map((c) => ({
@@ -52,13 +50,10 @@ async function ExecuteMarketInsights(countryId, inputData) {
       countryId: c.countryId,
       categoryName: c.stockCategory,
     }));
-  // console.log("categorylist", JSON.stringify(categoryList));
 
-  //get sector list
   var sectorList = await client.send(
     new ScanCommand({ TableName: SectorTable }),
-  ); //{sectorId, sectorName}
-  // console.log("sector", JSON.stringify(sectorList));
+  ); 
 
   if ([inputData, termList, categoryList, sectorList].every((v) => v != null)) {
     const result = await getAnalysis({

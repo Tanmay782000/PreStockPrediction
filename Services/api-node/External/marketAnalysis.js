@@ -5,6 +5,7 @@ import {
 import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
 import { getStockAnalysis } from "./stocksAnalysis.js";
+import {urlExtraction} from "../External/urlExtraction.js"
 
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
@@ -61,7 +62,7 @@ on sequence of terms id in above lise with asc. give each term out of 100.
 FORMAT:[{TermName:Probability}]
 
 #Summery(variable):-
-Explain reasoning of Terms based on news insights in 30 - 40 lines.[IMPORTANT]
+Summery related to terms.
 
 #OUTPUT FORMAT[Array Object]:-
 {
@@ -85,7 +86,7 @@ on sequence of categoryId id in above lise with asc. give each term out of 100.
 FORMAT:[{CategoryName:Probability}]
 
 #Summery(variable):-
-Explain reasoning of Categories based on news insights in 30 - 40 lines.[IMPORTANT]
+Summery related to Category.
 
 #OUTPUT FORMAT[Array Object]:-
 {
@@ -108,7 +109,7 @@ on sequence of sectorId id in above lise with asc. give each term out of 100.
 FORMAT:[{SectorName:Probability}]
 
 #Summery(variable):-
-Explain reasoning of Sectors based on news insights in 30 - 40 lines.[IMPORTANT]
+Summery related to Sector.
 
 #OUTPUT FORMAT[Array Object]:-
 {
@@ -129,7 +130,7 @@ Explain reasoning of Sectors based on news insights in 30 - 40 lines.[IMPORTANT]
         {
           role: "user",
           content: [{ type: "text", text: prompt }],
-        },
+        },        
       ],
     }),
   });
@@ -170,10 +171,9 @@ Explain reasoning of Sectors based on news insights in 30 - 40 lines.[IMPORTANT]
   console.log("put completed");
 
   console.log("going to do sector analysis");
-  const sectorSummerydata = item.sectorSummery.summary;
-  const input = { countryId, sectorSummerydata, inputarray };
 
-  const result = await getStockAnalysis(input);
+  const input = { countryId, inputarray };
+  const result = await urlExtraction(input);
   // const result = await ExecuteStocksInsights(input);
   if (result != null) {
     console.log("good it's not null", result);
@@ -186,6 +186,8 @@ Explain reasoning of Sectors based on news insights in 30 - 40 lines.[IMPORTANT]
   };
 };
 
+
+///UPDATE TO URLEXTRACTION
 async function ExecuteStocksInsights(input) {
   const payload = input;
   const command = new InvokeCommand({

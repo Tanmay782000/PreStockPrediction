@@ -237,6 +237,25 @@
                 }
               ]
             }
+          },
+          "urlExtractionTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "UrlExtraction",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "countryId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "countryId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
           }
         },
         "Outputs": {
@@ -477,6 +496,25 @@
               }
             ]
           }
+        },
+        "urlExtractionTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "UrlExtraction",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "countryId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "countryId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
         }
       },
       "Outputs": {}
@@ -497,7 +535,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1771839301701-2026-02-23T09:35:01.701Z",
+    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1773835744201-2026-03-18T12:09:04.201Z",
     "artifact": ""
   }
 }
