@@ -160,8 +160,6 @@ Summery related to Sector.
     modifiedDate: now,
   };
 
-  console.log("logging item", item);
-
   await client.send(
     new PutCommand({
       TableName: Filtered_News,

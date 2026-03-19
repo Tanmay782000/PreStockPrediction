@@ -61,6 +61,9 @@ yahooFinanceFormat
 Ticker formatted for the Yahoo Finance library.Do proper research and fetch the latest ticker format, ensuring it reflects any recent changes made by the company instead of using outdated symbols.
 Example: Reliance → RELIANCE.NS
 
+stockNameCategory
+Nifty 50 or Largecap or Midcap or Smallcap or Penny
+
 eventCategory
 event category based on news insights.
 
@@ -76,6 +79,7 @@ event category based on news insights.
 "sector":"",
 "keyCatalysts":"",
 "yahooFinanceFormat":"",
+"stockNameCategory":"",
 "eventCategory","",
 "rawStockNews":""
 }

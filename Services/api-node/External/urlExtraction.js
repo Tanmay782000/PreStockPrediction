@@ -25,7 +25,7 @@ export const urlExtraction = async (event) => {
 Task:
 From the input news dataset, return the top 3 URLs.
 
-Input Dataset: ${inputData}
+Input Dataset: ${JSON.stringify(inputData, null, 2)}
 Current DateTime: ${dateTime}
 
 Step 1: Classify Each Article (mandatory)
@@ -98,12 +98,30 @@ Step 6: Output Rules
 * If no valid URLs exist:
   return all values as null
 
-Output Format (strict JSON only):
+Output Format Rules:
+* strict JSON only.
+* Do not include explanations, markdown, or text outside the JSON structure.
 
+Output Format:
 {
 "top_urls": ["url1", "url2", "url3"]
 }
 ---`;
+  const command = new InvokeModelCommand({
+    modelId: "anthropic.claude-3-sonnet-20240229-v1:0", // example
+    contentType: "application/json",
+    accept: "application/json",
+    body: JSON.stringify({
+      anthropic_version: "bedrock-2023-05-31",
+      max_tokens: 2500,
+      messages: [
+        {
+          role: "user",
+          content: [{ type: "text", text: prompt }],
+        },
+      ],
+    }),
+  });
 
   const response = await bedrockClient.send(command);
   const responseBody = JSON.parse(Buffer.from(response.body).toString());
@@ -113,7 +131,7 @@ Output Format (strict JSON only):
 
   // Save in the database
 
-  const cId = countryId;
+  const cId = Number(countryId);
   let item = {
     countryId: cId,
     urls: result.top_urls,
@@ -128,7 +146,7 @@ Output Format (strict JSON only):
   );
 
   //Get the result from database
-  const responseData = await client.send(
+  var responseData = await client.send(
     new ScanCommand({
       TableName: Url_Extraction,
       Key: { countryId: cId },
@@ -155,11 +173,13 @@ Output Format (strict JSON only):
   }
 
   //save into the URLExtraction table
-
+  const now = new Date().toISOString();
   item = {
     countryId: cId,
     urls: result.top_urls,
     extractedData: urls_explaination,
+    createdDate: now,
+    modifiedDate: now
   };
 
   await client.send(

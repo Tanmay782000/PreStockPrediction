@@ -1,4 +1,4 @@
-import { ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
 import yahooFinance from "yahoo-finance2";
 import vader from "vader-sentiment";
@@ -9,12 +9,14 @@ import {
 
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 const yf = new yahooFinance();
+const Filtered_News = process.env.FilteredNews;
+const Deepanalysis_Stocks = process.env.DeepStockAnalysis;
+var countryId = null;  
 
 export const get = async (event) => {
   try {
-    const Filtered_News = process.env.FilteredNews;
-    const countryId = event.countryId;
 
+    countryId = event.countryId;
     const getnewsData = await client.send(
       new ScanCommand({
         TableName: Filtered_News,
@@ -415,7 +417,6 @@ Expected Growth
 5-Day Return  
 Volume Ratio  
 Volatility (20D)
-TechnicalAnalysis
 
 Output format:
 [
@@ -437,26 +438,43 @@ Return strictly valid JSON.
 Do not include explanations, markdown, or text outside the JSON structure.
 `;
 
-  // const command = new InvokeModelCommand({
-  //   modelId: "anthropic.claude-3-sonnet-20240229-v1:0", // example
-  //   contentType: "application/json",
-  //   accept: "application/json",
-  //   body: JSON.stringify({
-  //     anthropic_version: "bedrock-2023-05-31",
-  //     max_tokens: 2500,
-  //     messages: [
-  //       {
-  //         role: "user",
-  //         content: [{ type: "text", text: prompt }],
-  //       },
-  //     ],
-  //   }),
-  // });
-  // console.log("Completed");
-  // const response = await bedrockClient.send(command);
-  // const responseBody = JSON.parse(Buffer.from(response.body).toString());
-  // var text = responseBody.content[0].text;
-  // console.log("kind of format", text);
+  const command = new InvokeModelCommand({
+    modelId: "anthropic.claude-3-sonnet-20240229-v1:0", // example
+    contentType: "application/json",
+    accept: "application/json",
+    body: JSON.stringify({
+      anthropic_version: "bedrock-2023-05-31",
+      max_tokens: 2500,
+      messages: [
+        {
+          role: "user",
+          content: [{ type: "text", text: prompt }],
+        },
+      ],
+    }),
+  });
+  console.log("Completed");
+  const response = await bedrockClient.send(command);
+  const responseBody = JSON.parse(Buffer.from(response.body).toString());
+  var text = responseBody.content[0].text;
+  console.log("kind of format", text);
+  const finalArr = JSON.parse(text);
+
+  //ADD LOGIC OF SAVING DATA INTO DATABASE(In new table called stock deep analysis)
+  const now = new Date().toISOString();
+  let item = {
+    countryId: Number(countryId),
+    DeepAnalysis: finalArr || [],
+    createdDate: now,
+    modifiedDate: now,
+  };
+    
+  await client.send(
+    new PutCommand({
+      TableName: Deepanalysis_Stocks,
+      Item: item,
+    }),
+  );
 
   return {
     statusCode: "200",

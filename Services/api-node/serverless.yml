@@ -15,6 +15,7 @@ provider:
     FilteredNews: FilteredNews
     SectorDetailsTable: SectorDetails
     UrlExtractionTable: UrlExtraction
+    DeepStockAnalysis: DeepStocksAnalysis
     #Lambdas
 
   iam:
@@ -157,3 +158,5 @@ functions:
     handler: External/urlExtraction.urlExtraction
     timeout: 300
     description: "Fetch the URLs from the raw data."
+
+      

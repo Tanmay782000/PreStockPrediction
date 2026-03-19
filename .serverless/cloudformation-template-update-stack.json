@@ -245,6 +245,25 @@
           }
         ]
       }
+    },
+    "DeepStocksAnalysisTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "DeepStocksAnalysis",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "countryId",
+            "AttributeType": "N"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "countryId",
+            "KeyType": "HASH"
+          }
+        ]
+      }
     }
   },
   "Outputs": {
