@@ -61,7 +61,7 @@ export const get = async (event) => {
       await delay(800);
     }
 
-    // const res = await callBedrock(JSON.stringify(finalArr));
+    const res = await callBedrock(JSON.stringify(finalArr));
     
     return finalArr;
   } catch (err) {
@@ -394,7 +394,7 @@ VOLUME SIGNALS:
 
 PREFFERED DAYS TO HOLD THE POSITOIN:
 - Number of preffered days to hold the position.
-(e.g. 2-4 days or 1 day or 1 week etc...)
+(e.g. 1 day or 2-4 days or >1 week or >1 month etc...)
 
 RISK REDUCTION:
 Reduce probability if:
