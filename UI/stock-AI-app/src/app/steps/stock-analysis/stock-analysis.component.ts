@@ -44,7 +44,7 @@ export class StockAnalysisComponent {
       this.stockService.getStockAnalysis(countryId).subscribe(
         (res) => {
           console.log('ysysysys', res);
-          this.stockArray = res.stockAnalysis;
+          this.stockArray = res.stockAnalysis.StocksAnalysis;
           this.finalArray = this.stockArray;
           console.log(this.finalArray);
         },

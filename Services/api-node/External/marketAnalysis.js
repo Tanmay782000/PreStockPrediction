@@ -5,7 +5,7 @@ import {
 import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
 import { getStockAnalysis } from "./stocksAnalysis.js";
-import {urlExtraction} from "../External/urlExtraction.js"
+import { urlExtraction } from "../External/urlExtraction.js";
 
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
@@ -22,101 +22,59 @@ export const getAnalysis = async (event) => {
   });
   const beforedate = new Date(Date.now() + 5.5 * 3600000 - 12 * 3600000);
   const prompt = `
-##Global News_Array : ${JSON.stringify(inputarray, null, 2)}
-##Please focus more on prediction with dates & time between - ${todaydate} & ${beforedate}
-##Prioritize data from ${todaydate} for prediction; use ${beforedate} only if necessary.
-##Return strictly valid JSON and ensure no double quotes, escaped quotes, backticks, or similar characters appear inside any text values (e.g., summary, probabilityArr); rewrite sentences to avoid such characters so the output can be parsed directly without errors.
-##GLOBAL OUTPUT FORMAT: results of all sections
+INPUT:
+News: ${JSON.stringify(inputarray)}
+Terms: ${JSON.stringify(termList)}
+Categories: ${JSON.stringify(categoryList)}
+Sectors: ${JSON.stringify(sectorList)}
+CurrentDate: ${todaydate}
+FallbackDate: ${beforedate}
+
+GOAL:
+Predict probability of profit (0-100) for Terms, Categories, and Sectors based on news sentiment and recency.
+
+RULES:
+- Prioritize news from CurrentDate; use older data only if needed.
+- Give higher weight to recent timestamps.
+- Focus on forward-looking signals, not past performance.
+- Output must be valid JSON only.
+- Do NOT include quotes, backticks, or escaped characters inside text values.
+- Keep summaries short and clean.
+
+OUTPUT FORMAT:
 {
-"Section1":
-{
-  "probabilityArr": probabilityArr,
-  "summary": SUMMARY,
-},
-"Section2":
-{
-  "probabilityArr": probabilityArr,
-  "summary": SUMMARY,
-},
-"Section3":
-{
-  "probabilityArr": probabilityArr,
-  "summary": SUMMARY,
-}}
-
-##GLOBAL OUTPUT RULES:
--> Return ONLY valid JSON.
--> No explanations outside JSON.
-
-1. Section-1 [Term Analysis]
-#INPUTS:-
-Terms List: ${JSON.stringify(termList, null, 2)}
-
-#INSTRUCTION:-
-Analyze the input data and determine the best term from ${termList}.(focus more on recent news based on date and time)
-and another important thing is we are predicting the future of terms so consider the news and data behaviour as per current time and give more weightage to recent news and date for prediction.
-
-#probabilityArr(array variable):-
-Contains probability of profit based on news sentiments and do the ranking based 
-on sequence of terms id in above lise with asc. give each term out of 100.
-FORMAT:[{TermName:Probability}]
-
-#Summery(variable):-
-Summery related to terms.
-
-#OUTPUT FORMAT[Array Object]:-
-{
-  "probabilityArr": probabilityArr,
-  "summary": SUMMARY,
+  "Section1": { "probabilityArr": [], "summary": "" },
+  "Section2": { "probabilityArr": [], "summary": "" },
+  "Section3": { "probabilityArr": [], "summary": "" }
 }
-#End section
 
+SECTION LOGIC:
 
-2. Section-2 [Category Analysis]
-#INPUTS:-
-Category List:  ${JSON.stringify(categoryList, null, 2)}
+1. Section1 - Term Analysis
+- Evaluate each term using news sentiment and recency.
+- Assign probability (0-100).
+- Maintain same order as input list.
+- Output format:
+  [{TermName:Probability}]
 
-#INSTRUCTION:- 
-Analyze the input data and determine the BEST stock category from ${categoryList}.(focus more on recent news based on date and time)
-and another important thing is we are predicting the future of category so consider the news and data behaviour as per current time and give more weightage to recent news and date for prediction.
+2. Section2 - Category Analysis
+- Evaluate each category similarly.
+- Maintain input order.
+- Output format:
+  [{CategoryName:Probability}]
 
-#probabilityArr(array variable):-
-Contains probability of profit based on news sentiments and do the ranking based 
-on sequence of categoryId id in above lise with asc. give each term out of 100.
-FORMAT:[{CategoryName:Probability}]
+3. Section3 - Sector Analysis
+- Evaluate each sector similarly.
+- Maintain input order.
+- Output format:
+  [{SectorName:Probability}]
 
-#Summery(variable):-
-Summery related to Category.
+SUMMARY RULE:
+- One short paragraph per section.
+- No special characters or quotes inside text.
 
-#OUTPUT FORMAT[Array Object]:-
-{
-  "probabilityArr": probabilityArr,
-  "summary": SUMMARY,
-}
-#End section
-
-3. Section-3 [Sector Analysis]
-#INPUTS:-
-Sector List: ${JSON.stringify(sectorList, null, 2)}
-
-#INSTRUCTION:- 
-Analyze the input data and determine the BEST stock sector from ${sectorList}.(focus more on recent news based on date and time)
-and another important thing is we are predicting the future of sector so consider the news and data behaviour as per current time and give more weightage to recent news and date for prediction.
-
-#probabilityArr(array variable):-
-Contains probability of profit based on news sentiments and do the ranking based 
-on sequence of sectorId id in above lise with asc. give each term out of 100.
-FORMAT:[{SectorName:Probability}]
-
-#Summery(variable):-
-Summery related to Sector.
-
-#OUTPUT FORMAT[Array Object]:-
-{
-  "probabilityArr": probabilityArr,
-  "summary": SUMMARY,
-}
-#End section
+FINAL RULE:
+Return ONLY the JSON object. No extra text.
 `;
 
   const command = new InvokeModelCommand({
@@ -130,7 +88,7 @@ Summery related to Sector.
         {
           role: "user",
           content: [{ type: "text", text: prompt }],
-        },        
+        },
       ],
     }),
   });
@@ -183,7 +141,6 @@ Summery related to Sector.
     body: "good to go",
   };
 };
-
 
 ///UPDATE TO URLEXTRACTION
 async function ExecuteStocksInsights(input) {

@@ -23,7 +23,7 @@ export const get = async (event) => {
       })
     );
 
-    const stockData = getnewsData.Items[0].stockName;
+    const stockData = getnewsData.Items[0].stockName.StocksAnalysis;
     const finalArr = [];
 
     // ✅ Fetch NIFTY ONCE
@@ -34,15 +34,13 @@ export const get = async (event) => {
     for (const element of stockData) {
       const stockname = element.displayName.toString();
       const stocksymbol = element.yahooFinanceFormat.toString();
-      // const sectorSymbol = element.yahooFinanceSectorFormat.toString();
 
       const response = await generateFeatures(
         stockname,
         stocksymbol,
-        // sectorSymbol,
         niftyData
       );
-
+      console.log("FOR RSI",response);
       if (response != null) {
         const mergedText = `${element.rawStockNews} ${element.keyCatalysts}`;
 
@@ -63,7 +61,7 @@ export const get = async (event) => {
       await delay(800);
     }
 
-    const res = await callBedrock(JSON.stringify(finalArr));
+    // const res = await callBedrock(JSON.stringify(finalArr));
     
     return finalArr;
   } catch (err) {
@@ -104,7 +102,6 @@ async function safeFetch(fn, retries = 3) {
 async function generateFeatures(
   stockname,
   stocksymbol,
-  // sectorSymbol,
   niftyData
 ) {
   try {
@@ -141,7 +138,9 @@ async function generateFeatures(
     const volumes = quotes.map((q) => q.volume);
     const highs = quotes.map((q) => q.high);
     const lows = quotes.map((q) => q.low);
-
+ 
+    const RSI = await calculateRSI(closes);
+    const final_RSI = RSI[RSI.length - 1]
     const last = closes.length - 1;
     const nLast = niftyQuotes.length - 1;
 
@@ -255,7 +254,7 @@ async function generateFeatures(
       distance_resistance_20,
       breakout_20,
       nifty_return_1d,
-      // sector_return,
+      RSI:final_RSI,
       relative_strength,
       market_volatility,
     };
@@ -301,141 +300,131 @@ async function fetchStockWithFallback(symbol) {
   return data;
 }
 
+async function calculateRSI(closes, period = 14) {
+  let gains = [];
+  let losses = [];
+  
+  // Step 1: price changes
+  for (let i = 1; i < closes.length; i++) {
+    const diff = closes[i] - closes[i - 1];
+    gains.push(diff > 0 ? diff : 0);
+    losses.push(diff < 0 ? Math.abs(diff) : 0);
+  }
+
+  // Step 2: first average
+  let avgGain = gains.slice(0, period).reduce((a, b) => a + b, 0) / period;
+  let avgLoss = losses.slice(0, period).reduce((a, b) => a + b, 0) / period;
+
+  let rsi = [];
+
+  // Step 3: Wilder smoothing
+  for (let i = period; i < gains.length; i++) {
+    avgGain = ((avgGain * (period - 1)) + gains[i]) / period;
+    avgLoss = ((avgLoss * (period - 1)) + losses[i]) / period;
+
+    const rs = avgLoss === 0 ? 100 : avgGain / avgLoss;
+    const currentRSI = 100 - (100 / (1 + rs));
+
+    rsi.push(currentRSI);
+  }
+
+  return rsi;
+}
+
 async function callBedrock(inputData) {
   const now_d = new Date();
   const todaydate = now_d.toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
   });
   console.log("IN PROMPT");
+
   const prompt = `
-INSTRUCTION :- You are a quantitative swing trading analysis engine.
+INPUT:
+Stocks: ${JSON.stringify(inputData)}
+CurrentTime: ${todaydate}
 
-Input:- 
-->Stocks data:${inputData}
-->Current Date and time:${todaydate}
+GOAL:
+Estimate probability of profitable swing trade over next 5 trading days.
 
-Goal:
-Estimate the probability of a profitable swing trade over the next 5 trading days.
+CORE RULE:
+Adjust news impact using time difference between CurrentTime and newsDate:
+- Very recent → strong impact
+- Few hours old → partially priced in
+- Old + momentum conflict → trust price over sentiment
 
-Input contains:
-• Current market indicators
-• Stock momentum and volatility
-• Volume activity
-• Sector and market performance
-• News sentiment and catalysts
-• Support and resistance levels
-• Timestamp of the news article (newsDate)
-• Current system time
+PRIMARY FACTORS (priority order):
+1. Momentum:
+- Compare momentum_20, momentum_60, momentum_120
+- Acceleration = bullish, weakening = bearish
 
-Important reasoning rule:
+2. Market Alignment:
+- Use sector_return, nifty_return_1d, relative_strength
+- Favor stocks outperforming sector and market
 
-Use the difference between current time and newsDate to determine how relevant the news is.
+3. Volume Strength:
+- volume_ratio > 1.5 = strong participation
+- volume_trend_5d > 1 = accumulation
+- Low volume = weak signal
 
-If the news is very recent → it may still influence price.
+4. Event Impact:
+- Evaluate keyCatalysts strength
 
-If the news is several hours old and the stock price has already moved → assume the market has partially absorbed the information.
+5. Sentiment:
+- Use as secondary confirmation only
 
-If the news is older and momentum contradicts sentiment → prioritize price behavior over sentiment.
+PRICE LEVEL LOGIC:
 
-Primary signals (highest importance):
+Support:
+- Near support + positive momentum → bullish
+- Break below support → bearish
 
-1. Momentum acceleration
-Compare momentum_20 vs momentum_60 vs momentum_120 to detect strengthening or weakening trends.
+Resistance:
+- Near resistance + weak volume → rejection risk
+- Near resistance + strong volume → breakout chance
+- breakout_20 = 1 → strong continuation
 
-2. Sector and market alignment
-Use sector_return, nifty_return_1d, and relative_strength to determine whether the stock is outperforming its sector and the broader market.
+Distance:
+- Near resistance + weak momentum → reduce probability
+- Breakout + strong volume → increase probability
 
-3. Volume confirmation
-Use volume_ratio, volume_today, avg_volume_20d, and volume_trend_5d to detect institutional participation or accumulation.
+VOLUME SIGNALS:
+- volume_ratio > 1.5 → strong
+- volume_spike_flag = 1 + positive momentum → strong continuation
+- momentum without volume → weak
 
-4. Event impact
-Evaluate keyCatalysts to determine whether there is a meaningful corporate catalyst.
+PREFFERED DAYS TO HOLD THE POSITOIN:
+- Number of preffered days to hold the position.
+(e.g. 2-4 days or 1 day or 1 week etc...)
 
-5. Sentiment change
-Use sentimentscore as a supporting signal rather than a primary driver.
+RISK REDUCTION:
+Reduce probability if:
+- volatility_20 or volatility_60 > market_volatility
+- underperforming sector
+- sentiment contradicts price
+- weak volume confirmation
+- near resistance without breakout
 
-Support and Resistance analysis:
-
-Use support_20, support_50, support_60, support_80 and resistance_20, resistance_50, resistance_60, resistance_80 to evaluate price positioning.
-
-Support interpretation rules:
-
-If the current price is close to a support level and momentum is turning positive → potential bounce setup.
-
-If price is significantly above support → reduced downside risk.
-
-If price breaks below major support → bearish signal and reduce probability.
-
-Resistance interpretation rules:
-
-If price is approaching resistance with weak volume → risk of rejection.
-
-If price is approaching resistance with strong volume_ratio (>1.5) → possible breakout.
-
-If breakout_20 = 1 → strong continuation signal.
-
-Distance interpretation:
-
-Use distance_support_20 and distance_resistance_20 to evaluate proximity to key levels.
-
-If price is very close to resistance and momentum weakens → reduce probability.
-
-If price recently broke resistance and volume confirms → increase probability.
-
-Volume interpretation rules:
-
-If volume_ratio > 1.5 → strong participation or institutional activity.
-
-If volume_trend_5d > 1 → possible accumulation.
-
-If momentum is positive but volume_ratio < 1 → weak breakout.
-
-If volume_spike_flag = 1 and momentum is positive → strong continuation signal.
-
-Risk reduction rules:
-
-Reduce probability when:
-
-• volatility_20 or volatility_60 is significantly higher than market_volatility
-• the stock underperforms its sector
-• sentiment contradicts the price trend
-• volume confirmation is missing
-• price is near strong resistance without breakout confirmation
-
-Analysis horizon:
-Evaluate the probability of a profitable swing trade over the next 5 trading days.
-
-Output requirements:
-
-Return a JSON array containing:
-
-Stock  
-Sentiment Score  
-Key Catalyst  
-Probability of Profit  
-Expected Growth  
-5-Day Return  
-Volume Ratio  
-Volatility (20D)
-
-Output format:
+OUTPUT FORMAT:
 [
 {
 "StockId": inputData.stockId,
-"Stock": "ABC",
-"Sentiment Score": 0.42,
-"Key Catalyst": "Strong earnings guidance",
-"Probability of Profit": 68,
-"Expected Growth": "3% - 6%",
-"5-Day Return": 0.021,
-"Volume Ratio": 1.8,
-"Volatility (20D)": 0.034,
+"Stock": "",
+"Sentiment_Score": 0,
+"Key_Catalyst": "",
+"Probability_of_Profit": 0%,
+"Expected_Growth": "",
+"5-Day_Return": 0,
+"Volume_Ratio": 0,
+"Volatility_(20D)": 0,
+"Preffered_Days":"",
+"RSI": inputData.final_RSI
 }
 ]
 
-##Output Rules
-Return strictly valid JSON.
-Do not include explanations, markdown, or text outside the JSON structure.
+OUTPUT RULES:
+- Return only valid JSON array
+- No explanations or extra text
+- Keep text fields short and clean
 `;
 
   const command = new InvokeModelCommand({

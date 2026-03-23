@@ -22,91 +22,52 @@ export const urlExtraction = async (event) => {
   });
 
   const prompt = `
-Task:
-From the input news dataset, return the top 3 URLs.
+INPUT:
+News: ${JSON.stringify(inputData)}
+CurrentTime: ${dateTime}
 
-Input Dataset: ${JSON.stringify(inputData, null, 2)}
-Current DateTime: ${dateTime}
+GOAL:
+Return top 3 URLs with actionable stock trade signals.
 
-Step 1: Classify Each Article (mandatory)
+STEP 1: CLASSIFY
+Assign each article to one:
+- Intraday (same-day trades, levels, opening strategy)
+- Swing (2-5 day trades, short-term targets, breakout continuation)
 
-Classify every article into ONE category:
+STEP 2: FILTER (must pass all)
+- Contains specific stock names
+- Contains trade intent: buy, sell, hold, breakout, top picks, trading plan
+- Source is credible OR includes named analyst
 
-1. Trading (Intraday)
-
-* Same-day trades
-* Intraday levels, opening strategy, day trading
-
-2. Short-Term Swing (2-5 Days)
-
-* Short-term / near-term / positional trades
-* Expected movement over multiple days
-* Breakout with follow-through or targets beyond same day
-
-Step 2: Base Filters (must pass all)
-
-* Must explicitly mention specific stock/company names
-* Must contain trade intent, such as:
-  buy / sell / hold
-  breakout
-  top picks
-  trading plan
-  stock to buy today
-* Must be from:
-  a credible financial publisher
-  OR
-  include a named market analyst
-
-Step 3: Priority Rules
-
-* Always prefer most recent published articles
-* Prefer stronger signals:
+STEP 3: PRIORITY
+- Prefer latest articles (based on publish time)
+- Stronger signals rank higher:
   BUY/SELL > recommendation > watch/opinion
 
-Step 4: Composition Logic (strict)
+STEP 4: SELECTION
+- Pick best articles per category first
+- Then select total 3 URLs using mix:
+  - Prefer both categories
+  - If one category lacks entries, fill from the other
+- Avoid duplicates or same-content sources
 
-Select exactly 3 URLs using this combination:
+STEP 5: REJECT
+- No stock names
+- Only general market news
+- Duplicate/similar articles
 
-* Either:
-  2 Trading (Intraday) + 2 Short-Term Swing
-  OR
-  1 Trading (Intraday) + 3 Short-Term Swing
-  OR
-  3 Trading (Intraday) + 1 Short-Term Swing
-
-Selection approach:
-
-* First, pick best articles within each category
-* Then form a valid mix using:
-  latest publish time
-  strongest trade signals
-* If one category has insufficient articles:
-  fill remaining slots from the other category
-
-Step 5: Reject Conditions
-
-* No stock names mentioned
-* Only general market news (index movement, opening/closing updates)
-* Duplicate or same content from multiple domains
-
-Step 6: Output Rules
-
-* Return exactly 3 URLs
-* Maintain required mix (Trading + Swing)
-* If fewer than 3 valid URLs exist:
-  fill remaining with null
-* If no valid URLs exist:
-  return all values as null
-
-Output Format Rules:
-* strict JSON only.
-* Do not include explanations, markdown, or text outside the JSON structure.
-
-Output Format:
+OUTPUT:
 {
-"top_urls": ["url1", "url2", "url3"]
+  "top_urls": ["", "", ""]
 }
----`;
+
+RULES:
+- Return exactly 3 URLs
+- Use null if insufficient valid entries
+- Return only valid JSON
+- No extra text
+`;
+
   const command = new InvokeModelCommand({
     modelId: "anthropic.claude-3-sonnet-20240229-v1:0", // example
     contentType: "application/json",

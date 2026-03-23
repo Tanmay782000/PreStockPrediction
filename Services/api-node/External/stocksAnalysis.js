@@ -10,85 +10,53 @@ export const getStockAnalysis = async (event) => {
   console.log("got input data", inputData);
   const Filtered_News = process.env.FilteredNews;
   const prompt = ` 
-##Global News Array
-${JSON.stringify(inputData)}
+INPUT:
+News: ${JSON.stringify(inputData)}
 
-##Processing Instructions
-Extract stock names explicitly mentioned in the news articles.
-Ignore the IPO launch stocks.
-Predict whether each stock has a higher probability of Profit or Loss based on the news sentiment and catalysts.
-Probability must be an integer between 0 and 100.
-Use the most recent and strongest news signals to determine the prediction.
-Return the stocks which are mentioned in raw data.
-Avoid quotation marks inside text values such as keyCatalysts to prevent JSON parsing issues.
-Classify this news into event categories:
-Earnings,
-Government policy,
-Analyst upgrade,
-Partnership,
-Expansion,
-Management change,
-Litigation,
-Product launch
+GOAL:
+Extract stocks from news and predict short-term direction (Profit or Loss) with probability based on sentiment and catalysts.
 
-##Field Definitions
-stockId
-Numerical value from 1 to n.
+RULES:
+- Only include stocks explicitly mentioned.
+- Ignore IPO-related stocks.
+- Use most recent and strongest news signals.
+- Probability must be integer (0-100).
+- No quotes or special characters inside text fields.
+- Keep text fields short and clean.
 
-displayName
-Stock name mentioned in the news article.
+EVENT TYPES:
+Earnings, Government policy, Analyst upgrade, Partnership, Expansion, Management change, Litigation, Product launch
 
-Prediction
-Expected direction based on the news sentiment.
-Allowed values: Profit or Loss.
-
-probability
-Confidence level of the prediction from 0 to 100 based on the strength and recency of news.
-
-category
-Market category of the stock such as Nifty50, Nifty Midcap100, or Small Cap.
-
-sector
-Industry sector of the stock such as Information Technology, Healthcare, Utilities, Financial Services, etc.
-
-keyCatalysts
-One short sentence explaining the main reason why the stock is predicted to move in the given direction.
-
-rawStockNews
-information related to stock pick(e.g. target price, stop loss, expected growth, timeduration and technical analysis of stock);
-
-yahooFinanceFormat
-Ticker formatted for the Yahoo Finance library.Do proper research and fetch the latest ticker format, ensuring it reflects any recent changes made by the company instead of using outdated symbols.
-Example: Reliance → RELIANCE.NS
-
-stockNameCategory
-Nifty 50 or Largecap or Midcap or Smallcap or Penny
-
-eventCategory
-event category based on news insights.
-
-##Output JSON Schema
+OUTPUT FORMAT:
 {
-"StocksAnalysis":[
-{
-"stockId":"",
-"displayName":"",
-"Prediction":"",
-"probability":0,
-"category":"",
-"sector":"",
-"keyCatalysts":"",
-"yahooFinanceFormat":"",
-"stockNameCategory":"",
-"eventCategory","",
-"rawStockNews":""
-}
-]
+  "StocksAnalysis": [],
+  "NiftyPrediction": {}
 }
 
-##Output Rules
-Return strictly valid JSON.
-Do not include explanations, markdown, or text outside the JSON structure.
+STOCK ANALYSIS LOGIC:
+For each stock:
+- stockId: incremental number
+- displayName: stock name
+- Prediction: Profit or Loss
+- probability: 0-100 based on sentiment strength and recency
+- category: Nifty50, Midcap, Smallcap, etc.
+- sector: industry sector
+- keyCatalysts: one short reason for movement
+- yahooFinanceFormat: latest valid ticker (e.g., RELIANCE.NS)
+- stockNameCategory: Largecap / Midcap / Smallcap / Penny
+- eventCategory: choose from defined event types
+- rawStockNews: short summary of trade-related info
+
+NIFTY ANALYSIS LOGIC:
+- NiftyOutlook: Intraday or Few Sessions
+- NiftyPrediction: Bullish / Bearish / Sideways
+- Confidence: percentage (string format)
+- KeySignals: short technical signals (support, resistance, RSI, MACD, structure)
+- Description: short market view
+- Trade View: breakout / range / breakdown levels
+
+FINAL RULE:
+Return ONLY valid JSON. No extra text.
 `;
   const command = new InvokeModelCommand({
     modelId: "anthropic.claude-3-sonnet-20240229-v1:0", // example
@@ -125,7 +93,8 @@ Do not include explanations, markdown, or text outside the JSON structure.
     termSummery: getnewsData.Items[0].termSummery,
     categorySummery: getnewsData.Items[0].categorySummery,
     sectorSummery: getnewsData.Items[0].sectorSummery,
-    stockName: finalArr?.StocksAnalysis || [],
+    // stockName: finalArr?.StocksAnalysis || [],
+    stockName: finalArr || [],
     createdDate: now,
     modifiedDate: now,
   };
