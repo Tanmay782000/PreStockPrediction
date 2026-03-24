@@ -142,7 +142,7 @@ export const showStockAnalysis = async (event) => {
       }),
     );
 
-    var item = result.Item.stockName;
+    var item = result.Item.stockName.StocksAnalysis;
 
     return {
       statusCode: 200,
@@ -168,3 +168,44 @@ export const showStockAnalysis = async (event) => {
     };
   }
 };
+
+export const showNiftyAnalysis = async(event) => {
+   try {
+    await verify(event);
+    const id =
+      event.queryStringParameters?.countryId ||
+      (event.body ? JSON.parse(event.body).countryId : null);
+
+    const result = await client.send(
+      new GetCommand({
+        TableName: TABLE,
+        Key: { countryId: Number(id) },
+      }),
+    );
+
+    var item = result.Item.stockName.NiftyPrediction;
+
+    return {
+      statusCode: 200,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
+      body: JSON.stringify({
+        niftyPrediction: item,
+      }),
+    };
+  } catch (err) {
+    console.log("Error fetching news:", err);
+    return {
+      statusCode: err.statusCode,
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+      },
+      body: JSON.stringify({ error: err }),
+    };
+  }
+}

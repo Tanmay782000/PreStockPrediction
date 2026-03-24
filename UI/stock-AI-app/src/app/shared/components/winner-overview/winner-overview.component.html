@@ -12,12 +12,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for(item of finalArr; track $index){
-                        <tr>
-                            <td>{{item.Name}}</td>
-                            <td>{{item.Value}}</td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>Nifty Prediction</td>
+                        <td>{{finalArr.NiftyPrediction}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nifty Outlook</td>
+                        <td>{{finalArr.NiftyOutlook}}</td>
+                    </tr>
+                    <tr>
+                       <td>Confidence</td>
+                       <td>{{finalArr.Confidence}}</td>
+                    </tr>
+                    <tr>
+                       <td>KeySignals</td>
+                       <td>{{finalArr.KeySignals}}</td>
+                    </tr>
+                    <tr>
+                       <td>Description</td>
+                       <td>{{finalArr.Description}}</td>
+                    </tr>
+                    <tr>
+                       <td>TradeView</td>
+                       <td>{{finalArr.TradeView}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -27,45 +27,53 @@ News: ${JSON.stringify(inputData)}
 CurrentTime: ${dateTime}
 
 GOAL:
-Return top 3 URLs with actionable stock trade signals.
+Return top 4 URLs with actionable trade signals, including 1 Nifty prediction URL if available.
 
-STEP 1: CLASSIFY
-Assign each article to one:
-- Intraday (same-day trades, levels, opening strategy)
-- Swing (2-5 day trades, short-term targets, breakout continuation)
+CLASSIFY:
+- Intraday: same-day trades, levels
+- Swing: 2-5 day trades, breakout continuation
+- Nifty: Nifty/Bank Nifty outlook, support/resistance, direction
 
-STEP 2: FILTER (must pass all)
-- Contains specific stock names
-- Contains trade intent: buy, sell, hold, breakout, top picks, trading plan
-- Source is credible OR includes named analyst
+FILTER:
 
-STEP 3: PRIORITY
-- Prefer latest articles (based on publish time)
-- Stronger signals rank higher:
-  BUY/SELL > recommendation > watch/opinion
+Intraday/Swing:
+- Must include stock names
+- Must include intent: buy/sell/hold/breakout/top picks OR directional bias
+- Credible source or named analyst
 
-STEP 4: SELECTION
-- Pick best articles per category first
-- Then select total 3 URLs using mix:
-  - Prefer both categories
-  - If one category lacks entries, fill from the other
-- Avoid duplicates or same-content sources
+Nifty:
+- Must mention Nifty/Bank Nifty
+- Must include direction (support/resistance/prediction)
+- Must be recent
 
-STEP 5: REJECT
-- No stock names
-- Only general market news
-- Duplicate/similar articles
+PRIORITY:
+- Latest articles first
+- Signal strength:
+  BUY/SELL > recommendation > bias > opinion
+
+SELECT:
+- Exactly 4 URLs
+- At least 1 Nifty (if available)
+- Remaining from Intraday/Swing (prefer mix)
+- No duplicates
+
+REJECT:
+- URL extension with .cms format
+- No stock names (Intraday/Swing)
+- General/macro news only
+- No actionable insight
+- Duplicate content
 
 OUTPUT:
 {
-  "top_urls": ["", "", ""]
+  "top_urls": ["", "", "",""]
 }
 
 RULES:
-- Return exactly 3 URLs
-- Use null if insufficient valid entries
-- Return only valid JSON
-- No extra text
+- Include 1 Nifty URL if possible
+- If not enough valid → fill with null
+- Return only JSON.  
+- No extra text.
 `;
 
   const command = new InvokeModelCommand({

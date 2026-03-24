@@ -118,6 +118,13 @@ functions:
           path: showstockanalysis
           method: get
   
+  showNiftyAnalysis:
+    handler: handlers/getAnalysis.showNiftyAnalysis
+    events:
+      - http:
+          path: showniftyanlysis
+          method: get
+
 ############# Externl Calls ##############
 
   callMain:
@@ -138,6 +145,7 @@ functions:
           path: deepStockAnalysis
           method: get
 
+ 
 ############# Externl Calls ##############
   getNews:
     handler: External/newsAnalysis.get

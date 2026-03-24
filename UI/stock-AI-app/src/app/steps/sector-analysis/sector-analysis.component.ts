@@ -4,6 +4,7 @@ import { WinnerOverviewComponent } from '../../shared/components/winner-overview
 import { WizardActionsComponent } from '../../shared/components/wizard-actions/wizard-actions.component';
 import { SectorService } from '../../services/sector.service';
 import { CountryService } from '../../services/country.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-sector-analysis',
@@ -19,9 +20,11 @@ public title1: any = 'Sectors Probability';
   public sectorArray: number[] = [];
   public fixArray: any[] = ["Information Technology", "Financials", "Healthcare / Pharmaceuticals", "Consumer Discretionary", "Consumer Staples", "Industrials", "Energy", "Materials", "Utilities", "Real Estate","Communication Services"];
   public finalArray: any[] = [];
+  public niftyArray: any[] = [];
   constructor(
     private sectorService: SectorService,
     private countryService: CountryService,
+    private dataService: DataService
   ) {}
   ngOnInit(): void {
     const countryId = this.countryService.getSelectedCurrentCountry();
@@ -31,6 +34,7 @@ public title1: any = 'Sectors Probability';
           this.sectorArray = res.sectorAnalysis.probabilityArr;
           this.summery = res.sectorAnalysis.summary
           this.finalArray = this.sectorArray;
+          this.niftyArray = this.dataService.apiData()
         },
         (err) => {
           console.log(err);

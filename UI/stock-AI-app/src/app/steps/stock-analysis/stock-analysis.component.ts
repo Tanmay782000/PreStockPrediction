@@ -4,6 +4,7 @@ import { WinnerOverviewComponent } from '../../shared/components/winner-overview
 import { WizardActionsComponent } from '../../shared/components/wizard-actions/wizard-actions.component';
 import { StockService } from '../../services/stock.service';
 import { CountryService } from '../../services/country.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-stock-analysis',
@@ -34,9 +35,11 @@ export class StockAnalysisComponent {
     'Real Estate',
   ];
   public finalArray: any[] = [];
+  public niftyArray: any[] = [];
   constructor(
     private stockService: StockService,
     private countryService: CountryService,
+    private dataService: DataService
   ) {}
   ngOnInit(): void {
     const countryId = this.countryService.getSelectedCurrentCountry();
@@ -44,9 +47,9 @@ export class StockAnalysisComponent {
       this.stockService.getStockAnalysis(countryId).subscribe(
         (res) => {
           console.log('ysysysys', res);
-          this.stockArray = res.stockAnalysis.StocksAnalysis;
+          this.stockArray = res.stockAnalysis;
           this.finalArray = this.stockArray;
-          console.log(this.finalArray);
+          this.niftyArray = this.dataService.apiData()
         },
         (err) => {
           console.log(err);

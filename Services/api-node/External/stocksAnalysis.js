@@ -10,28 +10,34 @@ export const getStockAnalysis = async (event) => {
   console.log("got input data", inputData);
   const Filtered_News = process.env.FilteredNews;
   const prompt = ` 
-INPUT:
 News: ${JSON.stringify(inputData)}
 
 GOAL:
 Extract stocks from news and predict short-term direction (Profit or Loss) with probability based on sentiment and catalysts.
 
+Time Horizon Priority:
+1. Primary: Swing trades (2-5 trading days)
+2. Secondary: Intraday (same day) ONLY if swing signals are weak or unavailable
+
 RULES:
 - Only include stocks explicitly mentioned.
-- Ignore IPO-related stocks.
+- Ignore IPO-related stocks, Indexes, return pure stocks only.
 - Use most recent and strongest news signals.
+- Give higher priority to news titles that contain strong probability or directional cues (e.g., prediction, support/resistance, target, breakout) when generating NiftyPrediction.
 - Probability must be integer (0-100).
 - No quotes or special characters inside text fields.
 - Keep text fields short and clean.
 
+SIGNAL PRIORITY (highest → lowest):
+1. Swing signals:
+   breakout, trend continuation, support bounce, resistance breakout, pattern formation, multi-day targets
+2. Catalyst-based:
+   earnings, upgrades, partnerships, expansion, policy impact
+3. Intraday signals:
+   buy today, intraday levels, opening trade setup
+
 EVENT TYPES:
 Earnings, Government policy, Analyst upgrade, Partnership, Expansion, Management change, Litigation, Product launch
-
-OUTPUT FORMAT:
-{
-  "StocksAnalysis": [],
-  "NiftyPrediction": {}
-}
 
 STOCK ANALYSIS LOGIC:
 For each stock:
@@ -48,12 +54,20 @@ For each stock:
 - rawStockNews: short summary of trade-related info
 
 NIFTY ANALYSIS LOGIC:
+- Give priority to titles containing directional cues (support, resistance, breakout, target, prediction)
+- Focus on short-term outlook (Intraday to Few Sessions)
 - NiftyOutlook: Intraday or Few Sessions
 - NiftyPrediction: Bullish / Bearish / Sideways
 - Confidence: percentage (string format)
 - KeySignals: short technical signals (support, resistance, RSI, MACD, structure)
 - Description: short market view
 - Trade View: breakout / range / breakdown levels
+
+OUTPUT FORMAT:
+{
+  "StocksAnalysis": [],
+  "NiftyPrediction": {}
+}
 
 FINAL RULE:
 Return ONLY valid JSON. No extra text.
@@ -80,6 +94,16 @@ Return ONLY valid JSON. No extra text.
   console.log("kind of format", text);
   const finalArr = JSON.parse(text);
   console.log("final array", finalArr);
+  if(finalArr.StocksAnalysis == [] || finalArr.StocksAnalysis == null){
+    let CustomStockArray = [];
+    console.log("HERE I GOT NULL STOCKSANALYSIS!!!!!!!!!!")
+    //get the top 2 strong sector from sectorAnalysis table.
+
+    //get the 2 stocks from each sector from file.
+      
+    //save it into database
+    finalArr.StocksAnalysis = CustomStockArray
+  }
   var getnewsData = await client.send(
     new ScanCommand({
       TableName: Filtered_News,

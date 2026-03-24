@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col-3">
-        <app-winner-overview>
+    <div class="col-4">
+        <app-winner-overview [finalArr]="niftyArray">
         </app-winner-overview>
     </div>
-    <div class="col-9">
+    <div class="col-8">
         <app-analysis-overview [IsStockAnalysis]="false" [title1]="title1" [title2]="title2" [finalArray]="finalArray" [summery]="summery">
         </app-analysis-overview>
     </div>

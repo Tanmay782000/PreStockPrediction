@@ -20,6 +20,7 @@ export class TermService {
     return this.http.get(`${this.baseUrl}showtermanalysis`, {
       headers: headers,
       params:params
+      
     });
   }
 }

@@ -4,6 +4,7 @@ import { WinnerOverviewComponent } from '../../shared/components/winner-overview
 import { WizardActionsComponent } from '../../shared/components/wizard-actions/wizard-actions.component';
 import { CountryService } from '../../services/country.service';
 import { CategoryService } from '../../services/category.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-category-analysis',
@@ -23,9 +24,11 @@ export class CategoryAnalysisComponent implements OnInit {
   public categoryArray: number[] = [];
   public fixArray: any[] = ['Nifty 50', 'Nifty Next 50', 'Nifty Midcap 150', 'Nifty SmallCap 250'];
   public finalArray: any[] = [];
+  public niftyArray: any[] = [];
   constructor(    
       private categoryService: CategoryService,
-      private countryService: CountryService) {}
+      private countryService: CountryService,
+      private dataService: DataService) {}
   ngOnInit(): void {
     debugger;
     const countryId = this.countryService.getSelectedCurrentCountry();
@@ -36,6 +39,7 @@ export class CategoryAnalysisComponent implements OnInit {
           this.categoryArray = res.categoryAnalysis.probabilityArr;
           this.summery = res.categoryAnalysis.summary
           this.finalArray = this.categoryArray
+          this.niftyArray = this.dataService.apiData()
         },
         (err) => {
           console.log(err);

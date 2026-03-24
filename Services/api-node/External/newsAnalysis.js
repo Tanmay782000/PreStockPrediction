@@ -160,7 +160,7 @@ export const get = async () => {
       }
 
       countrynews[country] = mappedArticles.filter(
-        a => a.published.split(" ")[0] === todaydate
+        (a) => a.published.split(" ")[0] === todaydate,
       );
 
       console.log("after split record strentgh::", mappedArticles.length);
@@ -190,7 +190,15 @@ export const get = async () => {
     // Convert format for DynamoDB (unchanged)
     const countryMap = {};
     Object.entries(countrynews).forEach(([countryCode, countryArray]) => {
-      countryMap[countryCode] = countryArray.map((item) =>
+      const seen = new Set();
+      const distinctArray = countryArray.filter((item) => {
+        if (!item.url) return false; // skip invalid
+        if (seen.has(item.url)) return false;
+        seen.add(item.url);
+        return true;
+      });
+
+      countryMap[countryCode] = distinctArray.map((item) =>
         JSON.stringify(item),
       );
     });
