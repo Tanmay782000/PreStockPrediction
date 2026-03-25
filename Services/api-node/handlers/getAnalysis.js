@@ -4,6 +4,7 @@ import { verify } from "../Common/auth.middleware.js";
 
 // Table name from environment variable
 const TABLE = process.env.FilteredNews;
+const TABLE2 = process.env.DeepStockAnalysis;
 
 export const showTermAnalysis = async (event) => {
   try {
@@ -142,7 +143,29 @@ export const showStockAnalysis = async (event) => {
       }),
     );
 
+    const result2 = await client.send(
+      new GetCommand({
+        TableName: TABLE2,
+        Key: { countryId: Number(id) },
+      })
+    )
+
     var item = result.Item.stockName.StocksAnalysis;
+    var item2 = result2.Item.DeepAnalysis;
+
+    console.log("item11111",item)
+    console.log("item22222",item2)
+
+    // var array = []
+    // for (const url of item) {
+    //   for(const url2 of item2){
+    //     if(url.countryId == url2.countryId){
+    //       let data = {
+
+    //       }
+    //     }
+    //   }
+    // }
 
     return {
       statusCode: 200,

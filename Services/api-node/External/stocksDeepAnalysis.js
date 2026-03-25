@@ -105,7 +105,8 @@ async function generateFeatures(
   niftyData
 ) {
   try {
-    const res = await yf.search(stockname);
+    let appendNS = stockname + "" + ".NS"
+    const res = await yf.search(appendNS);
     const stock = res.quotes.find((q) => q.exchange === "NSI");
     const finalStockSymbol = stock?.symbol ?? stocksymbol;
 
@@ -403,6 +404,12 @@ Reduce probability if:
 - sentiment contradicts price
 - weak volume confirmation
 - near resistance without breakout
+
+inputData.stockId:
+Get the input stockId from given data(inputData array)
+
+inputData.final_RSI:
+Get the input final_RSI from given data(inputData array)
 
 OUTPUT FORMAT:
 [

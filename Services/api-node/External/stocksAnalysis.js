@@ -41,7 +41,7 @@ Earnings, Government policy, Analyst upgrade, Partnership, Expansion, Management
 
 STOCK ANALYSIS LOGIC:
 For each stock:
-- stockId: incremental number
+- stockId: incremental number(1 to n)
 - displayName: stock name
 - Prediction: Profit or Loss
 - probability: 0-100 based on sentiment strength and recency
