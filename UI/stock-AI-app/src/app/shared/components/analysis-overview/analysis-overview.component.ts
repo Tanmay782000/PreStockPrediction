@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component,Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-analysis-overview',
-  imports: [ProgressBarModule,CommonModule],
+  imports: [ProgressBarModule,CommonModule,RouterModule],
   templateUrl: './analysis-overview.component.html',
   styleUrl: './analysis-overview.component.css',
   standalone: true
@@ -20,5 +21,9 @@ Object = Object;
 public ShowSubscriptionOption()
 {
   
+}
+
+toNumber(value: string): number {
+  return parseFloat(value) || 0;
 }
 }

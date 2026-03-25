@@ -50,6 +50,7 @@ export class StockAnalysisComponent {
           this.stockArray = res.stockAnalysis;
           this.finalArray = this.stockArray;
           this.niftyArray = this.dataService.apiData()
+          this.dataService.setRepeatativeData(this.finalArray)
         },
         (err) => {
           console.log(err);

@@ -6,11 +6,13 @@ import { Component } from '@angular/core';
 import { SectorAnalysisComponent } from './steps/sector-analysis/sector-analysis.component';
 import { StockAnalysisComponent } from './steps/stock-analysis/stock-analysis.component';
 import { authGuard } from './services/gaurds/auth.guard';
+import { StockDetailsComponent } from './steps/stock-details/stock-details.component';
 
 export const routes: Routes = [
         {path:'', component: CountrySelectionComponent},
         {path:'term-analysis', component:TermAnalysisComponent,canActivate: [authGuard]},
         {path:'category-analysis', component:CategoryAnalysisComponent,canActivate: [authGuard]},
         {path:'sector-analysis', component:SectorAnalysisComponent,canActivate: [authGuard]},
-        {path:'stock-analysis', component:StockAnalysisComponent,canActivate: [authGuard]}
+        {path:'stock-analysis', component:StockAnalysisComponent,canActivate: [authGuard]},
+        {path:'stock-analysis/:id', component:StockDetailsComponent, canActivate: [authGuard]}
 ];

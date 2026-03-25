@@ -19,19 +19,23 @@
               <th scope="col">Sector</th>
               <th scope="col">Key Catalysts</th>
               <th scope="col">Prediction</th>
-              <th scope="col">Probability</th>
+              <th scope="col">Sentimental Probability</th>
+              <th scope="col">Historical Probability</th>
+              <th scope="col">Score</th>
               <!-- <th scope="col">Show Analysis</th> -->
             </tr>
           </thead>
           <tbody>
             @for(tra of finalArray; track $index){
-            <tr>
-              <th scope="row">{{tra.displayName}}</th>
+            <tr class="text-center">
+              <th scope="row"><a [routerLink]="['/stock-analysis',tra.stockId]">{{tra.displayName}}</a></th>
               <td>{{tra.category}}</td>
               <td>{{tra.sector}}</td>
               <td>{{tra.keyCatalysts}}</td>
               <td>{{tra.Prediction}}</td>
-              <th>{{tra.probability}}</th>
+              <th>{{tra.probability}}%</th>
+              <th>{{tra.Probability_of_Profit}}%</th> 
+              <th>{{ toNumber(tra.probability) + toNumber(tra.Probability_of_Profit) }}</th>
               <!-- <td>Show</td>  -->
               <!-- class="blur-column -->
             </tr>

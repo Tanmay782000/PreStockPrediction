@@ -24,10 +24,10 @@ export const showTermAnalysis = async (event) => {
 
     return {
       statusCode: 200,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({
         termAnalysis: item,
@@ -37,10 +37,10 @@ export const showTermAnalysis = async (event) => {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({ error: err }),
     };
@@ -65,10 +65,10 @@ export const showCategoryAnalysis = async (event) => {
 
     return {
       statusCode: 200,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({
         categoryAnalysis: item,
@@ -78,10 +78,10 @@ export const showCategoryAnalysis = async (event) => {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({ error: err }),
     };
@@ -106,10 +106,10 @@ export const showSectorAnalysis = async (event) => {
 
     return {
       statusCode: 200,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({
         sectorAnalysis: item,
@@ -119,10 +119,10 @@ export const showSectorAnalysis = async (event) => {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({ error: err }),
     };
@@ -147,53 +147,70 @@ export const showStockAnalysis = async (event) => {
       new GetCommand({
         TableName: TABLE2,
         Key: { countryId: Number(id) },
-      })
-    )
+      }),
+    );
 
-    var item = result.Item.stockName.StocksAnalysis;
+    var item1 = result.Item.stockName.StocksAnalysis;
     var item2 = result2.Item.DeepAnalysis;
 
-    console.log("item11111",item)
-    console.log("item22222",item2)
+    const res = [];
 
-    // var array = []
-    // for (const url of item) {
-    //   for(const url2 of item2){
-    //     if(url.countryId == url2.countryId){
-    //       let data = {
+    // create map from item2
+    const map = {};
+    for (const itm2 of item2) {
+      map[itm2.StockId] = itm2;
+    }
 
-    //       }
-    //     }
-    //   }
-    // }
+    // merge
+    for (const itm1 of item1) {
+      const key = itm1.displayName;
 
+      if (map[key]) {
+        const itm2 = map[key];
+
+        const data = {
+          ...itm1,
+          Sentiment_Score: itm2.Sentiment_Score,
+          Probability_of_Profit: itm2.Probability_of_Profit,
+          RSI: itm2.RSI,
+          Volume_Ratio: itm2.Volume_Ratio,
+          Volatility_20D: itm2["Volatility_(20D)"],
+          Return_5D: itm2["5-Day_Return"],
+          Preffered_Days: itm2.Preffered_Days,
+          Expected_Growth: itm2.Expected_Growth,
+        };
+
+        res.push(data);
+      }
+    }
+    console.log(JSON.stringify(res));
     return {
       statusCode: 200,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({
-        stockAnalysis: item,
+        stockAnalysis: res,
       }),
     };
   } catch (err) {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({ error: err }),
     };
   }
 };
 
-export const showNiftyAnalysis = async(event) => {
-   try {
+export const showNiftyAnalysis = async (event) => {
+  try {
     await verify(event);
     const id =
       event.queryStringParameters?.countryId ||
@@ -210,10 +227,10 @@ export const showNiftyAnalysis = async(event) => {
 
     return {
       statusCode: 200,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({
         niftyPrediction: item,
@@ -223,12 +240,12 @@ export const showNiftyAnalysis = async(event) => {
     console.log("Error fetching news:", err);
     return {
       statusCode: err.statusCode,
-      headers:{
+      headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE"
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
       },
       body: JSON.stringify({ error: err }),
     };
   }
-}
+};

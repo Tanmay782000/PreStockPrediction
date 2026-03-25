@@ -418,7 +418,7 @@ OUTPUT FORMAT:
 "Stock": "",
 "Sentiment_Score": 0,
 "Key_Catalyst": "",
-"Probability_of_Profit": 0%,
+"Probability_of_Profit": 0,
 "Expected_Growth": "",
 "5-Day_Return": 0,
 "Volume_Ratio": 0,
