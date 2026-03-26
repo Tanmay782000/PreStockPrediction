@@ -52,6 +52,7 @@ For each stock:
 - stockNameCategory: Largecap / Midcap / Smallcap / Penny
 - eventCategory: choose from defined event types
 - rawStockNews: short summary of trade-related info
+- expectedProfit: expected profit in percentage based on news.
 
 NIFTY ANALYSIS LOGIC:
 - Give priority to titles containing directional cues (support, resistance, breakout, target, prediction)
