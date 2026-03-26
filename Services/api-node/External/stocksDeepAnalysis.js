@@ -411,6 +411,9 @@ Get the input stockId from given data(inputData array)
 inputData.final_RSI:
 Get the input final_RSI from given data(inputData array)
 
+Probability_of_Profit:
+0-100 based on sentiment + calculation.
+
 OUTPUT FORMAT:
 [
 {
