@@ -160,12 +160,15 @@ export const showStockAnalysis = async (event) => {
     for (const itm2 of item2) {
       map[itm2.StockId] = itm2;
     }
-
+    console.log("map item",map);
     // merge
     for (const itm1 of item1) {
-      const key = itm1.displayName;
-
+      const key = itm1.stockId;
+      console.log("item1",itm1.stockId);
+      console.log("item2 match",itm1);
+      console.log("Matched");
       if (map[key]) {
+        console.log("Not matched");
         const itm2 = map[key];
 
         const data = {

@@ -1,6 +1,7 @@
 import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
 import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
+import { sectorStockSelector } from "./sectorStockSelector.js";
 
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
@@ -37,11 +38,11 @@ SIGNAL PRIORITY (highest → lowest):
    buy today, intraday levels, opening trade setup
 
 EVENT TYPES:
-Earnings, Government policy, Analyst upgrade, Partnership, Expansion, Management change, Litigation, Product launch
+Earnings, Government policy, Analyst upgrade, Partnership, Expansion, Management change, Litigation, Product launch, UnderPerformer, MarketAligned
 
 STOCK ANALYSIS LOGIC:
 For each stock:
-- stockId: incremental number(1 to n)
+- stockId: incremental number(1 to n) in string ""
 - displayName: stock name
 - Prediction: Profit or Loss
 - probability: 0-100 based on sentiment strength and recency
@@ -53,6 +54,8 @@ For each stock:
 - eventCategory: choose from defined event types
 - rawStockNews: short summary of trade-related info
 - expectedProfit: expected profit in percentage based on news.
+- timehorizon: Swing / Intraday
+- suggestedBy: Based on news & technicals //default text, no need of AI to generate
 
 NIFTY ANALYSIS LOGIC:
 - Give priority to titles containing directional cues (support, resistance, breakout, target, prediction)
@@ -95,6 +98,7 @@ Return ONLY valid JSON. No extra text.
   console.log("kind of format", text);
   const finalArr = JSON.parse(text);
   console.log("final array", finalArr);
+
   if(finalArr.StocksAnalysis == [] || finalArr.StocksAnalysis == null){
     let CustomStockArray = [];
     console.log("HERE I GOT NULL STOCKSANALYSIS!!!!!!!!!!")
@@ -102,9 +106,12 @@ Return ONLY valid JSON. No extra text.
 
     //get the 2 stocks from each sector from file.
       
+    //set sector weakness or sector strength
+
     //save it into database
     finalArr.StocksAnalysis = CustomStockArray
   }
+
   var getnewsData = await client.send(
     new ScanCommand({
       TableName: Filtered_News,
@@ -113,12 +120,44 @@ Return ONLY valid JSON. No extra text.
   );
 
   const now = new Date().toISOString();
+
+
+  //#region Get Sector Stocks based on Nifty Prediction
+  // let data = sectorStockSelector({
+  //   niftySentiment: finalArr.NiftyPrediction.NiftyPrediction //Bullish or Sideways
+  // });
+
+  // if(data!=null){
+  //   let sectorStocks = [];
+  //   var result = data.body;
+  //   for(const stock of result){
+  //     var format = {
+  //        category: stock.category,
+  //        displayName: stock.displayName,
+  //        eventCategory: stock.eventCategory,
+  //        expectedProfit:"0",
+  //        keyCatalysts: stock.keyCatalysts,
+  //        Prediction: stock.Prediction,
+  //        probability: "0",
+  //        rawStockNews: "",
+  //        sector: stock.sector,
+  //        stockNameCategory: stock.stockNameCategory,
+  //        suggestedBy: stock.suggestedBy,
+  //        yahooFinanceFormat: "",
+  //        timehorizon: stock.timehorizon,
+  //     }
+  //     sectorStocks.push(format);
+  //   }
+
+  //   finalArr[0].stock = [...finalArr[0].stock,...sectorStocks]
+  // }
+  //#endregion
+
   let item = {
     countryId: Number(countryId),
     termSummery: getnewsData.Items[0].termSummery,
     categorySummery: getnewsData.Items[0].categorySummery,
     sectorSummery: getnewsData.Items[0].sectorSummery,
-    // stockName: finalArr?.StocksAnalysis || [],
     stockName: finalArr || [],
     createdDate: now,
     modifiedDate: now,
@@ -129,7 +168,18 @@ Return ONLY valid JSON. No extra text.
       Item: item,
     }),
   );
+
+
+
+
+  
+
+
   console.log("stocks done");
+
+
+
+
   return {
     statusCode: 200,
     body: "good to go",

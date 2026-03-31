@@ -407,9 +407,13 @@ Reduce probability if:
 
 inputData.stockId:
 Get the input stockId from given data(inputData array)
+ - "StockId" MUST be copied exactly from inputData.stockId
+ - DO NOT use any other field for StockId
 
 inputData.final_RSI:
 Get the input final_RSI from given data(inputData array)
+ - "RSI" MUST be copied exactly from inputData.final_RSI
+ - DO NOT use any other field for RSI
 
 Probability_of_Profit:
 0-100 based on sentiment + calculation.
