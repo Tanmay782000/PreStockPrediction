@@ -1,4 +1,7 @@
-import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
+import {
+  BedrockRuntimeClient,
+  InvokeModelCommand,
+} from "@aws-sdk/client-bedrock-runtime";
 import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
 import { sectorStockSelector } from "./sectorStockSelector.js";
@@ -95,22 +98,8 @@ Return ONLY valid JSON. No extra text.
   const response = await bedrockClient.send(command);
   const responseBody = JSON.parse(Buffer.from(response.body).toString());
   var text = responseBody.content[0].text;
-  console.log("kind of format", text);
   const finalArr = JSON.parse(text);
   console.log("final array", finalArr);
-
-  if(finalArr.StocksAnalysis == [] || finalArr.StocksAnalysis == null){
-    let CustomStockArray = [];
-    console.log("HERE I GOT NULL STOCKSANALYSIS!!!!!!!!!!")
-    //get the top 2 strong sector from sectorAnalysis table.
-
-    //get the 2 stocks from each sector from file.
-      
-    //set sector weakness or sector strength
-
-    //save it into database
-    finalArr.StocksAnalysis = CustomStockArray
-  }
 
   var getnewsData = await client.send(
     new ScanCommand({
@@ -121,36 +110,48 @@ Return ONLY valid JSON. No extra text.
 
   const now = new Date().toISOString();
 
-
   //#region Get Sector Stocks based on Nifty Prediction
-  // let data = sectorStockSelector({
-  //   niftySentiment: finalArr.NiftyPrediction.NiftyPrediction //Bullish or Sideways
-  // });
+  let data = await sectorStockSelector({
+    niftySentiment: finalArr.NiftyPrediction.NiftyPrediction, //Bullish or Sideways
+  });
 
-  // if(data!=null){
-  //   let sectorStocks = [];
-  //   var result = data.body;
-  //   for(const stock of result){
-  //     var format = {
-  //        category: stock.category,
-  //        displayName: stock.displayName,
-  //        eventCategory: stock.eventCategory,
-  //        expectedProfit:"0",
-  //        keyCatalysts: stock.keyCatalysts,
-  //        Prediction: stock.Prediction,
-  //        probability: "0",
-  //        rawStockNews: "",
-  //        sector: stock.sector,
-  //        stockNameCategory: stock.stockNameCategory,
-  //        suggestedBy: stock.suggestedBy,
-  //        yahooFinanceFormat: "",
-  //        timehorizon: stock.timehorizon,
-  //     }
-  //     sectorStocks.push(format);
-  //   }
+  if (data != null) {
+    let sectorStocks = [];
+    var result = data.body;
+    for (const stock of result) {
+      var format = {
+        stockId: "0",
+        category: stock.category,
+        displayName: stock.displayName,
+        eventCategory: stock.eventCategory,
+        expectedProfit: "0",
+        keyCatalysts: stock.keyCatalysts,
+        Prediction: stock.Prediction,
+        probability: "0",
+        rawStockNews: "",
+        sector: stock.sector,
+        stockNameCategory: stock.stockNameCategory,
+        suggestedBy: stock.suggestedBy,
+        yahooFinanceFormat: stock.symbol,
+        timehorizon: stock.timehorizon
+      };
+      sectorStocks.push(format);
+    }
 
-  //   finalArr[0].stock = [...finalArr[0].stock,...sectorStocks]
-  // }
+    finalArr.StocksAnalysis = [...finalArr.StocksAnalysis, ...sectorStocks];
+    const stocks = finalArr.StocksAnalysis;
+
+    // 1️⃣ Get max stockId
+    let maxId = Math.max(...stocks.map((s) => Number(s.stockId) || 0));
+
+    // 2️⃣ Assign new IDs where stockId = 0
+    for (let item of stocks) {
+      if (!Number(item.stockId) || Number(item.stockId) === 0) {
+        maxId++;
+        item.stockId = maxId;
+      }
+    }
+  }
   //#endregion
 
   let item = {
@@ -168,17 +169,6 @@ Return ONLY valid JSON. No extra text.
       Item: item,
     }),
   );
-
-
-
-
-  
-
-
-  console.log("stocks done");
-
-
-
 
   return {
     statusCode: 200,

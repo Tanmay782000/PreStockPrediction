@@ -1,8 +1,8 @@
 <div class="aly_overview">
-  <div class="row">
+  <div class="row mt-2">
     <div class="col-12">
       <div class="position-relative d-flex align-items-center">
-        <h4 class="mx-auto mb-0">{{ title1 }}</h4>
+        <h4 class="mx-auto">{{ title1 }}</h4>
       </div>
       <div *ngIf="!IsStockAnalysis">
         <div class="term-row" *ngFor="let i of finalArray">
@@ -11,12 +11,13 @@
         </div>
       </div>
       <div *ngIf="IsStockAnalysis" class="tableContainer">
-        <table class="table text-center">
+        <table class="table text-center table-bordered">
           <thead>
             <tr>
               <th scope="col">Stock Name</th>
               <th scope="col">Category</th>
               <th scope="col">Sector</th>
+              <th scope="col">Analysis Type</th>
               <th scope="col">Key Catalysts</th>
               <th scope="col">Prediction</th>
               <th scope="col">Probability</th>
@@ -28,6 +29,7 @@
               <th scope="row"><a [routerLink]="['/stock-analysis',tra.stockId]">{{tra.displayName}}</a></th>
               <td>{{tra.category}}</td>
               <td>{{tra.sector}}</td>
+              <td scope="col">{{tra.suggestedBy == "Based on news & technicals" ? "News & Technical" : "Sector & Technical"}}</td>
               <td>{{tra.keyCatalysts}}</td>
               <td>{{tra.prediction ?? tra.Prediction}}</td>
               <th>{{tra.Probability_of_Profit}}%</th> 

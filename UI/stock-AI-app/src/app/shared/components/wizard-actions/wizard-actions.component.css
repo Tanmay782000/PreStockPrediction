@@ -1,8 +1,26 @@
-.button-actions{
-    margin-left: 465px;
-    margin-right: 62px;
-    margin-top: 40px;
+/* ================= BUTTON ACTIONS ================= */
+.button-actions {
+  display: flex;
+  justify-content: flex-end; /* align right */
+  gap: 10px;                 /* space between buttons */
+  margin: 20px 15px;
+  flex-wrap: wrap;           /* prevent overflow on small screens */
 }
-.btn{
-    width:130px!important;
+
+/* ================= BUTTON ================= */
+.btn {
+  width: 130px;
+  max-width: 100%;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .button-actions {
+    justify-content: center; /* center on mobile */
+    margin: 15px 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }

@@ -1,6 +1,25 @@
-*{
-margin-left:5px;
-margin-right:5px;
-margin-top:5px;
-margin-bottom: 2px;
+/* Mobile (default) */
+.container {
+  padding: 4px;
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+/* Laptops */
+@media (min-width: 1024px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1440px) {
+  .container {
+    padding: 10px;
+  }
 }

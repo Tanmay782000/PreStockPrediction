@@ -1,4 +1,5 @@
-<nav class="navbar navbar-light border-bottom border-secondary-subtle p-1">
+<div class="container">
+<nav class="navbar navbar-light ">
 <span class="d-flex justify-content-between align-items-center">
   <img src="assets/logo/logo.png" class="float-start" width="60" height="45">
     <span class="navbar-brand h1">Stock Market Insights</span>
@@ -17,8 +18,9 @@
     <li><a class="dropdown-item" href="#">Chinese</a></li>
   </ul>
 
-    <button class="btn btn-outline-primary btn-lg" href="#" (click)="openPopup()">Login</button>
+    <button class="btn btn-primary btn-lg" href="#" (click)="openPopup()">Login</button>
   </span>
 </nav>
 
 <app-login *ngIf="authService.showLoginPopup" (close)="closePopup()"></app-login>
+</div>

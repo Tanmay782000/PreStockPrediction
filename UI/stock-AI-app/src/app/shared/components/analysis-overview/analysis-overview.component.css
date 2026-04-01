@@ -1,25 +1,23 @@
-.aly_overview{
-background: white;
-    height: 4spx;
-    margin-top: -15px;
-  border: 1px solid #ccc;   /* skinny border */
-
-  box-shadow:
-    0 4px 10px rgba(0,0,0,0.15),     /* soft outer */
-    inset 0 1px 3px rgba(0,0,0,0.15); /* soft inner */
-
+/* ================= OVERVIEW ================= */
+.aly_overview {
+  background: #fff;
+  margin-top: -15px;
+  border: 1px solid #ccc;
   border-radius: 6px;
-    height: 465px;
-    background-color: white!important;   
-    overflow-y: auto;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.15),
+    inset 0 1px 3px rgba(0,0,0,0.15);
+
+  height: 465px;
+  overflow-y: auto;
 }
 
-.row{
- margin-top: 30px;
- margin-left: 15px;
-  margin-right: 15px;   
+/* ================= ROW FIX ================= */
+.custom-row {
+  margin: 30px 15px;
 }
 
+/* ================= TERM BAR ================= */
 .term-row {
   display: flex;
   align-items: center;
@@ -28,29 +26,63 @@ background: white;
 }
 
 .custom-bar {
-  flex: 1;           
+  flex: 1;
   height: 20px;
 }
 
-.blur-column {
-    filter: blur(5px);
-    user-select: none; 
-}
-
-.tableContainer{
+/* ================= TABLE ================= */
+.tableContainer {
   position: relative;
+  overflow-x: auto;
 }
 
+/* ================= BLUR ================= */
 .blur-column {
   filter: blur(6px);
   pointer-events: none;
+  user-select: none;
 }
 
+/* Optional: blur full table (better UX) */
+.table-blur {
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+/* ================= UNLOCK BUTTON ================= */
 .unlock-btn {
   position: absolute;
-  top: 80px;              /* adjust for header height */
-  left: 83%;              /* align roughly over last 2 columns */
-  transform: translateX(-50%);
+  top: 60px;
+  right: 20px;
   z-index: 10;
+
   padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Center version (if using full blur) */
+/*
+.unlock-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+*/
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .aly_overview {
+    height: auto;
+    max-height: 400px;
+  }
+
+  .unlock-btn {
+    top: 50px;
+    right: 10px;
+    padding: 5px 12px;
+    font-size: 12px;
+  }
 }

@@ -1,4 +1,21 @@
-.row{
-    margin-left: 50px;
-    margin-right: 50px;
+/* ================= ROW SPACING ================= */
+.row {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 1024px) {
+  .row {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .row {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

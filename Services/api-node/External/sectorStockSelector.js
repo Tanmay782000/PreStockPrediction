@@ -10,27 +10,33 @@ let SENTIMENT = "Bullish"; // or Bearish
 let STOCK_LIST = [];
 export const sectorStockSelector = async (input) => {
   const niftySentiment = input.niftySentiment; //barrish or bullish
-
-  let selectedStocks = await getTheSector(niftySentiment);
+  let selectedStocks = {};
+  let index = 0;
   let finalStocks = [];
-  const stocksSector = STOCKS.filter(s => s.sector === selectedStocks.sector);
-  STOCK_LIST = stocksSector;
-  TARGET_SECTOR = stocksSector[0].sector;
-  SENTIMENT = niftySentiment;
-  if(SENTIMENT === "Bearish"){
-    finalStocks = await getBearishStocks();
-  } else {
-    finalStocks = await getBullishStocks();
+  while (finalStocks.length === 0 && index < 11) {
+    console.log("data here");
+    selectedStocks = await getTheSector(niftySentiment, index);
+    let stocksSector = STOCKS.filter((s) => s.sector === selectedStocks.sector);
+    STOCK_LIST = stocksSector;
+    TARGET_SECTOR = stocksSector[0].sector;
+    SENTIMENT = niftySentiment;
+    if (SENTIMENT === "Bearish") {
+      finalStocks = await getBearishStocks();
+    } else {
+      finalStocks = await getBullishStocks();
+    }
+    index++;
+    console.log("final stocks", finalStocks);
   }
   return {
     statusCode: 200,
     body: finalStocks,
   };
-}
+};
 
-
-async function getTheSector(niftySentiment, id = 1) {
+async function getTheSector(niftySentiment, index, id = 1) {
   const TABLE = "FilteredNews";
+
   const result = await client.send(
     new GetCommand({
       TableName: TABLE,
@@ -38,24 +44,39 @@ async function getTheSector(niftySentiment, id = 1) {
     }),
   );
 
-  var item = result.Item.sectorSummery;
+  const item = result.Item.sectorSummery;
 
-  const data =
-    niftySentiment == "Bearish"
-      ? item.probabilityArr
-          .map((obj) => Object.entries(obj)[0])
-          .reduce((min, curr) => (curr[1] < min[1] ? curr : min))
-      : item.probabilityArr
-          .map((obj) => Object.entries(obj)[0])
-          .reduce((max, curr) => (curr[1] > max[1] ? curr : max));
+  const arr = item.probabilityArr.map((obj) => Object.entries(obj)[0]);
 
-  return { sector: data[0], minScore: data[1] };
+  let sorted;
+
+  if (niftySentiment === "Bearish") {
+    // Low → High
+    sorted = arr.sort((a, b) => a[1] - b[1]);
+
+    // 2nd lowest
+    return {
+      sector: sorted[index]?.[0],
+      score: sorted[index]?.[1],
+    };
+  } else {
+    // High → Low
+    sorted = arr.sort((a, b) => b[1] - a[1]);
+
+    // 2nd highest
+    return {
+      sector: sorted[index]?.[0],
+      score: sorted[index]?.[1],
+    };
+  }
 }
 
 function calculateReturns(closes, period) {
   const len = closes.length;
   if (len < period + 1) return 0;
-  return (closes[len - 1] - closes[len - period - 1]) / closes[len - period - 1];
+  return (
+    (closes[len - 1] - closes[len - period - 1]) / closes[len - period - 1]
+  );
 }
 
 function average(arr) {
@@ -71,12 +92,12 @@ async function getBullishStocks() {
     try {
       const data = await yf.chart(stock.symbol, {
         period1: "2024-01-01",
-        interval: "1d"
+        interval: "1d",
       });
 
       const quotes = data.quotes;
-      const closes = quotes.map(q => q.close).filter(Boolean);
-      const volumes = quotes.map(q => q.volume).filter(Boolean);
+      const closes = quotes.map((q) => q.close).filter(Boolean);
+      const volumes = quotes.map((q) => q.volume).filter(Boolean);
 
       if (closes.length < 60) continue;
 
@@ -88,8 +109,14 @@ async function getBullishStocks() {
       const avg_volume_20d = average(volumes.slice(-20));
       const volume_ratio = volume_today / avg_volume_20d;
 
-      const currentPrice = closes[closes.length - 1];
+      const lastClose = closes[closes.length - 1];
 
+      const quote = await yf.quote(stock.symbol);
+      const currentPrice = quote?.regularMarketPrice ?? lastClose;
+
+      if (!currentPrice) {
+        currentPrice = lastClose;
+      }
       // --- Support & Resistance ---
       const recentCloses = closes.slice(-20);
       const resistance_20 = Math.max(...recentCloses);
@@ -138,19 +165,19 @@ async function getBullishStocks() {
       if (probability >= 75) expectedMove = "5% - 8%";
       else if (probability >= 65) expectedMove = "3% - 6%";
 
-       results.push({
+      results.push({
         symbol: stock.symbol,
         category: stock.category,
-        displayName:stock.displayName,
+        displayName: stock.displayName,
         eventCategory: "Underperformer",
-        Prediction:"Profit",
+        Prediction: "Profit",
         sector: stock.sector,
         stockNameCategory: stock.stockNameCategory,
-        keyCatalysts: "Sector strength supported by breakout and rising volume indicates bullish continuation",
+        keyCatalysts:
+          "Sector strength supported by breakout and rising volume indicates bullish continuation",
         suggestedBy: "Stock Suggestion Based on Strongest Sector",
-        timehorizon: "Intraday"
+        timehorizon: "Intraday",
       });
-
     } catch (err) {
       console.error(`Error fetching ${stock.symbol}`, err.message);
     }
@@ -168,12 +195,12 @@ async function getBearishStocks() {
     try {
       const data = await yf.chart(stock.symbol, {
         period1: "2024-01-01",
-        interval: "1d"
+        interval: "1d",
       });
 
       const quotes = data.quotes;
-      const closes = quotes.map(q => q.close).filter(Boolean);
-      const volumes = quotes.map(q => q.volume).filter(Boolean);
+      const closes = quotes.map((q) => q.close).filter(Boolean);
+      const volumes = quotes.map((q) => q.volume).filter(Boolean);
 
       if (closes.length < 60) continue;
 
@@ -185,7 +212,14 @@ async function getBearishStocks() {
       const avg_volume_20d = average(volumes.slice(-20));
       const volume_ratio = volume_today / avg_volume_20d;
 
-      const currentPrice = closes[closes.length - 1];
+      const lastClose = closes[closes.length - 1];
+
+      const quote = await yf.quote(stock.symbol);
+      const currentPrice = quote?.regularMarketPrice ?? lastClose;
+
+      if (!currentPrice) {
+        currentPrice = lastClose;
+      }
 
       // --- Support & Resistance ---
       const recentCloses = closes.slice(-20);
@@ -196,8 +230,7 @@ async function getBearishStocks() {
       const distance_resistance_20 =
         (resistance_20 - currentPrice) / resistance_20;
 
-      const distance_support_20 =
-        (currentPrice - support_20) / support_20;
+      const distance_support_20 = (currentPrice - support_20) / support_20;
 
       // --- Breakdown Logic ---
       const breakdown_20 = currentPrice <= support_20 ? 1 : 0;
@@ -239,16 +272,16 @@ async function getBearishStocks() {
       results.push({
         symbol: stock.symbol,
         category: stock.category,
-        displayName:stock.displayName,
+        displayName: stock.displayName,
         eventCategory: "Underperformer",
-        Prediction:"Loss",
+        Prediction: "Loss",
         sector: stock.sector,
         stockNameCategory: stock.stockNameCategory,
-        keyCatalysts: "Sector weakness with breakdown and selling pressure indicates bearish continuation",
+        keyCatalysts:
+          "Sector weakness with breakdown and selling pressure indicates bearish continuation",
         suggestedBy: "Stock Suggestion Based on Weakest Sector",
-        timehorizon: "Intraday"
+        timehorizon: "Intraday",
       });
-
     } catch (err) {
       console.error(`Error fetching ${stock.symbol}`, err.message);
     }
@@ -261,5 +294,6 @@ async function getBearishStocks() {
   return results.slice(0, 3);
 }
 
-
-await sectorStockSelector({niftySentiment:"Bullish"}).then((res) => console.log("Selected Sector", res));
+await sectorStockSelector({ niftySentiment: "Bearish" }).then((res) =>
+  console.log("Selected Sector", res),
+);

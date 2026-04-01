@@ -1,16 +1,18 @@
-.stepper{
-    margin-left: 70px;
-    margin-right: 70px;
+/* ================= STEPPER CONTAINER ================= */
+.stepper {
+  margin: 10px 200px;
+  background-color: whitesmoke;
 }
 
+/* ================= MATERIAL STEPPER ================= */
 .mat-step-header {
-  padding: 18px 32px;
+  padding: 16px 24px;
 }
 
 .mat-step-header .mat-step-icon {
-  width: 42px;
-  height: 42px;
-  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -23,10 +25,33 @@
   border-top-width: 2px;
 }
 
-*{
-  background-color: whitesmoke!important;   /* your app background */
-}
-
+/* Disable click on steps */
 ::ng-deep .mat-step-header {
   pointer-events: none;
+}
+
+/* ================= GLOBAL BACKGROUND ================= */
+body {
+  background-color: whitesmoke;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .stepper {
+    margin: 10px;
+  }
+
+  .mat-step-header {
+    padding: 10px 12px;
+  }
+
+  .mat-step-header .mat-step-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .mat-step-label {
+    font-size: 11px;
+  }
 }

@@ -145,7 +145,15 @@ functions:
           path: deepStockAnalysis
           method: get
 
- 
+  tempTesting:
+    handler: External/stocksAnalysis.getStockAnalysis
+    timeout: 600
+    description: "temporary testing lambda for stock analysis logic"
+    events:
+      - http:
+          path: tempTesting
+          method: post
+
 ############# Externl Calls ##############
   getNews:
     handler: External/newsAnalysis.get

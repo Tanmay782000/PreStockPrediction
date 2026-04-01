@@ -165,7 +165,7 @@ export const showStockAnalysis = async (event) => {
     for (const itm1 of item1) {
       const key = itm1.stockId;
       console.log("item1",itm1.stockId);
-      console.log("item2 match",itm1);
+      console.log("item2 match",map[key]);
       console.log("Matched");
       if (map[key]) {
         console.log("Not matched");

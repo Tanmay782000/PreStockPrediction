@@ -340,88 +340,70 @@ async function callBedrock(inputData) {
   console.log("IN PROMPT");
 
   const prompt = `
+INSTRUCTION:
+You are a quantitative swing trading analysis engine.
+
 INPUT:
-Stocks: ${JSON.stringify(inputData)}
-CurrentTime: ${todaydate}
+- Stocks data: ${inputData}
+- suggestedType:
+  if sectorStocks.suggestedBy == Based on news & technicals → SetimentalTechnical
+  else → SectorTechnical
 
 GOAL:
-Estimate probability of profitable swing trade over next 5 trading days.
+Estimate probability of a profitable swing trade over next 5 trading days.
 
-CORE RULE:
-Adjust news impact using time difference between CurrentTime and newsDate:
-- Very recent → strong impact
-- Few hours old → partially priced in
-- Old + momentum conflict → trust price over sentiment
+CORE LOGIC:
 
-PRIMARY FACTORS (priority order):
-1. Momentum:
-- Compare momentum_20, momentum_60, momentum_120
-- Acceleration = bullish, weakening = bearish
+1. IF suggestedType = SetimentalTechnical
+   - Use ALL signals:
+     • sentiment score
+     • keyCatalysts (news-based)
+     • momentum, volume, volatility
+     • support/resistance
+   - Sentiment contributes to final probability
+   - Key_Catalyst should reflect news + technicals
 
-2. Market Alignment:
-- Use sector_return, nifty_return_1d, relative_strength
-- Favor stocks outperforming sector and market
+2. IF suggestedType = SectorTechnical
+   - DO NOT use sentiment or news
+   - Ignore sentiment score completely
+   - Generate probability ONLY using:
+     • momentum (momentum_20 vs momentum_60)
+     • volume_ratio
+     • breakout_20 / breakdown_20
+     • support/resistance proximity
+   - Key_Catalyst must be technical + sector based ONLY
+     Example:
+       - Sector strength with breakout and strong volume
+       - Sector weakness with breakdown and selling pressure
+   - Set Sentiment_Score = 0 always
 
-3. Volume Strength:
-- volume_ratio > 1.5 = strong participation
-- volume_trend_5d > 1 = accumulation
-- Low volume = weak signal
+PRIMARY SIGNALS (for both types, but sentiment only in SetimentalTechnical):
+- Momentum acceleration
+- Volume confirmation
+- Breakout / Breakdown
+- Support / Resistance positioning
+- Volatility risk
 
-4. Event Impact:
-- Evaluate keyCatalysts strength
+PROBABILITY RULES:
+- Strong momentum + volume + breakout → high probability (70-85)
+- Weak trend / near resistance → medium (50-65)
+- Contradiction or high volatility → reduce probability
 
-5. Sentiment:
-- Use as secondary confirmation only
+EXPECTED GROWTH:
+- 75+ → 5% - 8%
+- 65-75 → 3% - 6%
+- 55-65 → 2% - 4%
+- <55 → 0% - 2% or negative
 
-PRICE LEVEL LOGIC:
-
-Support:
-- Near support + positive momentum → bullish
-- Break below support → bearish
-
-Resistance:
-- Near resistance + weak volume → rejection risk
-- Near resistance + strong volume → breakout chance
-- breakout_20 = 1 → strong continuation
-
-Distance:
-- Near resistance + weak momentum → reduce probability
-- Breakout + strong volume → increase probability
-
-VOLUME SIGNALS:
-- volume_ratio > 1.5 → strong
-- volume_spike_flag = 1 + positive momentum → strong continuation
-- momentum without volume → weak
-
-PREFFERED DAYS TO HOLD THE POSITOIN:
-- Number of preffered days to hold the position.
-(e.g. 1 day or 2-4 days or >1 week or >1 month etc...)
-
-RISK REDUCTION:
-Reduce probability if:
-- volatility_20 or volatility_60 > market_volatility
-- underperforming sector
-- sentiment contradicts price
-- weak volume confirmation
-- near resistance without breakout
-
-inputData.stockId:
-Get the input stockId from given data(inputData array)
- - "StockId" MUST be copied exactly from inputData.stockId
- - DO NOT use any other field for StockId
-
-inputData.final_RSI:
-Get the input final_RSI from given data(inputData array)
- - "RSI" MUST be copied exactly from inputData.final_RSI
- - DO NOT use any other field for RSI
-
-Probability_of_Profit:
-0-100 based on sentiment + calculation.
+PREFERRED DAYS:
+- Strong breakout → 2-4 days
+- Moderate trend → 3-5 days
+- Weak setup → avoid or 1-2 days
 
 OUTPUT FORMAT:
 [
 {
-"StockId": inputData.stockId,
+"StockId": item.stockId,
 "Stock": "",
 "Sentiment_Score": 0,
 "Key_Catalyst": "",
@@ -430,12 +412,12 @@ OUTPUT FORMAT:
 "5-Day_Return": 0,
 "Volume_Ratio": 0,
 "Volatility_(20D)": 0,
-"Preffered_Days":"",
-"RSI": inputData.final_RSI
+"Preffered_Days": "",
+"RSI": item.final_RSI
 }
 ]
 
-OUTPUT RULES:
+RULES:
 - Return only valid JSON array
 - No explanations or extra text
 - Keep text fields short and clean
