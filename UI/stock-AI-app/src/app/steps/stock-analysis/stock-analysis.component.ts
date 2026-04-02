@@ -18,7 +18,7 @@ import { DataService } from '../../services/data.service';
   standalone: true,
 })
 export class StockAnalysisComponent {
-  public title1: any = 'Stocks Based on News & Technicals';
+  public title1: any = 'Nifty Current Status';
   public title2: any = 'Stocks Summery';
   public summery: any = '';
   public stockArray: number[] = [];

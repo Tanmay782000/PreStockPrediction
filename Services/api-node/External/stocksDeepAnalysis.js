@@ -400,10 +400,15 @@ PREFERRED DAYS:
 - Moderate trend → 3-5 days
 - Weak setup → avoid or 1-2 days
 
+INPUT-OUTPUT MAPPING:
+- StockId MUST be taken directly from item.stockId in input data.
+- Do NOT generate or change StockId.
+- Map each output object exactly to its corresponding input item.
+
 OUTPUT FORMAT:
 [
 {
-"StockId": item.stockId,
+"StockId": item.stockId, // must match input exactly
 "Stock": "",
 "Sentiment_Score": 0,
 "Key_Catalyst": "",
@@ -438,6 +443,7 @@ RULES:
       ],
     }),
   });
+  
   console.log("Completed");
   const response = await bedrockClient.send(command);
   const responseBody = JSON.parse(Buffer.from(response.body).toString());

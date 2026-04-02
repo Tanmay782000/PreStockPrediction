@@ -83,6 +83,43 @@ function average(arr) {
   return arr.reduce((a, b) => a + b, 0) / arr.length;
 }
 
+function calculateRSI(closes, period = 14) {
+  if (!closes || closes.length < period + 1) return null;
+
+  let gains = 0;
+  let losses = 0;
+
+  // Initial average gain/loss
+  for (let i = 1; i <= period; i++) {
+    const change = closes[i] - closes[i - 1];
+    if (change > 0) gains += change;
+    else losses += Math.abs(change);
+  }
+
+  let avgGain = gains / period;
+  let avgLoss = losses / period;
+
+  // Smooth RSI (Wilder's method)
+  for (let i = period + 1; i < closes.length; i++) {
+    const change = closes[i] - closes[i - 1];
+
+    if (change > 0) {
+      avgGain = (avgGain * (period - 1) + change) / period;
+      avgLoss = (avgLoss * (period - 1)) / period;
+    } else {
+      avgGain = (avgGain * (period - 1)) / period;
+      avgLoss = (avgLoss * (period - 1) + Math.abs(change)) / period;
+    }
+  }
+
+  if (avgLoss === 0) return 100;
+
+  const rs = avgGain / avgLoss;
+  const rsi = 100 - 100 / (1 + rs);
+
+  return Number(rsi.toFixed(2));
+}
+
 async function getBullishStocks() {
   const results = [];
 
@@ -90,139 +127,193 @@ async function getBullishStocks() {
     if (stock.sector !== TARGET_SECTOR) continue;
 
     try {
-      const data = await yf.chart(stock.symbol, {
+      // --- 🔍 SEARCH ---
+      const res = await yf.search(stock.displayName);
+
+      const stc = res.quotes.find(
+        (q) =>
+          q.exchange === "NSI" ||
+          q.exchange === "NSE" ||
+          q.symbol?.endsWith(".NS")
+      );
+
+      const finalStockSymbol = stc?.symbol ?? stock.symbol;
+
+      // --- 📊 HISTORICAL DATA ---
+      const data = await yf.chart(finalStockSymbol, {
         period1: "2024-01-01",
         interval: "1d",
       });
 
-      const quotes = data.quotes;
+      const quotes = data.quotes || [];
+      if (quotes.length < 60) continue;
+
       const closes = quotes.map((q) => q.close).filter(Boolean);
       const volumes = quotes.map((q) => q.volume).filter(Boolean);
 
-      if (closes.length < 60) continue;
-
-      // --- Indicators ---
-      const momentum_20 = calculateReturns(closes, 20);
-      const momentum_60 = calculateReturns(closes, 60);
-
-      const volume_today = volumes[volumes.length - 1];
-      const avg_volume_20d = average(volumes.slice(-20));
-      const volume_ratio = volume_today / avg_volume_20d;
-
       const lastClose = closes[closes.length - 1];
 
-      const quote = await yf.quote(stock.symbol);
-      const currentPrice = quote?.regularMarketPrice ?? lastClose;
+      // --- 📈 LIVE DATA ---
+      const quote = await yf.quote(finalStockSymbol);
 
-      if (!currentPrice) {
-        currentPrice = lastClose;
-      }
-      // --- Support & Resistance ---
-      const recentCloses = closes.slice(-20);
+      let currentPrice = quote?.regularMarketPrice ?? lastClose;
+      const currentVolume =
+        quote?.regularMarketVolume ?? volumes[volumes.length - 1];
+
+      // --- 🔄 REAL-TIME ADJUSTMENT ---
+      const updatedCloses = [...closes.slice(0, -1), currentPrice];
+      const updatedVolumes = [...volumes.slice(0, -1), currentVolume];
+
+      // --- 📉 MOMENTUM ---
+      const momentum_20 = calculateReturns(updatedCloses, 20);
+      const momentum_60 = calculateReturns(updatedCloses, 60);
+
+      // --- 📊 VOLUME ---
+      const volume_today = updatedVolumes[updatedVolumes.length - 1];
+      const avg_volume_20d = average(updatedVolumes.slice(-20));
+      const volume_ratio = volume_today / avg_volume_20d;
+
+      // --- 🧱 SUPPORT / RESISTANCE (FIXED) ---
+      const recentCloses = updatedCloses.slice(-21, -1); // 🔥 exclude current price
+
+      const support_20 = Math.min(...recentCloses);
       const resistance_20 = Math.max(...recentCloses);
 
-      const distance_resistance_20 =
-        (resistance_20 - currentPrice) / resistance_20;
+      // --- 📊 DISTANCE ---
+      const breakout_20 = currentPrice > resistance_20 ? 1 : 0;
 
-      const breakout_20 = currentPrice >= resistance_20 ? 1 : 0;
-      const near_breakout = distance_resistance_20 <= 0.02;
+      const near_breakout =
+        currentPrice >= resistance_20 * 0.98 &&
+        currentPrice <= resistance_20 * 1.01;
 
-      // --- FILTER ---
+      // --- 📊 RSI ---
+      const rsi_14 = calculateRSI(updatedCloses, 14);
+      if (!rsi_14) continue;
+
+      // --- 🚫 OVERBOUGHT FILTER ---
+      const breakout_strength =
+        (currentPrice - resistance_20) / resistance_20;
+
+      const isOverbought =
+        momentum_20 > 0.15 ||                 // too fast up move
+        rsi_14 > 68 ||                       // overbought zone
+        breakout_strength > 0.015 ||         // >1.5% above resistance
+        (volume_ratio > 1.8 && momentum_20 > 0.12); // blow-off
+
+      if (isOverbought) continue;
+
+      // --- 🚫 TOO EXTENDED FROM BASE ---
+      const isTooExtendedFromBase =
+        (currentPrice - support_20) / support_20 > 0.08;
+
+      if (isTooExtendedFromBase) continue;
+
+      // --- ❗ FINAL FILTER ---
       const isValid =
         momentum_20 > momentum_60 &&
         volume_ratio > 1.2 &&
-        (breakout_20 === 1 || near_breakout);
+        near_breakout; // 🔥 ONLY early breakout
 
       if (!isValid) continue;
 
-      // ==============================
-      // 🔥 PROBABILITY CALCULATION
-      // ==============================
-      let probability = 50;
+      // --- 🔥 SCORING ---
+      let score = 0;
 
-      // Momentum strength
-      if (momentum_20 > momentum_60) probability += 10;
-      if (momentum_20 > 0.05) probability += 10; // strong uptrend
+      if (momentum_20 > momentum_60) score += 30;
 
-      // Volume confirmation
-      if (volume_ratio > 1.5) probability += 10;
-      else if (volume_ratio > 1.2) probability += 5;
+      if (volume_ratio > 1.5) score += 30;
+      else if (volume_ratio > 1.2) score += 20;
 
-      // Breakout strength
-      if (breakout_20 === 1) probability += 15;
-      else if (near_breakout) probability += 8;
+      if (breakout_20 === 1) score += 30;
+      else if (near_breakout) score += 15;
 
-      // Trend consistency
-      if (momentum_60 > 0) probability += 5;
+      if (near_breakout) score += 10;
 
-      // Clamp between 0–100
-      probability = Math.min(100, Math.max(0, probability));
+      const probability = Math.max(40, Math.min(90, score));
 
-      // ==============================
-      // Expected Move (2–5 days)
-      // ==============================
-      let expectedMove = "2% - 4%";
-      if (probability >= 75) expectedMove = "5% - 8%";
-      else if (probability >= 65) expectedMove = "3% - 6%";
-
+      // --- 📦 RESULT ---
       results.push({
-        symbol: stock.symbol,
+        symbol: finalStockSymbol,
         category: stock.category,
         displayName: stock.displayName,
-        eventCategory: "Underperformer",
+        eventCategory: "Outperformer",
         Prediction: "Profit",
         sector: stock.sector,
         stockNameCategory: stock.stockNameCategory,
         keyCatalysts:
-          "Sector strength supported by breakout and rising volume indicates bullish continuation",
+          "Early breakout with strong momentum and volume, not overextended",
         suggestedBy: "Stock Suggestion Based on Strongest Sector",
         timehorizon: "Intraday",
+        probability,
+        currentPrice,
+        support_20,
+        resistance_20,
+        volume_ratio: Number(volume_ratio.toFixed(2)),
       });
+
     } catch (err) {
       console.error(`Error fetching ${stock.symbol}`, err.message);
     }
   }
 
-  // Sort best opportunities first
   return results.sort((a, b) => b.probability - a.probability);
 }
 
 async function getBearishStocks() {
   const results = [];
+
   for (const stock of STOCK_LIST) {
     if (stock.sector !== TARGET_SECTOR) continue;
 
     try {
-      const data = await yf.chart(stock.symbol, {
+      // --- 🔍 SEARCH ---
+      const res = await yf.search(stock.displayName);
+
+      const stc = res.quotes.find(
+        (q) =>
+          q.exchange === "NSI" ||
+          q.exchange === "NSE" ||
+          q.symbol?.endsWith(".NS"),
+      );
+
+      const finalStockSymbol = stc?.symbol ?? stock.symbol;
+
+      // --- 📊 HISTORICAL DATA ---
+      const data = await yf.chart(finalStockSymbol, {
         period1: "2024-01-01",
         interval: "1d",
       });
 
-      const quotes = data.quotes;
+      const quotes = data.quotes || [];
+      if (quotes.length < 60) continue;
+
       const closes = quotes.map((q) => q.close).filter(Boolean);
       const volumes = quotes.map((q) => q.volume).filter(Boolean);
 
-      if (closes.length < 60) continue;
-
-      // --- Indicators ---
-      const momentum_20 = calculateReturns(closes, 20);
-      const momentum_60 = calculateReturns(closes, 60);
-
-      const volume_today = volumes[volumes.length - 1];
-      const avg_volume_20d = average(volumes.slice(-20));
-      const volume_ratio = volume_today / avg_volume_20d;
-
       const lastClose = closes[closes.length - 1];
 
-      const quote = await yf.quote(stock.symbol);
-      const currentPrice = quote?.regularMarketPrice ?? lastClose;
+      // --- 📈 LIVE DATA ---
+      const quote = await yf.quote(finalStockSymbol);
 
-      if (!currentPrice) {
-        currentPrice = lastClose;
-      }
+      let currentPrice = quote?.regularMarketPrice ?? lastClose;
+      const currentVolume =
+        quote?.regularMarketVolume ?? volumes[volumes.length - 1];
 
-      // --- Support & Resistance ---
-      const recentCloses = closes.slice(-20);
+      // --- 🔄 REAL-TIME ADJUSTMENT ---
+      const updatedCloses = [...closes.slice(0, -1), currentPrice];
+      const updatedVolumes = [...volumes.slice(0, -1), currentVolume];
+
+      // --- 📉 MOMENTUM ---
+      const momentum_20 = calculateReturns(updatedCloses, 20);
+      const momentum_60 = calculateReturns(updatedCloses, 60);
+
+      // --- 📊 VOLUME ---
+      const volume_today = updatedVolumes[updatedVolumes.length - 1];
+      const avg_volume_20d = average(updatedVolumes.slice(-20));
+      const volume_ratio = volume_today / avg_volume_20d;
+
+      // --- 🧱 SUPPORT / RESISTANCE ---
+      const recentCloses = updatedCloses.slice(-20);
 
       const support_20 = Math.min(...recentCloses);
       const resistance_20 = Math.max(...recentCloses);
@@ -232,45 +323,53 @@ async function getBearishStocks() {
 
       const distance_support_20 = (currentPrice - support_20) / support_20;
 
-      // --- Breakdown Logic ---
+      // --- 🔻 BREAKDOWN LOGIC ---
       const breakdown_20 = currentPrice <= support_20 ? 1 : 0;
-
-      const near_resistance = distance_resistance_20 <= 0.02;
       const near_breakdown = distance_support_20 <= 0.02;
 
-      // --- FILTER CONDITIONS (BEARISH) ---
+      // --- 🚫 LATE ENTRY / REVERSAL FILTERS (NEW) ---
+      const breakdown_strength = (support_20 - currentPrice) / support_20;
+
+      const isOversold =
+        momentum_20 < -0.2 || // too stretched
+        breakdown_strength > 0.03 || // already far below support
+        (volume_ratio > 2 && momentum_20 < -0.15); // capitulation zone
+
+      if (isOversold) continue;
+
+      // --- ❗ FILTER ---
       const isValid =
         momentum_20 < momentum_60 &&
         volume_ratio > 1.2 &&
-        (breakdown_20 === 1 || near_resistance);
+        (breakdown_20 === 1 || near_breakdown);
 
       if (!isValid) continue;
+      const isTooExtendedFromBase =
+        (support_20 - currentPrice) / support_20 > 0.1;
 
+      if (isTooExtendedFromBase) continue;
       // --- 🔥 PROBABILITY SCORING ---
       let score = 0;
 
-      // Momentum (trend weakness)
+      // Trend weakness
       if (momentum_20 < momentum_60) score += 30;
 
       // Volume confirmation
       if (volume_ratio > 1.5) score += 30;
       else if (volume_ratio > 1.2) score += 20;
 
-      // Structure
+      // Structure (pure bearish now)
       if (breakdown_20 === 1) score += 30;
-      else if (near_resistance) score += 15;
+      else if (near_breakdown) score += 15;
 
-      // Extra: near breakdown adds continuation probability
+      // Continuation boost
       if (near_breakdown) score += 10;
 
-      // Risk control (avoid oversold crash)
-      if (momentum_20 < -0.25) score -= 10;
-
-      // Clamp probability
       const probability = Math.max(40, Math.min(90, score));
 
+      // --- 📦 RESULT ---
       results.push({
-        symbol: stock.symbol,
+        symbol: finalStockSymbol,
         category: stock.category,
         displayName: stock.displayName,
         eventCategory: "Underperformer",
@@ -278,22 +377,23 @@ async function getBearishStocks() {
         sector: stock.sector,
         stockNameCategory: stock.stockNameCategory,
         keyCatalysts:
-          "Sector weakness with breakdown and selling pressure indicates bearish continuation",
+          "Weak trend with controlled breakdown (not oversold), supported by volume expansion",
         suggestedBy: "Stock Suggestion Based on Weakest Sector",
         timehorizon: "Intraday",
+        probability,
+        currentPrice,
+        support_20,
+        resistance_20,
+        volume_ratio: Number(volume_ratio.toFixed(2)),
       });
     } catch (err) {
       console.error(`Error fetching ${stock.symbol}`, err.message);
     }
   }
 
-  // --- 🔥 SORT BY BEST SETUP ---
-  results.sort((a, b) => b.probability_of_bearish - a.probability_of_bearish);
-
-  // Optional: pick top 3
-  return results.slice(0, 3);
+  return results;
 }
 
-await sectorStockSelector({ niftySentiment: "Bearish" }).then((res) =>
-  console.log("Selected Sector", res),
-);
+// await sectorStockSelector({ niftySentiment: "Bullish" }).then((res) =>
+//   console.log("Selected Sector", res),
+// );

@@ -1,16 +1,21 @@
 <div class="aly_overview">
   <div class="row mt-2">
     <div class="col-12">
-      <div class="position-relative d-flex align-items-center">
+      <div *ngIf="!IsStockAnalysis" class="position-relative d-flex align-items-center">
         <h4 class="mx-auto">{{ title1 }}</h4>
       </div>
-      <div *ngIf="!IsStockAnalysis">
+      <div *ngIf="IsStockAnalysis" class="d-flex justify-content-between align-items-center gap-3">
+        <h5 class="mb-0">{{ title1 }}</h5>
+        <span class="mb-0">Last Updated: 02/04/2026 11:31AM</span>
+        <button class="btn btn-sm btn-primary">Refresh</button>
+      </div>
+      <div *ngIf="!IsStockAnalysis" class="mt-3">
         <div class="term-row" *ngFor="let i of finalArray">
           <h5>{{Object.keys(i)[0]}}</h5>
           <p-progressBar [value]="Object.values(i)[0]" class="custom-bar"></p-progressBar>
         </div>
       </div>
-      <div *ngIf="IsStockAnalysis" class="tableContainer">
+      <div *ngIf="IsStockAnalysis" class="mt-3">
         <table class="table text-center table-bordered">
           <thead>
             <tr>
@@ -29,10 +34,11 @@
               <th scope="row"><a [routerLink]="['/stock-analysis',tra.stockId]">{{tra.displayName}}</a></th>
               <td>{{tra.category}}</td>
               <td>{{tra.sector}}</td>
-              <td scope="col">{{tra.suggestedBy == "Based on news & technicals" ? "News & Technical" : "Sector & Technical"}}</td>
+              <td scope="col">{{tra.suggestedBy == "Based on news & technicals" ? "News & Technical" : "Sector &
+                Technical"}}</td>
               <td>{{tra.keyCatalysts}}</td>
               <td>{{tra.prediction ?? tra.Prediction}}</td>
-              <th>{{tra.Probability_of_Profit}}%</th> 
+              <th>{{tra.Probability_of_Profit}}%</th>
             </tr>
             }
           </tbody>
