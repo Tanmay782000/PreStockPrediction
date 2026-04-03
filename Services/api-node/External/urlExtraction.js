@@ -72,8 +72,9 @@ OUTPUT:
 RULES:
 - Include 1 Nifty URL if possible
 - If not enough valid → fill with null
-- Return only JSON.  
-- No extra text.
+- Return only valid JSON array
+- No explanations or extra text
+- Keep text fields short and clean
 `;
 
   const command = new InvokeModelCommand({

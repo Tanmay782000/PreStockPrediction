@@ -77,7 +77,8 @@ OUTPUT FORMAT:
 }
 
 FINAL RULE:
-Return ONLY valid JSON. No extra text.
+- Return only valid JSON array
+- No explanations or extra text
 `;
   const command = new InvokeModelCommand({
     modelId: "anthropic.claude-3-sonnet-20240229-v1:0", // example
