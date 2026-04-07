@@ -2,32 +2,38 @@ import { PutCommand, ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
 import { STOCKS } from "../Common/stockInfo.js";
 import yahooFinance from "yahoo-finance2";
-import vader from "vader-sentiment";
 
 const yf = new yahooFinance();
+
 let TARGET_SECTOR = "Energy";
-let SENTIMENT = "Bullish"; // or Bearish
+let SENTIMENT = "Bullish";
 let STOCK_LIST = [];
+
 export const sectorStockSelector = async (input) => {
-  const niftySentiment = input.niftySentiment; //barrish or bullish
+  const niftySentiment = input.niftySentiment;
   let selectedStocks = {};
   let index = 0;
   let finalStocks = [];
-  while (finalStocks.length === 0 && index < 11) {
-    console.log("data here");
+
+  while (finalStocks.length <= 3 && index < 11) {
     selectedStocks = await getTheSector(niftySentiment, index);
-    let stocksSector = STOCKS.filter((s) => s.sector === selectedStocks.sector);
+
+    let stocksSector = STOCKS.filter(
+      (s) => s.sector === selectedStocks.sector
+    );
+
     STOCK_LIST = stocksSector;
     TARGET_SECTOR = stocksSector[0].sector;
     SENTIMENT = niftySentiment;
-    if (SENTIMENT === "Bearish") {
-      finalStocks = await getBearishStocks();
-    } else {
-      finalStocks = await getBullishStocks();
-    }
+
+    finalStocks =
+      SENTIMENT === "Bearish"
+        ? await getBearishStocks()
+        : await getBullishStocks();
+
     index++;
-    console.log("final stocks", finalStocks);
   }
+
   return {
     statusCode: 200,
     body: finalStocks,
@@ -41,41 +47,33 @@ async function getTheSector(niftySentiment, index, id = 1) {
     new GetCommand({
       TableName: TABLE,
       Key: { countryId: Number(id) },
-    }),
+    })
   );
 
   const item = result.Item.sectorSummery;
-
   const arr = item.probabilityArr.map((obj) => Object.entries(obj)[0]);
 
   let sorted;
 
   if (niftySentiment === "Bearish") {
-    // Low → High
     sorted = arr.sort((a, b) => a[1] - b[1]);
-
-    // 2nd lowest
-    return {
-      sector: sorted[index]?.[0],
-      score: sorted[index]?.[1],
-    };
   } else {
-    // High → Low
     sorted = arr.sort((a, b) => b[1] - a[1]);
-
-    // 2nd highest
-    return {
-      sector: sorted[index]?.[0],
-      score: sorted[index]?.[1],
-    };
   }
+
+  return {
+    sector: sorted[index]?.[0],
+    score: sorted[index]?.[1],
+  };
 }
 
+// ---------------- UTILS ----------------
 function calculateReturns(closes, period) {
   const len = closes.length;
   if (len < period + 1) return 0;
   return (
-    (closes[len - 1] - closes[len - period - 1]) / closes[len - period - 1]
+    (closes[len - 1] - closes[len - period - 1]) /
+    closes[len - period - 1]
   );
 }
 
@@ -89,7 +87,6 @@ function calculateRSI(closes, period = 14) {
   let gains = 0;
   let losses = 0;
 
-  // Initial average gain/loss
   for (let i = 1; i <= period; i++) {
     const change = closes[i] - closes[i - 1];
     if (change > 0) gains += change;
@@ -99,7 +96,6 @@ function calculateRSI(closes, period = 14) {
   let avgGain = gains / period;
   let avgLoss = losses / period;
 
-  // Smooth RSI (Wilder's method)
   for (let i = period + 1; i < closes.length; i++) {
     const change = closes[i] - closes[i - 1];
 
@@ -108,18 +104,18 @@ function calculateRSI(closes, period = 14) {
       avgLoss = (avgLoss * (period - 1)) / period;
     } else {
       avgGain = (avgGain * (period - 1)) / period;
-      avgLoss = (avgLoss * (period - 1) + Math.abs(change)) / period;
+      avgLoss =
+        (avgLoss * (period - 1) + Math.abs(change)) / period;
     }
   }
 
   if (avgLoss === 0) return 100;
 
   const rs = avgGain / avgLoss;
-  const rsi = 100 - 100 / (1 + rs);
-
-  return Number(rsi.toFixed(2));
+  return Number((100 - 100 / (1 + rs)).toFixed(2));
 }
 
+// ---------------- BULLISH ----------------
 async function getBullishStocks() {
   const results = [];
 
@@ -127,7 +123,6 @@ async function getBullishStocks() {
     if (stock.sector !== TARGET_SECTOR) continue;
 
     try {
-      // --- 🔍 SEARCH ---
       const res = await yf.search(stock.displayName);
 
       const stc = res.quotes.find(
@@ -139,7 +134,6 @@ async function getBullishStocks() {
 
       const finalStockSymbol = stc?.symbol ?? stock.symbol;
 
-      // --- 📊 HISTORICAL DATA ---
       const data = await yf.chart(finalStockSymbol, {
         period1: "2024-01-01",
         interval: "1d",
@@ -151,72 +145,81 @@ async function getBullishStocks() {
       const closes = quotes.map((q) => q.close).filter(Boolean);
       const volumes = quotes.map((q) => q.volume).filter(Boolean);
 
-      const lastClose = closes[closes.length - 1];
-
-      // --- 📈 LIVE DATA ---
       const quote = await yf.quote(finalStockSymbol);
 
-      let currentPrice = quote?.regularMarketPrice ?? lastClose;
+      const currentPrice =
+        quote?.regularMarketPrice ?? closes.at(-1);
       const currentVolume =
-        quote?.regularMarketVolume ?? volumes[volumes.length - 1];
+        quote?.regularMarketVolume ?? volumes.at(-1);
 
-      // --- 🔄 REAL-TIME ADJUSTMENT ---
       const updatedCloses = [...closes.slice(0, -1), currentPrice];
       const updatedVolumes = [...volumes.slice(0, -1), currentVolume];
 
-      // --- 📉 MOMENTUM ---
+      // ---- MOMENTUM ----
       const momentum_20 = calculateReturns(updatedCloses, 20);
       const momentum_60 = calculateReturns(updatedCloses, 60);
 
-      // --- 📊 VOLUME ---
-      const volume_today = updatedVolumes[updatedVolumes.length - 1];
+      // ---- VOLUME ----
+      const volume_today = updatedVolumes.at(-1);
       const avg_volume_20d = average(updatedVolumes.slice(-20));
       const volume_ratio = volume_today / avg_volume_20d;
 
-      // --- 🧱 SUPPORT / RESISTANCE (FIXED) ---
-      const recentCloses = updatedCloses.slice(-21, -1); // 🔥 exclude current price
-
+      // ---- SUPPORT / RESISTANCE ----
+      const recentCloses = updatedCloses.slice(-21, -1);
       const support_20 = Math.min(...recentCloses);
       const resistance_20 = Math.max(...recentCloses);
 
-      // --- 📊 DISTANCE ---
       const breakout_20 = currentPrice > resistance_20 ? 1 : 0;
 
-      const near_breakout =
-        currentPrice >= resistance_20 * 0.98 &&
-        currentPrice <= resistance_20 * 1.01;
+      // ---- 🔥 NEW NEAR BREAKOUT LOGIC ----
+      const distanceToResistance =
+        (resistance_20 - currentPrice) / resistance_20;
 
-      // --- 📊 RSI ---
+      const near_breakout =
+        distanceToResistance >= 0 &&
+        distanceToResistance <= 0.015;
+
+      // ---- COMPRESSION ----
+      const last5 = updatedCloses.slice(-6, -1);
+      const range5 = Math.max(...last5) - Math.min(...last5);
+      const avgPrice5 = average(last5);
+
+      const isCompressing = range5 / avgPrice5 < 0.02;
+
+      // ---- VOLUME BUILDUP ----
+      const avgVol5 = average(updatedVolumes.slice(-5));
+      const avgVol20 = average(updatedVolumes.slice(-20));
+
+      const volume_building =
+        avgVol5 > avgVol20 * 0.9 &&
+        avgVol5 < avgVol20 * 1.3;
+
+      // ---- RSI ----
       const rsi_14 = calculateRSI(updatedCloses, 14);
       if (!rsi_14) continue;
 
-      // --- 🚫 OVERBOUGHT FILTER ---
-      const breakout_strength =
-        (currentPrice - resistance_20) / resistance_20;
-
+      // ---- FILTERS ----
       const isOverbought =
-        momentum_20 > 0.15 ||                 // too fast up move
-        rsi_14 > 68 ||                       // overbought zone
-        breakout_strength > 0.015 ||         // >1.5% above resistance
-        (volume_ratio > 1.8 && momentum_20 > 0.12); // blow-off
+        momentum_20 > 0.15 || rsi_14 > 68;
 
       if (isOverbought) continue;
 
-      // --- 🚫 TOO EXTENDED FROM BASE ---
-      const isTooExtendedFromBase =
-        (currentPrice - support_20) / support_20 > 0.08;
+      const isNearBreakoutCandidate =
+        momentum_20 > 0 &&
+        momentum_20 >= momentum_60 &&
+        near_breakout &&
+        isCompressing &&
+        volume_building;
 
-      if (isTooExtendedFromBase) continue;
-
-      // --- ❗ FINAL FILTER ---
       const isValid =
-        momentum_20 > momentum_60 &&
-        volume_ratio > 1.2 &&
-        near_breakout; // 🔥 ONLY early breakout
+        (momentum_20 > momentum_60 &&
+          volume_ratio > 1.2 &&
+          breakout_20 === 1) ||
+        isNearBreakoutCandidate;
 
       if (!isValid) continue;
 
-      // --- 🔥 SCORING ---
+      // ---- SCORING ----
       let score = 0;
 
       if (momentum_20 > momentum_60) score += 30;
@@ -225,32 +228,35 @@ async function getBullishStocks() {
       else if (volume_ratio > 1.2) score += 20;
 
       if (breakout_20 === 1) score += 30;
-      else if (near_breakout) score += 15;
 
-      if (near_breakout) score += 10;
+      if (isNearBreakoutCandidate) score += 25;
+      if (isCompressing) score += 10;
+      if (volume_building) score += 10;
 
       const probability = Math.max(40, Math.min(90, score));
 
-      // --- 📦 RESULT ---
+      const eventCategory =
+        breakout_20 === 1
+          ? "Breakout"
+          : isNearBreakoutCandidate
+          ? "Near Breakout"
+          : "Momentum";
+
       results.push({
         symbol: finalStockSymbol,
-        category: stock.category,
         displayName: stock.displayName,
-        eventCategory: "Outperformer",
-        Prediction: "Profit",
         sector: stock.sector,
-        stockNameCategory: stock.stockNameCategory,
-        keyCatalysts:
-          "Early breakout with strong momentum and volume, not overextended",
-        suggestedBy: "Stock Suggestion Based on Strongest Sector",
-        timehorizon: "Intraday",
+        Prediction: "Profit",
+        eventCategory,
         probability,
         currentPrice,
         support_20,
         resistance_20,
         volume_ratio: Number(volume_ratio.toFixed(2)),
+        keyCatalysts:
+          "Compression + volume buildup near resistance",
+        timehorizon: "Intraday",
       });
-
     } catch (err) {
       console.error(`Error fetching ${stock.symbol}`, err.message);
     }
@@ -259,6 +265,7 @@ async function getBullishStocks() {
   return results.sort((a, b) => b.probability - a.probability);
 }
 
+// ---------------- BEARISH (UNCHANGED CORE) ----------------
 async function getBearishStocks() {
   const results = [];
 
@@ -266,19 +273,17 @@ async function getBearishStocks() {
     if (stock.sector !== TARGET_SECTOR) continue;
 
     try {
-      // --- 🔍 SEARCH ---
       const res = await yf.search(stock.displayName);
 
       const stc = res.quotes.find(
         (q) =>
           q.exchange === "NSI" ||
           q.exchange === "NSE" ||
-          q.symbol?.endsWith(".NS"),
+          q.symbol?.endsWith(".NS")
       );
 
       const finalStockSymbol = stc?.symbol ?? stock.symbol;
 
-      // --- 📊 HISTORICAL DATA ---
       const data = await yf.chart(finalStockSymbol, {
         period1: "2024-01-01",
         interval: "1d",
@@ -290,110 +295,51 @@ async function getBearishStocks() {
       const closes = quotes.map((q) => q.close).filter(Boolean);
       const volumes = quotes.map((q) => q.volume).filter(Boolean);
 
-      const lastClose = closes[closes.length - 1];
-
-      // --- 📈 LIVE DATA ---
       const quote = await yf.quote(finalStockSymbol);
 
-      let currentPrice = quote?.regularMarketPrice ?? lastClose;
+      const currentPrice =
+        quote?.regularMarketPrice ?? closes.at(-1);
       const currentVolume =
-        quote?.regularMarketVolume ?? volumes[volumes.length - 1];
+        quote?.regularMarketVolume ?? volumes.at(-1);
 
-      // --- 🔄 REAL-TIME ADJUSTMENT ---
       const updatedCloses = [...closes.slice(0, -1), currentPrice];
       const updatedVolumes = [...volumes.slice(0, -1), currentVolume];
 
-      // --- 📉 MOMENTUM ---
       const momentum_20 = calculateReturns(updatedCloses, 20);
       const momentum_60 = calculateReturns(updatedCloses, 60);
 
-      // --- 📊 VOLUME ---
-      const volume_today = updatedVolumes[updatedVolumes.length - 1];
-      const avg_volume_20d = average(updatedVolumes.slice(-20));
-      const volume_ratio = volume_today / avg_volume_20d;
+      const avgVol20 = average(updatedVolumes.slice(-20));
+      const volume_ratio =
+        updatedVolumes.at(-1) / avgVol20;
 
-      // --- 🧱 SUPPORT / RESISTANCE ---
-      const recentCloses = updatedCloses.slice(-20);
+      const recent = updatedCloses.slice(-20);
+      const support_20 = Math.min(...recent);
+      const resistance_20 = Math.max(...recent);
 
-      const support_20 = Math.min(...recentCloses);
-      const resistance_20 = Math.max(...recentCloses);
+      const breakdown = currentPrice <= support_20;
 
-      const distance_resistance_20 =
-        (resistance_20 - currentPrice) / resistance_20;
-
-      const distance_support_20 = (currentPrice - support_20) / support_20;
-
-      // --- 🔻 BREAKDOWN LOGIC ---
-      const breakdown_20 = currentPrice <= support_20 ? 1 : 0;
-      const near_breakdown = distance_support_20 <= 0.02;
-
-      // --- 🚫 LATE ENTRY / REVERSAL FILTERS (NEW) ---
-      const breakdown_strength = (support_20 - currentPrice) / support_20;
-
-      const isOversold =
-        momentum_20 < -0.2 || // too stretched
-        breakdown_strength > 0.03 || // already far below support
-        (volume_ratio > 2 && momentum_20 < -0.15); // capitulation zone
-
-      if (isOversold) continue;
-
-      // --- ❗ FILTER ---
-      const isValid =
+      if (
         momentum_20 < momentum_60 &&
         volume_ratio > 1.2 &&
-        (breakdown_20 === 1 || near_breakdown);
-
-      if (!isValid) continue;
-      const isTooExtendedFromBase =
-        (support_20 - currentPrice) / support_20 > 0.1;
-
-      if (isTooExtendedFromBase) continue;
-      // --- 🔥 PROBABILITY SCORING ---
-      let score = 0;
-
-      // Trend weakness
-      if (momentum_20 < momentum_60) score += 30;
-
-      // Volume confirmation
-      if (volume_ratio > 1.5) score += 30;
-      else if (volume_ratio > 1.2) score += 20;
-
-      // Structure (pure bearish now)
-      if (breakdown_20 === 1) score += 30;
-      else if (near_breakdown) score += 15;
-
-      // Continuation boost
-      if (near_breakdown) score += 10;
-
-      const probability = Math.max(40, Math.min(90, score));
-
-      // --- 📦 RESULT ---
-      results.push({
-        symbol: finalStockSymbol,
-        category: stock.category,
-        displayName: stock.displayName,
-        eventCategory: "Underperformer",
-        Prediction: "Loss",
-        sector: stock.sector,
-        stockNameCategory: stock.stockNameCategory,
-        keyCatalysts:
-          "Weak trend with controlled breakdown (not oversold), supported by volume expansion",
-        suggestedBy: "Stock Suggestion Based on Weakest Sector",
-        timehorizon: "Intraday",
-        probability,
-        currentPrice,
-        support_20,
-        resistance_20,
-        volume_ratio: Number(volume_ratio.toFixed(2)),
-      });
+        breakdown
+      ) {
+        results.push({
+          symbol: finalStockSymbol,
+          displayName: stock.displayName,
+          Prediction: "Loss",
+          probability: 70,
+        });
+      }
     } catch (err) {
-      console.error(`Error fetching ${stock.symbol}`, err.message);
+      console.error(err.message);
     }
   }
 
   return results;
 }
 
-// await sectorStockSelector({ niftySentiment: "Bullish" }).then((res) =>
-//   console.log("Selected Sector", res),
-// );
+
+
+await sectorStockSelector({ niftySentiment: "Bullish" }).then((res) =>
+  console.log("Selected Sector", res),
+);

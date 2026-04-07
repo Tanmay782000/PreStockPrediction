@@ -112,7 +112,7 @@ FINAL RULE:
   const now = new Date().toISOString();
 
   //#region Get Sector Stocks based on Nifty Prediction
-  let niftySentiment = ["Bearish", "Bullish"];
+  let niftySentiment = ["Bullish"];
   let index = 0;
   while (index < 2) {
     let sentiment = niftySentiment[index];
