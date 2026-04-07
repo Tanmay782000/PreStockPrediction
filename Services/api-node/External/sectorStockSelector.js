@@ -338,10 +338,6 @@ async function getBearishStocks() {
   return results;
 }
 
-// await sectorStockSelector({ niftySentiment: "Bullish" }).then((res) =>
-//   console.log("Selected Sector", res),
-// );
-
 await sectorStockSelector({ niftySentiment: "Bullish" }).then((res) =>
   console.log("Selected Sector", res),
 );

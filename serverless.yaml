@@ -181,3 +181,34 @@ resources:
         KeySchema:
           - AttributeName: countryId
             KeyType: HASH
+
+
+  # Selected stocks table for user  
+    SelectedStocksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: SelectedStocks
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: stockId
+            AttributeType: N
+
+        KeySchema:
+          - AttributeName: stockId
+            KeyType: HASH
+
+  # Actual placing the stock
+    PlacedStocksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: PlacedStocks
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: stockId
+            AttributeType: N
+
+        KeySchema:
+          - AttributeName: stockId
+            KeyType: HASH

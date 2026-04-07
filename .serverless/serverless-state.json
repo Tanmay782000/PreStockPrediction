@@ -275,6 +275,44 @@
                 }
               ]
             }
+          },
+          "SelectedStocksTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "SelectedStocks",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "stockId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "stockId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
+          },
+          "PlacedStocksTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "PlacedStocks",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "stockId",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "stockId",
+                  "KeyType": "HASH"
+                }
+              ]
+            }
           }
         },
         "Outputs": {
@@ -553,6 +591,44 @@
               }
             ]
           }
+        },
+        "SelectedStocksTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "SelectedStocks",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "stockId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "stockId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
+        },
+        "PlacedStocksTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "PlacedStocks",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "stockId",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "stockId",
+                "KeyType": "HASH"
+              }
+            ]
+          }
         }
       },
       "Outputs": {}
@@ -573,7 +649,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1774275459050-2026-03-23T14:17:39.050Z",
+    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1775566044928-2026-04-07T12:47:24.928Z",
     "artifact": ""
   }
 }

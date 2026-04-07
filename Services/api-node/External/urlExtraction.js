@@ -69,7 +69,7 @@ OUTPUT:
   "top_urls": ["", "", "",""]
 }
 
-RULES:
+FINAL RULE:
 - Include 1 Nifty URL if possible
 - If not enough valid → fill with null
 - Return only valid JSON array

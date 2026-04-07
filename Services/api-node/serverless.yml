@@ -16,6 +16,9 @@ provider:
     SectorDetailsTable: SectorDetails
     UrlExtractionTable: UrlExtraction
     DeepStockAnalysis: DeepStocksAnalysis
+    SelectedStocksTable: SelectedStocks
+    PlacedStocksTable: PlacedStocks
+
     #Lambdas
 
   iam:
