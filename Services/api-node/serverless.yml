@@ -46,6 +46,12 @@ provider:
           Action:
             - bedrock:InvokeModel
           Resource: "*"
+        - Effect: Allow
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: "*"
 
 plugins:
   - serverless-offline
@@ -179,3 +185,13 @@ functions:
     description: "Fetch the URLs from the raw data."
 
       
+############## Cron Jobs ##############
+
+  cronJob:
+    handler: External/cron.cron
+    timeout: 300
+    description: "Cron job to update stock data"
+    events:
+      - schedule:
+          rate: rate(2 minutes)
+          enabled: true
