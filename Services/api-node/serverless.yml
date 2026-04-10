@@ -18,7 +18,6 @@ provider:
     DeepStockAnalysis: DeepStocksAnalysis
     SelectedStocksTable: SelectedStocks
     PlacedStocksTable: PlacedStocks
-
     #Lambdas
 
   iam:
@@ -191,7 +190,7 @@ functions:
     handler: External/cron.cron
     timeout: 300
     description: "Cron job to update stock data"
-    events:
-      - schedule:
-          rate: rate(2 minutes)
-          enabled: true
+    # events:
+    #   - schedule:
+    #       rate: rate(2 minutes)
+    #       enabled: true
