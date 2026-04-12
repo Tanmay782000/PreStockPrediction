@@ -193,7 +193,7 @@ async function getExpertTimingSignal(symbolKey, niftyStatus) {
         symbolKey: symbolKey,
         type: isBreakout ? "BREAKOUT" : "REVERSAL",
         price: L_close.toFixed(2),
-        target: (L_close + atrValue * 7.5).toFixed(2),
+        target: (L_close + atrValue * 5).toFixed(2),
         stopLoss: (L_close - atrValue * 2.5).toFixed(2),
       };
     }
@@ -257,10 +257,6 @@ let quantity = Math.floor(amount / currentPriceStock);
 
 let targetPrice = stockInfo.target; // Assuming this comes from the signal
 let stopLossPrice = stockInfo.stopLoss; // Assuming this comes from the signal
-
-
-
-
 }
 
 // ---------------- MAIN EXECUTION ----------------
