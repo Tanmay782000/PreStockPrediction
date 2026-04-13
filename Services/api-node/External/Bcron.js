@@ -1,163 +1,393 @@
+import axios from "axios";
 import yahooFinance from "yahoo-finance2";
-import { Barish_STOCKS } from "../Common/stockInfo.js";
+import { PutCommand, ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
+import { client } from "../db/dynamo.client.js";
+import { SYMBOL_MAP } from "../Common/stockInfo.js";
 
-const yf = new yahooFinance();
-
-// ---------------- SETTINGS ----------------
-// Keep the same sectors - they often fall the hardest during market corrections
-const BACKTEST_STOCKS = Barish_STOCKS.filter(s => s.sector == "Energy" || s.sector == "Materials" || s.sector == "Industrials" || s.sector == "Utilities").map(s => s.symbol);
-
-const NIFTY_SYMBOL = "^NSEI";
-const ATR_PERIOD = 20;
-
-const TWO_YEARS_MS = 2 * 365 * 24 * 60 * 60 * 1000;
-const SIXTY_DAYS_MS = 59 * 24 * 60 * 60 * 1000; 
-const START_DATE_DAILY = Math.floor((Date.now() - TWO_YEARS_MS) / 1000);
-const START_DATE_15M = Math.floor((Date.now() - SIXTY_DAYS_MS) / 1000);
-
-const average = (arr) => arr.length === 0 ? 0 : arr.reduce((a, b) => a + b, 0) / arr.length;
-
-function getHistoricalATR(allQuotes, currentIndex, period) {
-    if (currentIndex < period) return 0;
-    let trs = [];
-    for (let i = currentIndex - period + 1; i <= currentIndex; i++) {
-        const tr = Math.max(
-            allQuotes[i].high - allQuotes[i].low,
-            Math.abs(allQuotes[i].high - allQuotes[i - 1].close),
-            Math.abs(allQuotes[i].low - allQuotes[i - 1].close)
-        );
-        trs.push(tr);
-    }
-    return average(trs);
+const PlaceStocks = process.env.PlacedStocksTable;
+const Barish_STOCKS = SYMBOL_MAP;
+// ---------------- CONFIGURATION ----------------
+const CONFIG = {
+    apiKey: "uVNH5DtC",
+    // Use the JWT Token you provided (Ensure it is refreshed daily)
+    jwtToken: "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qRTFNVEk0TkN3aWJtSm1Jam94TnpjMk1EWTBOekEwTENKcFlYUWlPakUzTnpZd05qUTNNRFFzSW1wMGFTSTZJakZrTkRjM05tUmxMVE5oWlRjdE5ERTJZeTFpTURJMkxUa3dNall5T0RkaU9ETXlNeUlzSWxSdmEyVnVJam9pSW4wLllReG9zdE1uWWJ5aVY4ZW5fWXgwLXBTeElFQlIzZnlQa1REcTc3UmZJMTdla0cxdVhRQTJHbWdZU0QtWEFEQ243STlFRmtyX1BhX3Bjd0FHSGZhQ2JickxCd3Q0YWlreXF3YkFLRUlEVzBXdUdoODQxZVEyODAtaWtkY0htZE1UUFlHei1senVsTVdaMFNaX2M5M0w2ZnFoZVhIZ0oyQzhJTUJoZVNmS2lGQSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYwNjQ4ODQsImV4cCI6MTc3NjEwNTAwMH0.BQ8aqhDAlkDLTM25DcaGP1rWuBkhkwaXpaQ7Ac3fHrTcWUvqu9tvwpXYegYZxRcSNRsqDkJa1pHjAV4CKKTU-g", 
+    publicIP: "45.114.212.194", // From your earlier whitelisting screenshot
+    localIP: "127.0.0.1",
+    capital: 10000,
+    risk_per_trade: 0.20
 }
 
-async function backtestBearishStrategy() {
-    console.log("🚀 Initializing Bearish Hybrid Backtest...");
-    console.log(`📉 Mode: SHORTING (Sell High, Buy Low) | ${BACKTEST_STOCKS.length} Stocks\n`);
-
-    let totalWins = 0, totalLosses = 0, totalTrades = 0;
-
-    let allNiftyQuotes = [], allNiftyDaily = [];
+// ---------------- AXIOS BASE CLIENT (AngelOne) ----------------
+// Used exclusively for Nifty index data (not available on Yahoo Finance)
+const angelClient = axios.create({
+  baseURL: "https://apiconnect.angelone.in",
+  headers: {
+    Authorization: `Bearer ${CONFIG.jwt_token}`,
+    Accept: "application/json",
+    "X-SourceID": "WEB",
+    "X-UserType": "USER",
+    "X-ClientLocalIP": "127.0.0.1",
+    "X-ClientPublicIP": "45.114.212.194",
+    "X-MACAddress": "02:00:00:00:00:00",
+    "X-PrivateKey": CONFIG.api_key,
+    "Content-Type": "application/json",
+  },
+});
+ 
+// ---------------- TECHNICAL HELPERS ----------------
+const average = (arr) =>
+  arr.length === 0 ? 0 : arr.reduce((a, b) => a + b, 0) / arr.length;
+ 
+/**
+ * Yahoo Finance quote format: { date, open, high, low, close, volume }
+ * Used for individual stock ATR calculation.
+ */
+function calculateIntradayATR(quotes, period = 20) {
+  if (quotes.length < period + 1) return 0;
+  const recent = quotes.slice(-(period + 1));
+  const trs = [];
+  for (let i = 1; i < recent.length; i++) {
+    const tr = Math.max(
+      recent[i].high - recent[i].low,
+      Math.abs(recent[i].high - recent[i - 1].close),
+      Math.abs(recent[i].low - recent[i - 1].close),
+    );
+    trs.push(tr);
+  }
+  return average(trs);
+}
+ 
+// ================================================================
+//  NIFTY BEARISH SENTIMENT ENGINE — uses AngelOne API
+//  (Nifty index is not reliably available on Yahoo Finance)
+// ================================================================
+async function getNiftyBearishSentiment() {
+  const today = new Date().toISOString().split("T")[0];
+  try {
+    // Fetch 15-minute intraday candles for Nifty
+    const intraDayRes = await angelClient.post(
+      "/rest/secure/angelbroking/historical/v1/getCandleData",
+      {
+        exchange: "NSE",
+        symboltoken: "99926000", // Nifty 50 token
+        interval: "FIFTEEN_MINUTE",
+        fromdate: `${today} 09:15`,
+        todate: `${today} 15:30`,
+      },
+    );
+ 
+    // Fetch daily candles to get yesterday's close
+    const dailyRes = await angelClient.post(
+      "/rest/secure/angelbroking/historical/v1/getCandleData",
+      {
+        exchange: "NSE",
+        symboltoken: "99926000",
+        interval: "ONE_DAY",
+        fromdate: "2026-04-01 09:15",
+        todate: `${today} 15:30`,
+      },
+    );
+ 
+    const quotes = intraDayRes.data?.data;
+    const dailyQuotes = dailyRes.data?.data;
+ 
+    if (!quotes || quotes.length === 0) {
+      return { isBearish: false, reason: "Market Not Open" };
+    }
+ 
+    const yesterdayClose = dailyQuotes[dailyQuotes.length - 2][4];
+    const last = quotes[quotes.length - 1];
+    // AngelOne format: [timestamp, open, high, low, close, volume]
+    const [, open, high, low, close, volume] = last;
+ 
+    // VWAP Calculation
+    let tVal = 0, tVol = 0;
+    quotes.forEach((q) => {
+      tVal += q[4] * (q[5] || 1);
+      tVol += q[5] || 1;
+    });
+    const vwap = tVal / tVol;
+ 
+    // BEARISH GUARD: Below yesterday's close AND (Below VWAP OR Strong Red Body)
+    const isBelowPrev  = close < yesterdayClose;
+    const isBelowVWAP  = close < vwap * 1.0002;
+    const isStrongRed  = (high - low) > 0
+      ? Math.abs(close - open) / (high - low) > 0.3
+      : false;
+ 
+    const isBearish = isBelowPrev && (isBelowVWAP || isStrongRed);
+ 
+    return {
+      isBearish,
+      price: close.toFixed(2),
+      status: isBearish ? "🔴 WEAK" : "🟢 NEUTRAL",
+    };
+  } catch (err) {
+    console.error("❌ Nifty Bearish Sentiment Error:", err.message);
+    return { isBearish: false, status: "ERR" };
+  }
+}
+ 
+// ================================================================
+//  BEARISH STOCK SIGNAL ENGINE — uses Yahoo Finance API
+// ================================================================
+async function getBearishExpertSignal(symbol, niftyStatus) {
+  try {
+    console.log("niftyStatus & Symbol", niftyStatus, symbol);
+ 
+    if (!niftyStatus.isBearish) {
+      return { status: "WAITING", reason: "Nifty Bullish/Strong" };
+    }
+ 
+    const intradayData = await yf.chart(`${symbol}.NS`, {
+      period1: Math.floor(Date.now() / 1000) - 48 * 60 * 60, // 2 days back
+      interval: "15m",
+    });
+ 
+    const dailyData = await yf.chart(`${symbol}.NS`, {
+      period1: Math.floor(Date.now() / 1000) - 5 * 24 * 60 * 60, // 5 days back
+      interval: "1d",
+    });
+ 
+    const iQuotes = intradayData.quotes.filter((q) => q.close && q.volume);
+    const dQuotes = dailyData.quotes.filter((q) => q.close);
+ 
+    const todayStr = new Date().toLocaleDateString("en-CA", {
+      timeZone: "Asia/Kolkata",
+    });
+ 
+    const todayQuotes = iQuotes.filter((q) =>
+      new Date(q.date).toISOString().startsWith(todayStr),
+    );
+ 
+    if (todayQuotes.length < 3) {
+      return { status: "WAITING", reason: `Data Sync (${todayQuotes.length}/3)` };
+    }
+ 
+    const yesterdayClose = dQuotes[dQuotes.length - 2].close;
+ 
+    // Gap Down Protection: Don't short if it gapped down more than 3%
+    const gapPercent =
+      ((todayQuotes[0].open - yesterdayClose) / yesterdayClose) * 100;
+    if (gapPercent < -3.0) return { status: "REJECTED", reason: "High Gap Down" };
+ 
+    const morningLow  = Math.min(todayQuotes[0].low, todayQuotes[1].low);
+    const avgMorningVol = (todayQuotes[0].volume + todayQuotes[1].volume) / 2;
+ 
+    let sVal = 0, sVol = 0;
+    todayQuotes.forEach((q) => {
+      sVal += q.close * q.volume;
+      sVol += q.volume;
+    });
+    const stockVWAP = sVal / sVol;
+ 
+    const lastCandle = todayQuotes[todayQuotes.length - 1];
+    const prevCandle = todayQuotes[todayQuotes.length - 2];
+ 
+    // BEARISH CONDITIONS
+    const isBreakdown    = lastCandle.close < morningLow && lastCandle.close < stockVWAP;
+    const isLosingValue  = lastCandle.close < stockVWAP && prevCandle.close > stockVWAP;
+    const hasVolumeSurge = lastCandle.volume > avgMorningVol * 1.1;
+    const sBody          = Math.abs(lastCandle.close - lastCandle.open);
+    const sRange         = lastCandle.high - lastCandle.low;
+    const isStrongRed    = lastCandle.close < lastCandle.open &&
+                           (sRange > 0 ? sBody / sRange > 0.5 : false);
+ 
+    if (hasVolumeSurge && isStrongRed && (isBreakdown || isLosingValue)) {
+      const atrValue = calculateIntradayATR(iQuotes, 20);
+      const showDate = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+ 
+      return {
+        status: "TRIGGERED",
+        type: isBreakdown ? "BREAKDOWN" : "VALUE_LOSS",
+        symbol: symbol,
+        price: lastCandle.close.toFixed(2),
+        time: showDate,
+        date: todayStr,
+        target: (lastCandle.close - atrValue * 5.0).toFixed(2), // Target is BELOW (short)
+        stopLoss: (lastCandle.close + atrValue * 2.5).toFixed(2), // SL is ABOVE (short)
+      };
+    }
+ 
+    return { status: "WAITING", price: lastCandle.close.toFixed(2) };
+  } catch (err) {
+    return { status: "ERROR", message: err.message };
+  }
+}
+ 
+// ---------------- DATABASE OPERATION ----------------
+async function insertStock(signal) {
+  const getStocks = await client.send(
+    new ScanCommand({ TableName: PlaceStocks ?? "PlacedStocks" }),
+  );
+ 
+  if (getStocks.Items.length >= 4) {
+    console.log("⚠️ Already have 4 stocks in the system. Skipping insertion.");
+    return false;
+  }
+ 
+  console.log("SIGNAL TO INSERT", signal);
+ 
+  const alreadyExists = getStocks.Items.some(
+    (s) => s.symbolKey === signal.symbol,
+  );
+  if (alreadyExists) {
+    console.log(`⚠️ ${signal.symbol} already tracked. Skipping.`);
+    return false;
+  }
+ 
+  const c_date = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+  );
+ 
+  const isInserted = await client.send(
+    new PutCommand({
+      TableName: PlaceStocks ?? "PlacedStocks",
+      Item: {
+        symbolKey: signal.symbol,
+        price: signal.price,
+        target: signal.target,
+        stopLoss: signal.stopLoss,
+        type: signal.type,
+        status: 0, // 0 = Placed, 1 = Executed, 2 = Closed
+        createdAt: c_date.toString(),
+        updatedAt: c_date.toString(),
+      },
+    }),
+  );
+ 
+  if (isInserted) {
+    console.log(`✅ Signal for ${signal.symbol} stored in DB.`);
+    await placeStock(signal);
+    return true;
+  }
+ 
+  console.log(`❌ Failed to store signal for ${signal.symbol}.`);
+  return false;
+}
+ 
+// ---------------- ORDER PLACEMENT ----------------
+async function placeStock(signal) {
+  const amount = CONFIG.capital * CONFIG.risk_per_trade;
+  const qty = Math.floor(amount / signal.price);
+ 
+  if (qty < 1) {
+    console.log(`⚠️ Qty < 1 for ${signal.symbol}. Skipping order.`);
+    return;
+  }
+ 
+  const limitPrice = (signal.price * 0.997).toFixed(2); // 0.3% buffer BELOW for short sells
+ 
+  const payload = {
+    variety: "NORMAL",
+    tradingsymbol: `${signal.symbol}-EQ`,
+    symboltoken: Barish_STOCKS[signal.symbol]?.token,
+    transactiontype: "SELL", // SHORT position
+    exchange: "NSE",
+    ordertype: "LIMIT",
+    producttype: "INTRADAY",
+    duration: "DAY",
+    price: limitPrice.toString(),
+    squareoff:signal.target.toString(),
+    stoploss:signal.stopLoss.toString(),
+    quantity: qty.toString(),
+  };
+ 
+  console.log(
+    `🚀 Placing SHORT order for ${signal.symbol}: qty=${qty} @ ₹${limitPrice}`,
+  );
+ 
+  // Uncomment to actually place:
+  // const res = await angelClient.post('/rest/secure/angelbroking/order/v1/placeOrder', payload);
+  // if (res.data.status) console.log(`✅ SHORT placed: ${signal.symbol} @ ${limitPrice}`);
+ 
+  console.log(`✅ SHORT order placed: ${signal.symbol} @ ₹${limitPrice}`);
+ 
+  // Update status in database to Executed (1)
+  const getStockInfo = await client.send(
+    new GetCommand({
+      TableName: PlaceStocks ?? "PlacedStocks",
+      Key: { symbolKey: signal.symbol },
+    }),
+  );
+ 
+  if (!getStockInfo.Item) {
+    console.log(`⚠️ No record found for ${signal.symbol}. Cannot update status.`);
+    return;
+  }
+ 
+  const c_date = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+  );
+ 
+  await client.send(
+    new PutCommand({
+      TableName: PlaceStocks ?? "PlacedStocks",
+      Item: {
+        symbolKey: getStockInfo.Item.symbolKey,
+        price: getStockInfo.Item.price,
+        target: getStockInfo.Item.target,
+        stopLoss: getStockInfo.Item.stopLoss,
+        type: getStockInfo.Item.type,
+        status: 1, // 0 = Placed, 1 = Executed, 2 = Closed
+        createdAt: getStockInfo.Item.createdAt,
+        updatedAt: c_date.toString(),
+      },
+    }),
+  );
+}
+ 
+// ================================================================
+//  MAIN CRON — Entry Point
+// ================================================================
+export const cron = async () => {
+  const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+  console.log(`\n🔍 Bearish Scan Started: ${time}`);
+  console.log("━".repeat(55));
+ 
+  // ── Step 1: Nifty Bearish Sentiment via AngelOne (index data) ──
+  const nifty = await getNiftyBearishSentiment();
+  // const nifty = { isBearish: true, price: "22000", status: "🔴 WEAK" }; // ← mock for testing
+ 
+  console.log(`NIFTY: ${nifty.status || "N/A"} @ ₹${nifty.price || "?"}`);
+ 
+  if (nifty.status === "ERR") {
+    console.error("❌ Aborted: Could not fetch Nifty data.");
+    return;
+  }
+ 
+  console.log("━".repeat(55));
+ 
+  // ── Step 2: Scan stocks via Yahoo Finance ──────────────────────
+  for (const [symbolKey, stockData] of Object.entries(Barish_STOCKS)) {
     try {
-        const niftyHistory = await yf.chart(NIFTY_SYMBOL, { period1: START_DATE_15M, interval: "15m" });
-        const niftyDailyHistory = await yf.chart(NIFTY_SYMBOL, { period1: START_DATE_DAILY, interval: "1d" });
-        allNiftyQuotes = niftyHistory.quotes.filter(q => q.close);
-        allNiftyDaily = niftyDailyHistory.quotes.filter(q => q.close);
-    } catch (e) {
-        console.error("❌ Critical: Nifty data sync failed."); return;
+      const signal = await getBearishExpertSignal(symbolKey, nifty);
+ 
+      if (signal.status === "TRIGGERED") {
+        console.log(
+          `🔥 [${signal.type}] SHORT: ${symbolKey} @ ₹${signal.price} | 🎯 ${signal.target} | 🛑 ${signal.stopLoss}`,
+        );
+        await insertStock(signal);
+      } else {
+        const statusLabel = {
+          WAITING:  `⏳ ${signal.reason || "Monitoring"}`,
+          REJECTED: `🚫 ${signal.reason}`,
+          SYNCING:  "🔄 Syncing",
+          ERROR:    `❌ ${signal.message || "Error"}`,
+        }[signal.status] || signal.status;
+ 
+        console.log(`${symbolKey.padEnd(14)}: ${statusLabel}`);
+      }
+    } catch (err) {
+      console.error(`Error processing ${symbolKey}:`, err.message);
     }
-
-    for (const symbol of BACKTEST_STOCKS) {
-        try {
-            const stockHistory = await yf.chart(symbol, { period1: START_DATE_15M, interval: "15m" });
-            const dailyHistory = await yf.chart(symbol, { period1: START_DATE_DAILY, interval: "1d" });
-
-            const allStockQuotes = stockHistory.quotes.filter(q => q.close && q.volume);
-            const allDailyQuotes = dailyHistory.quotes.filter(q => q.close);
-
-            if (allStockQuotes.length === 0) continue;
-
-            const daysMap = {};
-            allStockQuotes.forEach(q => {
-                const dateStr = q.date.toISOString().split('T')[0];
-                if (!daysMap[dateStr]) daysMap[dateStr] = [];
-                daysMap[dateStr].push(q);
-            });
-
-            let stats = { wins: 0, losses: 0 };
-            const dateKeys = Object.keys(daysMap);
-
-            for (const todayStr of dateKeys) {
-                const todayStockQuotes = daysMap[todayStr];
-                if (todayStockQuotes.length < 5) continue;
-
-                const todayNiftyQuotes = allNiftyQuotes.filter(nq => nq.date.toISOString().startsWith(todayStr));
-                if (todayNiftyQuotes.length < 3) continue;
-
-                const nDailyIdx = allNiftyDaily.findIndex(nd => nd.date.toISOString().startsWith(todayStr));
-                const yesterdayNiftyClose = nDailyIdx > 0 ? allNiftyDaily[nDailyIdx - 1].close : 0;
-
-                const dailyIdx = allDailyQuotes.findIndex(dq => dq.date.toISOString().startsWith(todayStr));
-                if (dailyIdx <= 0) continue;
-                const yesterdayStockClose = allDailyQuotes[dailyIdx - 1].close;
-
-                // --- BEARISH STRATEGY EXECUTION ---
-                
-                // 1. Gap Down Protection (Don't short if it already fell too much at open)
-                const gapPercent = ((todayStockQuotes[0].open - yesterdayStockClose) / yesterdayStockClose) * 100;
-                if (gapPercent < -3.0) continue; 
-
-                const morningLow = Math.min(todayStockQuotes[0].low, todayStockQuotes[1].low);
-                const avgMorningVol = (todayStockQuotes[0].volume + todayStockQuotes[1].volume) / 2;
-
-                let sVwapSumPV = 0, sVwapSumV = 0;
-                let nVwapSumPV = 0, nVwapSumV = 0;
-
-                for (let i = 0; i < todayStockQuotes.length; i++) {
-                    const candle = todayStockQuotes[i];
-                    sVwapSumPV += (candle.close * candle.volume);
-                    sVwapSumV += candle.volume;
-                    const stockVWAP = sVwapSumPV / sVwapSumV;
-
-                    const nCandle = todayNiftyQuotes[i];
-                    if (nCandle) {
-                        nVwapSumPV += (nCandle.close * (nCandle.volume || 1));
-                        nVwapSumV += (nCandle.volume || 1);
-                    }
-                    const niftyVWAP = nVwapSumPV / nVwapSumV;
-
-                    // BEARISH NIFTY GUARD: Price below Yesterday AND (Below VWAP OR Strong Red Body)
-                    const niftyBearish = (nCandle?.close < yesterdayNiftyClose) && 
-                                       (nCandle?.close < (niftyVWAP * 1.0002) || 
-                                       (Math.abs(nCandle?.close - nCandle?.open) / (nCandle?.high - nCandle?.low)) > 0.3);
-
-                    if (i < 2 || !niftyBearish) continue;
-
-                    // STOCK BEARISH CONDITIONS
-                    const isBreakdown = candle.close < morningLow && candle.close < stockVWAP;
-                    const isLosingValue = candle.close < stockVWAP && todayStockQuotes[i - 1].close > stockVWAP;
-                    const isStrongRed = candle.close < candle.open && (Math.abs(candle.close - candle.open) / (candle.high - candle.low)) > 0.5;
-
-                    if (candle.volume > avgMorningVol * 1.1 && isStrongRed && (isBreakdown || isLosingValue)) {
-                        const globalIdx = allStockQuotes.findIndex(q => q.date === candle.date);
-                        const atr = getHistoricalATR(allStockQuotes, globalIdx, ATR_PERIOD);
-                        
-                        const entry = candle.close;
-                        // FLIPPED MATH: Target is BELOW, Stop Loss is ABOVE
-                        const target = entry - (atr * 5); 
-                        const stopLoss = entry + (atr * 2.5);
-
-                        let outcome = null;
-                        for (let j = i + 1; j < todayStockQuotes.length; j++) {
-                            if (todayStockQuotes[j].high >= stopLoss) { outcome = "LOSS"; break; }
-                            if (todayStockQuotes[j].low <= target) { outcome = "WIN"; break; }
-                        }
-
-                        if (!outcome) {
-                            outcome = todayStockQuotes[todayStockQuotes.length - 1].close < entry ? "WIN" : "LOSS";
-                        }
-
-                        if (outcome === "WIN") stats.wins++; else stats.losses++;
-                        break; 
-                    }
-                }
-            }
-            
-            totalWins += stats.wins;
-            totalLosses += stats.losses;
-            totalTrades += (stats.wins + stats.losses);
-
-            const currentTotal = stats.wins + stats.losses;
-            const currentWR = currentTotal > 0 ? ((stats.wins / currentTotal) * 100).toFixed(2) : 0;
-            console.log(`📉 ${symbol.padEnd(12)} | Wins: ${stats.wins} | Losses: ${stats.losses} | WR: ${currentWR}%`);
-
-        } catch (err) { continue; }
-    }
-
-    console.log("\n================================================================================");
-    console.log(`🏆 BEARISH HYBRID BACKTEST COMPLETE`);
-    console.log(`📈 Total Trades: ${totalTrades} | Win Rate: ${((totalWins/totalTrades)*100).toFixed(2)}%`);
-    console.log("================================================================================\n");
-}
-
-backtestBearishStrategy();
+ 
+    // Yahoo Finance rate limit: be gentle (~2 req/sec)
+    await new Promise((r) => setTimeout(r, 500));
+  }
+ 
+  console.log("━".repeat(55));
+  console.log(`🔍 Bearish Scan Complete: ${new Date().toLocaleTimeString("en-IN")}\n`);
+};
+ 
+await cron();

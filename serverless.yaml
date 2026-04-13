@@ -206,9 +206,9 @@ resources:
         BillingMode: PAY_PER_REQUEST
 
         AttributeDefinitions:
-          - AttributeName: stockId
-            AttributeType: N
+          - AttributeName: symbolKey
+            AttributeType: S
 
         KeySchema:
-          - AttributeName: stockId
+          - AttributeName: symbolKey
             KeyType: HASH

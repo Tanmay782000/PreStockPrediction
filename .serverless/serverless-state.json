@@ -302,13 +302,13 @@
               "BillingMode": "PAY_PER_REQUEST",
               "AttributeDefinitions": [
                 {
-                  "AttributeName": "stockId",
-                  "AttributeType": "N"
+                  "AttributeName": "symbolKey",
+                  "AttributeType": "S"
                 }
               ],
               "KeySchema": [
                 {
-                  "AttributeName": "stockId",
+                  "AttributeName": "symbolKey",
                   "KeyType": "HASH"
                 }
               ]
@@ -618,13 +618,13 @@
             "BillingMode": "PAY_PER_REQUEST",
             "AttributeDefinitions": [
               {
-                "AttributeName": "stockId",
-                "AttributeType": "N"
+                "AttributeName": "symbolKey",
+                "AttributeType": "S"
               }
             ],
             "KeySchema": [
               {
-                "AttributeName": "stockId",
+                "AttributeName": "symbolKey",
                 "KeyType": "HASH"
               }
             ]
@@ -649,7 +649,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1775566044928-2026-04-07T12:47:24.928Z",
+    "artifactDirectoryName": "serverless/SP-DynamoDB-Tables/dev/1776084046862-2026-04-13T12:40:46.862Z",
     "artifact": ""
   }
 }

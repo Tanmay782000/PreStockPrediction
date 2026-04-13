@@ -1,119 +1,125 @@
-import { SmartAPI } from "smartapi-javascript";
-import { TOTP } from "otpauth";
-import { PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import axios from "axios";
+import yahooFinance from "yahoo-finance2";
+import { PutCommand, ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
-import { get } from "./stocksDeepAnalysis.js";
+import { SYMBOL_MAP } from "../Common/stockInfo.js";
 
-//----------------- IMPORTS & GLOBALS ----------------
+const yf = new yahooFinance();
 
 const PlaceStocks = process.env.PlacedStocksTable;
+const Bullish_STOCKS = SYMBOL_MAP;
 
 // ---------------- CONFIGURATION ----------------
 const CONFIG = {
-  api_key: "YOUR_API_KEY",
-  client_code: "YOUR_CLIENT_CODE",
-  password: "YOUR_PASSWORD",
-  totp_secret: "YOUR_TOTP_SECRET", // The 2FA secret key from AngelOne
+  apiKey: "uVNH5DtC",
+  // Use the JWT Token you provided (Ensure it is refreshed daily)
+  jwtToken:
+    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qRTFNVEk0TkN3aWJtSm1Jam94TnpjMk1EWTBOekEwTENKcFlYUWlPakUzTnpZd05qUTNNRFFzSW1wMGFTSTZJakZrTkRjM05tUmxMVE5oWlRjdE5ERTJZeTFpTURJMkxUa3dNall5T0RkaU9ETXlNeUlzSWxSdmEyVnVJam9pSW4wLllReG9zdE1uWWJ5aVY4ZW5fWXgwLXBTeElFQlIzZnlQa1REcTc3UmZJMTdla0cxdVhRQTJHbWdZU0QtWEFEQ243STlFRmtyX1BhX3Bjd0FHSGZhQ2JickxCd3Q0YWlreXF3YkFLRUlEVzBXdUdoODQxZVEyODAtaWtkY0htZE1UUFlHei1senVsTVdaMFNaX2M5M0w2ZnFoZVhIZ0oyQzhJTUJoZVNmS2lGQSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYwNjQ4ODQsImV4cCI6MTc3NjEwNTAwMH0.BQ8aqhDAlkDLTM25DcaGP1rWuBkhkwaXpaQ7Ac3fHrTcWUvqu9tvwpXYegYZxRcSNRsqDkJa1pHjAV4CKKTU-g",
+  publicIP: "45.114.212.194", // From your earlier whitelisting screenshot
+  localIP: "127.0.0.1",
+  capital: 10000,
+  risk_per_trade: 0.2,
 };
 
-// Map your symbols to numeric Tokens (Essential for AngelOne)
-const SYMBOL_MAP = {
-  NIFTY: { token: "99926000", symbol: "Nifty 50", exchange: "NSE" }, // Nifty Index
-  RAMCOCEM: { token: "11532", symbol: "RAMCOCEM-EQ", exchange: "NSE" },
-  APLAPOLLO: { token: "13517", symbol: "APLAPOLLO-EQ", exchange: "NSE" },
-  TITAN: { token: "3506", symbol: "TITAN-EQ", exchange: "NSE" },
-  MANAPPURAM: { token: "13328", symbol: "MANAPPURAM-EQ", exchange: "NSE" },
-};
-
-const smart_api = new SmartAPI({ api_key: CONFIG.api_key });
+// ---------------- AXIOS BASE CLIENT (AngelOne) ----------------
+// Used exclusively for Nifty index data (not available on Yahoo Finance)
+const angelClient = axios.create({
+  baseURL: "https://apiconnect.angelone.in",
+  headers: {
+    Authorization: `Bearer ${CONFIG.jwt_token}`,
+    Accept: "application/json",
+    "X-SourceID": "WEB",
+    "X-UserType": "USER",
+    "X-ClientLocalIP": "127.0.0.1",
+    "X-ClientPublicIP": "45.114.212.194",
+    "X-MACAddress": "02:00:00:00:00:00",
+    "X-PrivateKey": CONFIG.api_key,
+    "Content-Type": "application/json",
+  },
+});
 
 // ---------------- TECHNICAL HELPERS ----------------
 const average = (arr) =>
   arr.length === 0 ? 0 : arr.reduce((a, b) => a + b, 0) / arr.length;
 
-// AngelOne Candle Data Format: [timestamp, open, high, low, close, volume]
-// Indices: 0:time, 1:O, 2:H, 3:L, 4:C, 5:V
-async function calculateATRFromAngel(candles, period = 20) {
-  if (candles.length < period + 1) return 0;
-  let trs = [];
-  const recent = candles.slice(-(period + 1));
+/**
+ * Yahoo Finance quote format: { date, open, high, low, close, volume }
+ * Used for individual stock ATR calculation.
+ */
+async function calculateIntradayATR(quotes, period = 20) {
+  if (quotes.length < period + 1) return 0;
+  const recent = quotes.slice(-(period + 1));
+  const trs = [];
   for (let i = 1; i < recent.length; i++) {
     const tr = Math.max(
-      recent[i][2] - recent[i][3], // H - L
-      Math.abs(recent[i][2] - recent[i - 1][4]), // H - Prev C
-      Math.abs(recent[i][3] - recent[i - 1][4]), // L - Prev C
+      recent[i].high - recent[i].low,
+      Math.abs(recent[i].high - recent[i - 1].close),
+      Math.abs(recent[i].low - recent[i - 1].close),
     );
     trs.push(tr);
   }
   return average(trs);
 }
 
-// ---------------- SESSION MANAGER ----------------
-async function initializeSession() {
-  try {
-    const totp = new TOTP({ secret: CONFIG.totp_secret }).generate();
-    const session = await smart_api.generateSession(
-      CONFIG.client_code,
-      CONFIG.password,
-      totp,
-    );
-    if (!session.status) throw new Error(session.message);
-    console.log("✅ Angel One Session Authenticated");
-  } catch (err) {
-    console.error("❌ Login Failed:", err.message);
-    process.exit(1);
-  }
-}
-
-// ---------------- NIFTY SENTIMENT ENGINE (AGGRESSIVE) ----------------
+// ================================================================
+//  NIFTY SENTIMENT ENGINE — uses AngelOne API
+//  (Nifty index is not reliably available on Yahoo Finance)
+// ================================================================
 async function getNiftySentiment() {
+  const today = new Date().toISOString().split("T")[0];
   try {
-    const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+    // Fetch 15-minute intraday candles for Nifty
+    const intraDayRes = await angelClient.post(
+      "/rest/secure/angelbroking/historical/v1/getCandleData",
+      {
+        exchange: "NSE",
+        symboltoken: "99926000", // Nifty 50 token
+        interval: "FIFTEEN_MINUTE",
+        fromdate: `${today} 09:15`,
+        todate: `${today} 15:30`,
+      },
+    );
 
-    // Fetch 15m Intraday
-    const candleRes = await smart_api.getCandleData({
-      exchange: "NSE",
-      symboltoken: SYMBOL_MAP.NIFTY.token,
-      interval: "FIFTEEN_MINUTE",
-      fromdate: `${today} 09:15`,
-      todate: `${today} 15:30`,
-    });
+    // Fetch daily candles to get yesterday's close
+    const dailyRes = await angelClient.post(
+      "/rest/secure/angelbroking/historical/v1/getCandleData",
+      {
+        exchange: "NSE",
+        symboltoken: "99926000",
+        interval: "ONE_DAY",
+        fromdate: "2026-04-01 09:15",
+        todate: `${today} 15:30`,
+      },
+    );
 
-    // Fetch Daily (for yesterday's close)
-    const dailyRes = await smart_api.getCandleData({
-      exchange: "NSE",
-      symboltoken: SYMBOL_MAP.NIFTY.token,
-      interval: "ONE_DAY",
-      fromdate: "2026-04-01 09:15", // Pull enough for history
-      todate: `${today} 15:30`,
-    });
+    const quotes = intraDayRes.data?.data;
+    const dailyQuotes = dailyRes.data?.data;
 
-    const iQuotes = candleRes.data;
-    const dQuotes = dailyRes.data;
-
-    if (!iQuotes || iQuotes.length === 0)
+    if (!quotes || quotes.length === 0) {
       return { isBullish: false, reason: "Market Not Open" };
+    }
 
-    const yesterdayClose = dQuotes[dQuotes.length - 2][4];
-    const lastCandle = iQuotes[iQuotes.length - 1];
-    const [time, open, high, low, close, volume] = lastCandle;
+    const yesterdayClose = dailyQuotes[dailyQuotes.length - 2][4];
+    const last = quotes[quotes.length - 1];
+    // AngelOne format: [timestamp, open, high, low, close, volume]
+    const [, open, high, low, close, volume] = last;
 
+    // VWAP Calculation
     let tVal = 0,
       tVol = 0;
-    iQuotes.forEach((q) => {
-      tVal += q[4] * (q[5] || 1);
-      tVol += q[5] || 1;
+    quotes.forEach((q) => {
+      tVal += q[4] * q[5];
+      tVol += q[5];
     });
+    const vwap = tVal / tVol;
 
-    const currentVWAP = tVal / tVol;
-    const body = Math.abs(close - open);
-    const range = high - low;
+    const isAbovePrev = close > yesterdayClose;
+    const isAboveVWAP = close > vwap * 0.9998;
+    const bodyToRange =
+      high - low > 0 ? Math.abs(close - open) / (high - low) : 0;
+    const isStrong = bodyToRange > 0.3;
 
-    const isAboveYesterday = close > yesterdayClose;
-    const isStrongBody = range > 0 ? body / range > 0.3 : false;
-    const isAboveVWAP = close > currentVWAP * 0.9998;
-
-    const isBullish = isAboveYesterday && (isAboveVWAP || isStrongBody);
+    const isBullish = isAbovePrev && (isAboveVWAP || isStrong);
 
     return {
       isBullish,
@@ -121,179 +127,273 @@ async function getNiftySentiment() {
       status: isBullish ? "🟢 STRONG" : "🔴 WEAK",
     };
   } catch (err) {
+    console.error("❌ Nifty Sentiment Error:", err.message);
     return { isBullish: false, status: "ERR" };
   }
 }
 
-// ---------------- CORE SIGNAL ENGINE (AGGRESSIVE) ----------------
-async function getExpertTimingSignal(symbolKey, niftyStatus) {
+// ================================================================
+//  STOCK SIGNAL ENGINE — uses Yahoo Finance API
+//  (Individual NSE stocks fetched via Yahoo Finance symbol e.g. "TITAN.NS")
+// ================================================================
+async function getExpertTimingSignal(symbol, niftyStatus) {
   try {
-    if (!niftyStatus.isBullish)
-      return { status: "WAITING", reason: "Nifty Weak" };
+    console.log("niftyStatus & Symbol", niftyStatus, symbol);
+    if (!niftyStatus.isBullish) {
+      return { status: "WAITING", reason: "Nifty Bearish/Weak" };
+    }
 
-    const tokenInfo = SYMBOL_MAP[symbolKey];
-    const today = new Date().toISOString().split("T")[0];
-
-    const candleRes = await smart_api.getCandleData({
-      exchange: "NSE",
-      symboltoken: tokenInfo.token,
-      interval: "FIFTEEN_MINUTE",
-      fromdate: `${today} 09:15`,
-      todate: `${today} 15:30`,
+    const intradayData = await yf.chart(`${symbol}.NS`, {
+      period1: Math.floor(Date.now() / 1000) - 48 * 60 * 60,
+      interval: "15m",
     });
 
-    const dailyRes = await smart_api.getCandleData({
-      exchange: "NSE",
-      symboltoken: tokenInfo.token,
-      interval: "ONE_DAY",
-      fromdate: "2026-04-01 09:15",
-      todate: `${today} 15:30`,
+    const dailyData = await yf.chart(`${symbol}.NS`, {
+      period1: Math.floor(Date.now() / 1000) - 5 * 24 * 60 * 60,
+      interval: "1d",
     });
 
-    const todayQuotes = candleRes.data;
-    const dQuotes = dailyRes.data;
+    const iQuotes = intradayData.quotes.filter((q) => q.close && q.volume);
+    const dQuotes = dailyData.quotes.filter((q) => q.close);
+    const todayStr = new Date().toLocaleDateString("en-CA", {
+      timeZone: "Asia/Kolkata",
+    });
 
-    if (!todayQuotes || todayQuotes.length < 3)
-      return { status: "WAITING", reason: "Syncing" };
+    const todayQuotes = iQuotes.filter((q) =>
+      new Date(q.date).toISOString().startsWith(todayStr),
+    );
 
-    const yesterdayClose = dQuotes[dQuotes.length - 2][4];
+    if (todayQuotes.length < 3)
+      return {
+        status: "WAITING",
+        reason: `Data Sync (${todayQuotes.length}/3)`,
+      };
+
+    const yesterdayClose = dQuotes[dQuotes.length - 2].close;
     const gapPercent =
-      ((todayQuotes[0][1] - yesterdayClose) / yesterdayClose) * 100;
+      ((todayQuotes[0].open - yesterdayClose) / yesterdayClose) * 100;
 
     if (gapPercent > 3.0) return { status: "REJECTED", reason: "High Gap" };
 
-    const morningHigh = Math.max(todayQuotes[0][2], todayQuotes[1][2]);
-    const avgMorningVol = (todayQuotes[0][5] + todayQuotes[1][5]) / 2;
+    const morningHigh = Math.max(todayQuotes[0].high, todayQuotes[1].high);
+    const avgMorningVol = (todayQuotes[0].volume + todayQuotes[1].volume) / 2;
 
     let sVal = 0,
       sVol = 0;
     todayQuotes.forEach((q) => {
-      sVal += q[4] * q[5];
-      sVol += q[5];
+      sVal += q.close * q.volume;
+      sVol += q.volume;
     });
 
     const stockVWAP = sVal / sVol;
     const lastCandle = todayQuotes[todayQuotes.length - 1];
     const prevCandle = todayQuotes[todayQuotes.length - 2];
-    const [time, L_open, L_high, L_low, L_close, L_vol] = lastCandle;
 
-    const isAboveVWAP = L_close > stockVWAP * 0.9998;
-    const isBreakout = L_close > morningHigh && isAboveVWAP;
-    const isReclaimingValue = isAboveVWAP && prevCandle[4] < stockVWAP;
-
-    const hasVolumeSurge = L_vol > avgMorningVol * 1.1;
-    const sBody = Math.abs(L_close - L_open);
-    const sRange = L_high - L_low;
-    const isStrongCandle = sRange > 0 ? sBody / sRange > 0.3 : false;
+    const isBreakout =
+      lastCandle.close > morningHigh && lastCandle.close > stockVWAP;
+    const isReclaimingValue =
+      lastCandle.close > stockVWAP && prevCandle.close < stockVWAP;
+    const hasVolumeSurge = lastCandle.volume > avgMorningVol * 1.1;
+    const sBody = Math.abs(lastCandle.close - lastCandle.open);
+    const sRange = lastCandle.high - lastCandle.low;
+    const isStrongCandle = sRange > 0 ? sBody / sRange > 0.5 : false;
 
     if (hasVolumeSurge && isStrongCandle && (isBreakout || isReclaimingValue)) {
-      const atrValue = await calculateATRFromAngel(todayQuotes, 20);
+      const atrValue = await calculateIntradayATR(iQuotes, 20);
+      let showDate = new Date().toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+      });
       return {
         status: "TRIGGERED",
-        symbolKey: symbolKey,
         type: isBreakout ? "BREAKOUT" : "REVERSAL",
-        price: L_close.toFixed(2),
-        target: (L_close + atrValue * 5).toFixed(2),
-        stopLoss: (L_close - atrValue * 2.5).toFixed(2),
+        symbol: symbol,
+        price: lastCandle.close.toFixed(2),
+        time: showDate,
+        date: todayStr,
+        target: (lastCandle.close + atrValue * 5.0).toFixed(2),
+        stopLoss: (lastCandle.close - atrValue * 2.5).toFixed(2),
       };
     }
 
-    return { status: "WAITING", price: L_close.toFixed(2) };
+    return { status: "WAITING", price: lastCandle.close.toFixed(2) };
   } catch (err) {
     return { status: "ERROR", message: err.message };
   }
 }
 
-// ---------------- DATABASE OPERATION OF ORDER PLACEMENT ----------------
-async function insertStock(res) {
-  var getStocks = await client.send(
-    new ScanCommand({
-      TableName: PlaceStocks,
+// ---------------- DATABASE OPERATION ----------------
+async function insertStock(signal) {
+  const getStocks = await client.send(
+    new ScanCommand({ TableName: PlaceStocks ?? "PlacedStocks" }),
+  );
+
+  if (getStocks.Items.length >= 4) {
+    console.log("⚠️ Already have 4 stocks in the system. Skipping insertion.");
+    return false;
+  }
+  console.log("SIGNAL TO INSERT", signal);
+  const alreadyExists = getStocks.Items.some(
+    (s) => s.symbolKey === signal.symbol,
+  );
+  if (alreadyExists) {
+    console.log(`⚠️ ${signal.symbol} already tracked. Skipping.`);
+    return false;
+  }
+  const c_date = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+  );
+  const isInserted = await client.send(
+    new PutCommand({
+      TableName: PlaceStocks ?? "PlacedStocks",
+      Item: {
+        symbolKey: signal.symbol,
+        price: signal.price,
+        target: signal.target,
+        stopLoss: signal.stopLoss,
+        type: signal.type,
+        status: 0, // 0 = Placed, 1 = Executed, 2 = Closed
+        createdAt: c_date.toString(),
+        updatedAt: c_date.toString(),
+      },
     }),
   );
 
-  if (getStocks.Items.length < 3) {
-    if (!getStocks.Items.any((s) => s.symbolKey === res.symbolKey)) {
-      //insert into the database
-      let isInserted = await client.send(
-        new PutCommand({
-          TableName: PlaceStocks,
-        }),
-      );
-      if (isInserted) {
-        console.log(`✅ Signal for ${signal.symbolKey} stored in DB.`);
-        await placeStock(res);
-        return true;
-      } else {
-        console.log(`❌ Failed to store signal for ${signal.symbolKey}.`);
-      }
-      return false;
-    }
-  } else {
-    console.log("⚠️ Already have 2 stocks in the system. Skipping insertion.");
-    return false; // Already have 2 stocks, skip insertion
+  if (isInserted) {
+    console.log(`✅ Signal for ${signal.symbol} stored in DB.`);
+    await placeStock(signal);
+    return true;
   }
+
+  console.log(`❌ Failed to store signal for ${signal.symbolKey}.`);
+  return false;
 }
 
-// ---------------- OPERATION OF STOCK PLACEMENT ----------------
-async function placeStock(res){
+// ---------------- ORDER PLACEMENT ----------------
+async function placeStock(signal) {
+  const amount = CONFIG.capital * CONFIG.risk_per_trade;
+  const qty = Math.floor(amount / signal.price);
+  if (qty < 1) {
+    console.log(`⚠️ Qty < 1 for ${signal.symbolKey}. Skipping order.`);
+    return;
+  }
 
-  let calculatedData = await calculatetotalPercentage()
+  const limitPrice = (signal.price * 1.003).toFixed(2); // 0.3% buffer
 
+  const payload = {
+    variety: "NORMAL",
+    tradingsymbol: `${signal.symbol}-EQ`,
+    symboltoken: Bullish_STOCKS[signal.symbol]?.token,
+    transactiontype: "BUY",
+    exchange: "NSE",
+    ordertype: "LIMIT",
+    producttype: "INTRADAY",
+    duration: "DAY",
+    price: limitPrice.toString(),
+    squareoff:signal.target.toString(),
+    stoploss:signal.stopLoss.toString(),
+    quantity: qty.toString(),
+  };
 
-  // Logic to place stock order using AngelOne API
-  // This would typically involve calling the order placement endpoint of AngelOne with the required parameters
-  // such as symbol, quantity, price, order type, etc.
+  console.log(
+    `🚀 Placing order for ${signal.symbol}: qty=${qty} @ ₹${limitPrice}`,
+  );
+
+  // Uncomment to actually place:
+  // const res = await angelClient.post('/rest/secure/angelbroking/order/v1/placeOrder', payload);
+  // if (res.data.status) console.log(`✅ Order placed: ${signal.symbolKey} @ ${limitPrice}`);
+
+  console.log(`✅ Order placed: ${signal.symbol} @ ${limitPrice}`);
+
+  //change the status in database
+
+  const getStockInfo = await client.send(
+    new GetCommand({
+      TableName: PlaceStocks ?? "PlacedStocks",
+      Key: { symbolKey: signal.symbol },
+    }),
+  );
+
+  if (!getStockInfo.Item) {
+    console.log(
+      `⚠️ No record found for ${signal.symbolKey}. Cannot update status.`,
+    );
+    return;
+  }
+  const c_date = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+  );
+  const isUpdated = await client.send(
+    new PutCommand({
+      TableName: PlaceStocks ?? "PlacedStocks",
+      Item: {
+        symbolKey: getStockInfo.Item.symbolKey,
+        price: getStockInfo.Item.price,
+        target: getStockInfo.Item.target,
+        stopLoss: getStockInfo.Item.stopLoss,
+        type: getStockInfo.Item.type,
+        status: 1, // 0 = Placed, 1 = Executed, 2 = Closed
+        createdAt: getStockInfo.Item.createdAt,
+        updatedAt: c_date.toString(),
+      },
+    }),
+  );
 }
 
-// ---------------- CALCULATE TOTAL PERCENTAGE ----------------
-async function calculatetotalPercentage(stockInfo){
-
-let capital = 10000;
-let amount = capital * 0.4; // 30% of capital per trade
-
-let currentPriceStock = 1200;
-let quantity = Math.floor(amount / currentPriceStock);
-
-let targetPrice = stockInfo.target; // Assuming this comes from the signal
-let stopLossPrice = stockInfo.stopLoss; // Assuming this comes from the signal
-}
-
-// ---------------- MAIN EXECUTION ----------------
+// ================================================================
+//  MAIN CRON — Entry Point
+// ================================================================
 export const cron = async () => {
-  await initializeSession();
-
   const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-  console.log(`🔍 Execution Start: ${time}`);
+  console.log(`\n🔍 Scan Started: ${time}`);
+  console.log("━".repeat(55));
 
-  const nifty = await getNiftySentiment();
-  console.log(`NIFTY Status: ${nifty.status} (${nifty.price})`);
+  // ── Step 1: Nifty Sentiment via AngelOne (index data) ──────────
+     const nifty = await getNiftySentiment();
+  // const nifty = {
+  //   isBullish: true,
+  //   price: 2500,
+  //   status: "🟢 STRONG",
+  // };
+  console.log(`NIFTY: ${nifty.status || "N/A"} @ ₹${nifty.price || "?"}`);
 
-  for (const key of Object.keys(SYMBOL_MAP)) {
-    if (key === "NIFTY") continue;
+  if (nifty.status === "ERR") {
+    console.error("❌ Aborted: Could not fetch Nifty data.");
+    return;
+  }
 
-    const res = await getExpertTimingSignal(key, nifty);
+  console.log("━".repeat(55));
 
-    if (res.status === "TRIGGERED") {
-      console.log(`🔥 [${res.type}] SIGNAL: ${key} @ ₹${res.price}`);
-      console.log(`🎯 TARGET: ₹${res.target} | 🛑 SL: ₹${res.stopLoss}`);
+  // ── Step 2: Scan stocks via Yahoo Finance ──────────────────────
+  for (const [symbolKey, stockData] of Object.entries(Bullish_STOCKS)) {
+    try {
+      const signal = await getExpertTimingSignal(symbolKey, nifty);
 
-      let isInserted = await insertStock(res);
-      if (isInserted) {
-        console.log(`✅ Signal for ${key} stored in DB.`);
+      if (signal.status === "TRIGGERED") {
+        console.log(
+          `🔥 [${signal.type}] ${symbolKey} @ ₹${signal.price} | 🎯 ${signal.target} | 🛑 ${signal.stopLoss}`,
+        );
+        await insertStock(signal);
       } else {
-        console.log(`❌ Failed to store signal for ${key}.`);
+        const statusLabel =
+          {
+            WAITING: `⏳ ${signal.reason || "Monitoring"}`,
+            REJECTED: `🚫 ${signal.reason}`,
+            SYNCING: "🔄 Syncing",
+            ERROR: `❌ ${signal.message || "Error"}`,
+          }[signal.status] || signal.status;
+
+        console.log(`${symbolKey.padEnd(14)}: ${statusLabel}`);
       }
-    } else {
-      console.log(
-        `⏳ ${key}: ${res.price || "Syncing"} [${res.reason || "Waiting"}]`,
-      );
+    } catch (err) {
+      console.error(`Error processing ${symbolKey}:`, err.message);
     }
 
-    // AngelOne Rate Limit: 3 calls per second
-    await new Promise((resolve) => setTimeout(resolve, 350));
+    // Yahoo Finance rate limit: be gentle (~2 req/sec)
+    await new Promise((r) => setTimeout(r, 500));
   }
-  console.log("🔍 Execution Complete.");
+
+  console.log("━".repeat(55));
+  console.log(`🔍 Scan Complete: ${new Date().toLocaleTimeString("en-IN")}\n`);
 };
 
 await cron();

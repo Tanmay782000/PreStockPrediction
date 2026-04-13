@@ -5,6 +5,7 @@ provider:
   runtime: nodejs20.x
   timeout: 30
   environment:
+    #APIS
     JWT_SECRET: "iamworkinginheliosassoftwareengineer"
     CountryTable: Country
     TokenHistoryTable: TokenHistory
@@ -18,6 +19,11 @@ provider:
     DeepStockAnalysis: DeepStocksAnalysis
     SelectedStocksTable: SelectedStocks
     PlacedStocksTable: PlacedStocks
+    #ANGLE_ONE_CONFIGURATIONS
+    ANGEL_API_KEY : 
+    ANGEL_CLIENT_CODE: 
+    ANGEL_PASSWORD:
+    ANGEL_TOTP_SECRET:
     #Lambdas
 
   iam:
