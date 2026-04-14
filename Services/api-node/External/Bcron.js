@@ -8,28 +8,27 @@ const PlaceStocks = process.env.PlacedStocksTable;
 const Barish_STOCKS = SYMBOL_MAP;
 // ---------------- CONFIGURATION ----------------
 const CONFIG = {
-    apiKey: "uVNH5DtC",
-    // Use the JWT Token you provided (Ensure it is refreshed daily)
-    jwtToken: "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qRTFNVEk0TkN3aWJtSm1Jam94TnpjMk1EWTBOekEwTENKcFlYUWlPakUzTnpZd05qUTNNRFFzSW1wMGFTSTZJakZrTkRjM05tUmxMVE5oWlRjdE5ERTJZeTFpTURJMkxUa3dNall5T0RkaU9ETXlNeUlzSWxSdmEyVnVJam9pSW4wLllReG9zdE1uWWJ5aVY4ZW5fWXgwLXBTeElFQlIzZnlQa1REcTc3UmZJMTdla0cxdVhRQTJHbWdZU0QtWEFEQ243STlFRmtyX1BhX3Bjd0FHSGZhQ2JickxCd3Q0YWlreXF3YkFLRUlEVzBXdUdoODQxZVEyODAtaWtkY0htZE1UUFlHei1senVsTVdaMFNaX2M5M0w2ZnFoZVhIZ0oyQzhJTUJoZVNmS2lGQSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYwNjQ4ODQsImV4cCI6MTc3NjEwNTAwMH0.BQ8aqhDAlkDLTM25DcaGP1rWuBkhkwaXpaQ7Ac3fHrTcWUvqu9tvwpXYegYZxRcSNRsqDkJa1pHjAV4CKKTU-g", 
-    publicIP: "45.114.212.194", // From your earlier whitelisting screenshot
-    localIP: "127.0.0.1",
-    capital: 10000,
-    risk_per_trade: 0.20
-}
+  apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
+  jwtToken: process.env.Smart_API_JWT_TOKEN ?? "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qSTJNRGc0Tml3aWJtSm1Jam94TnpjMk1UYzBNekEyTENKcFlYUWlPakUzTnpZeE56UXpNRFlzSW1wMGFTSTZJbUl4WXpVell6SmlMVEl4TTJRdE5HWmhZaTFpT1RZMUxXSmtOekl3WlRGaVpUQXlaU0lzSWxSdmEyVnVJam9pSW4wLnE1XzBwanNsSk1EbHdZMVNXUTAxczBoMUdSWG9ST0p2Tk1XQ2Frd3ZnQUVQbGY1LW9CZk4zdkJtNWJ0TWZ2OUNGYm1HMW1ObmpveUI0QTVRWGJXdW40YlZhNjBKYnItZklpcmg5UmZyU2lTVGc5OXhWSUh3WVo1UzlxOTJyaDNibktNVEVTMl9mb0MtTXlUSUhWVmJFdlZkU3RLelFJT2ZQSUZhWFZEOUJxVSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYxNzQ0ODYsImV4cCI6MTc3NjE5MTQwMH0.gtLrmwKaFNSX9qtuUchMWT7ywitdnp7ErRgoVJHvU_aKIDr_xJKzl9oIywnYFUWEAFeBUtY6I7yXBGeowgDf6g",
+  publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
+  localIP:  process.env.Smart_API_LocalIP ?? "127.0.0.1",
+  capital:  process.env.Capital ?? 10000,
+  risk_per_trade:  process.env.Risk_Per_Trade ?? 0.2,
+};
 
 // ---------------- AXIOS BASE CLIENT (AngelOne) ----------------
 // Used exclusively for Nifty index data (not available on Yahoo Finance)
 const angelClient = axios.create({
   baseURL: "https://apiconnect.angelone.in",
   headers: {
-    Authorization: `Bearer ${CONFIG.jwt_token}`,
+    Authorization: `Bearer ${CONFIG.jwtToken}`,
     Accept: "application/json",
     "X-SourceID": "WEB",
     "X-UserType": "USER",
     "X-ClientLocalIP": "127.0.0.1",
     "X-ClientPublicIP": "45.114.212.194",
     "X-MACAddress": "02:00:00:00:00:00",
-    "X-PrivateKey": CONFIG.api_key,
+    "X-PrivateKey": CONFIG.apiKey,
     "Content-Type": "application/json",
   },
 });
@@ -90,7 +89,7 @@ async function getNiftyBearishSentiment() {
  
     const quotes = intraDayRes.data?.data;
     const dailyQuotes = dailyRes.data?.data;
- 
+
     if (!quotes || quotes.length === 0) {
       return { isBearish: false, reason: "Market Not Open" };
     }
@@ -166,10 +165,10 @@ async function getBearishExpertSignal(symbol, niftyStatus) {
  
     const yesterdayClose = dQuotes[dQuotes.length - 2].close;
  
-    // Gap Down Protection: Don't short if it gapped down more than 3%
+    // Gap Down Protection: Don't short if it gapped down more than 5%
     const gapPercent =
       ((todayQuotes[0].open - yesterdayClose) / yesterdayClose) * 100;
-    if (gapPercent < -3.0) return { status: "REJECTED", reason: "High Gap Down" };
+    if (gapPercent < -5.0) return { status: "REJECTED", reason: "High Gap Down" };
  
     const morningLow  = Math.min(todayQuotes[0].low, todayQuotes[1].low);
     const avgMorningVol = (todayQuotes[0].volume + todayQuotes[1].volume) / 2;
@@ -204,7 +203,7 @@ async function getBearishExpertSignal(symbol, niftyStatus) {
         price: lastCandle.close.toFixed(2),
         time: showDate,
         date: todayStr,
-        target: (lastCandle.close - atrValue * 5.0).toFixed(2), // Target is BELOW (short)
+        target: (lastCandle.close - atrValue * 7.5).toFixed(2), // Target is BELOW (short)
         stopLoss: (lastCandle.close + atrValue * 2.5).toFixed(2), // SL is ABOVE (short)
       };
     }
@@ -247,7 +246,9 @@ async function insertStock(signal) {
         symbolKey: signal.symbol,
         price: signal.price,
         target: signal.target,
+        transactiontype: "SELL",
         stopLoss: signal.stopLoss,
+        limitPrice: "0",
         type: signal.type,
         status: 0, // 0 = Placed, 1 = Executed, 2 = Closed
         createdAt: c_date.toString(),
@@ -327,7 +328,9 @@ async function placeStock(signal) {
         symbolKey: getStockInfo.Item.symbolKey,
         price: getStockInfo.Item.price,
         target: getStockInfo.Item.target,
+        transactiontype: "SELL",
         stopLoss: getStockInfo.Item.stopLoss,
+        limitPrice : limitPrice.toString(),
         type: getStockInfo.Item.type,
         status: 1, // 0 = Placed, 1 = Executed, 2 = Closed
         createdAt: getStockInfo.Item.createdAt,
@@ -340,7 +343,7 @@ async function placeStock(signal) {
 // ================================================================
 //  MAIN CRON — Entry Point
 // ================================================================
-export const cron = async () => {
+export const Bcron = async () => {
   const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
   console.log(`\n🔍 Bearish Scan Started: ${time}`);
   console.log("━".repeat(55));
@@ -389,5 +392,3 @@ export const cron = async () => {
   console.log("━".repeat(55));
   console.log(`🔍 Bearish Scan Complete: ${new Date().toLocaleTimeString("en-IN")}\n`);
 };
- 
-await cron();

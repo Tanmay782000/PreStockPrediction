@@ -20,10 +20,13 @@ provider:
     SelectedStocksTable: SelectedStocks
     PlacedStocksTable: PlacedStocks
     #ANGLE_ONE_CONFIGURATIONS
-    ANGEL_API_KEY : 
-    ANGEL_CLIENT_CODE: 
-    ANGEL_PASSWORD:
-    ANGEL_TOTP_SECRET:
+    Smart_API_KEY : "uVNH5DtC"
+    Smart_API_JWT_TOKEN: "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qSTJNRGc0Tml3aWJtSm1Jam94TnpjMk1UYzBNekEyTENKcFlYUWlPakUzTnpZeE56UXpNRFlzSW1wMGFTSTZJbUl4WXpVell6SmlMVEl4TTJRdE5HWmhZaTFpT1RZMUxXSmtOekl3WlRGaVpUQXlaU0lzSWxSdmEyVnVJam9pSW4wLnE1XzBwanNsSk1EbHdZMVNXUTAxczBoMUdSWG9ST0p2Tk1XQ2Frd3ZnQUVQbGY1LW9CZk4zdkJtNWJ0TWZ2OUNGYm1HMW1ObmpveUI0QTVRWGJXdW40YlZhNjBKYnItZklpcmg5UmZyU2lTVGc5OXhWSUh3WVo1UzlxOTJyaDNibktNVEVTMl9mb0MtTXlUSUhWVmJFdlZkU3RLelFJT2ZQSUZhWFZEOUJxVSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYxNzQ0ODYsImV4cCI6MTc3NjE5MTQwMH0.gtLrmwKaFNSX9qtuUchMWT7ywitdnp7ErRgoVJHvU_aKIDr_xJKzl9oIywnYFUWEAFeBUtY6I7yXBGeowgDf6g"
+    Smart_API_SECRET: "625a12f7-a8de-4c19-9382-abfcb8be0bdf"
+    Smart_API_PublicIP: "45.114.212.194"
+    Smart_API_LocalIP: "127.0.0.1"
+    Capital: 10000,
+    Risk_Per_Trade: 0.2,
     #Lambdas
 
   iam:
@@ -188,15 +191,14 @@ functions:
     handler: External/urlExtraction.urlExtraction
     timeout: 300
     description: "Fetch the URLs from the raw data."
-
       
 ############## Cron Jobs ##############
-
   cronJob:
     handler: External/cron.cron
     timeout: 300
     description: "Cron job to update stock data"
-    # events:
-    #   - schedule:
-    #       rate: rate(2 minutes)
-    #       enabled: true
+
+  BcronJob:
+    handler: External/Bcron.Bcron
+    timeout: 300
+    description: "Cron job to update stock data for bearish sniper"

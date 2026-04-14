@@ -1,13 +1,8 @@
 import yahooFinance from "yahoo-finance2";
-import { Barish_STOCKS } from "../../Common/stockInfo.js";
+import { IT } from '../../Common/stockInfo.js';
 
 const yf = new yahooFinance();
 
-// ---------------- SETTINGS ----------------
-// We use the same high-momentum sectors as they often drop sharply during market corrections
-// const BACKTEST_STOCKS = STOCKS.map(s => s.symbol);
- const BACKTEST_STOCKS = Barish_STOCKS.map(s => s.symbol);
-const NIFTY_SYMBOL = "^NSEI";
 const ATR_PERIOD = 20;
 
 // TIMEFRAME CONSTANTS
@@ -33,16 +28,19 @@ function getHistoricalATR(allQuotes, currentIndex, period) {
 }
 
 async function backtestBearishStrategy() {
-    console.log("🚀 Initializing Bearish Hybrid Backtest...");
-    console.log(`📉 Mode: SHORTING (Sell High, Buy Low) | ${BACKTEST_STOCKS.length} Stocks\n`);
+    console.log("🚀 Initializing Bearish Sniper Backtest...");
+    
+    // FIX: Converting Object to Entries for iteration
+    const stockEntries = Object.entries(IT);
+    console.log(`📉 Mode: SHORTING (Sell High, Buy Low) | ${stockEntries.length} Stocks\n`);
 
     let totalWins = 0, totalLosses = 0, totalTrades = 0;
 
     // 1. FETCH NIFTY DATA
     let allNiftyQuotes = [], allNiftyDaily = [];
     try {
-        const niftyHistory = await yf.chart(NIFTY_SYMBOL, { period1: START_DATE_15M, interval: "15m" });
-        const niftyDailyHistory = await yf.chart(NIFTY_SYMBOL, { period1: START_DATE_DAILY, interval: "1d" });
+        const niftyHistory = await yf.chart("^NSEI", { period1: START_DATE_15M, interval: "15m" });
+        const niftyDailyHistory = await yf.chart("^NSEI", { period1: START_DATE_DAILY, interval: "1d" });
         
         allNiftyQuotes = niftyHistory.quotes.filter(q => q.close);
         allNiftyDaily = niftyDailyHistory.quotes.filter(q => q.close);
@@ -50,7 +48,9 @@ async function backtestBearishStrategy() {
         console.error("❌ Critical: Nifty data sync failed."); return;
     }
 
-    for (const symbol of BACKTEST_STOCKS) {
+    // 2. ITERATE THROUGH STOCKS
+    for (const [symbolKey, stockData] of stockEntries) {
+        const symbol = `${symbolKey}.NS`; // Ensure Yahoo suffix
         try {
             const stockHistory = await yf.chart(symbol, { period1: START_DATE_15M, interval: "15m" });
             const dailyHistory = await yf.chart(symbol, { period1: START_DATE_DAILY, interval: "1d" });
@@ -60,6 +60,7 @@ async function backtestBearishStrategy() {
 
             if (allStockQuotes.length === 0) continue;
 
+            // Map intraday data into days
             const daysMap = {};
             allStockQuotes.forEach(q => {
                 const dateStr = q.date.toISOString().split('T')[0];
@@ -68,15 +69,15 @@ async function backtestBearishStrategy() {
             });
 
             let stats = { wins: 0, losses: 0 };
-            const dateKeys = Object.keys(daysMap);
+            const dateKeys = Object.keys(daysMap).sort();
 
             for (const todayStr of dateKeys) {
                 const todayStockQuotes = daysMap[todayStr];
-                if (todayStockQuotes.length < 5) continue;
-
                 const todayNiftyQuotes = allNiftyQuotes.filter(nq => nq.date.toISOString().startsWith(todayStr));
-                if (todayNiftyQuotes.length < 3) continue;
+                
+                if (todayStockQuotes.length < 5 || todayNiftyQuotes.length < 3) continue;
 
+                // Sync Yesterday's Context
                 const nDailyIdx = allNiftyDaily.findIndex(nd => nd.date.toISOString().startsWith(todayStr));
                 const yesterdayNiftyClose = nDailyIdx > 0 ? allNiftyDaily[nDailyIdx - 1].close : 0;
 
@@ -85,10 +86,9 @@ async function backtestBearishStrategy() {
                 const yesterdayStockClose = allDailyQuotes[dailyIdx - 1].close;
 
                 // --- SHORT STRATEGY EXECUTION ---
-                
-                // Reject if stock gapped down more than 3% (Exhaustion Risk)
+                // Gap Down Protection (Avoid chasing if it already crashed > 3% at open)
                 const gapPercent = ((todayStockQuotes[0].open - yesterdayStockClose) / yesterdayStockClose) * 100;
-                if (gapPercent < -3.0) continue;
+                if (gapPercent < -5.0) continue;
 
                 const morningLow = Math.min(todayStockQuotes[0].low, todayStockQuotes[1].low);
                 const avgMorningVol = (todayStockQuotes[0].volume + todayStockQuotes[1].volume) / 2;
@@ -109,31 +109,30 @@ async function backtestBearishStrategy() {
                     }
                     const niftyVWAP = nVwapSumPV / nVwapSumV;
 
-                    // BEARISH NIFTY GUARD: Red Day + (Below VWAP or Strong Red Body)
+                    // BEARISH NIFTY GUARD
                     const niftyBearish = (nCandle?.close < yesterdayNiftyClose) && 
-                                       (nCandle?.close < (niftyVWAP * 1.0002)) && 
-                                       (Math.abs(nCandle?.close - nCandle?.open) / (nCandle?.high - nCandle?.low)) > 0.3;
+                                       (nCandle?.close < (niftyVWAP * 1.0002) || 
+                                       (Math.abs(nCandle?.close - nCandle?.open) / (nCandle?.high - nCandle?.low)) > 0.3);
 
                     if (i < 2 || !niftyBearish) continue;
 
+                    // Breakdown Logic
                     const isBreakdown = candle.close < morningLow && candle.close < stockVWAP;
                     const isLosingValue = candle.close < stockVWAP && todayStockQuotes[i - 1].close > stockVWAP;
-                    const isStrongRed = (Math.abs(candle.close - candle.open) / (candle.high - candle.low)) > 0.5 && candle.close < candle.open;
+                    const isStrongRed = candle.close < candle.open && (Math.abs(candle.close - candle.open) / (candle.high - candle.low)) > 0.5;
 
                     if (candle.volume > avgMorningVol * 1.1 && isStrongRed && (isBreakdown || isLosingValue)) {
                         const globalIdx = allStockQuotes.findIndex(q => q.date === candle.date);
                         const atr = getHistoricalATR(allStockQuotes, globalIdx, ATR_PERIOD);
                         
                         const entry = candle.close;
-                        // INVERTED TARGETS: Target is BELOW, Stop Loss is ABOVE
-                        const target = entry - (atr * 5); 
+                        // FLIPPED MATH for Shorting: Target is BELOW, Stop Loss is ABOVE
+                        const target = entry - (atr * 7.5); 
                         const stopLoss = entry + (atr * 2.5);
 
                         let outcome = null;
                         for (let j = i + 1; j < todayStockQuotes.length; j++) {
-                            // Hit SL if price goes ABOVE stopLoss
                             if (todayStockQuotes[j].high >= stopLoss) { outcome = "LOSS"; break; }
-                            // Hit WIN if price goes BELOW target
                             if (todayStockQuotes[j].low <= target) { outcome = "WIN"; break; }
                         }
 
@@ -153,15 +152,15 @@ async function backtestBearishStrategy() {
 
             const currentTotal = stats.wins + stats.losses;
             const currentWR = currentTotal > 0 ? ((stats.wins / currentTotal) * 100).toFixed(2) : 0;
-            console.log(`📉 ${symbol.padEnd(12)} | Wins: ${stats.wins} | Losses: ${stats.losses} | WR: ${currentWR}%`);
+            console.log(`📊 ${symbolKey.padEnd(12)} | Trades: ${currentTotal} | Wins: ${stats.wins} | WR: ${currentWR}%`);
 
         } catch (err) { continue; }
     }
 
-    console.log("\n================================================================================");
-    console.log(`🏆 BEARISH HYBRID BACKTEST COMPLETE`);
+    console.log("\n" + "=".repeat(80));
+    console.log(`🏆 BEARISH SNIPER BACKTEST COMPLETE`);
     console.log(`📈 Total Trades: ${totalTrades} | Win Rate: ${((totalWins/totalTrades)*100).toFixed(2)}%`);
-    console.log("================================================================================\n");
+    console.log("=".repeat(80) + "\n");
 }
 
 backtestBearishStrategy();
