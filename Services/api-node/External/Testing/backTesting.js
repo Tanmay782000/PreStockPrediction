@@ -123,7 +123,7 @@ async function backtestStrategy() {
                         const atr = getHistoricalATR(allStockQuotes, globalIdx, ATR_PERIOD);
                         
                         const entry = candle.close;
-                        const target = entry + (atr * 7.5); // Sniper Target (1:2 RR)
+                        const target = entry + (atr * 5.0); // Sniper Target (1:2 RR)
                         const stopLoss = entry - (atr * 2.5);
 
                         let outcome = null;

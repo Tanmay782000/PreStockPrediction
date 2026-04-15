@@ -12,7 +12,7 @@ const Bullish_STOCKS = OIL_AND_GAS_ENERGY;
 // ---------------- CONFIGURATION ----------------
 const CONFIG = {
   apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
-  jwtToken: process.env.Smart_API_JWT_TOKEN ?? "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qSTJNRGc0Tml3aWJtSm1Jam94TnpjMk1UYzBNekEyTENKcFlYUWlPakUzTnpZeE56UXpNRFlzSW1wMGFTSTZJbUl4WXpVell6SmlMVEl4TTJRdE5HWmhZaTFpT1RZMUxXSmtOekl3WlRGaVpUQXlaU0lzSWxSdmEyVnVJam9pSW4wLnE1XzBwanNsSk1EbHdZMVNXUTAxczBoMUdSWG9ST0p2Tk1XQ2Frd3ZnQUVQbGY1LW9CZk4zdkJtNWJ0TWZ2OUNGYm1HMW1ObmpveUI0QTVRWGJXdW40YlZhNjBKYnItZklpcmg5UmZyU2lTVGc5OXhWSUh3WVo1UzlxOTJyaDNibktNVEVTMl9mb0MtTXlUSUhWVmJFdlZkU3RLelFJT2ZQSUZhWFZEOUJxVSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYxNzQ0ODYsImV4cCI6MTc3NjE5MTQwMH0.gtLrmwKaFNSX9qtuUchMWT7ywitdnp7ErRgoVJHvU_aKIDr_xJKzl9oIywnYFUWEAFeBUtY6I7yXBGeowgDf6g",
+  jwtToken: process.env.Smart_API_JWT_TOKEN ?? "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qTXlNREk1TWl3aWJtSm1Jam94TnpjMk1qTXpOekV5TENKcFlYUWlPakUzTnpZeU16TTNNVElzSW1wMGFTSTZJbUkxWXpFM09EVmtMV1ppTTJVdE5EUXpaaTA1WVRJMExUUmpOMlJoWkRsbFl6bG1aQ0lzSWxSdmEyVnVJam9pSW4wLkZBaUhGNjhhWW5YRllxQ2NwTVVyNjNETTVSMmV6emFsZEtaZ2JJOTd3cXZKYVFaTUdldUZ0S3p6Ti0xV19jVGRWd2xpOGxnTDhPY09FNnlzeEpLb0x0b0NOYjFxWmR3N1VfZFhUZ25aQTllOWZNRktWUlA5b3g2LTl3MzQzcGc5LUFjNk9DcjV0R1JGTXd4a2hrWnlaRkVhMnZWdTVtR0RVcktCNkhmU1JSQSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYyMzM4OTIsImV4cCI6MTc3NjI3NzgwMH0.r1gMSMsr3tVJFLmw5-M8lF0BC66xMQerdv-U3D4tKgZrTNkBrhcySQmR1luroeL3iCgzQ8KmYXWnTZn7h0BWZA",
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
   localIP:  process.env.Smart_API_LocalIP ?? "127.0.0.1",
   capital:  process.env.Capital ?? 10000,
@@ -112,7 +112,7 @@ async function getNiftySentiment() {
     const vwap = tVal / tVol;
 
     const isAbovePrev = close > yesterdayClose;
-    const isAboveVWAP = close > vwap * 0.9998;
+    const isAboveVWAP = close > vwap * 0.9998; // 0.02% tolerance
     const bodyToRange =
       high - low > 0 ? Math.abs(close - open) / (high - low) : 0;
     const isStrong = bodyToRange > 0.3;
@@ -198,6 +198,7 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
 
     if (hasVolumeSurge && isStrongCandle && (isBreakout || isReclaimingValue)) {
       const atrValue = await calculateIntradayATR(iQuotes, 20);
+      const getTimeAdjustedTarget = getTimeAdjustedTargets(lastCandle.close, atrValue);
       let showDate = new Date().toLocaleString("en-IN", {
         timeZone: "Asia/Kolkata",
       });
@@ -208,8 +209,9 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
         price: lastCandle.close.toFixed(2),
         time: showDate,
         date: todayStr,
-        target: (lastCandle.close + atrValue * 7.5).toFixed(2),
-        stopLoss: (lastCandle.close - atrValue * 2.5).toFixed(2),
+        target: getTimeAdjustedTarget.target,
+        stopLoss: getTimeAdjustedTarget.stopLoss,
+        riskReward: getTimeAdjustedTarget.riskReward,
       };
     }
 
@@ -218,6 +220,46 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
     return { status: "ERROR", message: err.message };
   }
 }
+
+
+async function getTimeAdjustedTargets(entryPrice, atrValue) {
+const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+  const istTime = new Date(now);
+  const hour = istTime.getHours();
+  const minutes = istTime.getMinutes();
+  
+  // Minutes remaining until 15:15
+  const minutesLeft = (15 * 60 + 15) - (hour * 60 + minutes);
+  const hoursLeft = minutesLeft / 60;
+
+  let targetMultiplier;
+  let slMultiplier;
+
+  if (hoursLeft >= 4.5) {
+    // Early session - full ATR targets
+    targetMultiplier = 5.0;
+    slMultiplier = 2.5;
+  } else if (hoursLeft >= 3.0) {
+    // Mid session - moderate targets
+    targetMultiplier = 3.5;
+    slMultiplier = 2.0;
+  } else if (hoursLeft >= 2.0) {
+    // Late session - conservative
+    targetMultiplier = 2.5;
+    slMultiplier = 1.5;
+  } else {
+    // Too late - reject trade entirely
+    return null; // Signal to skip this trade
+  }
+
+  return {
+    target: (entryPrice + atrValue * targetMultiplier).toFixed(2),
+    stopLoss: (entryPrice - atrValue * slMultiplier).toFixed(2),
+    riskReward: (targetMultiplier / slMultiplier).toFixed(1)
+  };
+
+}
+
 
 // ---------------- DATABASE OPERATION ----------------
 async function insertStock(signal) {
@@ -248,6 +290,7 @@ async function insertStock(signal) {
         price: signal.price,
         target: signal.target,
         stopLoss: signal.stopLoss,
+        riskReward: signal.riskReward,
         limitPrice: "0",
         type: signal.type,
         transactiontype: "BUY",
@@ -291,6 +334,7 @@ async function placeStock(signal) {
     price: limitPrice.toString(),
     squareoff:signal.target.toString(),
     stoploss:signal.stopLoss.toString(),
+    riskReward: signal.riskReward.toString(),
     quantity: qty.toString(),
   };
 
@@ -330,6 +374,7 @@ async function placeStock(signal) {
         price: getStockInfo.Item.price,
         target: getStockInfo.Item.target,
         stopLoss: getStockInfo.Item.stopLoss,
+        riskReward: getStockInfo.Item.riskReward,
         type: getStockInfo.Item.type,
         transactiontype: "BUY",
         limitPrice : limitPrice.toString(),
@@ -399,3 +444,6 @@ export const cron = async () => {
 };
 
 await cron();
+
+
+

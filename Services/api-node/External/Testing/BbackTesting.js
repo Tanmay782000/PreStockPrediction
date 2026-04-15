@@ -127,7 +127,7 @@ async function backtestBearishStrategy() {
                         
                         const entry = candle.close;
                         // FLIPPED MATH for Shorting: Target is BELOW, Stop Loss is ABOVE
-                        const target = entry - (atr * 7.5); 
+                        const target = entry - (atr * 5.0); 
                         const stopLoss = entry + (atr * 2.5);
 
                         let outcome = null;
