@@ -3,7 +3,7 @@ import axios from "axios";
 const data = {
   clientcode: "AACG661827",
   password: "7820",
-  totp: "243738",
+  totp: "323443",
   state: "STATE_VARIABLE",
 };
 

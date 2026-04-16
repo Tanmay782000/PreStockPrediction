@@ -393,6 +393,24 @@ export const HEALTHCARE = {
     LALPATHLAB: { token: "11654", symbol: "LALPATHLAB-EQ", exchange: "NSE" }
 };
 
+
+export const STOCK_IN_NEWS = {
+    MAXHEALTH: { token: "3051", symbol: "MAXHEALTH-EQ", exchange: "NSE" },
+    HAL: { token: "2303", symbol: "HAL-EQ", exchange: "NSE" },
+    DRREDDY: { token: "881", symbol: "DRREDDY-EQ", exchange: "NSE" },
+    AUROPHARMA: { token: "275", symbol: "AUROPHARMA-EQ", exchange: "NSE" },
+    DABUR: { token: "772", symbol: "DABUR-EQ", exchange: "NSE" },
+     TECHM: { token: "13538", symbol: "TECHM-EQ", exchange: "NSE" },
+     SAIL: { token: "2963", symbol: "SAIL-EQ", exchange: "NSE" },
+     JSWSTEEL: { token: "11723", symbol: "JSWSTEEL-EQ", exchange: "NSE" },
+     TITAN: { token: "3506", symbol: "TITAN-EQ", exchange: "NSE" },
+     ADANIENT: { token: "25", symbol: "ADANIENT-EQ", exchange: "NSE" },
+     POWERGRID: { token: "14977", symbol: "POWERGRID-EQ", exchange: "NSE" },
+     SIEMENS: { token: "3150", symbol: "SIEMENS-EQ", exchange: "NSE" },
+     MUTHOOTFIN: { token: "236", symbol: "MUTHOOTFIN-EQ", exchange: "NSE" },
+     SUZLON: { token: "15773", symbol: "SUZLON-EQ", exchange: "NSE" }
+}
+
 export const CONSUMER_DURABLES_DISCRETIONARY = {
     TITAN: { token: "3506", symbol: "TITAN-EQ", exchange: "NSE" },
     HAVELLS: { token: "9819", symbol: "HAVELLS-EQ", exchange: "NSE" },

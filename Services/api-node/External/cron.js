@@ -2,17 +2,17 @@ import axios from "axios";
 import yahooFinance from "yahoo-finance2";
 import { PutCommand, ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
-import { OIL_AND_GAS_ENERGY } from "../Common/stockInfo.js";
+import { CONSUMER_DURABLES_DISCRETIONARY } from "../Common/stockInfo.js";
 
 const yf = new yahooFinance();
 
 const PlaceStocks = process.env.PlacedStocksTable;
-const Bullish_STOCKS = OIL_AND_GAS_ENERGY;
+const Bullish_STOCKS = CONSUMER_DURABLES_DISCRETIONARY;
 
 // ---------------- CONFIGURATION ----------------
 const CONFIG = {
   apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
-  jwtToken: process.env.Smart_API_JWT_TOKEN ?? "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qTXlNREk1TWl3aWJtSm1Jam94TnpjMk1qTXpOekV5TENKcFlYUWlPakUzTnpZeU16TTNNVElzSW1wMGFTSTZJbUkxWXpFM09EVmtMV1ppTTJVdE5EUXpaaTA1WVRJMExUUmpOMlJoWkRsbFl6bG1aQ0lzSWxSdmEyVnVJam9pSW4wLkZBaUhGNjhhWW5YRllxQ2NwTVVyNjNETTVSMmV6emFsZEtaZ2JJOTd3cXZKYVFaTUdldUZ0S3p6Ti0xV19jVGRWd2xpOGxnTDhPY09FNnlzeEpLb0x0b0NOYjFxWmR3N1VfZFhUZ25aQTllOWZNRktWUlA5b3g2LTl3MzQzcGc5LUFjNk9DcjV0R1JGTXd4a2hrWnlaRkVhMnZWdTVtR0RVcktCNkhmU1JSQSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYyMzM4OTIsImV4cCI6MTc3NjI3NzgwMH0.r1gMSMsr3tVJFLmw5-M8lF0BC66xMQerdv-U3D4tKgZrTNkBrhcySQmR1luroeL3iCgzQ8KmYXWnTZn7h0BWZA",
+  jwtToken: process.env.Smart_API_JWT_TOKEN ?? "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qTTVOemN3TVN3aWJtSm1Jam94TnpjMk16RXhNVEl4TENKcFlYUWlPakUzTnpZek1URXhNakVzSW1wMGFTSTZJbUl5TlRkaU1XRTRMV1ppWm1FdE5EVTJaUzFpTm1SaExUWTVNekpqTWpreFltTmxZaUlzSWxSdmEyVnVJam9pSW4wLkhDN0t3a1RvekJXcVpzUnpUdlNVcUFCTGlZSktvZ2Z2Z2VubkZ3TGdmeXdULVdyYVZQYlF2enRHbnNWZEZRLWJST3Fpdy1rd0M4WEV3UzlHa0ZyRk4tcWxXMjhPdjE4c3JVckRTZk9vbHJPLTdZVThQVTBRdE9VUDJ1b3E3TkZlRUFoXzY4ZzhPX0xMRmVLMGx2RGFZM0ZKQ1ZMMlpZdzZ4NW5yZ2E5cmVkZyIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYzMTEzMDEsImV4cCI6MTc3NjM2NDIwMH0.H71fVM3gNYVYRBecKjNu1kiZfL2ONDiJUhg3orAJTnYKJKGhgyq_lBwCs5g4AX1gC-7_Oy1KczoAZpIpK9uUrw",
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
   localIP:  process.env.Smart_API_LocalIP ?? "127.0.0.1",
   capital:  process.env.Capital ?? 10000,
@@ -57,6 +57,38 @@ async function calculateIntradayATR(quotes, period = 20) {
     trs.push(tr);
   }
   return average(trs);
+}
+
+// ================================================================
+//  CANDLE-CLOSE GUARD
+//  Your cron fires every 2 minutes, but 15m candles close only at
+//  :00, :15, :30, :45 of each hour. Evaluating a live incomplete
+//  candle gives false signals — volume and close are not final.
+//
+//  This function returns true ONLY when the current IST time is
+//  within a 90-second window just AFTER a 15m candle has closed:
+//    e.g. 10:30:00 → 10:31:30  ✅ evaluate
+//         10:28:00             ❌ skip (candle still live)
+//
+//  Why 90 seconds?
+//  - Your cron runs every 2 min, so the worst-case delay after
+//    candle close is ~2 min. A 90s window ensures every candle
+//    close is caught by at least one cron tick, with no overlap
+//    into the next candle.
+// ================================================================
+function isNearCandleClose() {
+  const now = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+  );
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+
+  // 15m candles close at :00, :15, :30, :45
+  // We allow evaluation in the 90 seconds AFTER the close
+  const secondsIntoInterval = (minutes % 15) * 60 + seconds;
+
+  // Allow: 0s–90s after candle close (i.e. first 90s of each 15m block)
+  return secondsIntoInterval <= 150;
 }
 
 // ================================================================
@@ -175,6 +207,7 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
 
     const morningHigh = Math.max(todayQuotes[0].high, todayQuotes[1].high);
     const avgMorningVol = (todayQuotes[0].volume + todayQuotes[1].volume) / 2;
+  
 
     let sVal = 0,
       sVol = 0;
@@ -187,6 +220,17 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
     const lastCandle = todayQuotes[todayQuotes.length - 1];
     const prevCandle = todayQuotes[todayQuotes.length - 2];
 
+    const candleRange = lastCandle.high - lastCandle.low;
+    let atrValue = await calculateIntradayATR(iQuotes,20);
+    const MAX_ATR_MULTIPLIER = 2.5;
+    if (candleRange > (atrValue * MAX_ATR_MULTIPLIER)) {
+      const exhaustionRatio = (candleRange / atrValue).toFixed(2);
+      return {
+        status: "REJECTED",
+        reason: `Exhaustion Spike: Candle is ${exhaustionRatio}x ATR (Limit: ${MAX_ATR_MULTIPLIER}x)`,
+      };
+    }
+
     const isBreakout =
       lastCandle.close > morningHigh && lastCandle.close > stockVWAP;
     const isReclaimingValue =
@@ -197,8 +241,8 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
     const isStrongCandle = sRange > 0 ? sBody / sRange > 0.5 : false;
 
     if (hasVolumeSurge && isStrongCandle && (isBreakout || isReclaimingValue)) {
-      const atrValue = await calculateIntradayATR(iQuotes, 20);
-      const getTimeAdjustedTarget = getTimeAdjustedTargets(lastCandle.close, atrValue);
+      atrValue = await calculateIntradayATR(iQuotes, 20);
+      const getTimeAdjustedTarget = await getTimeAdjustedTargets(lastCandle.close, atrValue);
       let showDate = new Date().toLocaleString("en-IN", {
         timeZone: "Asia/Kolkata",
       });
@@ -267,8 +311,8 @@ async function insertStock(signal) {
     new ScanCommand({ TableName: PlaceStocks ?? "PlacedStocks" }),
   );
 
-  if (getStocks.Items.length >= 4) {
-    console.log("⚠️ Already have 4 stocks in the system. Skipping insertion.");
+  if (getStocks.Items.length > 2) {
+    console.log("⚠️ Already have 2 stocks in the system. Skipping insertion.");
     return false;
   }
   console.log("SIGNAL TO INSERT", signal);
@@ -392,6 +436,28 @@ async function placeStock(signal) {
 export const cron = async () => {
   const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
   console.log(`\n🔍 Scan Started: ${time}`);
+
+  // ── Candle-Close Guard ─────────────────────────────────────────
+  // Your cron fires every 2 minutes. But 15m candles only close at
+  // :00, :15, :30, :45. Evaluating a live candle mid-way gives
+  // false signals — close and volume are not final yet.
+  //
+  // This guard skips the scan unless we are within 90 seconds
+  // AFTER a candle close. Since your cron runs every 2 minutes,
+  // every candle close will be caught within one cron tick.
+  //
+  // Example:
+  //   Cron fires at 10:28 IST → secondsIntoInterval = 780s → SKIP
+  //   Cron fires at 10:31 IST → secondsIntoInterval = 60s  → RUN ✅
+  if (!isNearCandleClose()) {
+    console.log(`⏭️  Skipping — not near a 15m candle close. Next candle closes at :${
+      String(
+        (Math.floor(new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })).getMinutes() / 15) + 1) * 15
+      ).padStart(2, "0")
+    }`);
+    return;
+  }
+
   console.log("━".repeat(55));
 
   // ── Step 1: Nifty Sentiment via AngelOne (index data) ──────────
@@ -443,7 +509,4 @@ export const cron = async () => {
   console.log(`🔍 Scan Complete: ${new Date().toLocaleTimeString("en-IN")}\n`);
 };
 
-await cron();
-
-
-
+// await cron();
