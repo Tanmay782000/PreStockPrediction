@@ -1,454 +1,259 @@
-export const SYMBOL_MAP = {
-    // Financials (Largecap)
-    HDFCBANK: { token: "1333", symbol: "HDFCBANK.NS", exchange: "NSE" },
-    ICICIBANK: { token: "1864", symbol: "ICICIBANK.NS", exchange: "NSE" },
-    SBIN: { token: "3045", symbol: "SBIN.NS", exchange: "NSE" },
-    KOTAKBANK: { token: "1922", symbol: "KOTAKBANK.NS", exchange: "NSE" },
-    AXISBANK: { token: "591", symbol: "AXISBANK.NS", exchange: "NSE" },
-    BAJFINANCE: { token: "317", symbol: "BAJFINANCE.NS", exchange: "NSE" },
-    BAJAJFINSV: { token: "16675", symbol: "BAJAJFINSV.NS", exchange: "NSE" },
-    LICI: { token: "11809", symbol: "LICI-EQ", exchange: "NSE" },
-    INDUSINDBK: { token: "5258", symbol: "INDUSINDBK-EQ", exchange: "NSE" },
-    HDFCLIFE: { token: "467", symbol: "HDFCLIFE-EQ", exchange: "NSE" },
-    SBILIFE: { token: "21808", symbol: "SBILIFE-EQ", exchange: "NSE" },
-    ICICIGI: { token: "18652", symbol: "ICICIGI-EQ", exchange: "NSE" },
-    BANKBARODA: { token: "4668", symbol: "BANKBARODA-EQ", exchange: "NSE" },
-    PFC: { token: "14299", symbol: "PFC-EQ", exchange: "NSE" },
-    RECLTD: { token: "15355", symbol: "RECLTD-EQ", exchange: "NSE" },
-    HDFCAMC: { token: "4244", symbol: "HDFCAMC-EQ", exchange: "NSE" },
-    CHOLAFIN: { token: "685", symbol: "CHOLAFIN-EQ", exchange: "NSE" },
-    MUTHOOTFIN: { token: "236", symbol: "MUTHOOTFIN-EQ", exchange: "NSE" },
-    JIOFIN: { token: "18921", symbol: "JIOFIN-EQ", exchange: "NSE" },
-    SHRIRAMFIN: { token: "3220", symbol: "SHRIRAMFIN-EQ", exchange: "NSE" },
-    BSE: { token: "1250", symbol: "BSE-EQ", exchange: "NSE" },
+export const Bullish_SYMBOL_MAP = {
 
-    // IT (Largecap)
-    TCS: { token: "11536", symbol: "TCS-EQ", exchange: "NSE" },
-    INFY: { token: "1594", symbol: "INFY-EQ", exchange: "NSE" },
-    HCLTECH: { token: "7229", symbol: "HCLTECH-EQ", exchange: "NSE" },
-    WIPRO: { token: "3787", symbol: "WIPRO-EQ", exchange: "NSE" },
-    TECHM: { token: "13538", symbol: "TECHM-EQ", exchange: "NSE" },
-    LTIM: { token: "17818", symbol: "LTIM-EQ", exchange: "NSE" },
-    PERSISTENT: { token: "18365", symbol: "PERSISTENT-EQ", exchange: "NSE" },
-    MPHASIS: { token: "4503", symbol: "MPHASIS-EQ", exchange: "NSE" },
-    RAMCOCEM: { token: "11532", symbol: "RAMCOCEM-EQ", exchange: "NSE" },
+  // ── Financials (Banks - Private) ─────────────────────────────
+  HDFCBANK:      { token: "", symbol: "HDFCBANK.NS",      exchange: "NSE" }, // HDFC Bank
+  ICICIBANK:     { token: "", symbol: "ICICIBANK.NS",     exchange: "NSE" }, // ICICI Bank
+  KOTAKBANK:     { token: "", symbol: "KOTAKBANK.NS",     exchange: "NSE" }, // Kotak Mahindra Bank
+  AXISBANK:      { token: "", symbol: "AXISBANK.NS",      exchange: "NSE" }, // Axis Bank
+  INDUSINDBK:    { token: "", symbol: "INDUSINDBK.NS",    exchange: "NSE" }, // IndusInd Bank
+  BANDHANBNK:    { token: "", symbol: "BANDHANBNK.NS",    exchange: "NSE" }, // Bandhan Bank
+  IDFCFIRSTB:    { token: "", symbol: "IDFCFIRSTB.NS",   exchange: "NSE" }, // IDFC First Bank
 
-    // Energy (Largecap)
-    RELIANCE: { token: "2885", symbol: "RELIANCE-EQ", exchange: "NSE" },
-    ONGC: { token: "2475", symbol: "ONGC-EQ", exchange: "NSE" },
-    NTPC: { token: "11630", symbol: "NTPC-EQ", exchange: "NSE" },
-    POWERGRID: { token: "14977", symbol: "POWERGRID-EQ", exchange: "NSE" },
-    BPCL: { token: "526", symbol: "BPCL-EQ", exchange: "NSE" },
-    ADANIPORTS: { token: "15083", symbol: "ADANIPORTS-EQ", exchange: "NSE" },
-    ADANIENT: { token: "25", symbol: "ADANIENT-EQ", exchange: "NSE" },
-    ADANIPOWER: { token: "15492", symbol: "ADANIPOWER-EQ", exchange: "NSE" },
-    ADANIGREEN: { token: "17631", symbol: "ADANIGREEN-EQ", exchange: "NSE" },
-    ADANIENSOL: { token: "17632", symbol: "ADANIENSOL-EQ", exchange: "NSE" },
-    IOC: { token: "1624", symbol: "IOC-EQ", exchange: "NSE" },
-    GAIL: { token: "4717", symbol: "GAIL-EQ", exchange: "NSE" },
-    COALINDIA: { token: "2031", symbol: "COALINDIA-EQ", exchange: "NSE" },
-    TATAPOWER: { token: "3426", symbol: "TATAPOWER-EQ", exchange: "NSE" },
+  // ── Financials (Banks - Public) ──────────────────────────────
+  SBIN:          { token: "", symbol: "SBIN.NS",          exchange: "NSE" }, // State Bank of India
+  BANKBARODA:    { token: "", symbol: "BANKBARODA.NS",    exchange: "NSE" }, // Bank of Baroda
+  PNB:           { token: "", symbol: "PNB.NS",           exchange: "NSE" }, // Punjab National Bank
+  CANBK:         { token: "", symbol: "CANBK.NS",         exchange: "NSE" }, // Canara Bank
 
-    // Consumer (Largecap)
-    HINDUNILVR: { token: "1394", symbol: "HINDUNILVR-EQ", exchange: "NSE" },
-    ITC: { token: "1660", symbol: "ITC-EQ", exchange: "NSE" },
-    NESTLEIND: { token: "17963", symbol: "NESTLEIND-EQ", exchange: "NSE" },
-    BRITANNIA: { token: "547", symbol: "BRITANNIA-EQ", exchange: "NSE" },
-    DABUR: { token: "772", symbol: "DABUR-EQ", exchange: "NSE" },
-    GODREJCP: { token: "10099", symbol: "GODREJCP-EQ", exchange: "NSE" },
-    MARICO: { token: "4067", symbol: "MARICO-EQ", exchange: "NSE" },
-    TATACONSUM: { token: "3432", symbol: "TATACONSUM-EQ", exchange: "NSE" },
-    COLPAL: { token: "15141", symbol: "COLPAL-EQ", exchange: "NSE" },
-    VBL: { token: "13528", symbol: "VBL-EQ", exchange: "NSE" },
-    MARUTI: { token: "10999", symbol: "MARUTI-EQ", exchange: "NSE" },
-    M_M: { token: "2031", symbol: "M&M-EQ", exchange: "NSE" },
-    EICHERMOT: { token: "910", symbol: "EICHERMOT-EQ", exchange: "NSE" },
-    BAJAJ_AUTO: { token: "16669", symbol: "BAJAJ-AUTO-EQ", exchange: "NSE" },
-    HEROMOTOCO: { token: "1348", symbol: "HEROMOTOCO-EQ", exchange: "NSE" },
-    TATAMOTORS: { token: "3456", symbol: "TMPV-EQ", exchange: "NSE" },
-    ZOMATO: { token: "5097", symbol: "ETERNAL-EQ", exchange: "NSE" },
-    TVSMOTOR: { token: "8479", symbol: "TVSMOTOR-EQ", exchange: "NSE" },
-    TRENT: { token: "1964", symbol: "TRENT-EQ", exchange: "NSE" },
-    DMART: { token: "19913", symbol: "DMART-EQ", exchange: "NSE" },
-    NYKAA: { token: "5517", symbol: "NYKAA-EQ", exchange: "NSE" },
-    IRCTC: { token: "13611", symbol: "IRCTC-EQ", exchange: "NSE" },
-    INDIGO: { token: "11195", symbol: "INDIGO-EQ", exchange: "NSE" },
-    JUBLFOOD: { token: "18096", symbol: "JUBLFOOD-EQ", exchange: "NSE" },
-    PAGEIND: { token: "14413", symbol: "PAGEIND-EQ", exchange: "NSE" },
-    MOTHERSON: { token: "8221", symbol: "MOTHERSON-EQ", exchange: "NSE" },
-    TITAN: { token: "3506", symbol: "TITAN-EQ", exchange: "NSE" },
+  // ── Financials (NBFCs & Financial Services) ──────────────────
+  BAJFINANCE:    { token: "", symbol: "BAJFINANCE.NS",    exchange: "NSE" }, // Bajaj Finance
+  BAJAJFINSV:    { token: "", symbol: "BAJAJFINSV.NS",    exchange: "NSE" }, // Bajaj Finserv
+  HDFCLIFE:      { token: "", symbol: "HDFCLIFE.NS",      exchange: "NSE" }, // HDFC Life Insurance
+  SBILIFE:       { token: "", symbol: "SBILIFE.NS",       exchange: "NSE" }, // SBI Life Insurance
+  ICICIPRULI:    { token: "", symbol: "ICICIPRULI.NS",    exchange: "NSE" }, // ICICI Prudential Life
+  ICICIGI:       { token: "", symbol: "ICICIGI.NS",       exchange: "NSE" }, // ICICI Lombard General Insurance
+  SBICARD:       { token: "", symbol: "SBICARD.NS",       exchange: "NSE" }, // SBI Cards
+  CHOLAFIN:      { token: "", symbol: "CHOLAFIN.NS",      exchange: "NSE" }, // Cholamandalam Investment
+  MUTHOOTFIN:    { token: "", symbol: "MUTHOOTFIN.NS",    exchange: "NSE" }, // Muthoot Finance
+  JIOFIN:        { token: "", symbol: "JIOFIN.NS",        exchange: "NSE" }, // Jio Financial Services
 
-    // Healthcare & Industrials (Largecap)
-    SUNPHARMA: { token: "3351", symbol: "SUNPHARMA-EQ", exchange: "NSE" },
-    CIPLA: { token: "694", symbol: "CIPLA-EQ", exchange: "NSE" },
-    DRREDDY: { token: "881", symbol: "DRREDDY-EQ", exchange: "NSE" },
-    DIVISLAB: { token: "10940", symbol: "DIVISLAB-EQ", exchange: "NSE" },
-    APOLLOHOSP: { token: "157", symbol: "APOLLOHOSP-EQ", exchange: "NSE" },
-    AUROPHARMA: { token: "275", symbol: "AUROPHARMA-EQ", exchange: "NSE" },
-    TORNTPHARM: { token: "3513", symbol: "TORNTPHARM-EQ", exchange: "NSE" },
-    MAXHEALTH: { token: "3051", symbol: "MAXHEALTH-EQ", exchange: "NSE" },
-    LT: { token: "11483", symbol: "LT-EQ", exchange: "NSE" },
-    BEL: { token: "383", symbol: "BEL-EQ", exchange: "NSE" },
-    HAL: { token: "2303", symbol: "HAL-EQ", exchange: "NSE" },
-    SIEMENS: { token: "3150", symbol: "SIEMENS-EQ", exchange: "NSE" },
-    ABB: { token: "10", symbol: "ABB-EQ", exchange: "NSE" },
-    HAVELLS: { token: "9819", symbol: "HAVELLS-EQ", exchange: "NSE" },
-    POLYCAB: { token: "9590", symbol: "POLYCAB-EQ", exchange: "NSE" },
-    BHEL: { token: "438", symbol: "BHEL-EQ", exchange: "NSE" },
-    CGPOWER: { token: "667", symbol: "CGPOWER-EQ", exchange: "NSE" },
-    CUMMINSIND: { token: "769", symbol: "CUMMINSIND-EQ", exchange: "NSE" },
-    POWERINDIA: { token: "1860", symbol: "POWERINDIA-EQ", exchange: "NSE" },
-    MANAPPURAM: { token: "13328", symbol: "MANAPPURAM-EQ", exchange: "NSE" },
+  // ── Information Technology ────────────────────────────────────
+  TCS:           { token: "", symbol: "TCS.NS",           exchange: "NSE" }, // Tata Consultancy Services
+  INFY:          { token: "", symbol: "INFY.NS",          exchange: "NSE" }, // Infosys
+  HCLTECH:       { token: "", symbol: "HCLTECH.NS",       exchange: "NSE" }, // HCL Technologies
+  WIPRO:         { token: "", symbol: "WIPRO.NS",         exchange: "NSE" }, // Wipro
+  TECHM:         { token: "", symbol: "TECHM.NS",         exchange: "NSE" }, // Tech Mahindra
+  LTI:           { token: "", symbol: "LTM.NS",          exchange: "NSE" }, // LTIMindtree
+  MPHASIS:       { token: "", symbol: "MPHASIS.NS",       exchange: "NSE" }, // Mphasis
+  PERSISTENT:    { token: "", symbol: "PERSISTENT.NS",    exchange: "NSE" }, // Persistent Systems
 
-    // Materials & Utilities (Largecap)
-    TATASTEEL: { token: "3499", symbol: "TATASTEEL-EQ", exchange: "NSE" },
-    JSWSTEEL: { token: "11723", symbol: "JSWSTEEL-EQ", exchange: "NSE" },
-    HINDALCO: { token: "1363", symbol: "HINDALCO-EQ", exchange: "NSE" },
-    GRASIM: { token: "1232", symbol: "GRASIM-EQ", exchange: "NSE" },
-    ULTRACEMCO: { token: "11523", symbol: "ULTRACEMCO-EQ", exchange: "NSE" },
-    VEDL: { token: "3063", symbol: "VEDL-EQ", exchange: "NSE" },
-    PIDILITIND: { token: "2664", symbol: "PIDILITIND-EQ", exchange: "NSE" },
-    AMBUJACEM: { token: "1270", symbol: "AMBUJACEM-EQ", exchange: "NSE" },
-    ACC: { token: "22", symbol: "ACC-EQ", exchange: "NSE" },
-    HINDZINC: { token: "1415", symbol: "HINDZINC-EQ", exchange: "NSE" },
-    ASIANPAINT: { token: "236", symbol: "ASIANPAINT-EQ", exchange: "NSE" },
-    SOLARA: { token: "5427", symbol: "SOLARA-EQ", exchange: "NSE" },
-    BHARTIARTL: { token: "10604", symbol: "BHARTIARTL-EQ", exchange: "NSE" },
-    INDUSTOWER: { token: "29135", symbol: "INDUSTOWER-EQ", exchange: "NSE" },
-    TATACOMM: { token: "3405", symbol: "TATACOMM-EQ", exchange: "NSE" },
-    DLF: { token: "14732", symbol: "DLF-EQ", exchange: "NSE" },
-    LODHA: { token: "4351", symbol: "LODHA-EQ", exchange: "NSE" },
-    GODREJPROP: { token: "11040", symbol: "GODREJPROP-EQ", exchange: "NSE" },
-    OBEROIRLTY: { token: "18114", symbol: "OBEROIRLTY-EQ", exchange: "NSE" },
-    PRESTIGE: { token: "18311", symbol: "PRESTIGE-EQ", exchange: "NSE" },
-    IRFC: { token: "160", symbol: "IRFC-EQ", exchange: "NSE" },
-    PNB: { token: "10666", symbol: "PNB-EQ", exchange: "NSE" },
-    UNIONBANK: { token: "10281", symbol: "UNIONBANK-EQ", exchange: "NSE" },
-    INDIANB: { token: "12151", symbol: "INDIANB-EQ", exchange: "NSE" },
-    CANBK: { token: "10794", symbol: "CANBK-EQ", exchange: "NSE" },
-    TORNTPOWER: { token: "13781", symbol: "TORNTPOWER-EQ", exchange: "NSE" },
+  // ── Oil, Gas & Energy ─────────────────────────────────────────
+  RELIANCE:      { token: "", symbol: "RELIANCE.NS",      exchange: "NSE" }, // Reliance Industries
+  ONGC:          { token: "", symbol: "ONGC.NS",          exchange: "NSE" }, // Oil & Natural Gas Corp
+  IOC:           { token: "", symbol: "IOC.NS",           exchange: "NSE" }, // Indian Oil Corporation
+  BPCL:          { token: "", symbol: "BPCL.NS",          exchange: "NSE" }, // Bharat Petroleum
+  GAIL:          { token: "", symbol: "GAIL.NS",          exchange: "NSE" }, // GAIL (India)
+  COALINDIA:     { token: "", symbol: "COALINDIA.NS",     exchange: "NSE" }, // Coal India
 
-    // Financials & IT (Midcap)
-    IDFCFIRSTB: { token: "11184", symbol: "IDFCFIRSTB-EQ", exchange: "NSE" },
-    FEDERALBNK: { token: "1023", symbol: "FEDERALBNK-EQ", exchange: "NSE" },
-    BANDHANBNK: { token: "2263", symbol: "BANDHANBNK-EQ", exchange: "NSE" },
-    AUBANK: { token: "2121", symbol: "AUBANK-EQ", exchange: "NSE" },
-    LICHSGFIN: { token: "1997", symbol: "LICHSGFIN-EQ", exchange: "NSE" },
-    M_MFIN: { token: "13285", symbol: "M&MFIN-EQ", exchange: "NSE" },
-    POONAWALLA: { token: "2112", symbol: "POONAWALLA-EQ", exchange: "NSE" },
-    ABCAPITAL: { token: "14840", symbol: "ABCAPITAL-EQ", exchange: "NSE" },
-    KAJARIACER: { token: "13061", symbol: "KAJARIACER-EQ", exchange: "NSE" },
-    "360ONE": { token: "172", symbol: "360ONE-EQ", exchange: "NSE" },
-    ANGELONE: { token: "17624", symbol: "ANGELONE-EQ", exchange: "NSE" },
-    KFINTECH: { token: "1231", symbol: "KFINTECH-EQ", exchange: "NSE" },
-    LTTS: { token: "11184", symbol: "LTTS-EQ", exchange: "NSE" },
-    COFORGE: { token: "11543", symbol: "COFORGE-EQ", exchange: "NSE" },
-    CYIENT: { token: "637", symbol: "CYIENT-EQ", exchange: "NSE" },
-    HAPPSTMNDS: { token: "17627", symbol: "HAPPSTMNDS-EQ", exchange: "NSE" },
-    TANLA: { token: "3388", symbol: "TANLA-EQ", exchange: "NSE" },
-    KPITTECH: { token: "2142", symbol: "KPITTECH-EQ", exchange: "NSE" },
-    TATAELXSI: { token: "3421", symbol: "TATAELXSI-EQ", exchange: "NSE" },
-    MASTEK: { token: "2064", symbol: "MASTEK-EQ", exchange: "NSE" },
+  // ── Power & Utilities ─────────────────────────────────────────
+  NTPC:          { token: "", symbol: "NTPC.NS",          exchange: "NSE" }, // NTPC
+  POWERGRID:     { token: "", symbol: "POWERGRID.NS",     exchange: "NSE" }, // Power Grid Corporation
+  ADANIPOWER:    { token: "", symbol: "ADANIPOWER.NS",    exchange: "NSE" }, // Adani Power
+  ADANIGREEN:    { token: "", symbol: "ADANIGREEN.NS",    exchange: "NSE" }, // Adani Green Energy
+  TATAPOWER:     { token: "", symbol: "TATAPOWER.NS",     exchange: "NSE" }, // Tata Power
 
-    // Health, Consumer & Industrials (Midcap)
-    ALKEM: { token: "11703", symbol: "ALKEM-EQ", exchange: "NSE" },
-    BIOCON: { token: "11373", symbol: "BIOCON-EQ", exchange: "NSE" },
-    LUPIN: { token: "10440", symbol: "LUPIN-EQ", exchange: "NSE" },
-    FORTIS: { token: "12640", symbol: "FORTIS-EQ", exchange: "NSE" },
-    METROPOLIS: { token: "1342", symbol: "METROPOLIS-EQ", exchange: "NSE" },
-    LALPATHLAB: { token: "11654", symbol: "LALPATHLAB-EQ", exchange: "NSE" },
-    GRANULES: { token: "1182", symbol: "GRANULES-EQ", exchange: "NSE" },
-    GLAND: { token: "2021", symbol: "GLAND-EQ", exchange: "NSE" },
-    MANKIND: { token: "4321", symbol: "MANKIND-EQ", exchange: "NSE" },
-    ASHOKLEY: { token: "212", symbol: "ASHOKLEY-EQ", exchange: "NSE" },
-    BALKRISIND: { token: "335", symbol: "BALKRISIND-EQ", exchange: "NSE" },
-    UNOMINDA: { token: "11717", symbol: "UNOMINDA-EQ", exchange: "NSE" },
-    BATAINDIA: { token: "371", symbol: "BATAINDIA-EQ", exchange: "NSE" },
-    ZYDUSLIFE: { token: "2708", symbol: "ZYDUSLIFE-EQ", exchange: "NSE" },
-    KALYANKJIL: { token: "1241", symbol: "KALYANKJIL-EQ", exchange: "NSE" },
-    CROMPTON: { token: "11516", symbol: "CROMPTON-EQ", exchange: "NSE" },
-    WHIRLPOOL: { token: "3740", symbol: "WHIRLPOOL-EQ", exchange: "NSE" },
-    PVRINOX: { token: "13147", symbol: "PVRINOX-EQ", exchange: "NSE" },
-    RADICO: { token: "2739", symbol: "RADICO-EQ", exchange: "NSE" },
-    EMAMILTD: { token: "936", symbol: "EMAMILTD-EQ", exchange: "NSE" },
-    JYOTHYLAB: { token: "13768", symbol: "JYOTHYLAB-EQ", exchange: "NSE" },
-    BIKAJI: { token: "321", symbol: "BIKAJI-EQ", exchange: "NSE" },
-    BHARATFORG: { token: "422", symbol: "BHARATFORG-EQ", exchange: "NSE" },
-    THERMAX: { token: "3503", symbol: "THERMAX-EQ", exchange: "NSE" },
-    KEI: { token: "1310", symbol: "KEI-EQ", exchange: "NSE" },
-    ESCORTS: { token: "958", symbol: "ESCORTS-EQ", exchange: "NSE" },
-    BLUESTARCO: { token: "492", symbol: "BLUESTARCO-EQ", exchange: "NSE" },
-    SKFINDIA: { token: "3235", symbol: "SKFINDIA-EQ", exchange: "NSE" },
-    TIMKEN: { token: "3501", symbol: "TIMKEN-EQ", exchange: "NSE" },
-    KSB: { token: "1932", symbol: "KSB-EQ", exchange: "NSE" },
-    FINCABLES: { token: "1036", symbol: "FINCABLES-EQ", exchange: "NSE" },
-    AIAENG: { token: "13512", symbol: "AIAENG-EQ", exchange: "NSE" },
-    GRINDWELL: { token: "1234", symbol: "GRINDWELL-EQ", exchange: "NSE" },
-    SUZLON: { token: "15773", symbol: "SUZLON-EQ", exchange: "NSE" },
-    PREMIER: { token: "2311", symbol: "PREMIER-EQ", exchange: "NSE" },
-    APLAPOLLO: { token: "13517", symbol: "APLAPOLLO-EQ", exchange: "NSE" },
+  // ── Automobiles ───────────────────────────────────────────────
+  MARUTI:        { token: "", symbol: "MARUTI.NS",        exchange: "NSE" }, // Maruti Suzuki
+  TATAMOTORS:    { token: "", symbol: "TMPV.NS",    exchange: "NSE" }, // Tata Motors
+  M_M:           { token: "", symbol: "M&M.NS",           exchange: "NSE" }, // Mahindra & Mahindra
+  BAJAJ_AUTO:    { token: "", symbol: "BAJAJ-AUTO.NS",    exchange: "NSE" }, // Bajaj Auto
+  HEROMOTOCO:    { token: "", symbol: "HEROMOTOCO.NS",    exchange: "NSE" }, // Hero MotoCorp
+  EICHERMOT:     { token: "", symbol: "EICHERMOT.NS",     exchange: "NSE" }, // Eicher Motors
+  TVSMOTORS:     { token: "", symbol: "TVSMOTOR.NS",      exchange: "NSE" }, // TVS Motor
 
-    // Energy & Materials (Midcap)
-    SAIL: { token: "2963", symbol: "SAIL-EQ", exchange: "NSE" },
-    JINDALSTEL: { token: "1722", symbol: "JINDALSTEL-EQ", exchange: "NSE" },
-    NATIONALUM: { token: "6364", symbol: "NATIONALUM-EQ", exchange: "NSE" },
-    DALBHARAT: { token: "2020", symbol: "DALBHARAT-EQ", exchange: "NSE" },
-    SUPREMEIND: { token: "3354", symbol: "SUPREMEIND-EQ", exchange: "NSE" },
-    ASTRAL: { token: "14418", symbol: "ASTRAL-EQ", exchange: "NSE" },
-    MOIL: { token: "18115", symbol: "MOIL-EQ", exchange: "NSE" },
-    TATACHEM: { token: "3404", symbol: "TATACHEM-EQ", exchange: "NSE" },
-    DEEPAKNTR: { token: "921", symbol: "DEEPAKNTR-EQ", exchange: "NSE" },
-    OIL: { token: "11532", symbol: "OIL-EQ", exchange: "NSE" },
-    PETRONET: { token: "11351", symbol: "PETRONET-EQ", exchange: "NSE" },
-    IGL: { token: "11262", symbol: "IGL-EQ", exchange: "NSE" },
-    ATGL: { token: "17631", symbol: "ATGL-EQ", exchange: "NSE" },
-    SJVN: { token: "15332", symbol: "SJVN-EQ", exchange: "NSE" },
-    NLCINDIA: { token: "11631", symbol: "NLCINDIA-EQ", exchange: "NSE" },
-    JSWENERGY: { token: "15141", symbol: "JSWENERGY-EQ", exchange: "NSE" },
-    CESC: { token: "676", symbol: "CESC-EQ", exchange: "NSE" },
-    PHOENIXLTD: { token: "2650", symbol: "PHOENIXLTD-EQ", exchange: "NSE" },
-    BRIGADE: { token: "14751", symbol: "BRIGADE-EQ", exchange: "NSE" },
-    SOBHA: { token: "14241", symbol: "SOBHA-EQ", exchange: "NSE" },
-    SUNTECK: { token: "18116", symbol: "SUNTECK-EQ", exchange: "NSE" },
-    SUNTV: { token: "13404", symbol: "SUNTV-EQ", exchange: "NSE" },
-    ZEEL: { token: "3812", symbol: "ZEEL-EQ", exchange: "NSE" },
-    NAZARA: { token: "2312", symbol: "NAZARA-EQ", exchange: "NSE" },
-    SAREGAMA: { token: "2976", symbol: "SAREGAMA-EQ", exchange: "NSE" },
+  // ── FMCG & Consumer ───────────────────────────────────────────
+  HINDUNILVR:    { token: "", symbol: "HINDUNILVR.NS",    exchange: "NSE" }, // Hindustan Unilever
+  ITC:           { token: "", symbol: "ITC.NS",           exchange: "NSE" }, // ITC
+  NESTLEIND:     { token: "", symbol: "NESTLEIND.NS",     exchange: "NSE" }, // Nestle India
+  BRITANNIA:     { token: "", symbol: "BRITANNIA.NS",     exchange: "NSE" }, // Britannia Industries
+  DABUR:         { token: "", symbol: "DABUR.NS",         exchange: "NSE" }, // Dabur India
+  MARICO:        { token: "", symbol: "MARICO.NS",        exchange: "NSE" }, // Marico
+  GODREJCP:      { token: "", symbol: "GODREJCP.NS",      exchange: "NSE" }, // Godrej Consumer Products
+  COLPAL:        { token: "", symbol: "COLPAL.NS",        exchange: "NSE" }, // Colgate-Palmolive India
+  TATACONSUM:    { token: "", symbol: "TATACONSUM.NS",    exchange: "NSE" }, // Tata Consumer Products
+
+  // ── Healthcare & Pharma ───────────────────────────────────────
+  SUNPHARMA:     { token: "", symbol: "SUNPHARMA.NS",     exchange: "NSE" }, // Sun Pharmaceutical
+  DRREDDY:       { token: "", symbol: "DRREDDY.NS",       exchange: "NSE" }, // Dr. Reddy's Laboratories
+  CIPLA:         { token: "", symbol: "CIPLA.NS",         exchange: "NSE" }, // Cipla
+  DIVISLAB:      { token: "", symbol: "DIVISLAB.NS",      exchange: "NSE" }, // Divi's Laboratories
+  APOLLOHOSP:    { token: "", symbol: "APOLLOHOSP.NS",    exchange: "NSE" }, // Apollo Hospitals
+  BIOCON:        { token: "", symbol: "BIOCON.NS",        exchange: "NSE" }, // Biocon
+  TORNTPHARM:    { token: "", symbol: "TORNTPHARM.NS",    exchange: "NSE" }, // Torrent Pharmaceuticals
+
+  // ── Telecom ───────────────────────────────────────────────────
+  BHARTIARTL:    { token: "", symbol: "BHARTIARTL.NS",   exchange: "NSE" }, // Bharti Airtel
+  IDEA:          { token: "", symbol: "IDEA.NS",          exchange: "NSE" }, // Vodafone Idea
+
+  // ── Cement & Construction Materials ──────────────────────────
+  ULTRACEMCO:    { token: "", symbol: "ULTRACEMCO.NS",    exchange: "NSE" }, // UltraTech Cement
+  SHREECEM:      { token: "", symbol: "SHREECEM.NS",      exchange: "NSE" }, // Shree Cement
+  AMBUJACEM:     { token: "", symbol: "AMBUJACEM.NS",     exchange: "NSE" }, // Ambuja Cements
+  ACC:           { token: "", symbol: "ACC.NS",           exchange: "NSE" }, // ACC
+
+  // ── Infrastructure & Engineering ─────────────────────────────
+  LT:            { token: "", symbol: "LT.NS",            exchange: "NSE" }, // Larsen & Toubro
+  ADANIPORTS:    { token: "", symbol: "ADANIPORTS.NS",    exchange: "NSE" }, // Adani Ports & SEZ
+  ADANIENT:      { token: "", symbol: "ADANIENT.NS",      exchange: "NSE" }, // Adani Enterprises
+  SIEMENS:       { token: "", symbol: "SIEMENS.NS",       exchange: "NSE" }, // Siemens India
+  ABB:           { token: "", symbol: "ABB.NS",           exchange: "NSE" }, // ABB India
+
+  // ── Metals & Mining ───────────────────────────────────────────
+  TATASTEEL:     { token: "", symbol: "TATASTEEL.NS",     exchange: "NSE" }, // Tata Steel
+  HINDALCO:      { token: "", symbol: "HINDALCO.NS",      exchange: "NSE" }, // Hindalco Industries
+  JSWSTEEL:      { token: "", symbol: "JSWSTEEL.NS",      exchange: "NSE" }, // JSW Steel
+  VEDL:          { token: "", symbol: "VEDL.NS",          exchange: "NSE" }, // Vedanta
+  SAIL:          { token: "", symbol: "SAIL.NS",          exchange: "NSE" }, // Steel Authority of India
+
+  // ── Consumer Durables & Retail ───────────────────────────────
+  TITAN:         { token: "", symbol: "TITAN.NS",         exchange: "NSE" }, // Titan Company
+  HAVELLS:       { token: "", symbol: "HAVELLS.NS",       exchange: "NSE" }, // Havells India
+  DMART:         { token: "", symbol: "DMART.NS",         exchange: "NSE" }, // Avenue Supermarts (DMart)
+  TRENT:         { token: "", symbol: "TRENT.NS",         exchange: "NSE" }, // Trent
+
+  // ── Real Estate ───────────────────────────────────────────────
+  DLF:           { token: "", symbol: "DLF.NS",           exchange: "NSE" }, // DLF
+
+  // ── Paints ────────────────────────────────────────────────────
+  ASIANPAINT:    { token: "", symbol: "ASIANPAINT.NS",    exchange: "NSE" }, // Asian Paints
+  BERGEPAINT:    { token: "", symbol: "BERGEPAINT.NS",    exchange: "NSE" }, // Berger Paints
+
+  // ── Fertilizers & Chemicals ───────────────────────────────────
+  PIDILITIND:    { token: "", symbol: "PIDILITIND.NS",    exchange: "NSE" }, // Pidilite Industries
+
+  // ── Logistics & Miscellaneous ─────────────────────────────────
+  ZOMATO:        { token: "", symbol: "ETERNAL.NS",        exchange: "NSE" }, // Zomato
+  NYKAA:         { token: "", symbol: "NYKAA.NS",         exchange: "NSE" }, // FSN E-Commerce (Nykaa)
+  PAYTM:         { token: "", symbol: "PAYTM.NS",         exchange: "NSE" }, // One97 Communications (Paytm)
+  INDIAMART:     { token: "", symbol: "INDIAMART.NS",     exchange: "NSE" }, // IndiaMART InterMESH
 };
 
-export const BANKS = {
-    HDFCBANK: { token: "1333", symbol: "HDFCBANK.NS", exchange: "NSE" },
-    ICICIBANK: { token: "1864", symbol: "ICICIBANK.NS", exchange: "NSE" },
-    SBIN: { token: "3045", symbol: "SBIN.NS", exchange: "NSE" },
-    KOTAKBANK: { token: "1922", symbol: "KOTAKBANK.NS", exchange: "NSE" },
-    AXISBANK: { token: "591", symbol: "AXISBANK.NS", exchange: "NSE" },
-    INDUSINDBK: { token: "5258", symbol: "INDUSINDBK-EQ", exchange: "NSE" },
-    BANKBARODA: { token: "4668", symbol: "BANKBARODA-EQ", exchange: "NSE" },
-    PNB: { token: "10666", symbol: "PNB-EQ", exchange: "NSE" },
-    UNIONBANK: { token: "10281", symbol: "UNIONBANK-EQ", exchange: "NSE" },
-    INDIANB: { token: "12151", symbol: "INDIANB-EQ", exchange: "NSE" },
-    CANBK: { token: "10794", symbol: "CANBK-EQ", exchange: "NSE" },
-    IDFCFIRSTB: { token: "11184", symbol: "IDFCFIRSTB-EQ", exchange: "NSE" },
-    FEDERALBNK: { token: "1023", symbol: "FEDERALBNK-EQ", exchange: "NSE" },
-    BANDHANBNK: { token: "2263", symbol: "BANDHANBNK-EQ", exchange: "NSE" },
-    AUBANK: { token: "2121", symbol: "AUBANK-EQ", exchange: "NSE" }
-};
+export const bearish_SYMBOL_MAP = {
 
-export const AUTO = {
-    MARUTI: { token: "10999", symbol: "MARUTI-EQ", exchange: "NSE" },
-    M_M: { token: "2031", symbol: "M&M-EQ", exchange: "NSE" },
-    EICHERMOT: { token: "910", symbol: "EICHERMOT-EQ", exchange: "NSE" },
-    BAJAJ_AUTO: { token: "16669", symbol: "BAJAJ-AUTO-EQ", exchange: "NSE" },
-    HEROMOTOCO: { token: "1348", symbol: "HEROMOTOCO-EQ", exchange: "NSE" },
-    TATAMOTORS: { token: "3456", symbol: "TMPV-EQ", exchange: "NSE" },
-    TVSMOTOR: { token: "8479", symbol: "TVSMOTOR-EQ", exchange: "NSE" },
-    ASHOKLEY: { token: "212", symbol: "ASHOKLEY-EQ", exchange: "NSE" },
-    BALKRISIND: { token: "335", symbol: "BALKRISIND-EQ", exchange: "NSE" },
-    UNOMINDA: { token: "11717", symbol: "UNOMINDA-EQ", exchange: "NSE" },
-    BHARATFORG: { token: "422", symbol: "BHARATFORG-EQ", exchange: "NSE" },
-    ESCORTS: { token: "958", symbol: "ESCORTS-EQ", exchange: "NSE" }
-};
+  // ── Financials (Banks - Private) ─────────────────────────────
+  HDFCBANK:      { token: "", symbol: "HDFCBANK.NS",      exchange: "NSE" }, // HDFC Bank
+  ICICIBANK:     { token: "", symbol: "ICICIBANK.NS",     exchange: "NSE" }, // ICICI Bank
+  KOTAKBANK:     { token: "", symbol: "KOTAKBANK.NS",     exchange: "NSE" }, // Kotak Mahindra Bank
+  AXISBANK:      { token: "", symbol: "AXISBANK.NS",      exchange: "NSE" }, // Axis Bank
+  INDUSINDBK:    { token: "", symbol: "INDUSINDBK.NS",    exchange: "NSE" }, // IndusInd Bank
+  BANDHANBNK:    { token: "", symbol: "BANDHANBNK.NS",    exchange: "NSE" }, // Bandhan Bank
+  IDFCFIRSTB:    { token: "", symbol: "IDFCFIRSTB.NS",   exchange: "NSE" }, // IDFC First Bank
 
-export const FINANCIAL_SERVICES = {
-    BAJFINANCE: { token: "317", symbol: "BAJFINANCE.NS", exchange: "NSE" },
-    BAJAJFINSV: { token: "16675", symbol: "BAJAJFINSV.NS", exchange: "NSE" },
-    LICI: { token: "11809", symbol: "LICI-EQ", exchange: "NSE" },
-    HDFCLIFE: { token: "467", symbol: "HDFCLIFE-EQ", exchange: "NSE" },
-    SBILIFE: { token: "21808", symbol: "SBILIFE-EQ", exchange: "NSE" },
-    ICICIGI: { token: "18652", symbol: "ICICIGI-EQ", exchange: "NSE" },
-    PFC: { token: "14299", symbol: "PFC-EQ", exchange: "NSE" },
-    RECLTD: { token: "15355", symbol: "RECLTD-EQ", exchange: "NSE" },
-    HDFCAMC: { token: "4244", symbol: "HDFCAMC-EQ", exchange: "NSE" },
-    CHOLAFIN: { token: "685", symbol: "CHOLAFIN-EQ", exchange: "NSE" },
-    MUTHOOTFIN: { token: "236", symbol: "MUTHOOTFIN-EQ", exchange: "NSE" },
-    JIOFIN: { token: "18921", symbol: "JIOFIN-EQ", exchange: "NSE" },
-    SHRIRAMFIN: { token: "3220", symbol: "SHRIRAMFIN-EQ", exchange: "NSE" },
-    BSE: { token: "1250", symbol: "BSE-EQ", exchange: "NSE" },
-    IRFC: { token: "160", symbol: "IRFC-EQ", exchange: "NSE" },
-    LICHSGFIN: { token: "1997", symbol: "LICHSGFIN-EQ", exchange: "NSE" },
-    M_MFIN: { token: "13285", symbol: "M&MFIN-EQ", exchange: "NSE" },
-    POONAWALLA: { token: "2112", symbol: "POONAWALLA-EQ", exchange: "NSE" },
-    ABCAPITAL: { token: "14840", symbol: "ABCAPITAL-EQ", exchange: "NSE" },
-    "360ONE": { token: "172", symbol: "360ONE-EQ", exchange: "NSE" },
-    ANGELONE: { token: "17624", symbol: "ANGELONE-EQ", exchange: "NSE" },
-    KFINTECH: { token: "1231", symbol: "KFINTECH-EQ", exchange: "NSE" },
-    MANAPPURAM: { token: "13328", symbol: "MANAPPURAM-EQ", exchange: "NSE" }
-};
+  // ── Financials (Banks - Public) ──────────────────────────────
+  SBIN:          { token: "", symbol: "SBIN.NS",          exchange: "NSE" }, // State Bank of India
+  BANKBARODA:    { token: "", symbol: "BANKBARODA.NS",    exchange: "NSE" }, // Bank of Baroda
+  PNB:           { token: "", symbol: "PNB.NS",           exchange: "NSE" }, // Punjab National Bank
+  CANBK:         { token: "", symbol: "CANBK.NS",         exchange: "NSE" }, // Canara Bank
 
-export const FMCG = {
-    HINDUNILVR: { token: "1394", symbol: "HINDUNILVR-EQ", exchange: "NSE" },
-    ITC: { token: "1660", symbol: "ITC-EQ", exchange: "NSE" },
-    NESTLEIND: { token: "17963", symbol: "NESTLEIND-EQ", exchange: "NSE" },
-    BRITANNIA: { token: "547", symbol: "BRITANNIA-EQ", exchange: "NSE" },
-    DABUR: { token: "772", symbol: "DABUR-EQ", exchange: "NSE" },
-    GODREJCP: { token: "10099", symbol: "GODREJCP-EQ", exchange: "NSE" },
-    MARICO: { token: "4067", symbol: "MARICO-EQ", exchange: "NSE" },
-    TATACONSUM: { token: "3432", symbol: "TATACONSUM-EQ", exchange: "NSE" },
-    COLPAL: { token: "15141", symbol: "COLPAL-EQ", exchange: "NSE" },
-    VBL: { token: "13528", symbol: "VBL-EQ", exchange: "NSE" },
-    JUBLFOOD: { token: "18096", symbol: "JUBLFOOD-EQ", exchange: "NSE" },
-    RADICO: { token: "2739", symbol: "RADICO-EQ", exchange: "NSE" },
-    EMAMILTD: { token: "936", symbol: "EMAMILTD-EQ", exchange: "NSE" },
-    JYOTHYLAB: { token: "13768", symbol: "JYOTHYLAB-EQ", exchange: "NSE" },
-    BIKAJI: { token: "321", symbol: "BIKAJI-EQ", exchange: "NSE" }
-};
+  // ── Financials (NBFCs & Financial Services) ──────────────────
+  BAJFINANCE:    { token: "", symbol: "BAJFINANCE.NS",    exchange: "NSE" }, // Bajaj Finance
+  BAJAJFINSV:    { token: "", symbol: "BAJAJFINSV.NS",    exchange: "NSE" }, // Bajaj Finserv
+  HDFCLIFE:      { token: "", symbol: "HDFCLIFE.NS",      exchange: "NSE" }, // HDFC Life Insurance
+  SBILIFE:       { token: "", symbol: "SBILIFE.NS",       exchange: "NSE" }, // SBI Life Insurance
+  ICICIPRULI:    { token: "", symbol: "ICICIPRULI.NS",    exchange: "NSE" }, // ICICI Prudential Life
+  ICICIGI:       { token: "", symbol: "ICICIGI.NS",       exchange: "NSE" }, // ICICI Lombard General Insurance
+  SBICARD:       { token: "", symbol: "SBICARD.NS",       exchange: "NSE" }, // SBI Cards
+  CHOLAFIN:      { token: "", symbol: "CHOLAFIN.NS",      exchange: "NSE" }, // Cholamandalam Investment
+  MUTHOOTFIN:    { token: "", symbol: "MUTHOOTFIN.NS",    exchange: "NSE" }, // Muthoot Finance
+  JIOFIN:        { token: "", symbol: "JIOFIN.NS",        exchange: "NSE" }, // Jio Financial Services
 
-export const IT = {
-    TCS: { token: "11536", symbol: "TCS-EQ", exchange: "NSE" },
-    INFY: { token: "1594", symbol: "INFY-EQ", exchange: "NSE" },
-    HCLTECH: { token: "7229", symbol: "HCLTECH-EQ", exchange: "NSE" },
-    WIPRO: { token: "3787", symbol: "WIPRO-EQ", exchange: "NSE" },
-    TECHM: { token: "13538", symbol: "TECHM-EQ", exchange: "NSE" },
-    LTIM: { token: "17818", symbol: "LTIM-EQ", exchange: "NSE" },
-    PERSISTENT: { token: "18365", symbol: "PERSISTENT-EQ", exchange: "NSE" },
-    MPHASIS: { token: "4503", symbol: "MPHASIS-EQ", exchange: "NSE" },
-    LTTS: { token: "11184", symbol: "LTTS-EQ", exchange: "NSE" },
-    COFORGE: { token: "11543", symbol: "COFORGE-EQ", exchange: "NSE" },
-    CYIENT: { token: "637", symbol: "CYIENT-EQ", exchange: "NSE" },
-    HAPPSTMNDS: { token: "17627", symbol: "HAPPSTMNDS-EQ", exchange: "NSE" },
-    TANLA: { token: "3388", symbol: "TANLA-EQ", exchange: "NSE" },
-    KPITTECH: { token: "2142", symbol: "KPITTECH-EQ", exchange: "NSE" },
-    TATAELXSI: { token: "3421", symbol: "TATAELXSI-EQ", exchange: "NSE" },
-    MASTEK: { token: "2064", symbol: "MASTEK-EQ", exchange: "NSE" }
-};
+  // ── Information Technology ────────────────────────────────────
+  TCS:           { token: "", symbol: "TCS.NS",           exchange: "NSE" }, // Tata Consultancy Services
+  INFY:          { token: "", symbol: "INFY.NS",          exchange: "NSE" }, // Infosys
+  HCLTECH:       { token: "", symbol: "HCLTECH.NS",       exchange: "NSE" }, // HCL Technologies
+  WIPRO:         { token: "", symbol: "WIPRO.NS",         exchange: "NSE" }, // Wipro
+  TECHM:         { token: "", symbol: "TECHM.NS",         exchange: "NSE" }, // Tech Mahindra
+  LTI:           { token: "", symbol: "LTM.NS",          exchange: "NSE" }, // LTIMindtree
+  MPHASIS:       { token: "", symbol: "MPHASIS.NS",       exchange: "NSE" }, // Mphasis
+  PERSISTENT:    { token: "", symbol: "PERSISTENT.NS",    exchange: "NSE" }, // Persistent Systems
 
-export const MEDIA = {
-    SUNTV: { token: "13404", symbol: "SUNTV-EQ", exchange: "NSE" },
-    ZEEL: { token: "3812", symbol: "ZEEL-EQ", exchange: "NSE" },
-    NAZARA: { token: "2312", symbol: "NAZARA-EQ", exchange: "NSE" },
-    SAREGAMA: { token: "2976", symbol: "SAREGAMA-EQ", exchange: "NSE" },
-    PVRINOX: { token: "13147", symbol: "PVRINOX-EQ", exchange: "NSE" }
-};
+  // ── Oil, Gas & Energy ─────────────────────────────────────────
+  RELIANCE:      { token: "", symbol: "RELIANCE.NS",      exchange: "NSE" }, // Reliance Industries
+  ONGC:          { token: "", symbol: "ONGC.NS",          exchange: "NSE" }, // Oil & Natural Gas Corp
+  IOC:           { token: "", symbol: "IOC.NS",           exchange: "NSE" }, // Indian Oil Corporation
+  BPCL:          { token: "", symbol: "BPCL.NS",          exchange: "NSE" }, // Bharat Petroleum
+  GAIL:          { token: "", symbol: "GAIL.NS",          exchange: "NSE" }, // GAIL (India)
+  COALINDIA:     { token: "", symbol: "COALINDIA.NS",     exchange: "NSE" }, // Coal India
 
-export const METAL = {
-    TATASTEEL: { token: "3499", symbol: "TATASTEEL-EQ", exchange: "NSE" },
-    JSWSTEEL: { token: "11723", symbol: "JSWSTEEL-EQ", exchange: "NSE" },
-    HINDALCO: { token: "1363", symbol: "HINDALCO-EQ", exchange: "NSE" },
-    VEDL: { token: "3063", symbol: "VEDL-EQ", exchange: "NSE" },
-    HINDZINC: { token: "1415", symbol: "HINDZINC-EQ", exchange: "NSE" },
-    SAIL: { token: "2963", symbol: "SAIL-EQ", exchange: "NSE" },
-    JINDALSTEL: { token: "1722", symbol: "JINDALSTEL-EQ", exchange: "NSE" },
-    NATIONALUM: { token: "6364", symbol: "NATIONALUM-EQ", exchange: "NSE" },
-    MOIL: { token: "18115", symbol: "MOIL-EQ", exchange: "NSE" }
-};
+  // ── Power & Utilities ─────────────────────────────────────────
+  NTPC:          { token: "", symbol: "NTPC.NS",          exchange: "NSE" }, // NTPC
+  POWERGRID:     { token: "", symbol: "POWERGRID.NS",     exchange: "NSE" }, // Power Grid Corporation
+  ADANIPOWER:    { token: "", symbol: "ADANIPOWER.NS",    exchange: "NSE" }, // Adani Power
+  ADANIGREEN:    { token: "", symbol: "ADANIGREEN.NS",    exchange: "NSE" }, // Adani Green Energy
+  TATAPOWER:     { token: "", symbol: "TATAPOWER.NS",     exchange: "NSE" }, // Tata Power
 
-export const PHARMA = {
-    SUNPHARMA: { token: "3351", symbol: "SUNPHARMA-EQ", exchange: "NSE" },
-    CIPLA: { token: "694", symbol: "CIPLA-EQ", exchange: "NSE" },
-    DRREDDY: { token: "881", symbol: "DRREDDY-EQ", exchange: "NSE" },
-    DIVISLAB: { token: "10940", symbol: "DIVISLAB-EQ", exchange: "NSE" },
-    AUROPHARMA: { token: "275", symbol: "AUROPHARMA-EQ", exchange: "NSE" },
-    TORNTPHARM: { token: "3513", symbol: "TORNTPHARM-EQ", exchange: "NSE" },
-    ALKEM: { token: "11703", symbol: "ALKEM-EQ", exchange: "NSE" },
-    BIOCON: { token: "11373", symbol: "BIOCON-EQ", exchange: "NSE" },
-    LUPIN: { token: "10440", symbol: "LUPIN-EQ", exchange: "NSE" },
-    GRANULES: { token: "1182", symbol: "GRANULES-EQ", exchange: "NSE" },
-    GLAND: { token: "2021", symbol: "GLAND-EQ", exchange: "NSE" },
-    MANKIND: { token: "4321", symbol: "MANKIND-EQ", exchange: "NSE" },
-    ZYDUSLIFE: { token: "2708", symbol: "ZYDUSLIFE-EQ", exchange: "NSE" },
-    SOLARA: { token: "5427", symbol: "SOLARA-EQ", exchange: "NSE" }
-};
+  // ── Automobiles ───────────────────────────────────────────────
+  MARUTI:        { token: "", symbol: "MARUTI.NS",        exchange: "NSE" }, // Maruti Suzuki
+  TATAMOTORS:    { token: "", symbol: "TMPV.NS",    exchange: "NSE" }, // Tata Motors
+  M_M:           { token: "", symbol: "M&M.NS",           exchange: "NSE" }, // Mahindra & Mahindra
+  BAJAJ_AUTO:    { token: "", symbol: "BAJAJ-AUTO.NS",    exchange: "NSE" }, // Bajaj Auto
+  HEROMOTOCO:    { token: "", symbol: "HEROMOTOCO.NS",    exchange: "NSE" }, // Hero MotoCorp
+  EICHERMOT:     { token: "", symbol: "EICHERMOT.NS",     exchange: "NSE" }, // Eicher Motors
+  TVSMOTORS:     { token: "", symbol: "TVSMOTOR.NS",      exchange: "NSE" }, // TVS Motor
 
-export const REALTY = {
-    DLF: { token: "14732", symbol: "DLF-EQ", exchange: "NSE" },
-    LODHA: { token: "4351", symbol: "LODHA-EQ", exchange: "NSE" },
-    GODREJPROP: { token: "11040", symbol: "GODREJPROP-EQ", exchange: "NSE" },
-    OBEROIRLTY: { token: "18114", symbol: "OBEROIRLTY-EQ", exchange: "NSE" },
-    PRESTIGE: { token: "18311", symbol: "PRESTIGE-EQ", exchange: "NSE" },
-    PHOENIXLTD: { token: "2650", symbol: "PHOENIXLTD-EQ", exchange: "NSE" },
-    BRIGADE: { token: "14751", symbol: "BRIGADE-EQ", exchange: "NSE" },
-    SOBHA: { token: "14241", symbol: "SOBHA-EQ", exchange: "NSE" },
-    SUNTECK: { token: "18116", symbol: "SUNTECK-EQ", exchange: "NSE" }
-};
+  // ── FMCG & Consumer ───────────────────────────────────────────
+  HINDUNILVR:    { token: "", symbol: "HINDUNILVR.NS",    exchange: "NSE" }, // Hindustan Unilever
+  ITC:           { token: "", symbol: "ITC.NS",           exchange: "NSE" }, // ITC
+  NESTLEIND:     { token: "", symbol: "NESTLEIND.NS",     exchange: "NSE" }, // Nestle India
+  BRITANNIA:     { token: "", symbol: "BRITANNIA.NS",     exchange: "NSE" }, // Britannia Industries
+  DABUR:         { token: "", symbol: "DABUR.NS",         exchange: "NSE" }, // Dabur India
+  MARICO:        { token: "", symbol: "MARICO.NS",        exchange: "NSE" }, // Marico
+  GODREJCP:      { token: "", symbol: "GODREJCP.NS",      exchange: "NSE" }, // Godrej Consumer Products
+  COLPAL:        { token: "", symbol: "COLPAL.NS",        exchange: "NSE" }, // Colgate-Palmolive India
+  TATACONSUM:    { token: "", symbol: "TATACONSUM.NS",    exchange: "NSE" }, // Tata Consumer Products
 
-export const OIL_AND_GAS_ENERGY = {
-    RELIANCE: { token: "2885", symbol: "RELIANCE-EQ", exchange: "NSE" },
-    ONGC: { token: "2475", symbol: "ONGC-EQ", exchange: "NSE" },
-    NTPC: { token: "11630", symbol: "NTPC-EQ", exchange: "NSE" },
-    POWERGRID: { token: "14977", symbol: "POWERGRID-EQ", exchange: "NSE" },
-    BPCL: { token: "526", symbol: "BPCL-EQ", exchange: "NSE" },
-    IOC: { token: "1624", symbol: "IOC-EQ", exchange: "NSE" },
-    GAIL: { token: "4717", symbol: "GAIL-EQ", exchange: "NSE" },
-    COALINDIA: { token: "2031", symbol: "COALINDIA-EQ", exchange: "NSE" },
-    TATAPOWER: { token: "3426", symbol: "TATAPOWER-EQ", exchange: "NSE" },
-    ADANIPOWER: { token: "15492", symbol: "ADANIPOWER-EQ", exchange: "NSE" },
-    ADANIGREEN: { token: "17631", symbol: "ADANIGREEN-EQ", exchange: "NSE" },
-    ADANIENSOL: { token: "17632", symbol: "ADANIENSOL-EQ", exchange: "NSE" },
-    TORNTPOWER: { token: "13781", symbol: "TORNTPOWER-EQ", exchange: "NSE" },
-    OIL: { token: "11532", symbol: "OIL-EQ", exchange: "NSE" },
-    PETRONET: { token: "11351", symbol: "PETRONET-EQ", exchange: "NSE" },
-    IGL: { token: "11262", symbol: "IGL-EQ", exchange: "NSE" },
-    ATGL: { token: "17631", symbol: "ATGL-EQ", exchange: "NSE" },
-    SJVN: { token: "15332", symbol: "SJVN-EQ", exchange: "NSE" },
-    NLCINDIA: { token: "11631", symbol: "NLCINDIA-EQ", exchange: "NSE" },
-    JSWENERGY: { token: "15141", symbol: "JSWENERGY-EQ", exchange: "NSE" },
-    CESC: { token: "676", symbol: "CESC-EQ", exchange: "NSE" }
-};
+  // ── Healthcare & Pharma ───────────────────────────────────────
+  SUNPHARMA:     { token: "", symbol: "SUNPHARMA.NS",     exchange: "NSE" }, // Sun Pharmaceutical
+  DRREDDY:       { token: "", symbol: "DRREDDY.NS",       exchange: "NSE" }, // Dr. Reddy's Laboratories
+  CIPLA:         { token: "", symbol: "CIPLA.NS",         exchange: "NSE" }, // Cipla
+  DIVISLAB:      { token: "", symbol: "DIVISLAB.NS",      exchange: "NSE" }, // Divi's Laboratories
+  APOLLOHOSP:    { token: "", symbol: "APOLLOHOSP.NS",    exchange: "NSE" }, // Apollo Hospitals
+  BIOCON:        { token: "", symbol: "BIOCON.NS",        exchange: "NSE" }, // Biocon
+  TORNTPHARM:    { token: "", symbol: "TORNTPHARM.NS",    exchange: "NSE" }, // Torrent Pharmaceuticals
 
-export const HEALTHCARE = {
-    APOLLOHOSP: { token: "157", symbol: "APOLLOHOSP-EQ", exchange: "NSE" },
-    MAXHEALTH: { token: "3051", symbol: "MAXHEALTH-EQ", exchange: "NSE" },
-    FORTIS: { token: "12640", symbol: "FORTIS-EQ", exchange: "NSE" },
-    METROPOLIS: { token: "1342", symbol: "METROPOLIS-EQ", exchange: "NSE" },
-    LALPATHLAB: { token: "11654", symbol: "LALPATHLAB-EQ", exchange: "NSE" }
-};
+  // ── Telecom ───────────────────────────────────────────────────
+  BHARTIARTL:    { token: "", symbol: "BHARTIARTL.NS",   exchange: "NSE" }, // Bharti Airtel
+  IDEA:          { token: "", symbol: "IDEA.NS",          exchange: "NSE" }, // Vodafone Idea
 
+  // ── Cement & Construction Materials ──────────────────────────
+  ULTRACEMCO:    { token: "", symbol: "ULTRACEMCO.NS",    exchange: "NSE" }, // UltraTech Cement
+  SHREECEM:      { token: "", symbol: "SHREECEM.NS",      exchange: "NSE" }, // Shree Cement
+  AMBUJACEM:     { token: "", symbol: "AMBUJACEM.NS",     exchange: "NSE" }, // Ambuja Cements
+  ACC:           { token: "", symbol: "ACC.NS",           exchange: "NSE" }, // ACC
 
-export const STOCK_IN_NEWS = {
-    MAXHEALTH: { token: "3051", symbol: "MAXHEALTH-EQ", exchange: "NSE" },
-    HAL: { token: "2303", symbol: "HAL-EQ", exchange: "NSE" },
-    DRREDDY: { token: "881", symbol: "DRREDDY-EQ", exchange: "NSE" },
-    AUROPHARMA: { token: "275", symbol: "AUROPHARMA-EQ", exchange: "NSE" },
-    DABUR: { token: "772", symbol: "DABUR-EQ", exchange: "NSE" },
-     TECHM: { token: "13538", symbol: "TECHM-EQ", exchange: "NSE" },
-     SAIL: { token: "2963", symbol: "SAIL-EQ", exchange: "NSE" },
-     JSWSTEEL: { token: "11723", symbol: "JSWSTEEL-EQ", exchange: "NSE" },
-     TITAN: { token: "3506", symbol: "TITAN-EQ", exchange: "NSE" },
-     ADANIENT: { token: "25", symbol: "ADANIENT-EQ", exchange: "NSE" },
-     POWERGRID: { token: "14977", symbol: "POWERGRID-EQ", exchange: "NSE" },
-     SIEMENS: { token: "3150", symbol: "SIEMENS-EQ", exchange: "NSE" },
-     MUTHOOTFIN: { token: "236", symbol: "MUTHOOTFIN-EQ", exchange: "NSE" },
-     SUZLON: { token: "15773", symbol: "SUZLON-EQ", exchange: "NSE" }
-}
+  // ── Infrastructure & Engineering ─────────────────────────────
+  LT:            { token: "", symbol: "LT.NS",            exchange: "NSE" }, // Larsen & Toubro
+  ADANIPORTS:    { token: "", symbol: "ADANIPORTS.NS",    exchange: "NSE" }, // Adani Ports & SEZ
+  ADANIENT:      { token: "", symbol: "ADANIENT.NS",      exchange: "NSE" }, // Adani Enterprises
+  SIEMENS:       { token: "", symbol: "SIEMENS.NS",       exchange: "NSE" }, // Siemens India
+  ABB:           { token: "", symbol: "ABB.NS",           exchange: "NSE" }, // ABB India
 
-export const CONSUMER_DURABLES_DISCRETIONARY = {
-    TITAN: { token: "3506", symbol: "TITAN-EQ", exchange: "NSE" },
-    HAVELLS: { token: "9819", symbol: "HAVELLS-EQ", exchange: "NSE" },
-    POLYCAB: { token: "9590", symbol: "POLYCAB-EQ", exchange: "NSE" },
-    SIEMENS: { token: "3150", symbol: "SIEMENS-EQ", exchange: "NSE" },
-    ABB: { token: "10", symbol: "ABB-EQ", exchange: "NSE" },
-    BLUESTARCO: { token: "492", symbol: "BLUESTARCO-EQ", exchange: "NSE" },
-    WHIRLPOOL: { token: "3740", symbol: "WHIRLPOOL-EQ", exchange: "NSE" },
-    CROMPTON: { token: "11516", symbol: "CROMPTON-EQ", exchange: "NSE" },
-    BATAINDIA: { token: "371", symbol: "BATAINDIA-EQ", exchange: "NSE" },
-    KALYANKJIL: { token: "1241", symbol: "KALYANKJIL-EQ", exchange: "NSE" },
-    PAGEIND: { token: "14413", symbol: "PAGEIND-EQ", exchange: "NSE" },
-    TRENT: { token: "1964", symbol: "TRENT-EQ", exchange: "NSE" },
-    DMART: { token: "19913", symbol: "DMART-EQ", exchange: "NSE" },
-    NYKAA: { token: "5517", symbol: "NYKAA-EQ", exchange: "NSE" },
-    ZOMATO: { token: "5097", symbol: "ETERNAL-EQ", exchange: "NSE" },
-    ASTRAL: { token: "14418", symbol: "ASTRAL-EQ", exchange: "NSE" },
-    KAJARIACER: { token: "13061", symbol: "KAJARIACER-EQ", exchange: "NSE" },
-    PIDILITIND: { token: "2664", symbol: "PIDILITIND-EQ", exchange: "NSE" }
-};
+  // ── Metals & Mining ───────────────────────────────────────────
+  TATASTEEL:     { token: "", symbol: "TATASTEEL.NS",     exchange: "NSE" }, // Tata Steel
+  HINDALCO:      { token: "", symbol: "HINDALCO.NS",      exchange: "NSE" }, // Hindalco Industries
+  JSWSTEEL:      { token: "", symbol: "JSWSTEEL.NS",      exchange: "NSE" }, // JSW Steel
+  VEDL:          { token: "", symbol: "VEDL.NS",          exchange: "NSE" }, // Vedanta
+  SAIL:          { token: "", symbol: "SAIL.NS",          exchange: "NSE" }, // Steel Authority of India
 
-export const INDUSTRIALS = {
-    LT: { token: "11483", symbol: "LT-EQ", exchange: "NSE" },
-    BEL: { token: "383", symbol: "BEL-EQ", exchange: "NSE" },
-    HAL: { token: "2303", symbol: "HAL-EQ", exchange: "NSE" },
-    BHEL: { token: "438", symbol: "BHEL-EQ", exchange: "NSE" },
-    CGPOWER: { token: "667", symbol: "CGPOWER-EQ", exchange: "NSE" },
-    CUMMINSIND: { token: "769", symbol: "CUMMINSIND-EQ", exchange: "NSE" },
-    POWERINDIA: { token: "1860", symbol: "POWERINDIA-EQ", exchange: "NSE" },
-    ADANIPORTS: { token: "15083", symbol: "ADANIPORTS-EQ", exchange: "NSE" },
-    ADANIENT: { token: "25", symbol: "ADANIENT-EQ", exchange: "NSE" },
-    THERMAX: { token: "3503", symbol: "THERMAX-EQ", exchange: "NSE" },
-    KEI: { token: "1310", symbol: "KEI-EQ", exchange: "NSE" },
-    SKFINDIA: { token: "3235", symbol: "SKFINDIA-EQ", exchange: "NSE" },
-    TIMKEN: { token: "3501", symbol: "TIMKEN-EQ", exchange: "NSE" },
-    KSB: { token: "1932", symbol: "KSB-EQ", exchange: "NSE" },
-    FINCABLES: { token: "1036", symbol: "FINCABLES-EQ", exchange: "NSE" },
-    AIAENG: { token: "13512", symbol: "AIAENG-EQ", exchange: "NSE" },
-    GRINDWELL: { token: "1234", symbol: "GRINDWELL-EQ", exchange: "NSE" },
-    SUZLON: { token: "15773", symbol: "SUZLON-EQ", exchange: "NSE" }
+  // ── Consumer Durables & Retail ───────────────────────────────
+  TITAN:         { token: "", symbol: "TITAN.NS",         exchange: "NSE" }, // Titan Company
+  HAVELLS:       { token: "", symbol: "HAVELLS.NS",       exchange: "NSE" }, // Havells India
+  DMART:         { token: "", symbol: "DMART.NS",         exchange: "NSE" }, // Avenue Supermarts (DMart)
+  TRENT:         { token: "", symbol: "TRENT.NS",         exchange: "NSE" }, // Trent
+
+  // ── Real Estate ───────────────────────────────────────────────
+  DLF:           { token: "", symbol: "DLF.NS",           exchange: "NSE" }, // DLF
+
+  // ── Paints ────────────────────────────────────────────────────
+  ASIANPAINT:    { token: "", symbol: "ASIANPAINT.NS",    exchange: "NSE" }, // Asian Paints
+  BERGEPAINT:    { token: "", symbol: "BERGEPAINT.NS",    exchange: "NSE" }, // Berger Paints
+
+  // ── Fertilizers & Chemicals ───────────────────────────────────
+  PIDILITIND:    { token: "", symbol: "PIDILITIND.NS",    exchange: "NSE" }, // Pidilite Industries
+
+  // ── Logistics & Miscellaneous ─────────────────────────────────
+  ZOMATO:        { token: "", symbol: "ETERNAL.NS",        exchange: "NSE" }, // Zomato
+  NYKAA:         { token: "", symbol: "NYKAA.NS",         exchange: "NSE" }, // FSN E-Commerce (Nykaa)
+  PAYTM:         { token: "", symbol: "PAYTM.NS",         exchange: "NSE" }, // One97 Communications (Paytm)
+  INDIAMART:     { token: "", symbol: "INDIAMART.NS",     exchange: "NSE" }, // IndiaMART InterMESH
 };

@@ -1,4 +1,4 @@
-import { INDUSTRIALS } from '../../Common/stockInfo.js';
+import { bearish_SYMBOL_MAP } from '../../Common/stockInfo.js';
 import yahooFinance from "yahoo-finance2";
 
 const yf = new yahooFinance();
@@ -31,7 +31,7 @@ async function backtestStrategy() {
     console.log("🚀 Initializing Specialist Sniper Backtest...");
     
     // FIX: Converting Object to Entries for iteration
-    const stockEntries = Object.entries(INDUSTRIALS);
+    const stockEntries = Object.entries(bearish_SYMBOL_MAP);
     console.log(`📊 Processing ${stockEntries.length} Stocks | Syncing 60D Intraday + 2YR Daily\n`);
 
     let totalWins = 0, totalLosses = 0, totalTrades = 0;

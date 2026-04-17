@@ -2,17 +2,17 @@ import axios from "axios";
 import yahooFinance from "yahoo-finance2";
 import { PutCommand, ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
-import { CONSUMER_DURABLES_DISCRETIONARY } from "../Common/stockInfo.js";
+import { Bullish_SYMBOL_MAP } from "../Common/stockInfo.js";
 
 const yf = new yahooFinance();
 
 const PlaceStocks = process.env.PlacedStocksTable;
-const Bullish_STOCKS = CONSUMER_DURABLES_DISCRETIONARY;
+const Bullish_STOCKS = Bullish_SYMBOL_MAP;
 
 // ---------------- CONFIGURATION ----------------
 const CONFIG = {
   apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
-  jwtToken: process.env.Smart_API_JWT_TOKEN ?? "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qTTVOemN3TVN3aWJtSm1Jam94TnpjMk16RXhNVEl4TENKcFlYUWlPakUzTnpZek1URXhNakVzSW1wMGFTSTZJbUl5TlRkaU1XRTRMV1ppWm1FdE5EVTJaUzFpTm1SaExUWTVNekpqTWpreFltTmxZaUlzSWxSdmEyVnVJam9pSW4wLkhDN0t3a1RvekJXcVpzUnpUdlNVcUFCTGlZSktvZ2Z2Z2VubkZ3TGdmeXdULVdyYVZQYlF2enRHbnNWZEZRLWJST3Fpdy1rd0M4WEV3UzlHa0ZyRk4tcWxXMjhPdjE4c3JVckRTZk9vbHJPLTdZVThQVTBRdE9VUDJ1b3E3TkZlRUFoXzY4ZzhPX0xMRmVLMGx2RGFZM0ZKQ1ZMMlpZdzZ4NW5yZ2E5cmVkZyIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYzMTEzMDEsImV4cCI6MTc3NjM2NDIwMH0.H71fVM3gNYVYRBecKjNu1kiZfL2ONDiJUhg3orAJTnYKJKGhgyq_lBwCs5g4AX1gC-7_Oy1KczoAZpIpK9uUrw",
+  jwtToken: process.env.Smart_API_JWT_TOKEN ?? "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qUTRNems0TWl3aWJtSm1Jam94TnpjMk16azNOREF5TENKcFlYUWlPakUzTnpZek9UYzBNRElzSW1wMGFTSTZJamcwWkdWaE5ESTNMVEV3TVRVdE5HTTNNUzA0TldJeUxUWTBNbVJsTWpBd01XRmhNeUlzSWxSdmEyVnVJam9pSW4wLk5RZUhJWFNUUi1EX3k0ZW41N0xseWtkX1dRV24zbzZFNEkyVXpJM25LSFdRdjFlcnEwczA4RG9EbGFydXRyN0VMRmpGd1JOZkxRWkVDZVByQ0cyR01uRmtrZGZYemVLMmI1OHd1N0RyZThtdEFHUGdRRllxUHdsTGNxWHFZdGZLMHVsT2FrOFRrRnJZV1NyQVdDM2FmTlBCRU5fdUZKX1o4VkMxRFhWZ1VwTSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYzOTc1ODIsImV4cCI6MTc3NjQ1MDYwMH0.jSLflDNB7DV-2aPI590h_Ya3VrSnQNKyrmlfn2ZGB7eYRKt0DXcYk-N2oHhsNRWT6GQTOrlM4mpoNTPulJa-dQ",
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
   localIP:  process.env.Smart_API_LocalIP ?? "127.0.0.1",
   capital:  process.env.Capital ?? 10000,
@@ -235,12 +235,19 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
       lastCandle.close > morningHigh && lastCandle.close > stockVWAP;
     const isReclaimingValue =
       lastCandle.close > stockVWAP && prevCandle.close < stockVWAP;
-    const hasVolumeSurge = lastCandle.volume > avgMorningVol * 1.1;
+    const hasVolumeSurge = lastCandle.volume > avgMorningVol * 1.5;
     const sBody = Math.abs(lastCandle.close - lastCandle.open);
     const sRange = lastCandle.high - lastCandle.low;
-    const isStrongCandle = sRange > 0 ? sBody / sRange > 0.5 : false;
+    const isStrongCandle = sRange > 0 ? sBody / sRange > 0.7 : false;
 
     if (hasVolumeSurge && isStrongCandle && (isBreakout || isReclaimingValue)) {
+      console.log("lastCandle.close", lastCandle.close);
+      console.log("stockVWAP", stockVWAP);
+      console.log("prevCandle.close", prevCandle.close);
+      console.log("lastCandle.volume", lastCandle.volume);
+      console.log("lastCandle.volume", lastCandle.volume);
+       console.log("isStrongCandle", sBody / sRange);
+      console.log("Stock is going to place")
       atrValue = await calculateIntradayATR(iQuotes, 20);
       const getTimeAdjustedTarget = await getTimeAdjustedTargets(lastCandle.close, atrValue);
       let showDate = new Date().toLocaleString("en-IN", {
@@ -509,4 +516,4 @@ export const cron = async () => {
   console.log(`🔍 Scan Complete: ${new Date().toLocaleTimeString("en-IN")}\n`);
 };
 
-// await cron();
+await cron();
