@@ -115,7 +115,7 @@ async function backtestStrategy() {
                     const isReclaiming = candle.close > stockVWAP && todayStockQuotes[i - 1].close < stockVWAP;
                     const isStrong = (Math.abs(candle.close - candle.open) / (candle.high - candle.low)) > 0.5;
 
-                    if (candle.volume > avgMorningVol * 1.1 && isStrong && (isBreakout || isReclaiming)) {
+                    if (candle.volume > avgMorningVol * 1.1 && isStrong && isReclaiming) {
                         const globalIdx = allStockQuotes.findIndex(q => q.date === candle.date);
                         const atr = getHistoricalATR(allStockQuotes, globalIdx, ATR_PERIOD);
                         

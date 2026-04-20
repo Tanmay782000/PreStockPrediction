@@ -12,11 +12,13 @@ const Bullish_STOCKS = Bullish_SYMBOL_MAP;
 // ---------------- CONFIGURATION ----------------
 const CONFIG = {
   apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
-  jwtToken: process.env.Smart_API_JWT_TOKEN ?? "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qUTRNems0TWl3aWJtSm1Jam94TnpjMk16azNOREF5TENKcFlYUWlPakUzTnpZek9UYzBNRElzSW1wMGFTSTZJamcwWkdWaE5ESTNMVEV3TVRVdE5HTTNNUzA0TldJeUxUWTBNbVJsTWpBd01XRmhNeUlzSWxSdmEyVnVJam9pSW4wLk5RZUhJWFNUUi1EX3k0ZW41N0xseWtkX1dRV24zbzZFNEkyVXpJM25LSFdRdjFlcnEwczA4RG9EbGFydXRyN0VMRmpGd1JOZkxRWkVDZVByQ0cyR01uRmtrZGZYemVLMmI1OHd1N0RyZThtdEFHUGdRRllxUHdsTGNxWHFZdGZLMHVsT2FrOFRrRnJZV1NyQVdDM2FmTlBCRU5fdUZKX1o4VkMxRFhWZ1VwTSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzYzOTc1ODIsImV4cCI6MTc3NjQ1MDYwMH0.jSLflDNB7DV-2aPI590h_Ya3VrSnQNKyrmlfn2ZGB7eYRKt0DXcYk-N2oHhsNRWT6GQTOrlM4mpoNTPulJa-dQ",
+  jwtToken:
+    process.env.Smart_API_JWT_TOKEN ??
+    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qYzBNakV5TkN3aWJtSm1Jam94TnpjMk5qVTFOVFEwTENKcFlYUWlPakUzTnpZMk5UVTFORFFzSW1wMGFTSTZJalUyTXpFM1pUZGhMV1JsTTJZdE5EVTNOeTFoTmpFd0xUZGpaVEZtTURVeU5HTmpNQ0lzSWxSdmEyVnVJam9pSW4wLmN4V2Jmbnhxa0ZaVGJkUTRUdzljYjlfaU93RDNpcWJON2RHUlJnMXAyVlpNNzlMbHJjOWlMLTJPM21FSUNjWHYwUC1tTVdWd1k1SkEtV092OUJPbVB0RHlNQTlXV0VkRzI4OWFEdnVldnd0X1NaVUNhRlZXcU9MdGgtUDhiSE9vemNBX1pkSVpRb0FlZnhRaFdWV0dJSmZtOHVOZVpySkZCWHgwclFIUjdoOCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzY2NTU3MjQsImV4cCI6MTc3NjcwOTgwMH0.y_0o31J2TCZKmtt_SyBEWSg9jQ-wrAR3rusSB347Kybde30Vxlb2StSM8DVhTOYnlz7r7tljdQfhvlxSmCIzFw",
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
-  localIP:  process.env.Smart_API_LocalIP ?? "127.0.0.1",
-  capital:  process.env.Capital ?? 10000,
-  risk_per_trade:  process.env.Risk_Per_Trade ?? 0.2,
+  localIP: process.env.Smart_API_LocalIP ?? "127.0.0.1",
+  capital: process.env.Capital ?? 10000,
+  risk_per_trade: process.env.Risk_Per_Trade ?? 0.2,
 };
 
 // ---------------- AXIOS BASE CLIENT (AngelOne) ----------------
@@ -207,7 +209,6 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
 
     const morningHigh = Math.max(todayQuotes[0].high, todayQuotes[1].high);
     const avgMorningVol = (todayQuotes[0].volume + todayQuotes[1].volume) / 2;
-  
 
     let sVal = 0,
       sVol = 0;
@@ -220,20 +221,6 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
     const lastCandle = todayQuotes[todayQuotes.length - 1];
     const prevCandle = todayQuotes[todayQuotes.length - 2];
 
-    const IsEarly = await getTimebasedCheck();
-    if(!IsEarly){
-      const candleRange = lastCandle.high - lastCandle.low;
-      let atrValue = await calculateIntradayATR(iQuotes, 20);
-      const MAX_ATR_MULTIPLIER = 2.5;
-      if (candleRange > atrValue * MAX_ATR_MULTIPLIER) {
-        const exhaustionRatio = (candleRange / atrValue).toFixed(2);
-        return {
-          status: "REJECTED",
-          reason: `Exhaustion Spike: Candle is ${exhaustionRatio}x ATR (Limit: ${MAX_ATR_MULTIPLIER}x)`,
-        };
-      }
-    }
-
     const isBreakout =
       lastCandle.close > morningHigh && lastCandle.close > stockVWAP;
     const isReclaimingValue =
@@ -243,16 +230,55 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
     const sRange = lastCandle.high - lastCandle.low;
     const isStrongCandle = sRange > 0 ? sBody / sRange > 0.5 : false;
 
-    if (hasVolumeSurge && isStrongCandle && (isBreakout || isReclaimingValue)) {
+    //isOpeningHighLogic
+    const historicalOpeningCandles = iQuotes.filter((q) => {
+      const date = new Date(q.date);
+      const istDate = new Date(
+        date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+      );
+      const hours = istDate.getHours();
+      const minutes = istDate.getMinutes();
+      const dateStr = istDate.toLocaleDateString("en-CA", {
+        timeZone: "Asia/Kolkata",
+      });
+
+      // Only 9:15 candle (which closes at 9:30) from previous days
+      return dateStr !== todayStr && hours === 9 && minutes === 15;
+    });
+
+    const historicalAvgVol = average(
+      historicalOpeningCandles.map((q) => q.volume),
+    );
+    const firstCandle = todayQuotes[0]; // 9:15 candle
+    const firstBody = Math.abs(firstCandle.close - firstCandle.open);
+    const firstRange = firstCandle.high - firstCandle.low;
+    const firstBodyRatio = firstRange > 0 ? firstBody / firstRange : 0;
+
+    const isOpeningDrive =
+      historicalAvgVol > 0 && // safety: we have history
+      firstCandle.close > firstCandle.open && // candle 1 was bullish
+      firstBodyRatio > 0.6 && // strong body, not a doji
+      firstCandle.volume > historicalAvgVol * 2.0 && // volume was 2x historical norm
+      lastCandle.close > stockVWAP && // price still above VWAP now
+      lastCandle.close > firstCandle.open; // holding above opening price
+
+    const isRegularSignal =
+      hasVolumeSurge && isStrongCandle && (isBreakout || isReclaimingValue);
+    const isOpeningDriveSignal = isOpeningDrive && isStrongCandle;
+
+    if (isRegularSignal || isOpeningDriveSignal) {
       console.log("lastCandle.close", lastCandle.close);
       console.log("stockVWAP", stockVWAP);
       console.log("prevCandle.close", prevCandle.close);
       console.log("lastCandle.volume", lastCandle.volume);
       console.log("lastCandle.volume", lastCandle.volume);
-       console.log("isStrongCandle", sBody / sRange);
-      console.log("Stock is going to place")
-      atrValue = await calculateIntradayATR(iQuotes, 20);
-      const getTimeAdjustedTarget = await getTimeAdjustedTargets(lastCandle.close, atrValue);
+      console.log("isStrongCandle", sBody / sRange);
+      console.log("Stock is going to place");
+      const atrValue = await calculateIntradayATR(iQuotes, 20);
+      const getTimeAdjustedTarget = await getTimeAdjustedTargets(
+        lastCandle.close,
+        atrValue,
+      );
       let showDate = new Date().toLocaleString("en-IN", {
         timeZone: "Asia/Kolkata",
       });
@@ -285,28 +311,28 @@ async function getTimebasedCheck() {
     timeZone: "Asia/Kolkata",
     hour12: false,
     hour: "2-digit",
-    minute: "2-digit"
+    minute: "2-digit",
   });
 
   // istTimeStr will be in "HH:mm" format (e.g., "09:15", "14:30")
   const [hours, minutes] = istTimeStr.split(":").map(Number);
-  
+
   // Calculate total minutes since midnight for easy comparison
-  const totalMinutes = (hours * 60) + minutes;
-  const cutOffMinutes = (11 * 60) + 30; // 11:30 AM = 690 minutes
+  const totalMinutes = hours * 60 + minutes;
+  const cutOffMinutes = 11 * 60 + 30; // 11:30 AM = 690 minutes
 
   // Returns true if current time is 11:30 AM or earlier
   return totalMinutes < cutOffMinutes;
 }
 
 async function getTimeAdjustedTargets(entryPrice, atrValue) {
-const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+  const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
   const istTime = new Date(now);
   const hour = istTime.getHours();
   const minutes = istTime.getMinutes();
-  
+
   // Minutes remaining until 15:15
-  const minutesLeft = (15 * 60 + 15) - (hour * 60 + minutes);
+  const minutesLeft = 15 * 60 + 15 - (hour * 60 + minutes);
   const hoursLeft = minutesLeft / 60;
 
   let targetMultiplier;
@@ -332,11 +358,9 @@ const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
   return {
     target: (entryPrice + atrValue * targetMultiplier).toFixed(2),
     stopLoss: (entryPrice - atrValue * slMultiplier).toFixed(2),
-    riskReward: (targetMultiplier / slMultiplier).toFixed(1)
+    riskReward: (targetMultiplier / slMultiplier).toFixed(1),
   };
-
 }
-
 
 // ---------------- DATABASE OPERATION ----------------
 async function insertStock(signal) {
@@ -396,7 +420,7 @@ async function placeStock(signal) {
     console.log(`⚠️ Qty < 1 for ${signal.symbolKey}. Skipping order.`);
     return;
   }
-  
+
   const limitPrice = (signal.price * 1.003).toFixed(2); // 0.3% buffer
 
   const payload = {
@@ -409,8 +433,8 @@ async function placeStock(signal) {
     producttype: "INTRADAY",
     duration: "DAY",
     price: limitPrice.toString(),
-    squareoff:signal.target.toString(),
-    stoploss:signal.stopLoss.toString(),
+    squareoff: signal.target.toString(),
+    stoploss: signal.stopLoss.toString(),
     riskReward: signal.riskReward.toString(),
     quantity: qty.toString(),
   };
@@ -454,7 +478,7 @@ async function placeStock(signal) {
         riskReward: getStockInfo.Item.riskReward,
         type: getStockInfo.Item.type,
         transactiontype: "BUY",
-        limitPrice : limitPrice.toString(),
+        limitPrice: limitPrice.toString(),
         status: 1, // 0 = Placed, 1 = Executed, 2 = Closed
         createdAt: getStockInfo.Item.createdAt,
         updatedAt: c_date.toString(),
@@ -483,18 +507,24 @@ export const cron = async () => {
   //   Cron fires at 10:28 IST → secondsIntoInterval = 780s → SKIP
   //   Cron fires at 10:31 IST → secondsIntoInterval = 60s  → RUN ✅
   if (!isNearCandleClose()) {
-    console.log(`⏭️  Skipping — not near a 15m candle close. Next candle closes at :${
-      String(
-        (Math.floor(new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })).getMinutes() / 15) + 1) * 15
-      ).padStart(2, "0")
-    }`);
+    console.log(
+      `⏭️  Skipping — not near a 15m candle close. Next candle closes at :${String(
+        (Math.floor(
+          new Date(
+            new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+          ).getMinutes() / 15,
+        ) +
+          1) *
+          15,
+      ).padStart(2, "0")}`,
+    );
     return;
   }
 
   console.log("━".repeat(55));
 
   // ── Step 1: Nifty Sentiment via AngelOne (index data) ──────────
-     const nifty = await getNiftySentiment();
+  const nifty = await getNiftySentiment();
   // const nifty = {
   //   isBullish: true,
   //   price: 2500,
@@ -542,4 +572,4 @@ export const cron = async () => {
   console.log(`🔍 Scan Complete: ${new Date().toLocaleTimeString("en-IN")}\n`);
 };
 
-await cron();
+// await cron();

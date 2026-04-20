@@ -1,5 +1,5 @@
 import yahooFinance from "yahoo-finance2";
-import { bearish_SYMBOL_MAP } from '../../Common/stockInfo.js';
+import { Bearish_SYMBOL_MAP } from '../../Common/stockInfo.js';
 
 const yf = new yahooFinance();
 
@@ -31,7 +31,7 @@ async function backtestBearishStrategy() {
     console.log("🚀 Initializing Bearish Sniper Backtest...");
     
     // FIX: Converting Object to Entries for iteration
-    const stockEntries = Object.entries(bearish_SYMBOL_MAP);
+    const stockEntries = Object.entries(Bearish_SYMBOL_MAP);
     console.log(`📉 Mode: SHORTING (Sell High, Buy Low) | ${stockEntries.length} Stocks\n`);
 
     let totalWins = 0, totalLosses = 0, totalTrades = 0;
