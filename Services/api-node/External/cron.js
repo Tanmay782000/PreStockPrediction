@@ -220,15 +220,18 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
     const lastCandle = todayQuotes[todayQuotes.length - 1];
     const prevCandle = todayQuotes[todayQuotes.length - 2];
 
-    const candleRange = lastCandle.high - lastCandle.low;
-    let atrValue = await calculateIntradayATR(iQuotes,20);
-    const MAX_ATR_MULTIPLIER = 2.5;
-    if (candleRange > (atrValue * MAX_ATR_MULTIPLIER)) {
-      const exhaustionRatio = (candleRange / atrValue).toFixed(2);
-      return {
-        status: "REJECTED",
-        reason: `Exhaustion Spike: Candle is ${exhaustionRatio}x ATR (Limit: ${MAX_ATR_MULTIPLIER}x)`,
-      };
+    const IsEarly = await getTimebasedCheck();
+    if(!IsEarly){
+      const candleRange = lastCandle.high - lastCandle.low;
+      let atrValue = await calculateIntradayATR(iQuotes, 20);
+      const MAX_ATR_MULTIPLIER = 2.5;
+      if (candleRange > atrValue * MAX_ATR_MULTIPLIER) {
+        const exhaustionRatio = (candleRange / atrValue).toFixed(2);
+        return {
+          status: "REJECTED",
+          reason: `Exhaustion Spike: Candle is ${exhaustionRatio}x ATR (Limit: ${MAX_ATR_MULTIPLIER}x)`,
+        };
+      }
     }
 
     const isBreakout =
@@ -238,7 +241,7 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
     const hasVolumeSurge = lastCandle.volume > avgMorningVol * 1.5;
     const sBody = Math.abs(lastCandle.close - lastCandle.open);
     const sRange = lastCandle.high - lastCandle.low;
-    const isStrongCandle = sRange > 0 ? sBody / sRange > 0.7 : false;
+    const isStrongCandle = sRange > 0 ? sBody / sRange > 0.5 : false;
 
     if (hasVolumeSurge && isStrongCandle && (isBreakout || isReclaimingValue)) {
       console.log("lastCandle.close", lastCandle.close);
@@ -272,6 +275,29 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
   }
 }
 
+async function getTimebasedCheck() {
+  // Create a Date object for the current moment
+  const now = new Date();
+
+  // Convert current time to IST strings
+  // This ensures the check works even if your server is in the US or Europe
+  const istTimeStr = now.toLocaleString("en-US", {
+    timeZone: "Asia/Kolkata",
+    hour12: false,
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  // istTimeStr will be in "HH:mm" format (e.g., "09:15", "14:30")
+  const [hours, minutes] = istTimeStr.split(":").map(Number);
+  
+  // Calculate total minutes since midnight for easy comparison
+  const totalMinutes = (hours * 60) + minutes;
+  const cutOffMinutes = (11 * 60) + 30; // 11:30 AM = 690 minutes
+
+  // Returns true if current time is 11:30 AM or earlier
+  return totalMinutes < cutOffMinutes;
+}
 
 async function getTimeAdjustedTargets(entryPrice, atrValue) {
 const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
