@@ -1,6 +1,6 @@
 import axios from "axios";
 import yahooFinance from "yahoo-finance2";
-import { Bullish_SYMBOL_MAP } from "../../Common/stockInfo.js";
+import { Bearish_SYMBOL_MAP } from "../../Common/stockInfo.js";
 
 const yf = new yahooFinance();
 
@@ -279,7 +279,7 @@ function checkEarningsQuality(quotes) {
 async function findBreakoutCandidates() {
     const results = [];
 
-    for (const [symbolKey] of Object.entries(Bullish_SYMBOL_MAP)) {
+    for (const [symbolKey] of Object.entries(Bearish_SYMBOL_MAP)) {
         try {
             const dailyData = await yf.chart(`${symbolKey}.NS`, {
                 period1: Math.floor((Date.now() - 60 * 24 * 60 * 60 * 1000) / 1000),

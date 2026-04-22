@@ -1,6 +1,6 @@
 import axios from "axios";
 import yahooFinance from "yahoo-finance2";
-import { bearish_SYMBOL_MAP } from "../../Common/stockInfo.js";
+import { Bearish_SYMBOL_MAP } from "../../Common/stockInfo.js";
 
 const yf = new yahooFinance();
 

@@ -2,18 +2,18 @@ import axios from "axios";
 import yahooFinance from "yahoo-finance2";
 import { PutCommand, ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 import { client } from "../db/dynamo.client.js";
-import { Bearish_SYMBOL_MAP } from "../Common/stockInfo.js";
+import { BearStocks } from "../Common/stockInfo.js";
 
 const yf = new yahooFinance();
 
 const PlaceStocks = process.env.PlacedStocksTable;
-const Barish_STOCKS = Bearish_SYMBOL_MAP;
+const Barish_STOCKS = BearStocks;
 // ---------------- CONFIGURATION ----------------
 const CONFIG = {
   apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
   jwtToken:
     process.env.Smart_API_JWT_TOKEN ??
-    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qYzBNakV5TkN3aWJtSm1Jam94TnpjMk5qVTFOVFEwTENKcFlYUWlPakUzTnpZMk5UVTFORFFzSW1wMGFTSTZJalUyTXpFM1pUZGhMV1JsTTJZdE5EVTNOeTFoTmpFd0xUZGpaVEZtTURVeU5HTmpNQ0lzSWxSdmEyVnVJam9pSW4wLmN4V2Jmbnhxa0ZaVGJkUTRUdzljYjlfaU93RDNpcWJON2RHUlJnMXAyVlpNNzlMbHJjOWlMLTJPM21FSUNjWHYwUC1tTVdWd1k1SkEtV092OUJPbVB0RHlNQTlXV0VkRzI4OWFEdnVldnd0X1NaVUNhRlZXcU9MdGgtUDhiSE9vemNBX1pkSVpRb0FlZnhRaFdWV0dJSmZtOHVOZVpySkZCWHgwclFIUjdoOCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzY2NTU3MjQsImV4cCI6MTc3NjcwOTgwMH0.y_0o31J2TCZKmtt_SyBEWSg9jQ-wrAR3rusSB347Kybde30Vxlb2StSM8DVhTOYnlz7r7tljdQfhvlxSmCIzFw",
+    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qa3hOVFU1T1N3aWJtSm1Jam94TnpjMk9ESTVNREU1TENKcFlYUWlPakUzTnpZNE1qa3dNVGtzSW1wMGFTSTZJak0wTnpGbFl6UXlMV0kxTTJFdE5HUTVOQzA1TVdaaExUSXlZMkUzTkRobE9EWTNZU0lzSWxSdmEyVnVJam9pSW4wLlZRb0FjdlNfM0VQUHlQR2NDSVhKSzI1cVBnSmdkdHgtUjJiUjN3aGEtSHNkRHNvSmk4TDBnMTcxM3NkdXh0R0QzVHg0SkZLWjVqRU91TG1FNnlnSG83OURKclhxM0xESzhCUEJiSkZ6aHF5bDZLOHdkanlPcE1YTk11M25qOVpVa2Y5aXUzMS1zOFJxTFZxd3BLVXVHQWNXNzFRQnlxRnZKNVRuRFVIUGNtUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzY4MjkxOTksImV4cCI6MTc3Njg4MjYwMH0.vzXwRw14zmz8o9foxGkLIWH2PftKm9x7_8t3uJPzYqblFEXyjdTdzhgVyeIZgoNNFUDcDjyVUHyn8c8qwz369A",
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
   localIP: process.env.Smart_API_LocalIP ?? "127.0.0.1",
   capital: process.env.Capital ?? 10000,
@@ -45,20 +45,20 @@ const average = (arr) =>
  * Yahoo Finance quote format: { date, open, high, low, close, volume }
  * Used for individual stock ATR calculation.
  */
-async function calculateIntradayATR(quotes, period = 20) {
-  if (quotes.length < period + 1) return 0;
-  const recent = quotes.slice(-(period + 1));
-  const trs = [];
-  for (let i = 1; i < recent.length; i++) {
-    const tr = Math.max(
-      recent[i].high - recent[i].low,
-      Math.abs(recent[i].high - recent[i - 1].close),
-      Math.abs(recent[i].low - recent[i - 1].close),
-    );
-    trs.push(tr);
-  }
-  return average(trs);
-}
+// async function calculateIntradayATR(quotes, period = 20) {
+//   if (quotes.length < period + 1) return 0;
+//   const recent = quotes.slice(-(period + 1));
+//   const trs = [];
+//   for (let i = 1; i < recent.length; i++) {
+//     const tr = Math.max(
+//       recent[i].high - recent[i].low,
+//       Math.abs(recent[i].high - recent[i - 1].close),
+//       Math.abs(recent[i].low - recent[i - 1].close),
+//     );
+//     trs.push(tr);
+//   }
+//   return average(trs);
+// }
 
 // ================================================================
 //  CANDLE-CLOSE GUARD
@@ -223,54 +223,79 @@ async function getBearishExpertSignal(symbol, niftyStatus) {
 
     const lastCandle = todayQuotes[todayQuotes.length - 1];
     const prevCandle = todayQuotes[todayQuotes.length - 2];
+    const secondCandle = todayQuotes[1];
 
-    //   const IsEarly = await getTimebasedCheck();
-    //   if(!IsEarly){
-    //   const candleRange = lastCandle.high - lastCandle.low;
-    //   let atrValue = await calculateIntradayATR(iQuotes, 20);
-    //   const MAX_ATR_MULTIPLIER = 2.5;
-    //   const isRedCandle = lastCandle.close < lastCandle.open;
+    const isBearishCandle = lastCandle.close < lastCandle.open;
 
-    //   if (isRedCandle && candleRange > atrValue * MAX_ATR_MULTIPLIER) {
-    //     const exhaustionRatio = (candleRange / atrValue).toFixed(2);
-    //     return {
-    //       status: "REJECTED",
-    //       reason: `Bearish Panic: Candle is ${exhaustionRatio}x ATR (Limit: ${MAX_ATR_MULTIPLIER}x). Potential Bounce.`,
-    //     };
-    //   }
-    // }
+    // ── BEARISH OPENING DRIVE LOGIC ───────────────────────────────────
+    // Mirror of bull mode: build historicalOpeningCandles from iQuotes
+    const historicalOpeningCandles = iQuotes.filter((q) => {
+      const date = new Date(q.date);
+      const istDate = new Date(
+        date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+      );
+      const hours = istDate.getHours();
+      const minutes = istDate.getMinutes();
+      const dateStr = istDate.toLocaleDateString("en-CA", {
+        timeZone: "Asia/Kolkata",
+      });
+      // Only 9:15 candles from previous days
+      return dateStr !== todayStr && hours === 9 && minutes === 15;
+    });
 
-    // BEARISH CONDITIONS
     const historicalAvgVol = average(
       historicalOpeningCandles.map((q) => q.volume),
     );
-    const firstCandle = todayQuotes[0]; // 9:15 candle
+
+    const firstCandle = todayQuotes[0];
     const firstBody = Math.abs(firstCandle.close - firstCandle.open);
     const firstRange = firstCandle.high - firstCandle.low;
     const firstBodyRatio = firstRange > 0 ? firstBody / firstRange : 0;
 
     const isOpeningDriveBearish =
-      historicalAvgVol > 0 && // safety: we have history
-      firstCandle.close < firstCandle.open && // candle 1 was BEARISH
-      firstBodyRatio > 0.6 && // strong body, not a doji
-      firstCandle.volume > historicalAvgVol * 2.0 && // volume was 2x historical norm
-      lastCandle.close < stockVWAP && // price still BELOW VWAP now
-      lastCandle.close < firstCandle.open; // holding BELOW opening price
+      historicalAvgVol > 0 && // have historical data
+      firstCandle.close < firstCandle.open && // candle 1 red
+      firstBodyRatio > 0.6 && // strong body, not doji
+      firstCandle.volume > historicalAvgVol * 2.0 && // 2x historical volume
+      secondCandle.close < secondCandle.open && // candle 2 also red (holding)
+      lastCandle.close < lastCandle.open && // lastCandle also red
+      lastCandle.close < stockVWAP && // below VWAP
+      lastCandle.close < firstCandle.open; // holding below opening price
 
-    // --- REGULAR BEARISH CONDITIONS ---
+    // ── REGULAR BEARISH CONDITIONS ────────────────────────────────────
+    const morningRange =
+      Math.max(todayQuotes[0].high, todayQuotes[1].high) -
+      Math.min(todayQuotes[0].low, todayQuotes[1].low);
+    const isMeaningfulMorningRange = morningRange > lastCandle.close * 0.003;
+
     const isBreakdown =
-      lastCandle.close < morningLow && lastCandle.close < stockVWAP;
+      isBearishCandle &&
+      isMeaningfulMorningRange &&
+      lastCandle.close < morningLow * 0.999 && // meaningful break, not just a touch
+      prevCandle.close >= morningLow && // first candle to break (no chasing)
+      lastCandle.close < stockVWAP;
+
+    // ── LOSING VALUE ────────────────────────────────────
+    const candleMid = (lastCandle.high + lastCandle.low) / 2;
+    const testedVWAP = lastCandle.high >= stockVWAP * 0.9992; // wick reached VWAP zone
+    const closeBelowMid = lastCandle.close < candleMid; // closed in lower half
+
     const isLosingValue =
-      lastCandle.close < stockVWAP && prevCandle.close > stockVWAP;
+      isBearishCandle &&
+      prevCandle.close > stockVWAP && // was above VWAP before
+      lastCandle.close < stockVWAP * 0.9995 && // meaningful close below VWAP
+      testedVWAP && // actually tested VWAP (rejection)
+      closeBelowMid; // closed in lower half of candle
+
     const hasVolumeSurge = lastCandle.volume > avgMorningVol * 1.5;
 
     const sBody = Math.abs(lastCandle.close - lastCandle.open);
     const sRange = lastCandle.high - lastCandle.low;
-    const isStrongRed =
-      lastCandle.close < lastCandle.open &&
-      (sRange > 0 ? sBody / sRange > 0.5 : false);
 
-    // --- BEARISH SIGNAL LOGIC ---
+    const isStrongRed =
+      isBearishCandle && (sRange > 0 ? sBody / sRange > 0.5 : false);
+
+    // ── BEARISH SIGNAL LOGIC ──────────────────────────────────────────
     const isRegularBearishSignal =
       hasVolumeSurge && isStrongRed && (isBreakdown || isLosingValue);
     const isOpeningDriveBearishSignal = isOpeningDriveBearish && isStrongRed;
@@ -280,21 +305,33 @@ async function getBearishExpertSignal(symbol, niftyStatus) {
       console.log("stockVWAP", stockVWAP);
       console.log("prevCandle.close", prevCandle.close);
       console.log("lastCandle.volume", lastCandle.volume);
-      console.log("lastCandle.volume", lastCandle.volume);
-      console.log("isStrongCandle", sBody / sRange);
-      console.log("Stock is going to place");
-      const atrValue = await calculateIntradayATR(iQuotes, 20);
+      console.log("isStrongRed", sBody / sRange);
+      console.log("Stock is going to place SHORT");
+
+      // Mirror bull mode: derive signalType, pass it to getTimeAdjustedTargets
+      const signalType = isBreakdown
+        ? "BREAKDOWN"
+        : isOpeningDriveBearishSignal
+          ? "OPENING_DRIVE"
+          : "VALUE_LOSS";
+
       const getTimeAdjustedTarget = await getTimeAdjustedTargets(
         lastCandle.close,
-        atrValue,
+        signalType,
       );
+
+      // Too late to trade — getTimeAdjustedTargets returns null
+      if (!getTimeAdjustedTarget) {
+        return { status: "WAITING", reason: "Too Late To Trade" };
+      }
+
       const showDate = new Date().toLocaleString("en-IN", {
         timeZone: "Asia/Kolkata",
       });
 
       return {
         status: "TRIGGERED",
-        type: isBreakdown ? "BREAKDOWN" : "VALUE_LOSS",
+        type: getTimeAdjustedTarget.session,
         symbol: symbol,
         price: lastCandle.close.toFixed(2),
         time: showDate,
@@ -311,31 +348,18 @@ async function getBearishExpertSignal(symbol, niftyStatus) {
   }
 }
 
-async function getTimebasedCheck() {
-  // Create a Date object for the current moment
-  const now = new Date();
-
-  // Convert current time to IST strings
-  // This ensures the check works even if your server is in the US or Europe
-  const istTimeStr = now.toLocaleString("en-US", {
-    timeZone: "Asia/Kolkata",
-    hour12: false,
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  // istTimeStr will be in "HH:mm" format (e.g., "09:15", "14:30")
-  const [hours, minutes] = istTimeStr.split(":").map(Number);
-
-  // Calculate total minutes since midnight for easy comparison
-  const totalMinutes = hours * 60 + minutes;
-  const cutOffMinutes = 11 * 60 + 30; // 11:30 AM = 690 minutes
-
-  // Returns true if current time is 11:30 AM or earlier
-  return totalMinutes < cutOffMinutes;
-}
-
-async function getTimeAdjustedTargets(entryPrice, atrValue) {
+// ================================================================
+//  TIME-ADJUSTED TARGETS — BEARISH (SHORT) VERSION
+//  Mirror of bull mode's getTimeAdjustedTargets, but inverted:
+//    target   = entry - X%   (price falls to here → profit)
+//    stopLoss = entry + X%   (price rises to here → cut loss)
+//
+//  Signal types:
+//    OPENING_DRIVE — strong red open, tight RR, quick exit
+//    BREAKDOWN     — clean break below morning low + VWAP
+//    VALUE_LOSS    — VWAP rejection (counter-trend), tightest RR
+// ================================================================
+async function getTimeAdjustedTargets(entryPrice, signalType) {
   const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
   const istTime = new Date(now);
   const hour = istTime.getHours();
@@ -345,30 +369,94 @@ async function getTimeAdjustedTargets(entryPrice, atrValue) {
   const minutesLeft = 15 * 60 + 15 - (hour * 60 + minutes);
   const hoursLeft = minutesLeft / 60;
 
-  let targetMultiplier;
-  let slMultiplier;
-
-  if (hoursLeft >= 4.5) {
-    // Early session - full ATR targets
-    targetMultiplier = 5.0;
-    slMultiplier = 2.5;
-  } else if (hoursLeft >= 3.0) {
-    // Mid session - moderate targets
-    targetMultiplier = 3.5;
-    slMultiplier = 2.0;
-  } else if (hoursLeft >= 2.0) {
-    // Late session - conservative
-    targetMultiplier = 2.5;
-    slMultiplier = 1.5;
-  } else {
-    // Too late - reject trade entirely
-    return null; // Signal to skip this trade
+  // ── TOO LATE TO TRADE ─────────────────────────────────────────────
+  if (hoursLeft < 2.0) {
+    return null; // Signal to skip
   }
 
+  // ── OPENING DRIVE — Tighter static RR ────────────────────────────
+  // Stock already dumped hard in candle 1; entry at candle 3 (9:45).
+  // Momentum may slow — take quick profit, tight stop.
+  if (signalType === "OPENING_DRIVE") {
+    if (hoursLeft >= 4.5) {
+      // 9:45 – 10:45 → fresh momentum, slightly wider room
+      return {
+        target: (entryPrice * (1 - 0.012)).toFixed(2), // -1.2%
+        stopLoss: (entryPrice * (1 + 0.007)).toFixed(2), // +0.7%
+        riskReward: "2.2",
+        session: "EARLY DRIVE",
+      };
+    } else if (hoursLeft >= 3.0) {
+      // 10:45 – 12:15 → momentum fading, tighten both sides
+      return {
+        target: (entryPrice * (1 - 0.01)).toFixed(2), // -1.0%
+        stopLoss: (entryPrice * (1 + 0.005)).toFixed(2), // +0.5%
+        riskReward: "2.0",
+        session: "MID DRIVE",
+      };
+    } else {
+      // 12:15 – 13:15 → too late for opening drive logic, skip
+      return null;
+    }
+  }
+
+  // ── BREAKDOWN — Medium static RR ─────────────────────────────────
+  // Clean break below morning low + VWAP. Institutional stocks can
+  // trend well on breakdowns — more room to run vs opening drive.
+  if (signalType === "BREAKDOWN") {
+    if (hoursLeft >= 4.5) {
+      return {
+        target: (entryPrice * (1 - 0.012)).toFixed(2), // -1.2%
+        stopLoss: (entryPrice * (1 + 0.007)).toFixed(2), // +0.7%
+        riskReward: "2.9",
+        session: "EARLY BREAKDOWN",
+      };
+    } else if (hoursLeft >= 3.0) {
+      return {
+        target: (entryPrice * (1 - 0.011)).toFixed(2), // -1.1%
+        stopLoss: (entryPrice * (1 + 0.006)).toFixed(2), // +0.6%
+        riskReward: "2.1",
+        session: "MID BREAKDOWN",
+      };
+    } else {
+      return null;
+    }
+  }
+
+  // ── VALUE LOSS — Tightest static RR ──────────────────────────────
+  // VWAP rejection is a counter-trend entry — higher failure rate.
+  // Tighter stop, quicker target. Mirror of bull REVERSAL.
+  if (signalType === "VALUE_LOSS") {
+    if (hoursLeft >= 4.5) {
+      return {
+        target: (entryPrice * (1 - 0.013)).toFixed(2), // -1.3%
+        stopLoss: (entryPrice * (1 + 0.007)).toFixed(2), // +0.7%
+        riskReward: "1.9",
+        session: "EARLY VALUE LOSS",
+      };
+    } else if (hoursLeft >= 3.0) {
+      return {
+        target: (entryPrice * (1 - 0.01)).toFixed(2), // -1.0%
+        stopLoss: (entryPrice * (1 + 0.006)).toFixed(2), // +0.6%
+        riskReward: "1.4",
+        session: "MID VALUE LOSS",
+      };
+    } else {
+      return {
+        target: (entryPrice * (1 - 0.01)).toFixed(2), // -1.0%
+        stopLoss: (entryPrice * (1 + 0.005)).toFixed(2), // +0.5%
+        riskReward: "1.1",
+        session: "LATE VALUE LOSS",
+      };
+    }
+  }
+
+  // ── FALLBACK — if signalType not matched ──────────────────────────
   return {
-    target: (entryPrice - atrValue * slMultiplier).toFixed(2),
-    stopLoss: (entryPrice + atrValue * targetMultiplier).toFixed(2),
-    riskReward: (targetMultiplier / slMultiplier).toFixed(1),
+    target: (entryPrice * (1 - 0.013)).toFixed(2),
+    stopLoss: (entryPrice * (1 + 0.007)).toFixed(2),
+    riskReward: "1.9",
+    session: "DEFAULT",
   };
 }
 
@@ -378,7 +466,7 @@ async function insertStock(signal) {
     new ScanCommand({ TableName: PlaceStocks ?? "PlacedStocks" }),
   );
 
-  if (getStocks.Items.length > 2) {
+  if (getStocks.Items.length >= 2) {
     console.log("⚠️ Already have 2 stocks in the system. Skipping insertion.");
     return false;
   }
@@ -511,17 +599,6 @@ export const Bcron = async () => {
   console.log(`\n🔍 Bearish Scan Started: ${time}`);
 
   // ── Candle-Close Guard ─────────────────────────────────────────
-  // Your cron fires every 2 minutes. But 15m candles only close at
-  // :00, :15, :30, :45. Evaluating a live candle mid-way gives
-  // false signals — close and volume are not final yet.
-  //
-  // This guard skips the scan unless we are within 90 seconds
-  // AFTER a candle close. Since your cron runs every 2 minutes,
-  // every candle close will be caught within one cron tick.
-  //
-  // Example:
-  //   Cron fires at 10:28 IST → secondsIntoInterval = 780s → SKIP
-  //   Cron fires at 10:31 IST → secondsIntoInterval = 60s  → RUN ✅
   if (!isNearCandleClose()) {
     console.log(
       `⏭️  Skipping — not near a 15m candle close. Next candle closes at :${String(

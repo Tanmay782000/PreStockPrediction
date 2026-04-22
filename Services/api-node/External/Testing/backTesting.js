@@ -5,7 +5,6 @@ const yf = new yahooFinance();
 
 const ATR_PERIOD = 20;
 
-// TIMEFRAME CONSTANTS
 const TWO_YEARS_MS = 2 * 365 * 24 * 60 * 60 * 1000;
 const SIXTY_DAYS_MS = 59 * 24 * 60 * 60 * 1000;
 const START_DATE_DAILY = Math.floor((Date.now() - TWO_YEARS_MS) / 1000);
@@ -27,23 +26,117 @@ function getHistoricalATR(allQuotes, currentIndex, period) {
     return average(trs);
 }
 
-// ================================================================
-//  OPENING DRIVE HISTORICAL VOLUME BASELINE
-//  Calculates average volume of 9:15 candle from previous days
-//  so we can compare today's opening candle against history
-// ================================================================
 function getHistoricalOpeningVolume(allStockQuotes, todayStr) {
     const openingCandles = allStockQuotes.filter(q => {
         const istDate = new Date(q.date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
         const dateStr = istDate.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
         const hours = istDate.getHours();
         const minutes = istDate.getMinutes();
-
-        // Only 9:15 candle from PREVIOUS days
         return dateStr !== todayStr && hours === 9 && minutes === 15;
     });
-
     return average(openingCandles.map(q => q.volume));
+}
+
+// ================================================================
+//  TIME-ADJUSTED TARGETS — NEW LOGIC (mirrors main script)
+//  Uses percentage-based targets instead of ATR multipliers.
+//  Returns null if too late to trade (< 2 hours left).
+//  signalType: "OPENING_DRIVE" | "BREAKOUT" | "REVERSAL"
+//
+//  Key difference from old logic:
+//  OLD → target = entry + (atr * multiplier)   [ATR-based, dynamic]
+//  NEW → target = entry * (1 + fixedPercent)   [%, predictable RR]
+// ================================================================
+function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
+    // Reconstruct IST time from the historical candle's date
+    const istString = candleDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+    const istTime = new Date(istString);
+    const hour = istTime.getHours();
+    const minutes = istTime.getMinutes();
+
+    // Minutes remaining until 15:15 IST
+    const minutesLeft = (15 * 60 + 15) - (hour * 60 + minutes);
+    const hoursLeft = minutesLeft / 60;
+
+    // Too late — never enter with < 2 hours left
+    if (hoursLeft < 2.0) return null;
+
+    // ── OPENING DRIVE ─────────────────────────────────────────────
+    if (signalType === "OPENING_DRIVE") {
+        if (hoursLeft >= 4.5) {
+            return {
+                target:     entryPrice * (1 + 0.012), // +1.2%
+                stopLoss:   entryPrice * (1 - 0.007), // -0.7%
+                riskReward: "1.08",
+                session:    "EARLY DRIVE"
+            };
+        } else if (hoursLeft >= 3.0) {
+            return {
+                target:     entryPrice * (1 + 0.010), // +1.0%
+                stopLoss:   entryPrice * (1 - 0.005), // -0.5%
+                riskReward: "1.1",
+                session:    "MID DRIVE"
+            };
+        } else {
+            // 12:15–13:15 → too late for opening drive
+            return null;
+        }
+    }
+
+    // ── BREAKOUT ──────────────────────────────────────────────────
+    if (signalType === "BREAKOUT") {
+        if (hoursLeft >= 4.5) {
+            return {
+                target:     entryPrice * (1 + 0.012), // +1.2%
+                stopLoss:   entryPrice * (1 - 0.007), // -0.7%
+                riskReward: "2.09",
+                session:    "EARLY BREAKOUT"
+            };
+        } else if (hoursLeft >= 3.0) {
+            return {
+                target:     entryPrice * (1 + 0.011), // +1.1%
+                stopLoss:   entryPrice * (1 - 0.006), // -0.6%
+                riskReward: "1.09",
+                session:    "MID BREAKOUT"
+            };
+        } else {
+            return null;
+        }
+    }
+
+    // ── REVERSAL ──────────────────────────────────────────────────
+    if (signalType === "REVERSAL") {
+        if (hoursLeft >= 4.5) {
+            return {
+                target:     entryPrice * (1 + 0.013), // +1.3%
+                stopLoss:   entryPrice * (1 - 0.007), // -0.7%
+                riskReward: "1.09",
+                session:    "EARLY REVERSAL"
+            };
+        } else if (hoursLeft >= 3.0) {
+            return {
+                target:     entryPrice * (1 + 0.011), // +1.0%
+                stopLoss:   entryPrice * (1 - 0.006), // -0.6%
+                riskReward: "1.09",
+                session:    "MID REVERSAL"
+            };
+        } else {
+            return {
+                target:     entryPrice * (1 + 0.010), // +1.0%
+                stopLoss:   entryPrice * (1 - 0.005), // -0.5%
+                riskReward: "1.1",
+                session:    "LATE REVERSAL"
+            };
+        }
+    }
+
+    // ── FALLBACK ──────────────────────────────────────────────────
+    return {
+        target:     entryPrice * (1 + 0.013),
+        stopLoss:   entryPrice * (1 - 0.007),
+        riskReward: "1.9",
+        session:    "DEFAULT"
+    };
 }
 
 async function backtestStrategy() {
@@ -52,25 +145,35 @@ async function backtestStrategy() {
     const stockEntries = Object.entries(Bullish_SYMBOL_MAP);
     console.log(`📊 Processing ${stockEntries.length} Stocks | Syncing 60D Intraday + 2YR Daily\n`);
 
-    let totalWins = 0, totalLosses = 0, totalTrades = 0;
+    let totalWins = 0, totalLosses = 0, totalTrades = 0, totalSkipped = 0;
     let breakoutWins = 0, breakoutLosses = 0;
     let reversalWins = 0, reversalLosses = 0;
     let openingDriveWins = 0, openingDriveLosses = 0;
 
-    // 1. FETCH NIFTY DATA
+    // Session-level tracking (new — to validate time-adjusted targets)
+    const sessionStats = {
+        "EARLY DRIVE":    { wins: 0, losses: 0 },
+        "MID DRIVE":      { wins: 0, losses: 0 },
+        "EARLY BREAKOUT": { wins: 0, losses: 0 },
+        "MID BREAKOUT":   { wins: 0, losses: 0 },
+        "LATE BREAKOUT":  { wins: 0, losses: 0 },
+        "EARLY REVERSAL": { wins: 0, losses: 0 },
+        "MID REVERSAL":   { wins: 0, losses: 0 },
+        "LATE REVERSAL":  { wins: 0, losses: 0 },
+        "DEFAULT":        { wins: 0, losses: 0 },
+    };
+
     let allNiftyQuotes = [], allNiftyDaily = [];
     try {
         const niftyHistory = await yf.chart("^NSEI", { period1: START_DATE_15M, interval: "15m" });
         const niftyDailyHistory = await yf.chart("^NSEI", { period1: START_DATE_DAILY, interval: "1d" });
-
         allNiftyQuotes = niftyHistory.quotes.filter(q => q.close);
         allNiftyDaily = niftyDailyHistory.quotes.filter(q => q.close);
     } catch (e) {
         console.error("❌ Critical: Nifty data sync failed."); return;
     }
 
-    // 2. ITERATE THROUGH STOCKS
-    for (const [symbolKey, stockData] of stockEntries) {
+    for (const [symbolKey] of stockEntries) {
         const symbol = `${symbolKey}.NS`;
         try {
             const stockHistory = await yf.chart(symbol, { period1: START_DATE_15M, interval: "15m" });
@@ -81,7 +184,6 @@ async function backtestStrategy() {
 
             if (allStockQuotes.length === 0) continue;
 
-            // Map intraday data into days
             const daysMap = {};
             allStockQuotes.forEach(q => {
                 const dateStr = q.date.toISOString().split('T')[0];
@@ -89,10 +191,10 @@ async function backtestStrategy() {
                 daysMap[dateStr].push(q);
             });
 
-            let stats = { 
-                wins: 0, losses: 0,
-                breakout: { wins: 0, losses: 0 },
-                reversal: { wins: 0, losses: 0 },
+            let stats = {
+                wins: 0, losses: 0, skipped: 0,
+                breakout:     { wins: 0, losses: 0 },
+                reversal:     { wins: 0, losses: 0 },
                 openingDrive: { wins: 0, losses: 0 }
             };
 
@@ -106,7 +208,6 @@ async function backtestStrategy() {
 
                 if (todayStockQuotes.length < 5 || todayNiftyQuotes.length < 3) continue;
 
-                // Sync Yesterday's Context
                 const nDailyIdx = allNiftyDaily.findIndex(nd => nd.date.toISOString().startsWith(todayStr));
                 const yesterdayNiftyClose = nDailyIdx > 0 ? allNiftyDaily[nDailyIdx - 1].close : 0;
 
@@ -114,22 +215,17 @@ async function backtestStrategy() {
                 if (dailyIdx <= 0) continue;
                 const yesterdayStockClose = allDailyQuotes[dailyIdx - 1].close;
 
-                // Gap Filter
                 const gapPercent = ((todayStockQuotes[0].open - yesterdayStockClose) / yesterdayStockClose) * 100;
                 if (gapPercent > 5.0) continue;
 
                 const morningHigh = Math.max(todayStockQuotes[0].high, todayStockQuotes[1].high);
                 const avgMorningVol = (todayStockQuotes[0].volume + todayStockQuotes[1].volume) / 2;
 
-                // ── OPENING DRIVE CHECK (evaluated at i=2, i.e. 9:45 candle) ──────
-                // ================================================================
-                //  We use historical avg volume of 9:15 candle from previous days
-                //  so we don't compare against the spike itself (which inflates avgMorningVol)
-                // ================================================================
+                // ── OPENING DRIVE CHECK ───────────────────────────────────
                 const historicalAvgVol = getHistoricalOpeningVolume(allStockQuotes, todayStr);
-                const firstCandle = todayStockQuotes[0];
+                const firstCandle  = todayStockQuotes[0];
                 const secondCandle = todayStockQuotes[1];
-                const thirdCandle = todayStockQuotes[2]; // 9:45 candle (lastCandle at i=2)
+                const thirdCandle  = todayStockQuotes[2];
 
                 let sVwapForOD = 0, volForOD = 0;
                 [firstCandle, secondCandle, thirdCandle].forEach(c => {
@@ -138,51 +234,58 @@ async function backtestStrategy() {
                 });
                 const vwapAtOD = sVwapForOD / volForOD;
 
-                const firstBody = Math.abs(firstCandle.close - firstCandle.open);
-                const firstRange = firstCandle.high - firstCandle.low;
+                const firstBody      = Math.abs(firstCandle.close - firstCandle.open);
+                const firstRange     = firstCandle.high - firstCandle.low;
                 const firstBodyRatio = firstRange > 0 ? firstBody / firstRange : 0;
 
-                const thirdBody = Math.abs(thirdCandle.close - thirdCandle.open);
-                const thirdRange = thirdCandle.high - thirdCandle.low;
+                const thirdBody      = Math.abs(thirdCandle.close - thirdCandle.open);
+                const thirdRange     = thirdCandle.high - thirdCandle.low;
                 const thirdBodyRatio = thirdRange > 0 ? thirdBody / thirdRange : 0;
 
                 const isOpeningDrive =
                     historicalAvgVol > 0 &&
-                    firstCandle.close > firstCandle.open &&       // Candle 1 bullish
-                    firstBodyRatio > 0.6 &&                       // Strong body on candle 1
-                    firstCandle.volume > historicalAvgVol * 2.0 &&// 2x historical opening volume
-                    secondCandle.close > firstCandle.open &&      // Candle 2 holding above open
-                    thirdCandle.close > vwapAtOD &&               // Still above VWAP at 9:45
-                    thirdCandle.close > firstCandle.open &&       // Holding opening level
-                    thirdBodyRatio > 0.5;                         // 9:45 candle itself is strong
+                    firstCandle.close > firstCandle.open &&
+                    firstBodyRatio > 0.6 &&
+                    firstCandle.volume > historicalAvgVol * 2.0 &&
+                    secondCandle.close > secondCandle.open &&
+                    thirdCandle.close > thirdCandle.open &&
+                    thirdCandle.close > vwapAtOD &&
+                    thirdCandle.close > firstCandle.open &&
+                    thirdBodyRatio > 0.5;
 
-                // ── OPENING DRIVE TRADE ───────────────────────────────────────────
                 if (isOpeningDrive) {
-                    const globalIdx = allStockQuotes.findIndex(q => q.date === thirdCandle.date);
-                    const atr = getHistoricalATR(allStockQuotes, globalIdx, ATR_PERIOD);
-
                     const entry = thirdCandle.close;
-                    const target = entry + (atr * 2.0); // Tighter target for opening drive
-                    const stopLoss = entry - (atr * 1.0); // Tighter SL for opening drive
+
+                    // ── NEW: use getTimeAdjustedTargets instead of ATR ────
+                    const targets = getTimeAdjustedTargets(entry, "OPENING_DRIVE", thirdCandle.date);
+
+                    // null = too late, skip this trade
+                    if (!targets) { stats.skipped++; continue; }
+
+                    const { target, stopLoss, session } = targets;
 
                     let outcome = null;
                     for (let j = 3; j < todayStockQuotes.length; j++) {
                         if (todayStockQuotes[j].low <= stopLoss) { outcome = "LOSS"; break; }
-                        if (todayStockQuotes[j].high >= target) { outcome = "WIN"; break; }
+                        if (todayStockQuotes[j].high >= target)  { outcome = "WIN";  break; }
                     }
                     if (!outcome) {
                         outcome = todayStockQuotes[todayStockQuotes.length - 1].close > entry ? "WIN" : "LOSS";
                     }
 
                     if (outcome === "WIN") {
-                        stats.wins++; stats.openingDrive.wins++;
+                        stats.wins++;
+                        stats.openingDrive.wins++;
+                        sessionStats[session].wins++;
                     } else {
-                        stats.losses++; stats.openingDrive.losses++;
+                        stats.losses++;
+                        stats.openingDrive.losses++;
+                        sessionStats[session].losses++;
                     }
-                    continue; // One trade per day
+                    continue;
                 }
 
-                // ── REGULAR SIGNAL SCAN (from i=2 onwards) ───────────────────────
+                // ── REGULAR SIGNAL SCAN ───────────────────────────────────
                 let sVwapSumPV = 0, sVwapSumV = 0;
                 let nVwapSumPV = 0, nVwapSumV = 0;
 
@@ -206,22 +309,35 @@ async function backtestStrategy() {
 
                     if (i < 2 || !niftyBullish) continue;
 
-                    const isBreakout = candle.close > morningHigh && candle.close > stockVWAP;
-                    const isReclaiming = candle.close > stockVWAP && todayStockQuotes[i - 1].close < stockVWAP;
-                    const isStrong = (Math.abs(candle.close - candle.open) / (candle.high - candle.low)) > 0.5;
+                    const isBullishCandle = candle.close > candle.open;
+
+                    const isBreakout = candle.close > morningHigh &&
+                                       candle.close > stockVWAP &&
+                                       isBullishCandle;
+
+                    const isReclaiming = candle.close > stockVWAP &&
+                                         todayStockQuotes[i - 1].close < stockVWAP &&
+                                         isBullishCandle;
+
+                    const isStrong = isBullishCandle &&
+                                     (Math.abs(candle.close - candle.open) / (candle.high - candle.low)) > 0.5;
 
                     if (candle.volume > avgMorningVol * 1.1 && isStrong && (isBreakout || isReclaiming)) {
-                        const globalIdx = allStockQuotes.findIndex(q => q.date === candle.date);
-                        const atr = getHistoricalATR(allStockQuotes, globalIdx, ATR_PERIOD);
-
                         const entry = candle.close;
-                        const target = entry + (atr * 5.0);
-                        const stopLoss = entry - (atr * 2.5);
+                        const signalType = isBreakout ? "BREAKOUT" : "REVERSAL";
+
+                        // ── NEW: use getTimeAdjustedTargets instead of hardcoded % ──
+                        const targets = getTimeAdjustedTargets(entry, signalType, candle.date);
+
+                        // null = too late in session, skip this trade
+                        if (!targets) { stats.skipped++; break; }
+
+                        const { target, stopLoss, session } = targets;
 
                         let outcome = null;
                         for (let j = i + 1; j < todayStockQuotes.length; j++) {
                             if (todayStockQuotes[j].low <= stopLoss) { outcome = "LOSS"; break; }
-                            if (todayStockQuotes[j].high >= target) { outcome = "WIN"; break; }
+                            if (todayStockQuotes[j].high >= target)  { outcome = "WIN";  break; }
                         }
                         if (!outcome) {
                             outcome = todayStockQuotes[todayStockQuotes.length - 1].close > entry ? "WIN" : "LOSS";
@@ -229,36 +345,35 @@ async function backtestStrategy() {
 
                         if (outcome === "WIN") {
                             stats.wins++;
+                            sessionStats[session].wins++;
                             if (isBreakout) stats.breakout.wins++;
                             else stats.reversal.wins++;
                         } else {
                             stats.losses++;
+                            sessionStats[session].losses++;
                             if (isBreakout) stats.breakout.losses++;
                             else stats.reversal.losses++;
                         }
-                        break; // One trade per day
+                        break;
                     }
                 }
             }
 
-            // Per-stock summary
-            totalWins += stats.wins;
-            totalLosses += stats.losses;
-            totalTrades += (stats.wins + stats.losses);
-            breakoutWins += stats.breakout.wins;
-            breakoutLosses += stats.breakout.losses;
-            reversalWins += stats.reversal.wins;
-            reversalLosses += stats.reversal.losses;
-            openingDriveWins += stats.openingDrive.wins;
-            openingDriveLosses += stats.openingDrive.losses;
+            totalWins        += stats.wins;
+            totalLosses      += stats.losses;
+            totalTrades      += (stats.wins + stats.losses);
+            totalSkipped     += stats.skipped;
+            breakoutWins     += stats.breakout.wins;     breakoutLosses     += stats.breakout.losses;
+            reversalWins     += stats.reversal.wins;     reversalLosses     += stats.reversal.losses;
+            openingDriveWins += stats.openingDrive.wins; openingDriveLosses += stats.openingDrive.losses;
 
             const currentTotal = stats.wins + stats.losses;
-            const currentWR = currentTotal > 0 ? ((stats.wins / currentTotal) * 100).toFixed(2) : 0;
-            const odTotal = stats.openingDrive.wins + stats.openingDrive.losses;
-            const odWR = odTotal > 0 ? ((stats.openingDrive.wins / odTotal) * 100).toFixed(2) : "N/A";
+            const currentWR    = currentTotal > 0 ? ((stats.wins / currentTotal) * 100).toFixed(2) : 0;
+            const odTotal      = stats.openingDrive.wins + stats.openingDrive.losses;
+            const odWR         = odTotal > 0 ? ((stats.openingDrive.wins / odTotal) * 100).toFixed(2) : "N/A";
 
             console.log(
-                `📊 ${symbolKey.padEnd(12)} | Trades: ${currentTotal} | WR: ${currentWR}% | ` +
+                `📊 ${symbolKey.padEnd(12)} | Trades: ${currentTotal} | Skipped: ${stats.skipped} | WR: ${currentWR}% | ` +
                 `BO: ${stats.breakout.wins}W/${stats.breakout.losses}L | ` +
                 `REV: ${stats.reversal.wins}W/${stats.reversal.losses}L | ` +
                 `OD: ${stats.openingDrive.wins}W/${stats.openingDrive.losses}L (WR: ${odWR}%)`
@@ -267,17 +382,26 @@ async function backtestStrategy() {
         } catch (err) { continue; }
     }
 
-    // Final Summary
-    const boTotal = breakoutWins + breakoutLosses;
+    const boTotal  = breakoutWins + breakoutLosses;
     const revTotal = reversalWins + reversalLosses;
-    const odTotal = openingDriveWins + openingDriveLosses;
+    const odTotal  = openingDriveWins + openingDriveLosses;
 
     console.log("\n" + "=".repeat(80));
     console.log(`🏆 HYBRID BACKTEST COMPLETE`);
-    console.log(`📈 Total Trades : ${totalTrades} | Overall WR: ${((totalWins / totalTrades) * 100).toFixed(2)}%`);
-    console.log(`📊 BREAKOUT     : ${boTotal} trades | WR: ${boTotal > 0 ? ((breakoutWins / boTotal) * 100).toFixed(2) : 0}%`);
-    console.log(`🔄 REVERSAL     : ${revTotal} trades | WR: ${revTotal > 0 ? ((reversalWins / revTotal) * 100).toFixed(2) : 0}%`);
-    console.log(`🚀 OPENING DRIVE: ${odTotal} trades | WR: ${odTotal > 0 ? ((openingDriveWins / odTotal) * 100).toFixed(2) : 0}%`);
+    console.log(`📈 Total Trades  : ${totalTrades} | Skipped (too late): ${totalSkipped} | Overall WR: ${totalTrades > 0 ? ((totalWins / totalTrades) * 100).toFixed(2) : 0}%`);
+    console.log(`📊 BREAKOUT      : ${boTotal}  trades | WR: ${boTotal  > 0 ? ((breakoutWins  / boTotal)  * 100).toFixed(2) : 0}%`);
+    console.log(`🔄 REVERSAL      : ${revTotal} trades | WR: ${revTotal > 0 ? ((reversalWins  / revTotal) * 100).toFixed(2) : 0}%`);
+    console.log(`🚀 OPENING DRIVE : ${odTotal}  trades | WR: ${odTotal  > 0 ? ((openingDriveWins / odTotal) * 100).toFixed(2) : 0}%`);
+
+    // ── SESSION BREAKDOWN — new, validates time-adjusted targets ──
+    console.log("\n📅 SESSION BREAKDOWN (validates time-adjusted RR logic):");
+    console.log("-".repeat(60));
+    for (const [session, s] of Object.entries(sessionStats)) {
+        const total = s.wins + s.losses;
+        if (total === 0) continue;
+        const wr = ((s.wins / total) * 100).toFixed(2);
+        console.log(`  ${session.padEnd(20)} | ${total} trades | WR: ${wr}% | ${s.wins}W / ${s.losses}L`);
+    }
     console.log("=".repeat(80) + "\n");
 }
 
