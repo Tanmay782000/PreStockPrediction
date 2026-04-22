@@ -655,7 +655,7 @@ export const Bcron = async () => {
     }
 
     // Yahoo Finance rate limit: be gentle (~2 req/sec)
-    await new Promise((r) => setTimeout(r, 500));
+    // await new Promise((r) => setTimeout(r, 500));
   }
 
   console.log("━".repeat(55));
