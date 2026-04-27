@@ -17,7 +17,7 @@ const CONFIG = {
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194",
   localIP: process.env.Smart_API_LocalIP ?? "127.0.0.1",
   capital: process.env.Capital ?? 100000,
-  risk_per_trade: process.env.Risk_Per_Trade ?? 0.4,
+  risk_per_trade: process.env.Risk_Per_Trade ?? 40,
 };
 
 // ---------------- AXIOS BASE CLIENT (AngelOne) ----------------
@@ -190,14 +190,14 @@ async function getBearishExpertSignal(symbol, niftyStatus, smartAPISymbol) {
     const morningLow = Math.min(todayQuotes[0].low, todayQuotes[1].low);
     const avgMorningVol = (todayQuotes[0].volume + todayQuotes[1].volume) / 2;
 
-    let sVal = 0,
-      sVol = 0;
-    todayQuotes.forEach((q) => {
-      sVal += q.close * q.volume;
-      sVol += q.volume;
-    });
-    const stockVWAP = sVal / sVol;
+const lastIdx = todayQuotes.length - 1;
+let sVal = 0, sVol = 0;
+for (let k = 0; k <= lastIdx; k++) {
+  sVal += todayQuotes[k].close * todayQuotes[k].volume;
+  sVol += todayQuotes[k].volume;
+}
 
+    const stockVWAP = sVal / sVol;
     const lastCandle = todayQuotes[todayQuotes.length - 1];
     const prevCandle = todayQuotes[todayQuotes.length - 2];
     const secondCandle = todayQuotes[1];
@@ -281,26 +281,26 @@ async function getBearishExpertSignal(symbol, niftyStatus, smartAPISymbol) {
       console.log("isStrongRed", sBody / sRange);
       console.log("Stock is going to place SHORT");
 
-      const signalType = isBreakdown
-        ? "BREAKDOWN"
-        : isOpeningDriveBearishSignal
-          ? "OPENING_DRIVE"
-          : "VALUE_LOSS";
+const signalType = isOpeningDriveBearishSignal
+  ? "OPENING_DRIVE"
+  : isBreakdown
+    ? "BREAKDOWN"
+    : "VALUE_LOSS";
 
       // ── Fetch live LTP via SmartAPI (mirrors bullish script) ──────────
       const lastPrice = await getLastPrice(smartAPISymbol);
+
+            // ── Guard: LTP fetch failed ───────────────────────────────────────
+      if (lastPrice == null || lastPrice == undefined || lastPrice == 0) {
+        console.log(`⚠️ Failed to fetch LTP for ${symbol}. Using last candle close as fallback.`);
+        return { status: "Error", price: lastCandle.close.toFixed(2), reason: "LTP Fetch Failed" };
+      }
 
       const getTimeAdjustedTarget = await getTimeAdjustedTargets(
         lastPrice,
         signalType,
         new Date(lastCandle.date)
       );
-
-      // ── Guard: LTP fetch failed ───────────────────────────────────────
-      if (lastPrice == null || lastPrice == undefined || lastPrice == 0) {
-        console.log(`⚠️ Failed to fetch LTP for ${symbol}. Using last candle close as fallback.`);
-        return { status: "Error", price: lastCandle.close.toFixed(2), reason: "LTP Fetch Failed" };
-      }
 
       // ── Guard: Too late to trade ──────────────────────────────────────
       if (!getTimeAdjustedTarget) {
@@ -314,8 +314,8 @@ async function getBearishExpertSignal(symbol, niftyStatus, smartAPISymbol) {
       return {
         status: "TRIGGERED",
         type: getTimeAdjustedTarget.session,
-        symbol: lastPrice,          // live LTP used as symbolKey (mirrors bullish)
-        price: lastCandle.close.toFixed(2),
+        symbol: symbol,          // live LTP used as symbolKey (mirrors bullish)
+        price: lastPrice.toFixed(2),
         time: showDate,
         date: todayStr,
         target: getTimeAdjustedTarget.target,
@@ -336,7 +336,7 @@ async function getBearishExpertSignal(symbol, niftyStatus, smartAPISymbol) {
 //  Target / SL percentages now mirror bullish mode exactly.
 //  Direction is inverted: target goes DOWN, stopLoss goes UP.
 // ================================================================
-function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
+async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
   const istString = candleDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
   const istTime   = new Date(istString);
   const hour      = istTime.getHours();
@@ -464,7 +464,7 @@ async function insertStock(signal) {
         stopLoss: signal.stopLoss,
         signalToken: signal.stockToken,   // ← added (mirrors bullish)
         limitPrice: "0",
-        lots: 0,                          // ← added (mirrors bullish)
+        lots: "0",                          // ← added (mirrors bullish)
         type: signal.type,
         status: 0,
         createdAt: c_date.toString(),
@@ -577,8 +577,10 @@ async function placeStock(signal) {
 
 // ----------------- LOT CALCULATION (mirrors bullish) ----------------
 async function calculateLots(signal) {
-  const amount = (CONFIG.capital * CONFIG.risk_per_trade) / 100;
-  const qty = Math.floor((amount * 5) / signal.price);
+  const capital = parseFloat(CONFIG.capital);
+  const risk_per_trade = parseFloat(CONFIG.risk_per_trade);
+  const amount = (capital * risk_per_trade) / 100;
+  const qty = Math.floor((amount * 5) / parseFloat(signal.price));
   return qty;
 }
 

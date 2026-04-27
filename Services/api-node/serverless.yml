@@ -26,7 +26,7 @@ provider:
     Smart_API_PublicIP: "45.114.212.194"
     Smart_API_LocalIP: "127.0.0.1"
     Capital: 100000,
-    Risk_Per_Trade: 0.4,
+    Risk_Per_Trade: 40,
     #Lambdas
 
   iam:

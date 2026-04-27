@@ -18,7 +18,7 @@ const CONFIG = {
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
   localIP: process.env.Smart_API_LocalIP ?? "127.0.0.1",
   capital: process.env.Capital ?? 100000,
-  risk_per_trade: process.env.Risk_Per_Trade ?? 0.4,
+  risk_per_trade: process.env.Risk_Per_Trade ?? 40,
 };
 
 // ---------------- AXIOS BASE CLIENT (AngelOne) ----------------
@@ -234,12 +234,12 @@ async function getExpertTimingSignal(symbol, niftyStatus, smartAPISymbol) {
     const morningHigh = Math.max(todayQuotes[0].high, todayQuotes[1].high);
     const avgMorningVol = (todayQuotes[0].volume + todayQuotes[1].volume) / 2;
 
-    let sVal = 0,
-      sVol = 0;
-    todayQuotes.forEach((q) => {
-      sVal += q.close * q.volume;
-      sVol += q.volume;
-    });
+const lastIdx = todayQuotes.length - 1;
+let sVal = 0, sVol = 0;
+for (let k = 0; k <= lastIdx; k++) {
+  sVal += todayQuotes[k].close * todayQuotes[k].volume;
+  sVol += todayQuotes[k].volume;
+}
 
     const stockVWAP = sVal / sVol;
     const lastCandle = todayQuotes[todayQuotes.length - 1];
@@ -338,6 +338,12 @@ async function getExpertTimingSignal(symbol, niftyStatus, smartAPISymbol) {
 
       const lastPrice = await getLastPrice(smartAPISymbol);
 
+      if(lastPrice == null || lastPrice == undefined || lastPrice == 0) 
+      {
+          console.log(`⚠️ Failed to fetch LTP for ${symbol}. Using last candle close as fallback.`);
+          return { status: "Error", price: lastCandle.close.toFixed(2), reason: "LTP Fetch Failed" };
+      }
+
       const getTimeAdjustedTarget = await getTimeAdjustedTargets(
         lastPrice,
         signalType,
@@ -347,11 +353,7 @@ if (!getTimeAdjustedTarget) {
   console.log(`⏭️ ${symbol} — skipping, outside valid trading window`);
   return { status: "WAITING", reason: "Outside Trading Window" };
 }
-      if(lastPrice == null || lastPrice == undefined || lastPrice == 0) 
-      {
-          console.log(`⚠️ Failed to fetch LTP for ${symbol}. Using last candle close as fallback.`);
-          return { status: "Error", price: lastCandle.close.toFixed(2), reason: "LTP Fetch Failed" };
-      }
+
 
       let showDate = new Date().toLocaleString("en-IN", {
         timeZone: "Asia/Kolkata",
@@ -359,8 +361,8 @@ if (!getTimeAdjustedTarget) {
       return {
         status: "TRIGGERED",
         type: getTimeAdjustedTarget.session,
-        symbol: lastPrice,
-        price: lastCandle.close.toFixed(2),
+        symbol: symbol,
+        price: lastPrice.toFixed(2),
         time: showDate,
         date: todayStr,
         target: getTimeAdjustedTarget.target,
@@ -376,7 +378,7 @@ if (!getTimeAdjustedTarget) {
   }
 }
 
-function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
+async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
     const istString = candleDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
     const istTime   = new Date(istString);
     const hour      = istTime.getHours();
@@ -516,9 +518,9 @@ async function insertStock(signal) {
         target: signal.target,
         stopLoss: signal.stopLoss,
         riskReward: signal.riskReward,
-        signalToken : signal.stockToken,
+        signalToken: signal.stockToken,
         limitPrice: "0",
-        lots: 0,
+        lots: "0", 
         type: signal.type,
         transactiontype: "BUY",
         status: 0, // 0 = Placed, 1 = Executed, 2 = Closed
@@ -560,7 +562,7 @@ async function placeStock(signal) {
     const payload = {
       variety:          "ROBO",
       tradingsymbol:    `${signal.symbol}-EQ`,
-      symboltoken:      signal.signalToken,
+      symboltoken:      signal.stockToken,
       transactiontype:  "BUY",
       exchange:         "NSE",
       ordertype:        "LIMIT",
@@ -616,7 +618,7 @@ async function placeStock(signal) {
         symbolKey: getStockInfo.Item.symbolKey,
         price: getStockInfo.Item.price,
         target: getStockInfo.Item.target,
-        symboltoken: getStockInfo.Item.symboltoken,
+        signalToken: getStockInfo.Item.signalToken,
         stopLoss: getStockInfo.Item.stopLoss,
         riskReward: getStockInfo.Item.riskReward,
         type: getStockInfo.Item.type,
@@ -631,13 +633,13 @@ async function placeStock(signal) {
   );
 }
 
-
-
 // ----------------- LOT CALCULATION ----------------
 async function calculateLots(signal) {
-   const amount = (CONFIG.capital * CONFIG.risk_per_trade) / 100;
-   const qty = Math.floor((amount * 5) / signal.price);
-   return qty;
+  const capital = parseFloat(CONFIG.capital);
+  const risk_per_trade = parseFloat(CONFIG.risk_per_trade);
+  const amount = (capital * risk_per_trade) / 100;
+  const qty = Math.floor((amount * 5) / signal.price);
+  return qty;
 }
 
 // ================================================================
@@ -659,22 +661,22 @@ export const cron = async () => {
   // Example:
   //   Cron fires at 10:28 IST → secondsIntoInterval = 780s → SKIP
   //   Cron fires at 10:31 IST → secondsIntoInterval = 60s  → RUN ✅
-  // if (!isNearCandleClose()) {
-  //   console.log(
-  //     `⏭️  Skipping — not near a 15m candle close. Next candle closes at :${String(
-  //       (Math.floor(
-  //         new Date(
-  //           new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
-  //         ).getMinutes() / 15,
-  //       ) +
-  //         1) *
-  //         15,
-  //     ).padStart(2, "0")}`,
-  //   );
-  //   return;
-  // }
+  if (!isNearCandleClose()) {
+    console.log(
+      `⏭️  Skipping — not near a 15m candle close. Next candle closes at :${String(
+        (Math.floor(
+          new Date(
+            new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+          ).getMinutes() / 15,
+        ) +
+          1) *
+          15,
+      ).padStart(2, "0")}`,
+    );
+    return;
+  }
 
-  // console.log("━".repeat(55));
+  console.log("━".repeat(55));
 
   // ── Step 1: Nifty Sentiment via AngelOne (index data) ──────────
   const nifty = await getNiftySentiment();
