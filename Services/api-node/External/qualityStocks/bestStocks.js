@@ -1,6 +1,6 @@
 import axios from "axios";
 import yahooFinance from "yahoo-finance2";
-import { Bearish_SYMBOL_MAP } from "../../Common/stockInfo.js";
+import { Bullish_SYMBOL_MAP } from "../../Common/stockInfo.js";
 
 const yf = new yahooFinance();
 
@@ -202,17 +202,67 @@ function checkConsolidationQuality(quotes) {
 //  Stock breaking out with sector tailwind = high quality
 // ================================================================
 const SECTOR_ETFS = {
-    // Banking
-    'HDFCBANK': '^NSEBANK', 'SBIN': '^NSEBANK', 'ICICIBANK': '^NSEBANK',
-    'AXISBANK': '^NSEBANK', 'KOTAKBANK': '^NSEBANK', 'BANKBARODA': '^NSEBANK',
-    // IT
-    'INFY': 'INFY.NS', 'TCS': 'TCS.NS', 'WIPRO': 'WIPRO.NS', 'HCLTECH': 'HCLTECH.NS',
-    // Pharma
-    'SUNPHARMA': 'SUNPHARMA.NS', 'DRREDDY': 'DRREDDY.NS', 'CIPLA': 'CIPLA.NS',
-    // Auto
-    'MARUTI': 'MARUTI.NS', 'TATAMOTORS': 'TATAMOTORS.NS', 'M&M': 'M&M.NS',
-    // FMCG
-    'HINDUNILVR': 'HINDUNILVR.NS', 'NESTLEIND': 'NESTLEIND.NS', 'ITC': 'ITC.NS',
+    // ── FINANCIALS (Banking - Private & Public) ──────────────────
+    'HDFCBANK': '^NSEBANK', 'ICICIBANK': '^NSEBANK', 'KOTAKBANK': '^NSEBANK',
+    'AXISBANK': '^NSEBANK', 'INDUSINDBK': '^NSEBANK', 'BANDHANBNK': '^NSEBANK',
+    'IDFCFIRSTB': '^NSEBANK', 'SBIN': '^NSEBANK', 'BANKBARODA': '^NSEBANK',
+    'PNB': '^NSEBANK', 'CANBK': '^NSEBANK', 'UNIONBANK': '^NSEBANK',
+
+    // ── FINANCIAL SERVICES (NBFCs & Insurance) ──────────────────
+    'BAJFINANCE': 'NIFTYFINSERVICE.NS', 'BAJAJFINSV': 'NIFTYFINSERVICE.NS',
+    'LICI': 'NIFTYFINSERVICE.NS', 'HDFCLIFE': 'NIFTYFINSERVICE.NS',
+    'SBILIFE': 'NIFTYFINSERVICE.NS', 'ICICIPRULI': 'NIFTYFINSERVICE.NS',
+    'ICICIGI': 'NIFTYFINSERVICE.NS', 'SBICARD': 'NIFTYFINSERVICE.NS',
+    'CHOLAFIN': 'NIFTYFINSERVICE.NS', 'MUTHOOTFIN': 'NIFTYFINSERVICE.NS',
+    'SHRIRAMFIN': 'NIFTYFINSERVICE.NS', 'PFC': 'NIFTYFINSERVICE.NS',
+    'RECLTD': 'NIFTYFINSERVICE.NS', 'IRFC': 'NIFTYFINSERVICE.NS',
+    'JIOFIN': 'NIFTYFINSERVICE.NS', 'BAJAJHLDNG': 'NIFTYFINSERVICE.NS',
+
+    // ── INFORMATION TECHNOLOGY ───────────────────────────────────
+    'TCS': 'NIFTYIT.NS', 'INFY': 'NIFTYIT.NS', 'HCLTECH': 'NIFTYIT.NS',
+    'WIPRO': 'NIFTYIT.NS', 'TECHM': 'NIFTYIT.NS', 'LTI': 'NIFTYIT.NS',
+    'MPHASIS': 'NIFTYIT.NS', 'PERSISTENT': 'NIFTYIT.NS',
+
+    // ── OIL, GAS & ENERGY ────────────────────────────────────────
+    'RELIANCE': 'NIFTYENERGY.NS', 'ONGC': 'NIFTYENERGY.NS', 'IOC': 'NIFTYENERGY.NS',
+    'BPCL': 'NIFTYENERGY.NS', 'GAIL': 'NIFTYENERGY.NS', 'COALINDIA': 'NIFTYENERGY.NS',
+    'NTPC': 'NIFTYENERGY.NS', 'POWERGRID': 'NIFTYENERGY.NS', 'ADANIPOWER': 'NIFTYENERGY.NS',
+    'ADANIGREEN': 'NIFTYENERGY.NS', 'TATAPOWER': 'NIFTYENERGY.NS',
+
+    // ── AUTOMOBILES ──────────────────────────────────────────────
+    'MARUTI': 'NIFTYAUTO.NS', 'TATAMOTORS': 'NIFTYAUTO.NS', 'M_M': 'NIFTYAUTO.NS',
+    'BAJAJ_AUTO': 'NIFTYAUTO.NS', 'HEROMOTOCO': 'NIFTYAUTO.NS', 'EICHERMOT': 'NIFTYAUTO.NS',
+    'TVSMOTORS': 'NIFTYAUTO.NS', 'BOSCHLTD': 'NIFTYAUTO.NS',
+
+    // ── FMCG ─────────────────────────────────────────────────────
+    'HINDUNILVR': 'NIFTYFMCG.NS', 'ITC': 'NIFTYFMCG.NS', 'NESTLEIND': 'NIFTYFMCG.NS',
+    'BRITANNIA': 'NIFTYFMCG.NS', 'VBL': 'NIFTYFMCG.NS', 'DABUR': 'NIFTYFMCG.NS',
+    'MARICO': 'NIFTYFMCG.NS', 'GODREJCP': 'NIFTYFMCG.NS', 'COLPAL': 'NIFTYFMCG.NS',
+    'TATACONSUM': 'NIFTYFMCG.NS',
+
+    // ── HEALTHCARE & PHARMA ──────────────────────────────────────
+    'SUNPHARMA': 'NIFTYPHARMA.NS', 'DRREDDY': 'NIFTYPHARMA.NS', 'CIPLA': 'NIFTYPHARMA.NS',
+    'DIVISLAB': 'NIFTYPHARMA.NS', 'APOLLOHOSP': 'NIFTYPHARMA.NS', 'BIOCON': 'NIFTYPHARMA.NS',
+    'TORNTPHARM': 'NIFTYPHARMA.NS',
+
+    // ── METALS & MINING ──────────────────────────────────────────
+    'TATASTEEL': 'NIFTYMETAL.NS', 'HINDALCO': 'NIFTYMETAL.NS', 'JSWSTEEL': 'NIFTYMETAL.NS',
+    'VEDL': 'NIFTYMETAL.NS', 'SAIL': 'NIFTYMETAL.NS',
+
+    // ── INFRASTRUCTURE & CEMENT ──────────────────────────────────
+    'LT': 'NIFTYINFRA.NS', 'ADANIPORTS': 'NIFTYINFRA.NS', 'ADANIENT': 'NIFTYINFRA.NS',
+    'ULTRACEMCO': 'NIFTYINFRA.NS', 'GRASIM': 'NIFTYINFRA.NS', 'SHREECEM': 'NIFTYINFRA.NS',
+    'AMBUJACEM': 'NIFTYINFRA.NS', 'ACC': 'NIFTYINFRA.NS', 'HAL': 'NIFTYINFRA.NS',
+    'BEL': 'NIFTYINFRA.NS', 'SIEMENS': 'NIFTYINFRA.NS', 'ABB': 'NIFTYINFRA.NS',
+
+    // ── CONSUMER DURABLES & REALTY ───────────────────────────────
+    'TITAN': 'NIFTYCONSRDURBL.NS', 'HAVELLS': 'NIFTYCONSRDURBL.NS', 'ASIANPAINT': 'NIFTYCONSRDURBL.NS',
+    'BERGEPAINT': 'NIFTYCONSRDURBL.NS', 'DLF': 'NIFTYREALTY.NS',
+
+    // ── TELECOM & MISC (Using Nifty 50 as proxy or specific sector) 
+    'BHARTIARTL': 'NIFTY50.NS', 'ZOMATO': 'NIFTY50.NS', 'INDIGO': 'NIFTY50.NS',
+    'DMART': 'NIFTY50.NS', 'TRENT': 'NIFTY50.NS', 'PIDILITIND': 'NIFTY50.NS',
+    'PAYTM': 'NIFTY50.NS', 'NYKAA': 'NIFTY50.NS', 'INDIAMART': 'NIFTY50.NS'
 };
 
 async function isSectorBullish(symbolKey, niftyQuotes) {
@@ -279,7 +329,7 @@ function checkEarningsQuality(quotes) {
 async function findBreakoutCandidates() {
     const results = [];
 
-    for (const [symbolKey] of Object.entries(Bearish_SYMBOL_MAP)) {
+    for (const [symbolKey] of Object.entries(Bullish_SYMBOL_MAP)) {
         try {
             const dailyData = await yf.chart(`${symbolKey}.NS`, {
                 period1: Math.floor((Date.now() - 60 * 24 * 60 * 60 * 1000) / 1000),
@@ -373,50 +423,106 @@ async function getFnOStocks() {
 }
 
 // ================================================================
+//  BLOCK DEAL DETECTION
+//  NSE publishes block deals throughout the day
+//  Block BUY = institution committed capital = bullish confirmation
+//  Block SELL = institution exiting = bearish signal
+//  Run at 8:30 AM pre-market for previous day + early morning deals
+// ================================================================
+async function getTodayBlockDeals() {
+    try {
+        const res = await axios.get(
+            'https://www.nseindia.com/api/block-deal',
+            {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0',
+                    'Accept': 'application/json',
+                    'Referer': 'https://www.nseindia.com'
+                }
+            }
+        );
+
+        if (!res.data?.data || res.data.data.length === 0) {
+            console.log('⚠️  No block deals found today');
+            return [];
+        }
+
+        return res.data.data.map(d => ({
+            symbol:   d.symbol,
+            quantity: d.quantity,
+            price:    d.price,
+            type:     d.buySell === 'B' ? 'BUY' : 'SELL'
+        }));
+
+    } catch (err) {
+        console.log(`⚠️  Block Deal API failed — ${err.message?.slice(0, 50)}`);
+        return []; // Don't block scan if API fails
+    }
+}
+
+// ================================================================
 //  MAIN — Professional Grade Pre-Market Watchlist
 // ================================================================
 async function generatePreMarketWatchlist() {
     console.log("⏰ Professional Pre-Market Scan Starting...\n");
 
     // ── STEP 1: Fetch all data in parallel ───────────────────────
-    const [breakouts, newsStocks, fnoStocks, fiiData, niftyDataRaw] = await Promise.allSettled([
-        findBreakoutCandidates(),
-        getNewsStocks(),
-        getFnOStocks(),
-        getFIIDIIData(),
-        yf.chart("^NSEI", {
-            period1: Math.floor((Date.now() - 60 * 24 * 60 * 60 * 1000) / 1000),
-            interval: "1d"
-        })
-    ]);
+    const [breakouts, newsStocks, fnoStocks, fiiData, niftyDataRaw, blockDealData] =
+        await Promise.allSettled([
+            findBreakoutCandidates(),
+            getNewsStocks(),
+            getFnOStocks(),
+            getFIIDIIData(),
+            yf.chart("^NSEI", {
+                period1: Math.floor((Date.now() - 60 * 24 * 60 * 60 * 1000) / 1000),
+                interval: "1d"
+            }),
+            getTodayBlockDeals()  // ── NEW ──
+        ]);
 
-    const breakoutList = breakouts.status  === 'fulfilled' ? breakouts.value  : [];
-    const newsList     = newsStocks.status === 'fulfilled' ? newsStocks.value : [];
-    const fnoList      = fnoStocks.status  === 'fulfilled' ? fnoStocks.value  : [];
-    const fii          = fiiData.status    === 'fulfilled' ? fiiData.value    : { isFIIBullish: false, label: '🏦 FII N/A' };
-    const niftyQuotes  = niftyDataRaw.status === 'fulfilled'
-        ? niftyDataRaw.value.quotes.filter(q => q.close)
-        : [];
+    const breakoutList  = breakouts.status     === 'fulfilled' ? breakouts.value     : [];
+    const newsList      = newsStocks.status    === 'fulfilled' ? newsStocks.value    : [];
+    const fnoList       = fnoStocks.status     === 'fulfilled' ? fnoStocks.value     : [];
+    const fii           = fiiData.status       === 'fulfilled' ? fiiData.value       : { isFIIBullish: false, label: '🏦 FII N/A' };
+    const niftyQuotes   = niftyDataRaw.status  === 'fulfilled'
+        ? niftyDataRaw.value.quotes.filter(q => q.close) : [];
+    const blockDealList = blockDealData.status === 'fulfilled' ? blockDealData.value : [];
 
-    if (newsStocks.status === 'rejected') console.log(`⚠️  NSE News API failed — ${newsStocks.reason?.message}`);
-    if (fnoStocks.status  === 'rejected') console.log(`⚠️  NSE F&O API failed  — ${fnoStocks.reason?.message}`);
+    if (newsStocks.status  === 'rejected') console.log(`⚠️  NSE News API failed       — ${newsStocks.reason?.message}`);
+    if (fnoStocks.status   === 'rejected') console.log(`⚠️  NSE F&O API failed        — ${fnoStocks.reason?.message}`);
+    if (blockDealData.status === 'rejected') console.log(`⚠️  Block Deal API failed   — ${blockDealData.reason?.message}`);
 
     // ── STEP 2: Market-level context ─────────────────────────────
     console.log(`\n📊 MARKET CONTEXT`);
     console.log("─".repeat(50));
     console.log(`  ${fii.label}`);
     console.log(`  ${fii.isFIIBullish ? '✅ FII BULLISH — High confidence day' : '⚠️  FII NOT BULLISH — Trade smaller size'}`);
+    console.log(`  🏦 Block Deals Today: ${blockDealList.length} total | ` +
+                `${blockDealList.filter(b => b.type === 'BUY').length} BUY | ` +
+                `${blockDealList.filter(b => b.type === 'SELL').length} SELL`);
     console.log("─".repeat(50) + "\n");
 
     const newsSymbols = new Set(newsList.map(n => n.symbol));
     const fnoSymbols  = new Set(fnoList.map(f => f.symbol));
+
+    // ── BLOCK DEAL SETS ───────────────────────────────────────────
+    const blockBuySymbols  = new Set(
+        blockDealList
+            .filter(b => b.type === 'BUY')
+            .map(b => b.symbol)
+    );
+    const blockSellSymbols = new Set(
+        blockDealList
+            .filter(b => b.type === 'SELL')
+            .map(b => b.symbol)
+    );
+    // ─────────────────────────────────────────────────────────────
 
     // ── STEP 3: Apply Level 2 professional filters per stock ──────
     const enrichedList = [];
 
     for (const stock of breakoutList) {
         try {
-            // Run all Level 2 filters in parallel per stock
             const [mtf, sector] = await Promise.all([
                 checkMTFAlignment(stock.symbol),
                 isSectorBullish(stock.symbol, niftyQuotes)
@@ -426,21 +532,26 @@ async function generatePreMarketWatchlist() {
             const base     = checkConsolidationQuality(stock.quotes);
             const earnings = checkEarningsQuality(stock.quotes);
 
+            // ── BLOCK DEAL FLAGS ──────────────────────────────────
+            const hasBlockBuy  = blockBuySymbols.has(stock.symbol);
+            const hasBlockSell = blockSellSymbols.has(stock.symbol);
+            // ─────────────────────────────────────────────────────
+
             // ── PROFESSIONAL SCORE ────────────────────────────────
-            // Each Level 2 filter adds bonus points
             const professionalScore = (
-                (rs.isLeader         ? 2 : 0) +   // Outperforming Nifty
-                (mtf.aligned         ? 2 : 0) +   // Weekly + Daily aligned
-                (base.isHighQuality  ? 2 : 0) +   // Tight base
-                (base.isMediumQuality && !base.isHighQuality ? 1 : 0) + // Medium base
-                (sector.bullish      ? 1 : 0) +   // Sector tailwind
-                (earnings.hadStrongEarnings ? 1 : 0) + // Fundamental catalyst
-                (fii.isFIIBullish    ? 1 : 0)    // Market tailwind
+                (rs.isLeader         ? 2 : 0) +
+                (mtf.aligned         ? 2 : 0) +
+                (base.isHighQuality  ? 2 : 0) +
+                (base.isMediumQuality && !base.isHighQuality ? 1 : 0) +
+                (sector.bullish      ? 1 : 0) +
+                (earnings.hadStrongEarnings ? 1 : 0) +
+                (fii.isFIIBullish    ? 1 : 0) +
+                (hasBlockBuy         ? 4 : 0) +  // ── NEW: highest weight
+                (hasBlockSell        ? -2 : 0)   // ── NEW: penalize sell pressure
             );
             // ─────────────────────────────────────────────────────
 
             // ── PROFESSIONAL GATE ─────────────────────────────────
-            // Must pass at least 3 out of 4 key checks to qualify
             const keyChecks = [rs.isLeader, mtf.aligned, base.isMediumQuality, sector.bullish];
             const keyChecksPassed = keyChecks.filter(Boolean).length;
             const passedProfessionalGate = keyChecksPassed >= 3;
@@ -453,25 +564,29 @@ async function generatePreMarketWatchlist() {
 
             enrichedList.push({
                 ...stock,
-                inNews: newsSymbols.has(stock.symbol),
-                inFnO:  fnoSymbols.has(stock.symbol),
+                inNews:      newsSymbols.has(stock.symbol),
+                inFnO:       fnoSymbols.has(stock.symbol),
+                hasBlockBuy,   // ── NEW
+                hasBlockSell,  // ── NEW
                 finalScore,
                 professionalScore,
                 keyChecksPassed,
                 passedProfessionalGate,
-                // Filter labels for display
                 filters: { rs, mtf, base, sector, earnings }
             });
 
         } catch (err) {
-            // If Level 2 fails for a stock, still include with basic score
             enrichedList.push({
                 ...stock,
-                inNews: newsSymbols.has(stock.symbol),
-                inFnO:  fnoSymbols.has(stock.symbol),
+                inNews:      newsSymbols.has(stock.symbol),
+                inFnO:       fnoSymbols.has(stock.symbol),
+                hasBlockBuy:  blockBuySymbols.has(stock.symbol),   // ── NEW
+                hasBlockSell: blockSellSymbols.has(stock.symbol),  // ── NEW
                 finalScore: stock.score +
                     (newsSymbols.has(stock.symbol) ? 3 : 0) +
-                    (fnoSymbols.has(stock.symbol)  ? 2 : 0),
+                    (fnoSymbols.has(stock.symbol)  ? 2 : 0) +
+                    (blockBuySymbols.has(stock.symbol)  ? 4 : 0) +
+                    (blockSellSymbols.has(stock.symbol) ? -2 : 0),
                 professionalScore: 0,
                 keyChecksPassed: 0,
                 passedProfessionalGate: false,
@@ -483,9 +598,7 @@ async function generatePreMarketWatchlist() {
     // ── STEP 4: Sort and split into tiers ────────────────────────
     const sorted = enrichedList.sort((a, b) => b.finalScore - a.finalScore);
 
-    // TIER 1: Passed professional gate (highest conviction)
     const tier1 = sorted.filter(s => s.passedProfessionalGate).slice(0, 8);
-    // TIER 2: Didn't pass gate but still technically strong
     const tier2 = sorted.filter(s => !s.passedProfessionalGate).slice(0, 5);
 
     // ── STEP 5: Display ──────────────────────────────────────────
@@ -498,9 +611,11 @@ async function generatePreMarketWatchlist() {
 
     tier1.forEach((s, i) => {
         const sources = [];
-        if (s.score >= 4)  sources.push("📈 BREAKOUT");
-        if (s.inNews)      sources.push("📰 NEWS");
-        if (s.inFnO)       sources.push("💰 F&O");
+        if (s.score >= 4)    sources.push("📈 BREAKOUT");
+        if (s.inNews)        sources.push("📰 NEWS");
+        if (s.inFnO)         sources.push("💰 F&O");
+        if (s.hasBlockBuy)   sources.push("🏦 BLOCK BUY");   // ── NEW
+        if (s.hasBlockSell)  sources.push("🔴 BLOCK SELL");  // ── NEW
         const sourceLabel = sources.join(" + ");
 
         console.log(
@@ -512,6 +627,14 @@ async function generatePreMarketWatchlist() {
         if (s.filters.base)     console.log(`    ├─ ${s.filters.base.label}`);
         if (s.filters.sector)   console.log(`    ├─ ${s.filters.sector.label}`);
         if (s.filters.earnings) console.log(`    └─ ${s.filters.earnings.label}`);
+        // ── NEW: Block deal detail line ───────────────────────────
+        if (s.hasBlockBuy || s.hasBlockSell) {
+            const blockDetails = blockDealList
+                .filter(b => b.symbol === s.symbol)
+                .map(b => `${b.type} ${b.quantity?.toLocaleString()} @ ₹${b.price}`)
+                .join(', ');
+            console.log(`    └─ 🏦 BLOCK DEALS: ${blockDetails}`);
+        }
     });
 
     console.log("\n⚡ TIER 2 — WATCHLIST ONLY (Monitor but trade cautiously)");
@@ -519,9 +642,11 @@ async function generatePreMarketWatchlist() {
 
     tier2.forEach((s, i) => {
         const sources = [];
-        if (s.score >= 4) sources.push("📈 BREAKOUT");
-        if (s.inNews)     sources.push("📰 NEWS");
-        if (s.inFnO)      sources.push("💰 F&O");
+        if (s.score >= 4)    sources.push("📈 BREAKOUT");
+        if (s.inNews)        sources.push("📰 NEWS");
+        if (s.inFnO)         sources.push("💰 F&O");
+        if (s.hasBlockBuy)   sources.push("🏦 BLOCK BUY");   // ── NEW
+        if (s.hasBlockSell)  sources.push("🔴 BLOCK SELL");  // ── NEW
 
         console.log(
             `  ${String(i+1).padStart(2)}. ${s.symbol.padEnd(12)} | ₹${s.close} | Score: ${s.finalScore} | [${sources.join(" + ")}] | Checks: ${s.keyChecksPassed}/4`
@@ -530,6 +655,7 @@ async function generatePreMarketWatchlist() {
 
     console.log("\n" + "=".repeat(70));
     console.log(`📋 SUMMARY: ${tier1.length} high conviction | ${tier2.length} on watchlist | ${fii.label}`);
+    console.log(`🏦 Block Deals: ${blockBuySymbols.size} BUY stocks | ${blockSellSymbols.size} SELL stocks`);
     console.log("=".repeat(70) + "\n");
 }
 

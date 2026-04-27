@@ -341,8 +341,12 @@ async function getExpertTimingSignal(symbol, niftyStatus, smartAPISymbol) {
       const getTimeAdjustedTarget = await getTimeAdjustedTargets(
         lastPrice,
         signalType,
+        new Date(lastCandle.date)
       );
-
+if (!getTimeAdjustedTarget) {
+  console.log(`⏭️ ${symbol} — skipping, outside valid trading window`);
+  return { status: "WAITING", reason: "Outside Trading Window" };
+}
       if(lastPrice == null || lastPrice == undefined || lastPrice == 0) 
       {
           console.log(`⚠️ Failed to fetch LTP for ${symbol}. Using last candle close as fallback.`);
@@ -426,8 +430,8 @@ function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
         } else if (hoursLeft >= 3.0) {
             // Mid session — moderate target
             return {
-                target:     (entryPrice * (1 + 0.0100)).toFixed(2), // +1.0%
-                stopLoss:   (entryPrice * (1 - 0.0050)).toFixed(2), // -0.5%
+                target:     (entryPrice * (1 + 0.0080)).toFixed(2), // +0.8%
+                stopLoss:   (entryPrice * (1 - 0.0040)).toFixed(2), // -0.4%
                 riskReward: "1.8",
                 session:    "MID BREAKOUT"
             };
@@ -616,7 +620,7 @@ async function placeStock(signal) {
         stopLoss: getStockInfo.Item.stopLoss,
         riskReward: getStockInfo.Item.riskReward,
         type: getStockInfo.Item.type,
-        lots: calculateLot,
+        lots: qty.toString(),
         transactiontype: "BUY",
         limitPrice: limitPrice.toString(),
         status: 1, // 0 = Placed, 1 = Executed, 2 = Closed
@@ -655,22 +659,22 @@ export const cron = async () => {
   // Example:
   //   Cron fires at 10:28 IST → secondsIntoInterval = 780s → SKIP
   //   Cron fires at 10:31 IST → secondsIntoInterval = 60s  → RUN ✅
-  if (!isNearCandleClose()) {
-    console.log(
-      `⏭️  Skipping — not near a 15m candle close. Next candle closes at :${String(
-        (Math.floor(
-          new Date(
-            new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
-          ).getMinutes() / 15,
-        ) +
-          1) *
-          15,
-      ).padStart(2, "0")}`,
-    );
-    return;
-  }
+  // if (!isNearCandleClose()) {
+  //   console.log(
+  //     `⏭️  Skipping — not near a 15m candle close. Next candle closes at :${String(
+  //       (Math.floor(
+  //         new Date(
+  //           new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+  //         ).getMinutes() / 15,
+  //       ) +
+  //         1) *
+  //         15,
+  //     ).padStart(2, "0")}`,
+  //   );
+  //   return;
+  // }
 
-  console.log("━".repeat(55));
+  // console.log("━".repeat(55));
 
   // ── Step 1: Nifty Sentiment via AngelOne (index data) ──────────
   const nifty = await getNiftySentiment();

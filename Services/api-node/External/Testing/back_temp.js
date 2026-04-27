@@ -1,4 +1,4 @@
-import { Bullish_SYMBOL_MAP } from '../../Common/stockInfo.js';
+import { BullStocks } from '../../Common/stockInfo.js';
 import yahooFinance from "yahoo-finance2";
 
 const yf = new yahooFinance();
@@ -86,7 +86,7 @@ function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
 async function backtestStrategy() {
     console.log("🚀 Initializing Sniper Backtest [TODAY + YESTERDAY ONLY]...");
 
-    const stockEntries = Object.entries(Bullish_SYMBOL_MAP);
+    const stockEntries = Object.entries(BullStocks);
     console.log(`📊 Processing ${stockEntries.length} Stocks | Syncing Latest 2 Sessions\n`);
 
     let totalWins = 0, totalLosses = 0, totalTrades = 0, totalSkipped = 0;

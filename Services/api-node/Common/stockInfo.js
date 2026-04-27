@@ -304,35 +304,7 @@ export const Bearish_SYMBOL_MAP = {
 };
 
 export const BearStocks = {
-  BAJFINANCE: { token: "", symbol: "BAJFINANCE.NS", exchange: "NSE" }, // Bajaj Finance
-  BAJAJFINSV: { token: "", symbol: "BAJAJFINSV.NS", exchange: "NSE" }, // Bajaj Finserv
-  LICI: { token: "", symbol: "LICI.NS", exchange: "NSE" }, // Life Insurance Corporation
-  HDFCLIFE: { token: "", symbol: "HDFCLIFE.NS", exchange: "NSE" }, // HDFC Life Insurance
-  SBILIFE: { token: "", symbol: "SBILIFE.NS", exchange: "NSE" }, // SBI Life Insurance
-  ICICIPRULI: { token: "", symbol: "ICICIPRULI.NS", exchange: "NSE" }, // ICICI Prudential Life
-  ICICIGI: { token: "", symbol: "ICICIGI.NS", exchange: "NSE" }, // ICICI Lombard General Insurance
-  SBICARD: { token: "", symbol: "SBICARD.NS", exchange: "NSE" }, // SBI Cards
-  CHOLAFIN: { token: "", symbol: "CHOLAFIN.NS", exchange: "NSE" }, // Cholamandalam Investment
-  MUTHOOTFIN: { token: "", symbol: "MUTHOOTFIN.NS", exchange: "NSE" }, // Muthoot Finance
-  SHRIRAMFIN: { token: "", symbol: "SHRIRAMFIN.NS", exchange: "NSE" }, // Shriram Finance
-  PFC: { token: "", symbol: "PFC.NS", exchange: "NSE" }, // Power Finance Corporation
-  RECLTD: { token: "", symbol: "RECLTD.NS", exchange: "NSE" }, // REC Limited
-  IRFC: { token: "", symbol: "IRFC.NS", exchange: "NSE" }, // Indian Railway Finance Corp
-  JIOFIN: { token: "", symbol: "JIOFIN.NS", exchange: "NSE" }, // Jio Financial Services
-  BAJAJHLDNG: { token: "", symbol: "BAJAJHLDNG.NS", exchange: "NSE" }, // Bajaj Holdings
-  HDFCBANK: { token: "", symbol: "HDFCBANK.NS", exchange: "NSE" }, // HDFC Bank
-  ICICIBANK: { token: "", symbol: "ICICIBANK.NS", exchange: "NSE" }, // ICICI Bank
-  KOTAKBANK: { token: "", symbol: "KOTAKBANK.NS", exchange: "NSE" }, // Kotak Mahindra Bank
-  AXISBANK: { token: "", symbol: "AXISBANK.NS", exchange: "NSE" }, // Axis Bank
-  INDUSINDBK: { token: "", symbol: "INDUSINDBK.NS", exchange: "NSE" }, // IndusInd Bank
-  BANDHANBNK: { token: "", symbol: "BANDHANBNK.NS", exchange: "NSE" }, // Bandhan Bank
-  IDFCFIRSTB: { token: "", symbol: "IDFCFIRSTB.NS", exchange: "NSE" }, // IDFC First Bank
-  SBIN: { token: "", symbol: "SBIN.NS", exchange: "NSE" }, // State Bank of India
-  BANKBARODA: { token: "", symbol: "BANKBARODA.NS", exchange: "NSE" }, // Bank of Baroda
-  PNB: { token: "", symbol: "PNB.NS", exchange: "NSE" }, // Punjab National Bank
-  CANBK: { token: "", symbol: "CANBK.NS", exchange: "NSE" }, // Canara Bank
-  UNIONBANK: { token: "", symbol: "UNIONBANK.NS", exchange: "NSE" }, // Union Bank of India
-  MPHASIS: { token: "", symbol: "MPHASIS.NS", exchange: "NSE" },
   PERSISTENT: { token: "", symbol: "PERSISTENT.NS", exchange: "NSE" }, 
+  TECHM:         { token: "", symbol: "TECHM.NS",         exchange: "NSE" },
   HEROMOTOCO:    { token: "", symbol: "HEROMOTOCO.NS",    exchange: "NSE" },
 };
