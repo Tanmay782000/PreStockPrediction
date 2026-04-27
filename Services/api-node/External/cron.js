@@ -14,11 +14,11 @@ const CONFIG = {
   apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
   jwtToken:
     process.env.Smart_API_JWT_TOKEN ??
-    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM05qa3hOVFU1T1N3aWJtSm1Jam94TnpjMk9ESTVNREU1TENKcFlYUWlPakUzTnpZNE1qa3dNVGtzSW1wMGFTSTZJak0wTnpGbFl6UXlMV0kxTTJFdE5HUTVOQzA1TVdaaExUSXlZMkUzTkRobE9EWTNZU0lzSWxSdmEyVnVJam9pSW4wLlZRb0FjdlNfM0VQUHlQR2NDSVhKSzI1cVBnSmdkdHgtUjJiUjN3aGEtSHNkRHNvSmk4TDBnMTcxM3NkdXh0R0QzVHg0SkZLWjVqRU91TG1FNnlnSG83OURKclhxM0xESzhCUEJiSkZ6aHF5bDZLOHdkanlPcE1YTk11M25qOVpVa2Y5aXUzMS1zOFJxTFZxd3BLVXVHQWNXNzFRQnlxRnZKNVRuRFVIUGNtUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzY4MjkxOTksImV4cCI6MTc3Njg4MjYwMH0.vzXwRw14zmz8o9foxGkLIWH2PftKm9x7_8t3uJPzYqblFEXyjdTdzhgVyeIZgoNNFUDcDjyVUHyn8c8qwz369A",
+    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056TTBPRE0wT1N3aWJtSm1Jam94TnpjM01qWXhOelk1TENKcFlYUWlPakUzTnpjeU5qRTNOamtzSW1wMGFTSTZJakV6TUROaE1tWXdMV0V4WkRZdE5HSmlOaTA1TUdNMUxUTmxNemRtWVRJNU9HVmlPQ0lzSWxSdmEyVnVJam9pSW4wLlN1LXI2dC1aTFBuOEsxalJvcHNsX29NeXpkTDh1cjlndUx6MW1uU3MwU3ktUmhodzZKTXVtM2MxWDc1MFdvUENieS1kdmE2MFR1WU9rYU4wWmM2dmtxdmk4dEQ3bEx2NS16MWM0TGlzUzl3TEJpaVc3YkJpZjlxdzlyQzhSUEVuQjVaaGFNVVJacFotUFlYNVVvSHc3Y2Q3OXVYeFgtWHdSYUpwd2NoV1N1USIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzcyNjE5NDksImV4cCI6MTc3NzMxNDYwMH0.aKTKeLdv6VgT86FYMEVziTCP3wpRaOuG2BSHJ5eR9nyZYvRU97mFiqS8lfwJTOucjezS4ETnrzH5FnxjbppvTw",
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
   localIP: process.env.Smart_API_LocalIP ?? "127.0.0.1",
-  capital: process.env.Capital ?? 10000,
-  risk_per_trade: process.env.Risk_Per_Trade ?? 0.2,
+  capital: process.env.Capital ?? 100000,
+  risk_per_trade: process.env.Risk_Per_Trade ?? 0.4,
 };
 
 // ---------------- AXIOS BASE CLIENT (AngelOne) ----------------
@@ -164,11 +164,35 @@ async function getNiftySentiment() {
   }
 }
 
+// ===============================================================
+// Last price of stock
+// ===============================================================
+async function getLastPrice(symboltoken, exchange = "NSE") {
+    try {
+        const res = await angelClient.post(
+            "/rest/secure/angelbroking/market/v1/quote/",
+            {
+                mode: "LTP",
+                exchangeTokens: {
+                    [exchange]: [symboltoken]
+                }
+            }
+        );
+
+        const ltp = res.data?.data?.fetched?.[0]?.ltp;
+        return ltp;
+
+    } catch (err) {
+        console.error(`❌ LTP fetch failed — ${err.message}`);
+        return null;
+    }
+}
+
 // ================================================================
 //  STOCK SIGNAL ENGINE — uses Yahoo Finance API
 //  (Individual NSE stocks fetched via Yahoo Finance symbol e.g. "TITAN.NS")
 // ================================================================
-async function getExpertTimingSignal(symbol, niftyStatus) {
+async function getExpertTimingSignal(symbol, niftyStatus, smartAPISymbol) {
   try {
     console.log("niftyStatus & Symbol", niftyStatus, symbol);
     if (!niftyStatus.isBullish) {
@@ -311,24 +335,34 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
         : isOpeningDriveSignal
           ? "OPENING_DRIVE"
           : "REVERSAL";
-      // const atrValue = await calculateIntradayATR(iQuotes, 20);
+
+      const lastPrice = await getLastPrice(smartAPISymbol);
+
       const getTimeAdjustedTarget = await getTimeAdjustedTargets(
-        lastCandle.close,
+        lastPrice,
         signalType,
       );
+
+      if(lastPrice == null || lastPrice == undefined || lastPrice == 0) 
+      {
+          console.log(`⚠️ Failed to fetch LTP for ${symbol}. Using last candle close as fallback.`);
+          return { status: "Error", price: lastCandle.close.toFixed(2), reason: "LTP Fetch Failed" };
+      }
+
       let showDate = new Date().toLocaleString("en-IN", {
         timeZone: "Asia/Kolkata",
       });
       return {
         status: "TRIGGERED",
         type: getTimeAdjustedTarget.session,
-        symbol: symbol,
+        symbol: lastPrice,
         price: lastCandle.close.toFixed(2),
         time: showDate,
         date: todayStr,
         target: getTimeAdjustedTarget.target,
         stopLoss: getTimeAdjustedTarget.stopLoss,
         riskReward: getTimeAdjustedTarget.riskReward,
+        stockToken: smartAPISymbol
       };
     }
 
@@ -338,117 +372,114 @@ async function getExpertTimingSignal(symbol, niftyStatus) {
   }
 }
 
-async function getTimeAdjustedTargets(entryPrice, signalType) {
-  const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-  const istTime = new Date(now);
-  const hour = istTime.getHours();
-  const minutes = istTime.getMinutes();
+function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
+    const istString = candleDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+    const istTime   = new Date(istString);
+    const hour      = istTime.getHours();
+    const minutes   = istTime.getMinutes();
 
-  // Minutes remaining until 15:15
-  const minutesLeft = 15 * 60 + 15 - (hour * 60 + minutes);
-  const hoursLeft = minutesLeft / 60;
+    const minutesLeft = (15 * 60 + 15) - (hour * 60 + minutes);
+    const hoursLeft   = minutesLeft / 60;
 
-  // ── TOO LATE TO TRADE ─────────────────────────────────────────────
-  // Never enter a trade with less than 2 hours left in session
-  // Institutional stocks need time to play out
-  if (hoursLeft < 2.0) {
-    return null; // Signal to skip
-  }
+    if (hoursLeft < 2.0) return null;
 
-  // ── OPENING DRIVE — Tighter static RR ────────────────────────────
-  // Reasoning:
-  // - Stock already moved hard in candle 1
-  // - Entry is at candle 3 (9:45) — momentum may slow
-  // - Take quick profit, tight stop
-  // - 1.3% reward / 0.6% risk = RR 1:2.16
-  if (signalType === "OPENING_DRIVE") {
-    if (hoursLeft >= 4.5) {
-      // 9:45 – 10:45 → fresh momentum, slightly wider room
-      return {
-        target: (entryPrice * (1 + 0.012)).toFixed(2), // +1.2%
-        stopLoss: (entryPrice * (1 - 0.007)).toFixed(2), // -0.7%
-        riskReward: "2.2",
-        session: "EARLY DRIVE",
-      };
-    } else if (hoursLeft >= 3.0) {
-      // 10:45 – 12:15 → momentum fading, tighten both sides
-      return {
-        target: (entryPrice * (1 + 0.01)).toFixed(2), // +1.0%
-        stopLoss: (entryPrice * (1 - 0.005)).toFixed(2), // -0.5%
-        riskReward: "2.0",
-        session: "MID DRIVE",
-      };
-    } else {
-      // 12:15 – 13:15 → too late for opening drive logic, skip
-      return null;
+    // ── OPENING DRIVE ─────────────────────────────────────────────
+    // Already in motion by candle 3 (9:45)
+    // Tight RR — quick profit, quick exit
+    // 0.70% target / 0.35% SL = 1:2 RR
+    if (signalType === "OPENING_DRIVE") {
+        if (hoursLeft >= 4.5) {
+            // 9:45–10:45 → fresh momentum
+            return {
+                target: (entryPrice * (1 + 0.0070)).toFixed(2), // +0.70%
+                stopLoss:   (entryPrice * (1 - 0.0035)).toFixed(2), // -0.35%
+                riskReward: "2.0",
+                session:    "EARLY DRIVE"
+            };
+        } else if (hoursLeft >= 3.0) {
+            // 10:45–12:15 → momentum fading
+            return {
+                target: (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
+                stopLoss:  (entryPrice * (1 - 0.0030)).toFixed(2), // -0.30%
+                riskReward: "2.0",
+                session:    "MID DRIVE"
+            };
+        } else {
+            // Too late for opening drive
+            return null;
+        }
     }
-  }
 
-  // ── BREAKOUT — Medium static RR ───────────────────────────────────
-  // Reasoning:
-  // - Clean breakout above morning high + VWAP
-  // - Institutional stocks trend well after breakout
-  // - More room to run vs opening drive
-  if (signalType === "BREAKOUT") {
-    if (hoursLeft >= 4.5) {
-      // Early session — full momentum, wide target
-      return {
-        target: (entryPrice * (1 + 0.012)).toFixed(2), // +1.2%
-        stopLoss: (entryPrice * (1 - 0.007)).toFixed(2), // -0.7%
-        riskReward: "2.9",
-        session: "EARLY BREAKOUT",
-      };
-    } else if (hoursLeft >= 3.0) {
-      // Mid session — moderate target
-      return {
-        target: (entryPrice * (1 + 0.011)).toFixed(2), // +1.1%
-        stopLoss: (entryPrice * (1 - 0.006)).toFixed(2), // -0.6%
-        riskReward: "2.1",
-        session: "MID BREAKOUT",
-      };
-    } else {
-      // Late session — conservative, quick exit
-      return null;
+    // ── BREAKOUT ──────────────────────────────────────────────────
+    // Clean breakout above morning high + VWAP
+    // Keep current RR — needs room to breathe
+    // Institutional stocks trend well after real breakout
+    if (signalType === "BREAKOUT") {
+        if (hoursLeft >= 4.5) {
+            // Early session — full momentum
+            return {
+                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1.0%
+                stopLoss: (entryPrice * (1 - 0.0050)).toFixed(2), // -0.5%
+                riskReward: "1.7",
+                session:    "EARLY BREAKOUT"
+            };
+        } else if (hoursLeft >= 3.0) {
+            // Mid session — moderate target
+            return {
+                target:     (entryPrice * (1 + 0.0100)).toFixed(2), // +1.0%
+                stopLoss:   (entryPrice * (1 - 0.0050)).toFixed(2), // -0.5%
+                riskReward: "1.8",
+                session:    "MID BREAKOUT"
+            };
+        } else {
+            // Late breakout — proven bad (33% WR) → skip
+            return null;
+        }
     }
-  }
 
-  // ── REVERSAL — Tightest static RR ────────────────────────────────
-  // Reasoning:
-  // - VWAP reclaim is counter-trend entry
-  // - Higher failure rate vs breakout
-  // - Tighter stop, quicker target
-  if (signalType === "REVERSAL") {
-    if (hoursLeft >= 4.5) {
-      return {
-        target: (entryPrice * (1 + 0.013)).toFixed(2), // +1.3%
-        stopLoss: (entryPrice * (1 - 0.007)).toFixed(2), // -0.7%
-        riskReward: "1.9",
-        session: "EARLY REVERSAL",
-      };
-    } else if (hoursLeft >= 3.0) {
-      return {
-        target: (entryPrice * (1 + 0.01)).toFixed(2), // +1.0%
-        stopLoss: (entryPrice * (1 - 0.006)).toFixed(2), // -0.6%
-        riskReward: "1.4",
-        session: "MID REVERSAL",
-      };
-    } else {
-      return {
-        target: (entryPrice * (1 + 0.01)).toFixed(2), // +1.0%
-        stopLoss: (entryPrice * (1 - 0.005)).toFixed(2), // -0.5%
-        riskReward: "1.1",
-        session: "LATE REVERSAL",
-      };
+    // ── REVERSAL ──────────────────────────────────────────────────
+    // VWAP reclaim — counter trend entry
+    // Early session VWAP unreliable → tight RR
+    // Mid session VWAP reliable → keep current RR
+    // Late session → tight RR (less time)
+    if (signalType === "REVERSAL") {
+        if (hoursLeft >= 4.5) {
+            // Early session — VWAP not established
+            // Tight RR to protect against fake reclaims
+            return {
+                target:     (entryPrice * (1 + 0.0070)).toFixed(2), // +0.70%
+                stopLoss:   (entryPrice * (1 - 0.0035)).toFixed(2), // -0.35%
+                riskReward: "2.0",
+                session:    "EARLY REVERSAL"
+            };
+        } else if (hoursLeft >= 3.0) {
+            // Mid session — VWAP reliable (72% WR proven)
+            // Keep wider RR — let winners run
+            return {
+                target:     (entryPrice * (1 + 0.0100)).toFixed(2), // +1.00%
+                stopLoss:   (entryPrice * (1 - 0.0050)).toFixed(2), // -0.50%
+                riskReward: "1.8",
+                session:    "MID REVERSAL"
+            };
+        } else {
+            // Late session — less time remaining
+            // Tight RR for quick exit
+            return {
+                target: (entryPrice * (1 + 0.0070)).toFixed(2), // +0.70%
+                stopLoss:   (entryPrice * (1 - 0.0035)).toFixed(2), // -0.35%
+                riskReward: "2.0",
+                session:    "LATE REVERSAL"
+            };
+        }
     }
-  }
 
-  // ── FALLBACK — if signalType not matched ──────────────────────────
-  return {
-    target: (entryPrice * (1 + 0.013)).toFixed(2),
-    stopLoss: (entryPrice * (1 - 0.007)).toFixed(2),
-    riskReward: "1.9",
-    session: "DEFAULT",
-  };
+    // ── FALLBACK ──────────────────────────────────────────────────
+    return {
+        target:     (entryPrice * (1 + 0.0070)).toFixed(2),
+        stopLoss:   (entryPrice * (1 - 0.0035)).toFixed(2),
+        riskReward: "1.7",
+        session:    "DEFAULT"
+    };
 }
 
 // ---------------- DATABASE OPERATION ----------------
@@ -481,7 +512,9 @@ async function insertStock(signal) {
         target: signal.target,
         stopLoss: signal.stopLoss,
         riskReward: signal.riskReward,
+        signalToken : signal.stockToken,
         limitPrice: "0",
+        lots: 0,
         type: signal.type,
         transactiontype: "BUY",
         status: 0, // 0 = Placed, 1 = Executed, 2 = Closed
@@ -503,40 +536,56 @@ async function insertStock(signal) {
 
 // ---------------- ORDER PLACEMENT ----------------
 async function placeStock(signal) {
-  const amount = CONFIG.capital * CONFIG.risk_per_trade;
-  const qty = Math.floor(amount / signal.price);
-  if (qty < 1) {
-    console.log(`⚠️ Qty < 1 for ${signal.symbolKey}. Skipping order.`);
-    return;
-  }
 
-  const limitPrice = (signal.price * 1.003).toFixed(2); // 0.3% buffer
+    const qty = await calculateLots(signal);
 
-  const payload = {
-    variety: "NORMAL",
-    tradingsymbol: `${signal.symbol}-EQ`,
-    symboltoken: Bullish_STOCKS[signal.symbol]?.token,
-    transactiontype: "BUY",
-    exchange: "NSE",
-    ordertype: "LIMIT",
-    producttype: "INTRADAY",
-    duration: "DAY",
-    price: limitPrice.toString(),
-    squareoff: signal.target.toString(),
-    stoploss: signal.stopLoss.toString(),
-    riskReward: signal.riskReward.toString(),
-    quantity: qty.toString(),
-  };
+    if (!qty || qty < 1) {
+      console.log(`⚠️ Qty < 1 for ${signal.symbol}. Skipping.`);
+      return;
+    }
 
-  console.log(
-    `🚀 Placing order for ${signal.symbol}: qty=${qty} @ ₹${limitPrice}`,
-  );
+    const limitPrice    = parseFloat((parseFloat(signal.price) * 1.003).toFixed(2));
+    const squareoffDiff = parseFloat((parseFloat(signal.target)   - limitPrice).toFixed(2));
+    const stoplossDiff  = parseFloat((limitPrice - parseFloat(signal.stopLoss)).toFixed(2));
 
-  // Uncomment to actually place:
-  // const res = await angelClient.post('/rest/secure/angelbroking/order/v1/placeOrder', payload);
-  // if (res.data.status) console.log(`✅ Order placed: ${signal.symbolKey} @ ${limitPrice}`);
+    if (squareoffDiff <= 0 || stoplossDiff <= 0) {
+      console.log(`⚠️ Invalid SL/Target for ${signal.symbol}. Skipping.`);
+      return;
+    }
 
-  console.log(`✅ Order placed: ${signal.symbol} @ ${limitPrice}`);
+    const payload = {
+      variety:          "ROBO",
+      tradingsymbol:    `${signal.symbol}-EQ`,
+      symboltoken:      signal.signalToken,
+      transactiontype:  "BUY",
+      exchange:         "NSE",
+      ordertype:        "LIMIT",
+      producttype:      "INTRADAY",
+      duration:         "DAY",
+      price:            limitPrice.toString(),
+      squareoff:        squareoffDiff.toString(),
+      stoploss:         stoplossDiff.toString(),
+      trailingStopLoss: "0",
+      quantity:         qty.toString(),
+    };
+
+    // const res = await angelClient.post(
+    //   '/rest/secure/angelbroking/order/v1/placeOrder',
+    //   payload
+    // );
+
+    // if (res.data?.status === true) {
+    //   console.log(`✅ Order placed : ${signal.symbol} @ ₹${limitPrice}`);
+    //   console.log(`   Order ID     : ${res.data?.data?.orderid}`);
+    //   console.log(`   Qty          : ${qty}`);
+    //   console.log(`   Target       : ₹${signal.target} (+₹${squareoffDiff})`);
+    //   console.log(`   Stop Loss    : ₹${signal.stopLoss} (-₹${stoplossDiff})`);
+    //   return res.data?.data?.orderid;
+    // } else {
+    //   console.log(`❌ Order failed  : ${signal.symbol}`);
+    //   console.log(`   Reason        : ${res.data?.message || "Unknown"}`);
+    //   return null;
+    // }
 
   //change the status in database
 
@@ -563,9 +612,11 @@ async function placeStock(signal) {
         symbolKey: getStockInfo.Item.symbolKey,
         price: getStockInfo.Item.price,
         target: getStockInfo.Item.target,
+        symboltoken: getStockInfo.Item.symboltoken,
         stopLoss: getStockInfo.Item.stopLoss,
         riskReward: getStockInfo.Item.riskReward,
         type: getStockInfo.Item.type,
+        lots: calculateLot,
         transactiontype: "BUY",
         limitPrice: limitPrice.toString(),
         status: 1, // 0 = Placed, 1 = Executed, 2 = Closed
@@ -574,6 +625,15 @@ async function placeStock(signal) {
       },
     }),
   );
+}
+
+
+
+// ----------------- LOT CALCULATION ----------------
+async function calculateLots(signal) {
+   const amount = (CONFIG.capital * CONFIG.risk_per_trade) / 100;
+   const qty = Math.floor((amount * 5) / signal.price);
+   return qty;
 }
 
 // ================================================================
@@ -631,7 +691,7 @@ export const cron = async () => {
   // ── Step 2: Scan stocks via Yahoo Finance ──────────────────────
   for (const [symbolKey, stockData] of Object.entries(Bullish_STOCKS)) {
     try {
-      const signal = await getExpertTimingSignal(symbolKey, nifty);
+      const signal = await getExpertTimingSignal(symbolKey, nifty, stockData.token);
 
       if (signal.status === "TRIGGERED") {
         console.log(
