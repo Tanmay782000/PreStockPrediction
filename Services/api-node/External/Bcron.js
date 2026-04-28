@@ -281,7 +281,8 @@ const signalType = isOpeningDriveBearishSignal
   : isBreakdown
     ? "BREAKDOWN"
     : "VALUE_LOSS";
-
+      
+      console.log("Signal Type:", signalType);
       // ── Fetch live LTP via SmartAPI (mirrors bullish script) ──────────
       const lastPrice = await getLastPrice(smartAPISymbol);
 
