@@ -1,22 +1,33 @@
 const API_KEY = "Sb43A6sTJNxxMHvtuVOtYAbDr91lbX2cts5JHRvY"; 
 
 const BullStocks = {
- BAJFINANCE:    { token: "", symbol: "BAJFINANCE.NS",    exchange: "NSE" }, // Bajaj Finance
-  BAJAJFINSV:    { token: "", symbol: "BAJAJFINSV.NS",    exchange: "NSE" }, // Bajaj Finserv
-  LICI:          { token: "", symbol: "LICI.NS",          exchange: "NSE" }, // Life Insurance Corporation
-  HDFCLIFE:      { token: "", symbol: "HDFCLIFE.NS",      exchange: "NSE" }, // HDFC Life Insurance
-  SBILIFE:       { token: "", symbol: "SBILIFE.NS",       exchange: "NSE" }, // SBI Life Insurance
-  ICICIPRULI:    { token: "", symbol: "ICICIPRULI.NS",    exchange: "NSE" }, // ICICI Prudential Life
-  ICICIGI:       { token: "", symbol: "ICICIGI.NS",       exchange: "NSE" }, // ICICI Lombard General Insurance
-  SBICARD:       { token: "", symbol: "SBICARD.NS",       exchange: "NSE" }, // SBI Cards
-  CHOLAFIN:      { token: "", symbol: "CHOLAFIN.NS",      exchange: "NSE" }, // Cholamandalam Investment
-  MUTHOOTFIN:    { token: "", symbol: "MUTHOOTFIN.NS",    exchange: "NSE" }, // Muthoot Finance
-  SHRIRAMFIN:    { token: "", symbol: "SHRIRAMFIN.NS",    exchange: "NSE" }, // Shriram Finance
-  PFC:           { token: "", symbol: "PFC.NS",           exchange: "NSE" }, // Power Finance Corporation
-  RECLTD:        { token: "", symbol: "RECLTD.NS",        exchange: "NSE" }, // REC Limited
-  IRFC:          { token: "", symbol: "IRFC.NS",          exchange: "NSE" }, // Indian Railway Finance Corp
-  JIOFIN:        { token: "", symbol: "JIOFIN.NS",        exchange: "NSE" }, // Jio Financial Services
-  BAJAJHLDNG:    { token: "", symbol: "BAJAJHLDNG.NS",    exchange: "NSE" }, // Bajaj Holdings
+TATASTEEL: { token: "", symbol: "TATASTEEL.NS", exchange: "NSE" }, // Metal tailwind but weaker
+TATAPOWER:     { token: "", symbol: "TATAPOWER.NS",     exchange: "NSE" }, // Tata Power
+ADANIPORTS:    { token: "", symbol: "ADANIPORTS.NS",    exchange: "NSE" }, // Adani Ports & SEZ
+ADANIENT:      { token: "", symbol: "ADANIENT.NS",      exchange: "NSE" }, // Adani Enterprises
+COALINDIA:     { token: "", symbol: "COALINDIA.NS",     exchange: "NSE" }, // Coal India
+NESTLEIND:     { token: "", symbol: "NESTLEIND.NS",     exchange: "NSE" }, // Nestle India
+MARICO:        { token: "", symbol: "MARICO.NS",        exchange: "NSE" }, // Marico
+JSWSTEEL:      { token: "", symbol: "JSWSTEEL.NS",      exchange: "NSE" }, // JSW Steel
+BANDHANBNK:    { token: "", symbol: "BANDHANBNK.NS",    exchange: "NSE" }, // Bandhan Bank
+DIVISLAB:      { token: "", symbol: "DIVISLAB.NS",      exchange: "NSE" }, // Divi's Laboratories
+TITAN:         { token: "", symbol: "TITAN.NS",         exchange: "NSE" }, // Titan Company
+  HAVELLS:       { token: "", symbol: "HAVELLS.NS",       exchange: "NSE" }, // Havells India
+  DMART:         { token: "", symbol: "DMART.NS",         exchange: "NSE" }, // Avenue Supermarts (DMart)
+  TRENT:         { token: "", symbol: "TRENT.NS",         exchange: "NSE" }, // Trent
+ TATASTEEL:     { token: "", symbol: "TATASTEEL.NS",     exchange: "NSE" }, // Tata Steel
+  HINDALCO:      { token: "", symbol: "HINDALCO.NS",      exchange: "NSE" }, // Hindalco Industries
+  JSWSTEEL:      { token: "", symbol: "JSWSTEEL.NS",      exchange: "NSE" }, // JSW Steel
+  VEDL:          { token: "", symbol: "VEDL.NS",          exchange: "NSE" }, // Vedanta
+  SAIL:          { token: "", symbol: "SAIL.NS",          exchange: "NSE" }, // Steel Authority of India
+   MARUTI:        { token: "", symbol: "MARUTI.NS",        exchange: "NSE" }, // Maruti Suzuki
+  TATAMOTORS:    { token: "", symbol: "TMPV.NS",          exchange: "NSE" }, // Tata Motors
+  M_M:           { token: "", symbol: "M&M.NS",           exchange: "NSE" }, // Mahindra & Mahindra
+  BAJAJ_AUTO:    { token: "", symbol: "BAJAJ-AUTO.NS",    exchange: "NSE" }, // Bajaj Auto
+  HEROMOTOCO:    { token: "", symbol: "HEROMOTOCO.NS",    exchange: "NSE" }, // Hero MotoCorp
+  EICHERMOT:     { token: "", symbol: "EICHERMOT.NS",     exchange: "NSE" }, // Eicher Motors
+  TVSMOTORS:     { token: "", symbol: "TVSMOTOR.NS",      exchange: "NSE" }, // TVS Motor
+  BOSCHLTD:      { token: "", symbol: "BOSCHLTD.NS",      exchange: "NSE" }, // Bosch Ltd
 };
 
 async function fetchNewsForStock(symbol) {

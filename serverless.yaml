@@ -198,11 +198,26 @@ resources:
           - AttributeName: stockId
             KeyType: HASH
 
-  # Actual placing the stock
+  # Actual placing the stock for bull and bear
     PlacedStocksTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: PlacedStocks
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: symbolKey
+            AttributeType: S
+
+        KeySchema:
+          - AttributeName: symbolKey
+            KeyType: HASH
+  
+  # Testing for the bear market only
+    BearPlacedStocksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: BearPlacedStocks
         BillingMode: PAY_PER_REQUEST
 
         AttributeDefinitions:

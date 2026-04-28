@@ -141,23 +141,33 @@ export const Bullish_SYMBOL_MAP = {
 };
 
 export const BullStocks = {
- HINDALCO: { token: "", symbol: "HINDALCO.NS", exchange: "NSE" }, // Strong metal momentum + highest sentiment
-  SIEMENS: { token: "", symbol: "SIEMENS.NS", exchange: "NSE" }, // RSI up + OI build
-  DRREDDY: { token: "", symbol: "DRREDDY.NS", exchange: "NSE" }, // Positive trigger + defensive pharma
-  CIPLA: { token: "", symbol: "CIPLA.NS", exchange: "NSE" }, // Pharma strength, slightly mixed
-  JSWSTEEL: { token: "", symbol: "JSWSTEEL.NS", exchange: "NSE" }, // JV news, medium momentum
   TATASTEEL: { token: "", symbol: "TATASTEEL.NS", exchange: "NSE" }, // Metal tailwind but weaker
-  PFC: { token: "", symbol: "PFC.NS", exchange: "NSE" }, // Neutral-positive, infra theme
-  ICICIBANK: { symbol: "ICICIBANK.NS" },   // Strong results + highest positive sentiment
-  HDFCBANK: { symbol: "HDFCBANK.NS" },     // Good earnings + stable but slower
-  SBIN: { symbol: "SBIN.NS" },             // Positive macro tailwinds (RBI actions, sentiment high)
-  AXISBANK: { symbol: "AXISBANK.NS" },     // Earnings + moderate sentiment
-  PNB: { symbol: "PNB.NS" },               // Positive product/news flow + strong sentiment spike
-  ICICIPRULI: { token: "", symbol: "ICICIPRULI.NS", exchange: "NSE" }, // Strong consistent positive sentiment (0.9+, multiple)
-MUTHOOTFIN: { token: "", symbol: "MUTHOOTFIN.NS", exchange: "NSE" }, // Strong rally + good sentiment mix
-SBICARD: { token: "", symbol: "SBICARD.NS", exchange: "NSE" }, // High sentiment (0.84+), improving fundamentals
-CHOLAFIN: { token: "", symbol: "CHOLAFIN.NS", exchange: "NSE" }, // Net positive despite some noise
-HDFCLIFE: { token: "", symbol: "HDFCLIFE.NS", exchange: "NSE" }, // Decent positive bias overall
+  TATAPOWER: { token: "", symbol: "TATAPOWER.NS", exchange: "NSE" }, // Tata Power
+  ADANIPORTS: { token: "", symbol: "ADANIPORTS.NS", exchange: "NSE" }, // Adani Ports & SEZ
+  ADANIENT: { token: "", symbol: "ADANIENT.NS", exchange: "NSE" }, // Adani Enterprises
+  COALINDIA: { token: "", symbol: "COALINDIA.NS", exchange: "NSE" }, // Coal India
+  NESTLEIND: { token: "", symbol: "NESTLEIND.NS", exchange: "NSE" }, // Nestle India
+  MARICO: { token: "", symbol: "MARICO.NS", exchange: "NSE" }, // Marico
+  JSWSTEEL: { token: "", symbol: "JSWSTEEL.NS", exchange: "NSE" }, // JSW Steel
+  BANDHANBNK: { token: "", symbol: "BANDHANBNK.NS", exchange: "NSE" }, // Bandhan Bank
+  DIVISLAB: { token: "", symbol: "DIVISLAB.NS", exchange: "NSE" }, // Divi's Laboratories
+  TITAN: { token: "", symbol: "TITAN.NS", exchange: "NSE" }, // Titan Company
+  HAVELLS: { token: "", symbol: "HAVELLS.NS", exchange: "NSE" }, // Havells India
+  DMART: { token: "", symbol: "DMART.NS", exchange: "NSE" }, // Avenue Supermarts (DMart)
+  TRENT: { token: "", symbol: "TRENT.NS", exchange: "NSE" }, // Trent
+  TATASTEEL: { token: "", symbol: "TATASTEEL.NS", exchange: "NSE" }, // Tata Steel
+  HINDALCO: { token: "", symbol: "HINDALCO.NS", exchange: "NSE" }, // Hindalco Industries
+  JSWSTEEL: { token: "", symbol: "JSWSTEEL.NS", exchange: "NSE" }, // JSW Steel
+  VEDL: { token: "", symbol: "VEDL.NS", exchange: "NSE" }, // Vedanta
+  SAIL: { token: "", symbol: "SAIL.NS", exchange: "NSE" }, // Steel Authority of India
+  MARUTI: { token: "", symbol: "MARUTI.NS", exchange: "NSE" }, // Maruti Suzuki
+  TATAMOTORS: { token: "", symbol: "TMPV.NS", exchange: "NSE" }, // Tata Motors
+  M_M: { token: "", symbol: "M&M.NS", exchange: "NSE" }, // Mahindra & Mahindra
+  BAJAJ_AUTO: { token: "", symbol: "BAJAJ-AUTO.NS", exchange: "NSE" }, // Bajaj Auto
+  HEROMOTOCO: { token: "", symbol: "HEROMOTOCO.NS", exchange: "NSE" }, // Hero MotoCorp
+  EICHERMOT: { token: "", symbol: "EICHERMOT.NS", exchange: "NSE" }, // Eicher Motors
+  TVSMOTORS: { token: "", symbol: "TVSMOTOR.NS", exchange: "NSE" }, // TVS Motor
+  BOSCHLTD: { token: "", symbol: "BOSCHLTD.NS", exchange: "NSE" }, // Bosch Ltd
 };
 
 export const Bearish_SYMBOL_MAP = {
@@ -304,7 +314,37 @@ export const Bearish_SYMBOL_MAP = {
 };
 
 export const BearStocks = {
-  PERSISTENT: { token: "", symbol: "PERSISTENT.NS", exchange: "NSE" }, 
-  TECHM:         { token: "", symbol: "TECHM.NS",         exchange: "NSE" },
-  HEROMOTOCO:    { token: "", symbol: "HEROMOTOCO.NS",    exchange: "NSE" },
+   // ── Financials (Banks - Private) ─────────────────────────────
+  HDFCBANK:      { token: "", symbol: "HDFCBANK.NS",      exchange: "NSE" }, // HDFC Bank
+  ICICIBANK:     { token: "", symbol: "ICICIBANK.NS",     exchange: "NSE" }, // ICICI Bank
+  KOTAKBANK:     { token: "", symbol: "KOTAKBANK.NS",     exchange: "NSE" }, // Kotak Mahindra Bank
+  AXISBANK:      { token: "", symbol: "AXISBANK.NS",      exchange: "NSE" }, // Axis Bank
+   INDUSINDBK:    { token: "", symbol: "INDUSINDBK.NS",    exchange: "NSE" }, // IndusInd Bank
+  BANDHANBNK:    { token: "", symbol: "BANDHANBNK.NS",    exchange: "NSE" }, // Bandhan Bank
+  IDFCFIRSTB:    { token: "", symbol: "IDFCFIRSTB.NS",    exchange: "NSE" }, // IDFC First Bank
+
+  // ── Financials (Banks - Public) ──────────────────────────────
+   SBIN:          { token: "", symbol: "SBIN.NS",          exchange: "NSE" }, // State Bank of India
+  BANKBARODA:    { token: "", symbol: "BANKBARODA.NS",    exchange: "NSE" }, // Bank of Baroda
+  PNB:           { token: "", symbol: "PNB.NS",           exchange: "NSE" }, // Punjab National Bank
+  CANBK:         { token: "", symbol: "CANBK.NS",         exchange: "NSE" }, // Canara Bank
+  UNIONBANK:     { token: "", symbol: "UNIONBANK.NS",     exchange: "NSE" }, // Union Bank of India
+
+  // ── Financials (NBFCs & Financial Services) ──────────────────
+  BAJFINANCE:    { token: "", symbol: "BAJFINANCE.NS",    exchange: "NSE" }, // Bajaj Finance
+  BAJAJFINSV:    { token: "", symbol: "BAJAJFINSV.NS",    exchange: "NSE" }, // Bajaj Finserv
+  LICI:          { token: "", symbol: "LICI.NS",          exchange: "NSE" }, // Life Insurance Corporation
+  HDFCLIFE:      { token: "", symbol: "HDFCLIFE.NS",      exchange: "NSE" }, // HDFC Life Insurance
+  SBILIFE:       { token: "", symbol: "SBILIFE.NS",       exchange: "NSE" }, // SBI Life Insurance
+  ICICIPRULI:    { token: "", symbol: "ICICIPRULI.NS",    exchange: "NSE" }, // ICICI Prudential Life
+  ICICIGI:       { token: "", symbol: "ICICIGI.NS",       exchange: "NSE" }, // ICICI Lombard General Insurance
+  SBICARD:       { token: "", symbol: "SBICARD.NS",       exchange: "NSE" }, // SBI Cards
+  CHOLAFIN:      { token: "", symbol: "CHOLAFIN.NS",      exchange: "NSE" }, // Cholamandalam Investment
+  MUTHOOTFIN:    { token: "", symbol: "MUTHOOTFIN.NS",    exchange: "NSE" }, // Muthoot Finance
+  SHRIRAMFIN:    { token: "", symbol: "SHRIRAMFIN.NS",    exchange: "NSE" }, // Shriram Finance
+  PFC:           { token: "", symbol: "PFC.NS",           exchange: "NSE" }, // Power Finance Corporation
+  RECLTD:        { token: "", symbol: "RECLTD.NS",        exchange: "NSE" }, // REC Limited
+  IRFC:          { token: "", symbol: "IRFC.NS",          exchange: "NSE" }, // Indian Railway Finance Corp
+  JIOFIN:        { token: "", symbol: "JIOFIN.NS",        exchange: "NSE" }, // Jio Financial Services
+  BAJAJHLDNG:    { token: "", symbol: "BAJAJHLDNG.NS",    exchange: "NSE" }, // Bajaj Holdings
 };

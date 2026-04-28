@@ -6,14 +6,14 @@ import { BearStocks } from "../Common/stockInfo.js";
 
 const yf = new yahooFinance();
 
-const PlaceStocks = process.env.PlacedStocksTable;
+const PlaceStocks = process.env.BearPlacedStocksTable;
 const Barish_STOCKS = BearStocks;
 // ---------------- CONFIGURATION ----------------
 const CONFIG = {
   apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
   jwtToken:
     process.env.Smart_API_JWT_TOKEN ??
-    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056TTBPRE0wT1N3aWJtSm1Jam94TnpjM01qWXhOelk1TENKcFlYUWlPakUzTnpjeU5qRTNOamtzSW1wMGFTSTZJakV6TUROaE1tWXdMV0V4WkRZdE5HSmlOaTA1TUdNMUxUTmxNemRtWVRJNU9HVmlPQ0lzSWxSdmEyVnVJam9pSW4wLlN1LXI2dC1aTFBuOEsxalJvcHNsX29NeXpkTDh1cjlndUx6MW1uU3MwU3ktUmhodzZKTXVtM2MxWDc1MFdvUENieS1kdmE2MFR1WU9rYU4wWmM2dmtxdmk4dEQ3bEx2NS16MWM0TGlzUzl3TEJpaVc3YkJpZjlxdzlyQzhSUEVuQjVaaGFNVVJacFotUFlYNVVvSHc3Y2Q3OXVYeFgtWHdSYUpwd2NoV1N1USIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzcyNjE5NDksImV4cCI6MTc3NzMxNDYwMH0.aKTKeLdv6VgT86FYMEVziTCP3wpRaOuG2BSHJ5eR9nyZYvRU97mFiqS8lfwJTOucjezS4ETnrzH5FnxjbppvTw",
+    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194",
   localIP: process.env.Smart_API_LocalIP ?? "127.0.0.1",
   capital: process.env.Capital ?? 100000,
@@ -146,11 +146,11 @@ async function getLastPrice(symboltoken, exchange = "NSE") {
 // ================================================================
 async function getBearishExpertSignal(symbol, niftyStatus, smartAPISymbol) {
   try {
-    console.log("niftyStatus & Symbol", niftyStatus, symbol);
+    console.log("By Passing Nifty Filter", niftyStatus, symbol,smartAPISymbol);
 
-    if (!niftyStatus.isBearish) {
-      return { status: "WAITING", reason: "Nifty Bullish/Strong" };
-    }
+    // if (!niftyStatus.isBearish) {
+    //   return { status: "WAITING", reason: "Nifty Bullish/Strong" };
+    // }
 
     const intradayData = await yf.chart(`${symbol}.NS`, {
       period1: Math.floor(Date.now() / 1000) - 48 * 60 * 60,
@@ -228,14 +228,9 @@ for (let k = 0; k <= lastIdx; k++) {
     const firstBodyRatio = firstRange > 0 ? firstBody / firstRange : 0;
 
     const isOpeningDriveBearish =
-      historicalAvgVol > 0 &&
-      firstCandle.close < firstCandle.open &&
-      firstBodyRatio > 0.6 &&
-      firstCandle.volume > historicalAvgVol * 2.0 &&
-      secondCandle.close < secondCandle.open &&
-      lastCandle.close < lastCandle.open &&
-      lastCandle.close < stockVWAP &&
-      lastCandle.close < firstCandle.open;
+          firstCandle.close < firstCandle.open &&        // first candle is red
+          firstCandle.volume > historicalAvgVol * 1.5 && // above average volume
+          lastCandle.close < firstCandle.open;            // still holding below open
 
     // ── REGULAR BEARISH CONDITIONS ────────────────────────────────────
     const morningRange =
@@ -352,15 +347,15 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
   if (signalType === "OPENING_DRIVE") {
     if (hoursLeft >= 4.5) {
       return {
-        target:     (entryPrice * (1 - 0.0070)).toFixed(2), // -0.70%
-        stopLoss:   (entryPrice * (1 + 0.0035)).toFixed(2), // +0.35%
+        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
+        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
         riskReward: "2.0",
         session:    "EARLY DRIVE",
       };
     } else if (hoursLeft >= 3.0) {
       return {
-        target:     (entryPrice * (1 - 0.0060)).toFixed(2), // -0.60%
-        stopLoss:   (entryPrice * (1 + 0.0030)).toFixed(2), // +0.30%
+        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
+        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
         riskReward: "2.0",
         session:    "MID DRIVE",
       };
@@ -374,15 +369,15 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
   if (signalType === "BREAKDOWN") {
     if (hoursLeft >= 4.5) {
       return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.00%
-        stopLoss:   (entryPrice * (1 + 0.0050)).toFixed(2), // +0.50%
+        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
+        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
         riskReward: "1.7",
         session:    "EARLY BREAKDOWN",
       };
     } else if (hoursLeft >= 3.0) {
       return {
-        target:     (entryPrice * (1 - 0.0080)).toFixed(2), // -0.80%
-        stopLoss:   (entryPrice * (1 + 0.0040)).toFixed(2), // +0.40%
+        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
+        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
         riskReward: "1.8",
         session:    "MID BREAKDOWN",
       };
@@ -396,22 +391,22 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
   if (signalType === "VALUE_LOSS") {
     if (hoursLeft >= 4.5) {
       return {
-        target:     (entryPrice * (1 - 0.0070)).toFixed(2), // -0.70%
-        stopLoss:   (entryPrice * (1 + 0.0035)).toFixed(2), // +0.35%
+        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
+        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
         riskReward: "2.0",
         session:    "EARLY VALUE LOSS",
       };
     } else if (hoursLeft >= 3.0) {
       return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.00%
-        stopLoss:   (entryPrice * (1 + 0.0050)).toFixed(2), // +0.50%
+        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
+        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
         riskReward: "1.8",
         session:    "MID VALUE LOSS",
       };
     } else {
       return {
-        target:     (entryPrice * (1 - 0.0070)).toFixed(2), // -0.70%
-        stopLoss:   (entryPrice * (1 + 0.0035)).toFixed(2), // +0.35%
+        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
+        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
         riskReward: "2.0",
         session:    "LATE VALUE LOSS",
       };
@@ -430,7 +425,7 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
 // ---------------- DATABASE OPERATION ----------------
 async function insertStock(signal) {
   const getStocks = await client.send(
-    new ScanCommand({ TableName: PlaceStocks ?? "PlacedStocks" }),
+    new ScanCommand({ TableName: PlaceStocks ?? "BearPlacedStocks" }),
   );
 
   if (getStocks.Items.length >= 2) {
@@ -454,7 +449,7 @@ async function insertStock(signal) {
 
   const isInserted = await client.send(
     new PutCommand({
-      TableName: PlaceStocks ?? "PlacedStocks",
+      TableName: PlaceStocks ?? "BearPlacedStocks",
       Item: {
         symbolKey: signal.symbol,
         price: signal.price,
@@ -539,7 +534,7 @@ async function placeStock(signal) {
   // ── Update DB status to Executed (1) ──────────────────────────
   const getStockInfo = await client.send(
     new GetCommand({
-      TableName: PlaceStocks ?? "PlacedStocks",
+      TableName: PlaceStocks ?? "BearPlacedStocks",
       Key: { symbolKey: signal.symbol },
     }),
   );
@@ -555,7 +550,7 @@ async function placeStock(signal) {
 
   await client.send(
     new PutCommand({
-      TableName: PlaceStocks ?? "PlacedStocks",
+      TableName: PlaceStocks ?? "BearPlacedStocks",
       Item: {
         symbolKey:       getStockInfo.Item.symbolKey,
         price:           getStockInfo.Item.price,

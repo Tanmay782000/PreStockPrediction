@@ -14,7 +14,7 @@ const CONFIG = {
   apiKey: process.env.Smart_API_KEY ?? "uVNH5DtC",
   jwtToken:
     process.env.Smart_API_JWT_TOKEN ??
-    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056TTBPRE0wT1N3aWJtSm1Jam94TnpjM01qWXhOelk1TENKcFlYUWlPakUzTnpjeU5qRTNOamtzSW1wMGFTSTZJakV6TUROaE1tWXdMV0V4WkRZdE5HSmlOaTA1TUdNMUxUTmxNemRtWVRJNU9HVmlPQ0lzSWxSdmEyVnVJam9pSW4wLlN1LXI2dC1aTFBuOEsxalJvcHNsX29NeXpkTDh1cjlndUx6MW1uU3MwU3ktUmhodzZKTXVtM2MxWDc1MFdvUENieS1kdmE2MFR1WU9rYU4wWmM2dmtxdmk4dEQ3bEx2NS16MWM0TGlzUzl3TEJpaVc3YkJpZjlxdzlyQzhSUEVuQjVaaGFNVVJacFotUFlYNVVvSHc3Y2Q3OXVYeFgtWHdSYUpwd2NoV1N1USIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzcyNjE5NDksImV4cCI6MTc3NzMxNDYwMH0.aKTKeLdv6VgT86FYMEVziTCP3wpRaOuG2BSHJ5eR9nyZYvRU97mFiqS8lfwJTOucjezS4ETnrzH5FnxjbppvTw",
+    "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
   publicIP: process.env.Smart_API_PublicIP ?? "45.114.212.194", // From your earlier whitelisting screenshot
   localIP: process.env.Smart_API_LocalIP ?? "127.0.0.1",
   capital: process.env.Capital ?? 100000,
@@ -194,10 +194,10 @@ async function getLastPrice(symboltoken, exchange = "NSE") {
 // ================================================================
 async function getExpertTimingSignal(symbol, niftyStatus, smartAPISymbol) {
   try {
-    console.log("niftyStatus & Symbol", niftyStatus, symbol);
-    if (!niftyStatus.isBullish) {
-      return { status: "WAITING", reason: "Nifty Bearish/Weak" };
-    }
+    console.log("By Passing Nifty Filter", niftyStatus, symbol,smartAPISymbol);
+    // if (!niftyStatus.isBullish) {
+    //   return { status: "WAITING", reason: "Nifty Bearish/Weak" };
+    // }
 
     const intradayData = await yf.chart(`${symbol}.NS`, {
       period1: Math.floor(Date.now() / 1000) - 48 * 60 * 60,
@@ -308,14 +308,9 @@ for (let k = 0; k <= lastIdx; k++) {
     const firstBodyRatio = firstRange > 0 ? firstBody / firstRange : 0;
 
     const isOpeningDrive =
-      historicalAvgVol > 0 && // have historical data
-      firstCandle.close > firstCandle.open && // FIX 4: candle 1 green
-      firstBodyRatio > 0.6 && // strong body, not doji
-      firstCandle.volume > historicalAvgVol * 2.0 && // 2x historical volume
-      secondCandle.close > secondCandle.open && // FIX 5: candle 2 green (holding)
-      lastCandle.close > lastCandle.open && // FIX 6: lastCandle also green
-      lastCandle.close > stockVWAP && // still above VWAP
-      lastCandle.close > firstCandle.open; // holding above opening price
+          firstCandle.close > firstCandle.open &&        // first candle is green
+          firstCandle.volume > historicalAvgVol * 1.5 && // above average volume
+          lastCandle.close > firstCandle.open;            // still holding above open
 
     // ── FIX 7: isOpeningDriveSignal also needs isBullishCandle ────────
     const isRegularSignal =
@@ -335,7 +330,7 @@ for (let k = 0; k <= lastIdx; k++) {
         : isOpeningDriveSignal
           ? "OPENING_DRIVE"
           : "REVERSAL";
-
+      console.log("Signal Type:", signalType);  
       const lastPrice = await getLastPrice(smartAPISymbol);
 
       if(lastPrice == null || lastPrice == undefined || lastPrice == 0) 
@@ -397,16 +392,16 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
         if (hoursLeft >= 4.5) {
             // 9:45–10:45 → fresh momentum
             return {
-                target: (entryPrice * (1 + 0.0070)).toFixed(2), // +0.70%
-                stopLoss:   (entryPrice * (1 - 0.0035)).toFixed(2), // -0.35%
+                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1%
+                stopLoss:   (entryPrice * (1 - 0.0060)).toFixed(2), // -0.60%
                 riskReward: "2.0",
                 session:    "EARLY DRIVE"
             };
         } else if (hoursLeft >= 3.0) {
             // 10:45–12:15 → momentum fading
             return {
-                target: (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
-                stopLoss:  (entryPrice * (1 - 0.0030)).toFixed(2), // -0.30%
+                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1%
+                stopLoss:   (entryPrice * (1 - 0.0060)).toFixed(2), // -0.60%
                 riskReward: "2.0",
                 session:    "MID DRIVE"
             };
@@ -424,16 +419,16 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
         if (hoursLeft >= 4.5) {
             // Early session — full momentum
             return {
-                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1.0%
-                stopLoss: (entryPrice * (1 - 0.0050)).toFixed(2), // -0.5%
+                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1%
+                stopLoss:   (entryPrice * (1 - 0.0060)).toFixed(2), // -0.60%
                 riskReward: "1.7",
                 session:    "EARLY BREAKOUT"
             };
         } else if (hoursLeft >= 3.0) {
             // Mid session — moderate target
             return {
-                target:     (entryPrice * (1 + 0.0080)).toFixed(2), // +0.8%
-                stopLoss:   (entryPrice * (1 - 0.0040)).toFixed(2), // -0.4%
+                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1%
+                stopLoss:   (entryPrice * (1 - 0.0060)).toFixed(2), // -0.60%
                 riskReward: "1.8",
                 session:    "MID BREAKOUT"
             };
@@ -453,8 +448,8 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
             // Early session — VWAP not established
             // Tight RR to protect against fake reclaims
             return {
-                target:     (entryPrice * (1 + 0.0070)).toFixed(2), // +0.70%
-                stopLoss:   (entryPrice * (1 - 0.0035)).toFixed(2), // -0.35%
+                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1%
+                stopLoss:   (entryPrice * (1 - 0.0060)).toFixed(2), // -0.60%
                 riskReward: "2.0",
                 session:    "EARLY REVERSAL"
             };
@@ -462,8 +457,8 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
             // Mid session — VWAP reliable (72% WR proven)
             // Keep wider RR — let winners run
             return {
-                target:     (entryPrice * (1 + 0.0100)).toFixed(2), // +1.00%
-                stopLoss:   (entryPrice * (1 - 0.0050)).toFixed(2), // -0.50%
+                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1%
+                stopLoss:   (entryPrice * (1 - 0.0060)).toFixed(2), // -0.60%
                 riskReward: "1.8",
                 session:    "MID REVERSAL"
             };
@@ -471,8 +466,8 @@ async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
             // Late session — less time remaining
             // Tight RR for quick exit
             return {
-                target: (entryPrice * (1 + 0.0070)).toFixed(2), // +0.70%
-                stopLoss:   (entryPrice * (1 - 0.0035)).toFixed(2), // -0.35%
+                target: (entryPrice * (1 + 0.0100)).toFixed(2), // +1%
+                stopLoss:   (entryPrice * (1 - 0.0060)).toFixed(2), // -0.60%
                 riskReward: "2.0",
                 session:    "LATE REVERSAL"
             };

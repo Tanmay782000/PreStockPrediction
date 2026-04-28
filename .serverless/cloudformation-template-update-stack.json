@@ -302,6 +302,25 @@
           }
         ]
       }
+    },
+    "BearPlacedStocksTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "BearPlacedStocks",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "symbolKey",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "symbolKey",
+            "KeyType": "HASH"
+          }
+        ]
+      }
     }
   },
   "Outputs": {
