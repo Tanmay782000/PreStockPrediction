@@ -4,7 +4,7 @@ import { BearStocks } from '../../Common/stockInfo.js';
 const yf = new yahooFinance();
 
 // ── 2-day spot-check mode (change to SIXTY_DAYS_MS for full backtest) ──
-const TWO_DAYS_MS  = 4 * 24 * 60 * 60 * 1000;
+const TWO_DAYS_MS  = 2 * 24 * 60 * 60 * 1000;
 const FIVE_DAYS_MS = 5 * 24 * 60 * 60 * 1000; // enough to get yesterday's daily close
 const START_DATE_DAILY = Math.floor((Date.now() - FIVE_DAYS_MS)  / 1000);
 const START_DATE_15M   = Math.floor((Date.now() - TWO_DAYS_MS)   / 1000);

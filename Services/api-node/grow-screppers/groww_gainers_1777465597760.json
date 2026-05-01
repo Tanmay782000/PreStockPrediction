@@ -1,0 +1,806 @@
+{
+  "scrapedAt": "2026-04-29T12:26:37.760Z",
+  "count": 100,
+  "stocks": [
+    {
+      "name": "Vedanta Results today ₹773.60 34.30 (4.64%) 5,47,38,724",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Tech Mahindra ₹1,459.80 51.70 (3.67%) 33,34,783",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Lodha Developers In news ₹912.70 29.80 (3.38%) 47,34,976",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Mazagon Dock Shipbuilders ₹2,769.70 86.40 (3.22%) 49,24,360",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Maruti Suzuki India Results yesterday ₹13,257.00 365.00 (2.83%) 7,54,798",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Coal India In news ₹479.90 12.90 (2.76%) 1,80,63,862",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Reliance Industries In news ₹1,425.40 36.50 (2.63%) 3,05,42,143",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bharti Airtel ₹1,888.10 44.30 (2.40%) 77,13,013",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Siemens Energy India ₹3,310.00 76.30 (2.36%) 9,22,444",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Mahindra & Mahindra ₹3,152.30 64.20 (2.08%) 39,17,359",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Sun Pharmaceutical Industries ₹1,778.70 31.40 (1.80%) 98,09,449",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Nestle India ₹1,465.60 25.60 (1.78%) 27,53,356",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Tata Consumer Products ₹1,168.00 20.30 (1.77%) 13,46,355",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Eicher Motors ₹7,189.50 118.00 (1.67%) 5,22,596",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "TVS Motor Company ₹3,553.90 58.00 (1.66%) 7,53,712",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Divi's Laboratories ₹6,534.00 101.50 (1.58%) 3,24,770",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Larsen & Toubro In news ₹4,096.10 58.40 (1.45%) 21,75,030",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Adani Ports and Special Economic Zone In news ₹1,661.10 23.50 (1.44%) 23,45,365",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Infosys In news ₹1,167.50 15.40 (1.34%) 83,03,109",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Tata Consultancy Services In news ₹2,474.70 30.00 (1.23%) 28,35,961",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Torrent Pharmaceuticals ₹4,231.50 48.60 (1.16%) 2,22,082",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Cholamandalam Investment & Finance Company ₹1,553.30 16.90 (1.10%) 7,23,397",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Hindustan Unilever In news ₹2,314.40 24.90 (1.09%) 17,78,765",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Avenue Supermarts ₹4,593.40 49.00 (1.08%) 2,99,310",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Kotak Mahindra Bank ₹382.00 4.05 (1.07%) 79,13,344",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "HDFC Asset Management Company ₹2,787.90 27.70 (1.00%) 8,32,683",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Varun Beverages ₹523.10 4.55 (0.88%) 99,73,200",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Cipla ₹1,317.60 11.10 (0.85%) 9,86,556",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Britannia Industries ₹5,709.00 47.00 (0.83%) 3,63,567",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Grasim Industries ₹2,803.20 20.20 (0.73%) 9,76,666",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "HDFC Life Insurance Company ₹594.40 4.25 (0.72%) 68,69,287",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bajaj Finance Results today ₹930.00 6.35 (0.69%) 54,38,997",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bajaj Holdings & Investment ₹10,305.50 59.00 (0.58%) 23,745",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Axis Bank In news ₹1,296.40 7.40 (0.57%) 62,28,275",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Cummins India ₹5,288.00 30.00 (0.57%) 3,28,892",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Adani Enterprises In news ₹2,425.90 13.50 (0.56%) 46,56,967",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Tata Motors Passenger Vehicles In news ₹352.70 1.90 (0.54%) 1,05,81,537",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Titan Company ₹4,439.80 22.80 (0.52%) 7,02,730",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bajaj Auto In news ₹9,543.50 48.00 (0.51%) 2,61,656",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Solar Industries India ₹15,377.00 73.00 (0.48%) 1,17,051",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "SBI Life Insurance Company ₹1,816.20 7.90 (0.44%) 14,31,080",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Power Grid Corporation Of India ₹320.35 1.35 (0.42%) 1,03,72,929",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bharat Electronics ₹437.55 1.80 (0.41%) 95,07,163",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Tata Steel ₹215.88 0.83 (0.39%) 3,28,00,573",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Eternal Results yesterday ₹254.03 0.96 (0.38%) 15,21,37,971",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Shriram Finance ₹956.85 3.60 (0.38%) 58,29,309",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "HCL Technologies ₹1,200.20 4.20 (0.35%) 47,77,201",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Hindustan Aeronautics ₹4,351.60 10.20 (0.23%) 9,07,743",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Max Healthcare Institute ₹1,006.60 1.85 (0.18%) 18,70,409",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bank of Baroda In news ₹268.25 0.42 (0.16%) 59,19,525",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "UltraTech Cement ₹11,833.00 16.00 (0.14%) 3,61,932",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Oil & Natural Gas Corporation ₹301.40 0.10 (0.03%) 2,72,67,649",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Godfrey Phillips India ₹2,275.30 159.20 (7.52%) 39,26,006",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Cochin Shipyard ₹1,773.80 78.20 (4.61%) 67,25,966",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Vodafone Idea ₹10.29 0.34 (3.42%) 60,53,75,435",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "IndusInd Bank ₹913.75 28.20 (3.18%) 34,85,256",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Aditya Birla Capital ₹348.45 10.15 (3.00%) 67,56,111",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Multi Commodity Exchange of India In news ₹2,968.30 70.30 (2.43%) 26,98,924",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Mahindra & Mahindra Financial Services ₹320.20 7.55 (2.41%) 84,92,814",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Prestige Estates Projects ₹1,433.70 31.10 (2.22%) 3,91,078",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "LIC Housing Finance ₹562.15 12.15 (2.21%) 24,35,923",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "IDFC First Bank ₹70.15 1.44 (2.10%) 3,59,95,299",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Godrej Properties ₹1,862.30 37.70 (2.07%) 8,60,344",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Exide Industries ₹363.45 7.20 (2.02%) 48,99,239",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Radico Khaitan ₹3,458.50 59.30 (1.74%) 3,08,361",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Phoenix Mills ₹1,790.30 28.40 (1.61%) 6,80,047",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Yes Bank ₹20.27 0.30 (1.50%) 12,75,92,848",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Laurus Labs ₹1,106.10 15.65 (1.44%) 17,47,114",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Waaree Energies Results today ₹3,502.90 49.30 (1.43%) 19,61,068",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Dabur India ₹456.00 5.85 (1.30%) 10,78,626",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Oracle Financial Services Software ₹9,688.00 118.00 (1.23%) 4,73,232",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Indian Railway Catering & Tourism Corporation ₹550.10 6.25 (1.15%) 13,48,964",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "LG Electronics India ₹1,627.00 18.30 (1.14%) 4,95,651",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "PolicyBazaar - PB Fintech Ltd. ₹1,684.30 16.90 (1.01%) 8,75,557",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Supreme Industries ₹3,667.30 35.40 (0.97%) 3,24,795",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Hero MotoCorp ₹5,114.50 46.50 (0.92%) 4,74,261",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "NMDC ₹91.73 0.83 (0.91%) 2,70,64,617",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Container Corporation of India ₹514.60 4.10 (0.80%) 13,48,894",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Housing & Urban Development Corporation ₹216.70 1.65 (0.77%) 44,80,936",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "KPIT Technologies ₹740.05 5.60 (0.76%) 12,72,977",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Bharat Forge ₹1,907.80 13.00 (0.69%) 17,52,427",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Jubilant FoodWorks ₹485.40 3.00 (0.62%) 25,49,457",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "SBI Cards And Payment Services ₹651.20 3.75 (0.58%) 19,35,617",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Patanjali Foods ₹466.30 2.45 (0.53%) 15,82,925",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Adani Total Gas ₹656.95 3.10 (0.47%) 50,57,512",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Glenmark Pharmaceuticals ₹2,413.90 10.20 (0.42%) 6,16,900",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Tata Elxsi ₹4,148.40 16.80 (0.41%) 2,82,871",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Lupin ₹2,311.40 8.70 (0.38%) 7,06,510",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Colgate-Palmolive (India) ₹2,132.50 7.30 (0.34%) 3,91,370",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Motilal Oswal Financial Services Results today ₹784.95 2.25 (0.29%) 19,25,107",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Steel Authority Of India In news ₹186.16 0.53 (0.29%) 2,55,68,031",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "BSE In news ₹3,635.70 9.60 (0.26%) 26,58,476",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Coforge ₹1,204.00 3.10 (0.26%) 11,74,935",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Astral ₹1,552.80 3.90 (0.25%) 8,03,166",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Hitachi Energy India ₹32,885.00 80.00 (0.24%) 95,678",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Tata Communications ₹1,602.20 3.60 (0.23%) 4,31,680",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Premier Energies ₹1,039.15 1.80 (0.17%) 14,10,468",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Hindustan Petroleum Corporation ₹380.60 0.55 (0.14%) 47,77,651",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "ICICI Prudential Asset Management Company ₹3,302.40 2.60 (0.08%) 2,64,976",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Persistent Systems In news ₹4,805.80 2.30 (0.05%) 6,28,484",
+      "tag": "NA",
+      "price": "",
+      "change": "",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    }
+  ]
+}

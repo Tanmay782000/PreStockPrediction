@@ -1,0 +1,750 @@
+{
+  "scrapedAt": "2026-04-29T12:32:13.534Z",
+  "count": 93,
+  "stocks": [
+    {
+      "name": "Power Finance Corporation ₹464.75 -16.65 (3.46%) 1,09,26,068",
+      "tag": "NA",
+      "price": "",
+      "change": "Power Finance Corporation ₹464.75 -16.65 (3.46%) 1,09,26,068",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "REC Results yesterday ₹363.55 -12.25 (3.26%) 1,68,91,422",
+      "tag": "NA",
+      "price": "",
+      "change": "REC Results yesterday ₹363.55 -12.25 (3.26%) 1,68,91,422",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Jindal Steel ₹1,228.10 -37.40 (2.96%) 10,69,141",
+      "tag": "NA",
+      "price": "",
+      "change": "Jindal Steel ₹1,228.10 -37.40 (2.96%) 10,69,141",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bosch ₹36,345.00 -975.00 (2.61%) 34,734",
+      "tag": "NA",
+      "price": "",
+      "change": "Bosch ₹36,345.00 -975.00 (2.61%) 34,734",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Tata Power Company ₹451.50 -10.30 (2.23%) 74,12,182",
+      "tag": "NA",
+      "price": "",
+      "change": "Tata Power Company ₹451.50 -10.30 (2.23%) 74,12,182",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Interglobe Aviation ₹4,345.20 -97.20 (2.19%) 16,95,800",
+      "tag": "NA",
+      "price": "",
+      "change": "Interglobe Aviation ₹4,345.20 -97.20 (2.19%) 16,95,800",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Union Bank of India ₹167.31 -3.17 (1.86%) 2,37,90,547",
+      "tag": "NA",
+      "price": "",
+      "change": "Union Bank of India ₹167.31 -3.17 (1.86%) 2,37,90,547",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Dr Reddy's Laboratories In news ₹1,329.80 -24.80 (1.83%) 45,45,837",
+      "tag": "NA",
+      "price": "",
+      "change": "Dr Reddy's Laboratories In news ₹1,329.80 -24.80 (1.83%) 45,45,837",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Adani Power ₹219.28 -4.07 (1.82%) 5,19,32,086",
+      "tag": "NA",
+      "price": "",
+      "change": "Adani Power ₹219.28 -4.07 (1.82%) 5,19,32,086",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Samvardhana Motherson International ₹123.24 -1.98 (1.58%) 1,48,94,309",
+      "tag": "NA",
+      "price": "",
+      "change": "Samvardhana Motherson International ₹123.24 -1.98 (1.58%) 1,48,94,309",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "NTPC ₹401.30 -5.55 (1.36%) 1,19,20,835",
+      "tag": "NA",
+      "price": "",
+      "change": "NTPC ₹401.30 -5.55 (1.36%) 1,19,20,835",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Shree Cement ₹24,555.00 -335.00 (1.35%) 11,849",
+      "tag": "NA",
+      "price": "",
+      "change": "Shree Cement ₹24,555.00 -335.00 (1.35%) 11,849",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Siemens ₹3,776.80 -50.50 (1.32%) 2,04,618",
+      "tag": "NA",
+      "price": "",
+      "change": "Siemens ₹3,776.80 -50.50 (1.32%) 2,04,618",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bharat Petroleum Corporation ₹303.90 -3.85 (1.25%) 1,69,18,034",
+      "tag": "NA",
+      "price": "",
+      "change": "Bharat Petroleum Corporation ₹303.90 -3.85 (1.25%) 1,69,18,034",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Adani Energy Solutions ₹1,418.15 -17.30 (1.21%) 23,56,863",
+      "tag": "NA",
+      "price": "",
+      "change": "Adani Energy Solutions ₹1,418.15 -17.30 (1.21%) 23,56,863",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "The Indian Hotels Company ₹644.65 -7.80 (1.20%) 17,82,233",
+      "tag": "NA",
+      "price": "",
+      "change": "The Indian Hotels Company ₹644.65 -7.80 (1.20%) 17,82,233",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Muthoot Finance ₹3,461.10 -34.90 (1.00%) 3,82,641",
+      "tag": "NA",
+      "price": "",
+      "change": "Muthoot Finance ₹3,461.10 -34.90 (1.00%) 3,82,641",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Ambuja Cements ₹454.60 -4.20 (0.92%) 17,78,884",
+      "tag": "NA",
+      "price": "",
+      "change": "Ambuja Cements ₹454.60 -4.20 (0.92%) 17,78,884",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "ICICI Bank In news ₹1,281.00 -11.00 (0.85%) 1,17,16,030",
+      "tag": "NA",
+      "price": "",
+      "change": "ICICI Bank In news ₹1,281.00 -11.00 (0.85%) 1,17,16,030",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Bajaj Finserv In news ₹1,764.20 -14.80 (0.83%) 6,99,788",
+      "tag": "NA",
+      "price": "",
+      "change": "Bajaj Finserv In news ₹1,764.20 -14.80 (0.83%) 6,99,788",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Indian Oil Corporation ₹144.19 -1.20 (0.83%) 1,25,75,213",
+      "tag": "NA",
+      "price": "",
+      "change": "Indian Oil Corporation ₹144.19 -1.20 (0.83%) 1,25,75,213",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "United Spirits ₹1,363.40 -11.00 (0.80%) 7,69,004",
+      "tag": "NA",
+      "price": "",
+      "change": "United Spirits ₹1,363.40 -11.00 (0.80%) 7,69,004",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "CG Power & Industrial Solutions ₹825.60 -5.60 (0.67%) 23,54,905",
+      "tag": "NA",
+      "price": "",
+      "change": "CG Power & Industrial Solutions ₹825.60 -5.60 (0.67%) 23,54,905",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Hindalco Industries ₹1,067.20 -7.10 (0.66%) 37,10,080",
+      "tag": "NA",
+      "price": "",
+      "change": "Hindalco Industries ₹1,067.20 -7.10 (0.66%) 37,10,080",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Asian Paints ₹2,447.30 -15.30 (0.62%) 6,03,585",
+      "tag": "NA",
+      "price": "",
+      "change": "Asian Paints ₹2,447.30 -15.30 (0.62%) 6,03,585",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Trent ₹4,228.30 -25.60 (0.60%) 6,43,572",
+      "tag": "NA",
+      "price": "",
+      "change": "Trent ₹4,228.30 -25.60 (0.60%) 6,43,572",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Apollo Hospitals Enterprise ₹7,709.00 -44.00 (0.57%) 3,21,242",
+      "tag": "NA",
+      "price": "",
+      "change": "Apollo Hospitals Enterprise ₹7,709.00 -44.00 (0.57%) 3,21,242",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Hindustan Zinc ₹613.05 -3.05 (0.50%) 79,83,106",
+      "tag": "NA",
+      "price": "",
+      "change": "Hindustan Zinc ₹613.05 -3.05 (0.50%) 79,83,106",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "HDFC Bank In news ₹779.00 -3.55 (0.45%) 2,57,99,963",
+      "tag": "NA",
+      "price": "",
+      "change": "HDFC Bank In news ₹779.00 -3.55 (0.45%) 2,57,99,963",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Wipro ₹200.68 -0.90 (0.45%) 1,56,67,662",
+      "tag": "NA",
+      "price": "",
+      "change": "Wipro ₹200.68 -0.90 (0.45%) 1,56,67,662",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Hyundai Motor India ₹1,817.40 -7.80 (0.43%) 7,37,246",
+      "tag": "NA",
+      "price": "",
+      "change": "Hyundai Motor India ₹1,817.40 -7.80 (0.43%) 7,37,246",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Adani Green Energy ₹1,244.80 -5.15 (0.41%) 29,41,179",
+      "tag": "NA",
+      "price": "",
+      "change": "Adani Green Energy ₹1,244.80 -5.15 (0.41%) 29,41,179",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "State Bank of India In news ₹1,086.90 -4.40 (0.40%) 1,06,11,104",
+      "tag": "NA",
+      "price": "",
+      "change": "State Bank of India In news ₹1,086.90 -4.40 (0.40%) 1,06,11,104",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Tata Motors ₹416.95 -1.35 (0.32%) 73,76,675",
+      "tag": "NA",
+      "price": "",
+      "change": "Tata Motors ₹416.95 -1.35 (0.32%) 73,76,675",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "ABB India ₹7,264.50 -23.50 (0.32%) 3,61,430",
+      "tag": "NA",
+      "price": "",
+      "change": "ABB India ₹7,264.50 -23.50 (0.32%) 3,61,430",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Pidilite Industries ₹1,389.00 -3.60 (0.26%) 3,64,945",
+      "tag": "NA",
+      "price": "",
+      "change": "Pidilite Industries ₹1,389.00 -3.60 (0.26%) 3,64,945",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Tata Capital ₹325.10 -0.70 (0.21%) 33,03,303",
+      "tag": "NA",
+      "price": "",
+      "change": "Tata Capital ₹325.10 -0.70 (0.21%) 33,03,303",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Punjab National Bank ₹111.18 -0.21 (0.19%) 1,32,95,763",
+      "tag": "NA",
+      "price": "",
+      "change": "Punjab National Bank ₹111.18 -0.21 (0.19%) 1,32,95,763",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Godrej Consumer Products ₹1,090.05 -1.95 (0.18%) 8,17,956",
+      "tag": "NA",
+      "price": "",
+      "change": "Godrej Consumer Products ₹1,090.05 -1.95 (0.18%) 8,17,956",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "JSW Steel ₹1,279.70 -1.90 (0.15%) 23,64,369",
+      "tag": "NA",
+      "price": "",
+      "change": "JSW Steel ₹1,279.70 -1.90 (0.15%) 23,64,369",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Indian Railway Finance Corp ₹105.08 -0.06 (0.06%) 95,23,095",
+      "tag": "NA",
+      "price": "",
+      "change": "Indian Railway Finance Corp ₹105.08 -0.06 (0.06%) 95,23,095",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Zydus Lifesciences ₹910.85 -0.45 (0.05%) 5,90,232",
+      "tag": "NA",
+      "price": "",
+      "change": "Zydus Lifesciences ₹910.85 -0.45 (0.05%) 5,90,232",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "JIO Financial Services ₹250.71 -0.10 (0.04%) 2,24,55,886",
+      "tag": "NA",
+      "price": "",
+      "change": "JIO Financial Services ₹250.71 -0.10 (0.04%) 2,24,55,886",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "Canara Bank In news ₹137.06 -0.04 (0.03%) 1,82,18,577",
+      "tag": "NA",
+      "price": "",
+      "change": "Canara Bank In news ₹137.06 -0.04 (0.03%) 1,82,18,577",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "GAIL (India) In news ₹165.66 -0.02 (0.01%) 81,64,580",
+      "tag": "NA",
+      "price": "",
+      "change": "GAIL (India) In news ₹165.66 -0.02 (0.01%) 81,64,580",
+      "volume": "",
+      "source": "NIFTY 100"
+    },
+    {
+      "name": "JSW Energy ₹560.40 -20.50 (3.53%) 43,06,287",
+      "tag": "NA",
+      "price": "",
+      "change": "JSW Energy ₹560.40 -20.50 (3.53%) 43,06,287",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Lenskart Solutions ₹519.95 -17.05 (3.18%) 25,27,593",
+      "tag": "NA",
+      "price": "",
+      "change": "Lenskart Solutions ₹519.95 -17.05 (3.18%) 25,27,593",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Groww (Billionbrains Garage Ventures) ₹213.47 -6.38 (2.90%) 4,39,53,535",
+      "tag": "NA",
+      "price": "",
+      "change": "Groww (Billionbrains Garage Ventures) ₹213.47 -6.38 (2.90%) 4,39,53,535",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Bharat Heavy Electricals ₹344.50 -10.21 (2.88%) 1,47,16,414",
+      "tag": "NA",
+      "price": "",
+      "change": "Bharat Heavy Electricals ₹344.50 -10.21 (2.88%) 1,47,16,414",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Blue Star ₹1,837.30 -54.30 (2.87%) 6,83,145",
+      "tag": "NA",
+      "price": "",
+      "change": "Blue Star ₹1,837.30 -54.30 (2.87%) 6,83,145",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Swiggy ₹275.00 -7.30 (2.59%) 1,67,10,318",
+      "tag": "NA",
+      "price": "",
+      "change": "Swiggy ₹275.00 -7.30 (2.59%) 1,67,10,318",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Vishal Mega Mart ₹122.86 -3.13 (2.48%) 72,43,777",
+      "tag": "NA",
+      "price": "",
+      "change": "Vishal Mega Mart ₹122.86 -3.13 (2.48%) 72,43,777",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Voltas In news ₹1,474.80 -36.30 (2.40%) 7,93,781",
+      "tag": "NA",
+      "price": "",
+      "change": "Voltas In news ₹1,474.80 -36.30 (2.40%) 7,93,781",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Indian Bank Results today ₹875.55 -20.55 (2.29%) 54,61,272",
+      "tag": "NA",
+      "price": "",
+      "change": "Indian Bank Results today ₹875.55 -20.55 (2.29%) 54,61,272",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Paytm - One97 Communications Ltd In news ₹1,104.20 -24.95 (2.21%) 24,76,900",
+      "tag": "NA",
+      "price": "",
+      "change": "Paytm - One97 Communications Ltd In news ₹1,104.20 -24.95 (2.21%) 24,76,900",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Rail Vikas Nigam ₹302.30 -6.33 (2.05%) 68,90,706",
+      "tag": "NA",
+      "price": "",
+      "change": "Rail Vikas Nigam ₹302.30 -6.33 (2.05%) 68,90,706",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Federal Bank Results today ₹284.75 -5.85 (2.01%) 2,11,86,876",
+      "tag": "NA",
+      "price": "",
+      "change": "Federal Bank Results today ₹284.75 -5.85 (2.01%) 2,11,86,876",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "National Aluminium Co ₹433.30 -8.20 (1.86%) 78,85,901",
+      "tag": "NA",
+      "price": "",
+      "change": "National Aluminium Co ₹433.30 -8.20 (1.86%) 78,85,901",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Aurobindo Pharma ₹1,396.80 -25.80 (1.81%) 17,38,923",
+      "tag": "NA",
+      "price": "",
+      "change": "Aurobindo Pharma ₹1,396.80 -25.80 (1.81%) 17,38,923",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Page Industries ₹36,845.00 -660.00 (1.76%) 17,895",
+      "tag": "NA",
+      "price": "",
+      "change": "Page Industries ₹36,845.00 -660.00 (1.76%) 17,895",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Fortis Healthcare ₹935.20 -16.35 (1.72%) 9,03,219",
+      "tag": "NA",
+      "price": "",
+      "change": "Fortis Healthcare ₹935.20 -16.35 (1.72%) 9,03,219",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Havells India ₹1,252.50 -19.70 (1.55%) 15,53,192",
+      "tag": "NA",
+      "price": "",
+      "change": "Havells India ₹1,252.50 -19.70 (1.55%) 15,53,192",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "NHPC ₹84.09 -1.29 (1.51%) 2,83,77,211",
+      "tag": "NA",
+      "price": "",
+      "change": "NHPC ₹84.09 -1.29 (1.51%) 2,83,77,211",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "GMR Airports ₹96.43 -1.43 (1.46%) 1,23,12,794",
+      "tag": "NA",
+      "price": "",
+      "change": "GMR Airports ₹96.43 -1.43 (1.46%) 1,23,12,794",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Alkem Laboratories ₹5,344.00 -74.50 (1.37%) 96,480",
+      "tag": "NA",
+      "price": "",
+      "change": "Alkem Laboratories ₹5,344.00 -74.50 (1.37%) 96,480",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Info Edge (India) ₹991.65 -12.95 (1.29%) 20,58,896",
+      "tag": "NA",
+      "price": "",
+      "change": "Info Edge (India) ₹991.65 -12.95 (1.29%) 20,58,896",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Polycab India ₹8,148.50 -105.50 (1.28%) 2,63,510",
+      "tag": "NA",
+      "price": "",
+      "change": "Polycab India ₹8,148.50 -105.50 (1.28%) 2,63,510",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Tube Investments of India ₹2,965.10 -35.90 (1.20%) 1,88,728",
+      "tag": "NA",
+      "price": "",
+      "change": "Tube Investments of India ₹2,965.10 -35.90 (1.20%) 1,88,728",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Ashok Leyland In news ₹165.73 -1.79 (1.07%) 1,67,22,649",
+      "tag": "NA",
+      "price": "",
+      "change": "Ashok Leyland In news ₹165.73 -1.79 (1.07%) 1,67,22,649",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Tata Investment Corporation ₹717.55 -7.60 (1.05%) 4,68,052",
+      "tag": "NA",
+      "price": "",
+      "change": "Tata Investment Corporation ₹717.55 -7.60 (1.05%) 4,68,052",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "GE Vernova T&D India ₹4,479.40 -41.40 (0.92%) 5,77,126",
+      "tag": "NA",
+      "price": "",
+      "change": "GE Vernova T&D India ₹4,479.40 -41.40 (0.92%) 5,77,126",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Suzlon Energy In news ₹56.81 -0.51 (0.89%) 12,72,40,966",
+      "tag": "NA",
+      "price": "",
+      "change": "Suzlon Energy In news ₹56.81 -0.51 (0.89%) 12,72,40,966",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Oil India ₹492.85 -4.35 (0.87%) 43,51,303",
+      "tag": "NA",
+      "price": "",
+      "change": "Oil India ₹492.85 -4.35 (0.87%) 43,51,303",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Mphasis Results today ₹2,250.70 -19.60 (0.86%) 6,98,342",
+      "tag": "NA",
+      "price": "",
+      "change": "Mphasis Results today ₹2,250.70 -19.60 (0.86%) 6,98,342",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Nykaa - FSN E-Commerce Ventures Ltd. ₹267.85 -2.26 (0.84%) 27,83,335",
+      "tag": "NA",
+      "price": "",
+      "change": "Nykaa - FSN E-Commerce Ventures Ltd. ₹267.85 -2.26 (0.84%) 27,83,335",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Bank Of India ₹143.21 -1.04 (0.72%) 97,11,019",
+      "tag": "NA",
+      "price": "",
+      "change": "Bank Of India ₹143.21 -1.04 (0.72%) 97,11,019",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Indian Renewable Energy Development Agency ₹137.21 -0.84 (0.61%) 62,22,771",
+      "tag": "NA",
+      "price": "",
+      "change": "Indian Renewable Energy Development Agency ₹137.21 -0.84 (0.61%) 62,22,771",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "KEI Industries ₹4,935.20 -29.90 (0.60%) 3,54,086",
+      "tag": "NA",
+      "price": "",
+      "change": "KEI Industries ₹4,935.20 -29.90 (0.60%) 3,54,086",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Oberoi Realty ₹1,700.30 -10.00 (0.58%) 3,71,647",
+      "tag": "NA",
+      "price": "",
+      "change": "Oberoi Realty ₹1,700.30 -10.00 (0.58%) 3,71,647",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "AU Small Finance Bank ₹1,017.65 -5.15 (0.50%) 13,45,598",
+      "tag": "NA",
+      "price": "",
+      "change": "AU Small Finance Bank ₹1,017.65 -5.15 (0.50%) 13,45,598",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "APL Apollo Tubes ₹1,966.60 -9.40 (0.48%) 3,73,009",
+      "tag": "NA",
+      "price": "",
+      "change": "APL Apollo Tubes ₹1,966.60 -9.40 (0.48%) 3,73,009",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Dixon Technologies (India) ₹11,325.00 -45.00 (0.40%) 6,77,475",
+      "tag": "NA",
+      "price": "",
+      "change": "Dixon Technologies (India) ₹11,325.00 -45.00 (0.40%) 6,77,475",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Mankind Pharma ₹2,256.80 -7.60 (0.34%) 2,73,192",
+      "tag": "NA",
+      "price": "",
+      "change": "Mankind Pharma ₹2,256.80 -7.60 (0.34%) 2,73,192",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "PI Industries ₹3,091.10 -6.50 (0.21%) 2,89,695",
+      "tag": "NA",
+      "price": "",
+      "change": "PI Industries ₹3,091.10 -6.50 (0.21%) 2,89,695",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Marico ₹779.30 -1.55 (0.20%) 8,61,651",
+      "tag": "NA",
+      "price": "",
+      "change": "Marico ₹779.30 -1.55 (0.20%) 8,61,651",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Bharat Dynamics ₹1,394.10 -2.60 (0.19%) 13,05,339",
+      "tag": "NA",
+      "price": "",
+      "change": "Bharat Dynamics ₹1,394.10 -2.60 (0.19%) 13,05,339",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Biocon ₹362.25 -0.55 (0.15%) 14,77,358",
+      "tag": "NA",
+      "price": "",
+      "change": "Biocon ₹362.25 -0.55 (0.15%) 14,77,358",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Coromandel International ₹2,007.90 -2.80 (0.14%) 2,75,336",
+      "tag": "NA",
+      "price": "",
+      "change": "Coromandel International ₹2,007.90 -2.80 (0.14%) 2,75,336",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "L&T Finance ₹285.42 -0.36 (0.13%) 33,76,266",
+      "tag": "NA",
+      "price": "",
+      "change": "L&T Finance ₹285.42 -0.36 (0.13%) 33,76,266",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "ICICI Lombard General Insurance Company ₹1,770.60 -1.20 (0.07%) 3,13,134",
+      "tag": "NA",
+      "price": "",
+      "change": "ICICI Lombard General Insurance Company ₹1,770.60 -1.20 (0.07%) 3,13,134",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Kalyan Jewellers India ₹412.40 -0.25 (0.06%) 34,43,668",
+      "tag": "NA",
+      "price": "",
+      "change": "Kalyan Jewellers India ₹412.40 -0.25 (0.06%) 34,43,668",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Max Financial Services ₹1,610.40 -0.40 (0.02%) 3,33,323",
+      "tag": "NA",
+      "price": "",
+      "change": "Max Financial Services ₹1,610.40 -0.40 (0.02%) 3,33,323",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    },
+    {
+      "name": "Indus Towers ₹413.90 -0.05 (0.01%) 1,04,38,131",
+      "tag": "NA",
+      "price": "",
+      "change": "Indus Towers ₹413.90 -0.05 (0.01%) 1,04,38,131",
+      "volume": "",
+      "source": "NIFTY MIDCAP 100"
+    }
+  ]
+}
