@@ -247,7 +247,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/country.get",
         "Runtime": "nodejs20.x",
@@ -271,9 +271,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -295,7 +295,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "Common/auth.tokengeneration",
         "Runtime": "nodejs20.x",
@@ -319,9 +319,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -343,7 +343,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/stockTerm.get",
         "Runtime": "nodejs20.x",
@@ -367,9 +367,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -391,7 +391,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/stockCategory.get",
         "Runtime": "nodejs20.x",
@@ -415,9 +415,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -439,7 +439,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/userFlow.get",
         "Runtime": "nodejs20.x",
@@ -463,9 +463,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -487,7 +487,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/country.getCountry",
         "Runtime": "nodejs20.x",
@@ -511,9 +511,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -535,7 +535,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/getAnalysis.showTermAnalysis",
         "Runtime": "nodejs20.x",
@@ -559,9 +559,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -583,7 +583,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/getAnalysis.showCategoryAnalysis",
         "Runtime": "nodejs20.x",
@@ -607,9 +607,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -631,7 +631,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/getAnalysis.showSectorAnalysis",
         "Runtime": "nodejs20.x",
@@ -655,9 +655,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -679,7 +679,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/getAnalysis.showStockAnalysis",
         "Runtime": "nodejs20.x",
@@ -703,9 +703,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -727,7 +727,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "handlers/getAnalysis.showNiftyAnalysis",
         "Runtime": "nodejs20.x",
@@ -751,9 +751,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -775,7 +775,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/main.main",
         "Runtime": "nodejs20.x",
@@ -800,9 +800,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -824,7 +824,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/stocksDeepAnalysis.get",
         "Runtime": "nodejs20.x",
@@ -849,9 +849,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -873,7 +873,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/stocksAnalysis.getStockAnalysis",
         "Runtime": "nodejs20.x",
@@ -898,9 +898,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -922,7 +922,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/newsAnalysis.get",
         "Runtime": "nodejs20.x",
@@ -947,9 +947,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -971,7 +971,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/marketAnalysis.getAnalysis",
         "Runtime": "nodejs20.x",
@@ -996,9 +996,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -1020,7 +1020,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/stocksAnalysis.getStockAnalysis",
         "Runtime": "nodejs20.x",
@@ -1045,9 +1045,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -1069,7 +1069,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/urlExtraction.urlExtraction",
         "Runtime": "nodejs20.x",
@@ -1094,9 +1094,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -1118,7 +1118,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/cron.cron",
         "Runtime": "nodejs20.x",
@@ -1143,9 +1143,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -1167,7 +1167,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-c93cf11a-8362",
-          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777374449910-2026-04-28T11:07:29.910Z/SP-Node-Lambda-Functions.zip"
+          "S3Key": "serverless/SP-Node-Lambda-Functions/dev/1777717030292-2026-05-02T10:17:10.292Z/SP-Node-Lambda-Functions.zip"
         },
         "Handler": "External/Bcron.Bcron",
         "Runtime": "nodejs20.x",
@@ -1192,9 +1192,9 @@
             "PlacedStocksTable": "PlacedStocks",
             "BearPlacedStocksTable": "BearPlacedStocks",
             "Smart_API_KEY": "uVNH5DtC",
-            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056UXpOVFk1T1N3aWJtSm1Jam94TnpjM016UTVNVEU1TENKcFlYUWlPakUzTnpjek5Ea3hNVGtzSW1wMGFTSTZJbUV3T0RGa1lqTmtMVGhsWm1VdE5EWm1ZeTA1TmpNMUxUUXhZemcyTlRrNVlXRTVNaUlzSWxSdmEyVnVJam9pSW4wLmZBNFRPVjFiVGtYdGFkck15VUhPcWxXLUUwU2hocDU0YWg0ZklPeTdiTllMTi11QXl0dE5LemlTc1g2bEVNXzNYcTN2TEhUSFdtZzhOX0RpbEFLdFZ6VDZHdW56UTBlcVBrNlQ0N2xvVG05RjVxZDNHRHYxVHJrdUZkWnI3bFVvN05TX1dxOUpHQWs2RnBhVXplQ0Y2R3NYY0ZsWklmamh3V3FEZXdQaEdkMCIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsIlgtT0xELUFQSS1LRVkiOmZhbHNlLCJpYXQiOjE3NzczNDkyOTksImV4cCI6MTc3NzQwMTAwMH0.4t0l4-LV_xfqn70jCPonMBw94-ErArTbUByCBn2bSGQbhy0SQfrP7XAma4uT5z0fFv4zSPOl7cvmEN_MBXbWKw",
+            "Smart_API_JWT_TOKEN": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkFBQ0c2NjE4MjciLCJyb2xlcyI6MCwidXNlcnR5cGUiOiJVU0VSIiwidG9rZW4iOiJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlYM1I1Y0dVaU9pSmpiR2xsYm5RaUxDSjBiMnRsYmw5MGVYQmxJam9pZEhKaFpHVmZZV05qWlhOelgzUnZhMlZ1SWl3aVoyMWZhV1FpT2pNc0luTnZkWEpqWlNJNklqTWlMQ0prWlhacFkyVmZhV1FpT2lJd05UWmhaRGs1WWkxaE1qWTFMVE5tTkdVdFlXSmlOaTA1T0RabFltSTNOalk0Wm1JaUxDSnJhV1FpT2lKMGNtRmtaVjlyWlhsZmRqSWlMQ0p2Ylc1bGJXRnVZV2RsY21sa0lqb3pMQ0p3Y205a2RXTjBjeUk2ZXlKa1pXMWhkQ0k2ZXlKemRHRjBkWE1pT2lKaFkzUnBkbVVpZlN3aWJXWWlPbnNpYzNSaGRIVnpJam9pWVdOMGFYWmxJbjE5TENKcGMzTWlPaUowY21Ga1pWOXNiMmRwYmw5elpYSjJhV05sSWl3aWMzVmlJam9pUVVGRFJ6WTJNVGd5TnlJc0ltVjRjQ0k2TVRjM056YzVPVEF3TlN3aWJtSm1Jam94TnpjM056RXlOREkxTENKcFlYUWlPakUzTnpjM01USTBNalVzSW1wMGFTSTZJamd4T1RRM1pUQTBMVE0zWWprdE5HSmpaUzA1WXpFeExUUXhNVGxpTkRJelpERXpNaUlzSWxSdmEyVnVJam9pSW4wLmg4N0cxbXRCalBfZDVoejR1R2Y4QkNBSHdZRV9wcmJuenVLYXpMcGlIZnBGU3d4VVE3US01MWRWVDVRYkE5YTh4S1otMDZDeU9xZVpmVklpLTA0SEY0aDVNd1BHS2hrTmZGWFBac2tUa2V5ZEk3NDRSbXkzOWdPTFR0ZkRYcWh3Z05VT3Qxdk9zbkRaMVoybXNFb2Zzc2F0eGl1NGdQUzVvN1FpWUx0bkdvUSIsIkFQSS1LRVkiOiJ1Vk5INUR0QyIsImlhdCI6MTc3NzcxMjYwNSwiZXhwIjoxNzc3NzQ2NjAwfQ.wRQFOV2kZAJlUlYVzOy4io5W7yGgBIh9DfAmHBfKQFVr_JNqdwIY7ZY9pHDuRJ0n-FsKNoK1boFeMs3caPvFVQ",
             "Smart_API_SECRET": "625a12f7-a8de-4c19-9382-abfcb8be0bdf",
-            "Smart_API_PublicIP": "45.114.212.194",
+            "Smart_API_PublicIP": "15.207.159.248",
             "Smart_API_LocalIP": "127.0.0.1",
             "Capital": "100000,",
             "Risk_Per_Trade": "40,"
@@ -1211,212 +1211,212 @@
         "BcronJobLogGroup"
       ]
     },
-    "GetCountriesLambdaVersionXWM2CNntCIbbGtfVQJk8VxP65AAHXqotlpD2ckqL4": {
+    "GetCountriesLambdaVersionlin3BlIdWhITe81CX5iHl7GjTIylZFFYQhoQHUfQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetCountriesLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "PostTokenLambdaVersionz6GdoCJYauVcp1UMNImBw6BnN4iuDDHy7mma6D37upo": {
+    "PostTokenLambdaVersionfBBGVdAxV9ypr1VyOIKBt1nVLX8N5gihG1LTkmLVuBg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PostTokenLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "GetStockTermsLambdaVersionHOJZgyd0JoMPLxCW4CK32UHHWWMXOhoFZ7bm94dfm8": {
+    "GetStockTermsLambdaVersionIe7eDjEknmL1Lt21CTlzHqi0dxFsxrgzui3v1xI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetStockTermsLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "GetStockCategoryLambdaVersioni1CspubHxgUX6qLo0HKBh6rQVLMk4D8hZ2sfBVFDkk": {
+    "GetStockCategoryLambdaVersion7G0mi8r9ttjYU8Rn88jsptv2wUiHRXMgDbs3BE0O50E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetStockCategoryLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "UserFlowLambdaVersionaA8rVa3NRyLKdyXEHWbxI93Bd3jMO233OOcAjLqNE": {
+    "UserFlowLambdaVersionTgCgewO52istBqF39aYWcY9SvZga65pDecNgRNGHgd8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UserFlowLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "GetCountryLambdaVersiongMgMvadjOo6qj1nj0GBJFWBY1Bh7DkFHKg8p9GgxQ": {
+    "GetCountryLambdaVersionCWA6Zs1HaX0R4VIpzoryiYBpKcylKNy33OpQnGU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetCountryLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "ShowTermAnalysisLambdaVersionx98yqbdcltMkfXK83ZF1XEcrqiAU9aGxSOlm4dyefzw": {
+    "ShowTermAnalysisLambdaVersionRo2JiY4QuW6m8Byk3fuubatlVK39SMy8WMECha9K8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ShowTermAnalysisLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "ShowCategoryAnalysisLambdaVersionSpeGONYktRQ5sefw5QoaeJtkqe5nToucrZifUxpuU": {
+    "ShowCategoryAnalysisLambdaVersionRZ51FMC3EUzgwp6CqPb777Jb11b1VMZXkMne3cinwE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ShowCategoryAnalysisLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "ShowSectorAnalysisLambdaVersion67JJ9bKtyxGIC3YSxkcTNDxUQV8rAKmllsDdJlFv0": {
+    "ShowSectorAnalysisLambdaVersionDURIvSfo0EEK4FVXy5MWln3vPCXsUvot6EtQw70ZNY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ShowSectorAnalysisLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "ShowStockAnalysisLambdaVersionYFRXfOMiZmxubz63ABMrxy6ow87GzNX2FOjI38iGk": {
+    "ShowStockAnalysisLambdaVersionNy4QXYrzounb7qs6DqBBexCCu7rmObFL9dxR9BNtI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ShowStockAnalysisLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "ShowNiftyAnalysisLambdaVersionGlfc2971ORWYvgUMX12QFBnpMgt9VD98dGn5HldFs": {
+    "ShowNiftyAnalysisLambdaVersionTPbFcmoCmUJy2kEwWOvndfEarlsWY0EtVuKxT7m0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ShowNiftyAnalysisLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E="
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8="
       }
     },
-    "CallMainLambdaVersiono6kvM3l7EpmnsNCEN66imaDcdVIBYmilS14nV6h2Hg": {
+    "CallMainLambdaVersionX8wcXmORZKY2jxkrgqBkddX0E9FWTJlPbtj0HwecVw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CallMainLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "get news & execute all prompts"
       }
     },
-    "ExecuteDeepStockAnalysisLambdaVersionpFb18XWSeZQFFUHykhE2ZHNQWk2IIQCjgx4IUjuQ": {
+    "ExecuteDeepStockAnalysisLambdaVersionvqh3J8w2BGdj99GdA0BCyyT3VgBZDEwIDSkGM358R8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ExecuteDeepStockAnalysisLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "start the analysis over stocks insights"
       }
     },
-    "TempTestingLambdaVersionFwN9P4XMiY4JvVXoE7kIObLGmaGQkyC3N7Ds85RIFVg": {
+    "TempTestingLambdaVersionh1wEynXOPcNFkVRAxg6ncoWAWJZPGhAicMMrXl1JDc0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "TempTestingLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "temporary testing lambda for stock analysis logic"
       }
     },
-    "GetNewsLambdaVersionwZQuhZCiWNMa4ciywZde8K0Z7MbM2lae48e9llN2ak": {
+    "GetNewsLambdaVersionnv1LyzW5u0ikrsEC4UNCbsWp0WtT9hNh8aUEgC4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetNewsLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "Fetches news data for a given country and date range"
       }
     },
-    "GetmarketAnalysisLambdaVersionepKFZXI2NnaNPYwwL4i75W0TIkVuUvI40sjBLfelzI": {
+    "GetmarketAnalysisLambdaVersioneREzzBAH4uCUXgk6gCbQaehi7GrqT29I7oKWyfVAs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetmarketAnalysisLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "Term, category and sector analysis"
       }
     },
-    "GetstocksAnalysisLambdaVersionQ1f65KXsR4dkkT2b300WaGcEM43aoRpm92vCOw9M": {
+    "GetstocksAnalysisLambdaVersion2vSSsPNaxPVII1qKm5bdeqtOBOFl3BHlwd9fxYebPc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetstocksAnalysisLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "Generate the stocks from insights."
       }
     },
-    "GeturlExtractionLambdaVersionySGhDb3AtwRZGQOizKheG4gLW7kSKmpmkvEogsB5g": {
+    "GeturlExtractionLambdaVersionesKxi1E2eAjVGGoWjGXbU0vsxE1gUNskqKIDkJwdNOY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GeturlExtractionLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "Fetch the URLs from the raw data."
       }
     },
-    "CronJobLambdaVersionBERtaQyOI7ci0hrAIEdwOoiGxyzQ4oBF84yIt4Hvtgw": {
+    "CronJobLambdaVersion1DxhRDd3SWrfc5aUM6XCs1ZPwkaUmMQHp6RhHyPLVk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CronJobLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "Cron job to update stock data"
       }
     },
-    "BcronJobLambdaVersionJnYk0DaFcMgB0gjmJV7Ks5RMMvPcfGUU39Pe5vQKuE": {
+    "BcronJobLambdaVersionYHDMmQ3nEcjgMqnHoqWktkiuz13uVrNSWTVoqlsFbwE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "BcronJobLambdaFunction"
         },
-        "CodeSha256": "p6BmN9CsTGokMQyqMW51rgeiIBWoN9Kn1ri+SRQFq/E=",
+        "CodeSha256": "63DulH8ETLYvTLNJLIg3+yn4JIa27LxJZq7fUyVqLv8=",
         "Description": "Cron job to update stock data for bearish sniper"
       }
     },
@@ -2286,7 +2286,7 @@
         "TempTestingLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1777374417177": {
+    "ApiGatewayDeployment1777716965157": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -2840,7 +2840,7 @@
     "GetCountriesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetCountriesLambdaVersionXWM2CNntCIbbGtfVQJk8VxP65AAHXqotlpD2ckqL4"
+        "Ref": "GetCountriesLambdaVersionlin3BlIdWhITe81CX5iHl7GjTIylZFFYQhoQHUfQ"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetCountriesLambdaFunctionQualifiedArn"
@@ -2849,7 +2849,7 @@
     "PostTokenLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostTokenLambdaVersionz6GdoCJYauVcp1UMNImBw6BnN4iuDDHy7mma6D37upo"
+        "Ref": "PostTokenLambdaVersionfBBGVdAxV9ypr1VyOIKBt1nVLX8N5gihG1LTkmLVuBg"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-PostTokenLambdaFunctionQualifiedArn"
@@ -2858,7 +2858,7 @@
     "GetStockTermsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetStockTermsLambdaVersionHOJZgyd0JoMPLxCW4CK32UHHWWMXOhoFZ7bm94dfm8"
+        "Ref": "GetStockTermsLambdaVersionIe7eDjEknmL1Lt21CTlzHqi0dxFsxrgzui3v1xI"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetStockTermsLambdaFunctionQualifiedArn"
@@ -2867,7 +2867,7 @@
     "GetStockCategoryLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetStockCategoryLambdaVersioni1CspubHxgUX6qLo0HKBh6rQVLMk4D8hZ2sfBVFDkk"
+        "Ref": "GetStockCategoryLambdaVersion7G0mi8r9ttjYU8Rn88jsptv2wUiHRXMgDbs3BE0O50E"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetStockCategoryLambdaFunctionQualifiedArn"
@@ -2876,7 +2876,7 @@
     "UserFlowLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UserFlowLambdaVersionaA8rVa3NRyLKdyXEHWbxI93Bd3jMO233OOcAjLqNE"
+        "Ref": "UserFlowLambdaVersionTgCgewO52istBqF39aYWcY9SvZga65pDecNgRNGHgd8"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-UserFlowLambdaFunctionQualifiedArn"
@@ -2885,7 +2885,7 @@
     "GetCountryLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetCountryLambdaVersiongMgMvadjOo6qj1nj0GBJFWBY1Bh7DkFHKg8p9GgxQ"
+        "Ref": "GetCountryLambdaVersionCWA6Zs1HaX0R4VIpzoryiYBpKcylKNy33OpQnGU"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetCountryLambdaFunctionQualifiedArn"
@@ -2894,7 +2894,7 @@
     "ShowTermAnalysisLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ShowTermAnalysisLambdaVersionx98yqbdcltMkfXK83ZF1XEcrqiAU9aGxSOlm4dyefzw"
+        "Ref": "ShowTermAnalysisLambdaVersionRo2JiY4QuW6m8Byk3fuubatlVK39SMy8WMECha9K8"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-ShowTermAnalysisLambdaFunctionQualifiedArn"
@@ -2903,7 +2903,7 @@
     "ShowCategoryAnalysisLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ShowCategoryAnalysisLambdaVersionSpeGONYktRQ5sefw5QoaeJtkqe5nToucrZifUxpuU"
+        "Ref": "ShowCategoryAnalysisLambdaVersionRZ51FMC3EUzgwp6CqPb777Jb11b1VMZXkMne3cinwE"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-ShowCategoryAnalysisLambdaFunctionQualifiedArn"
@@ -2912,7 +2912,7 @@
     "ShowSectorAnalysisLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ShowSectorAnalysisLambdaVersion67JJ9bKtyxGIC3YSxkcTNDxUQV8rAKmllsDdJlFv0"
+        "Ref": "ShowSectorAnalysisLambdaVersionDURIvSfo0EEK4FVXy5MWln3vPCXsUvot6EtQw70ZNY"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-ShowSectorAnalysisLambdaFunctionQualifiedArn"
@@ -2921,7 +2921,7 @@
     "ShowStockAnalysisLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ShowStockAnalysisLambdaVersionYFRXfOMiZmxubz63ABMrxy6ow87GzNX2FOjI38iGk"
+        "Ref": "ShowStockAnalysisLambdaVersionNy4QXYrzounb7qs6DqBBexCCu7rmObFL9dxR9BNtI"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-ShowStockAnalysisLambdaFunctionQualifiedArn"
@@ -2930,7 +2930,7 @@
     "ShowNiftyAnalysisLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ShowNiftyAnalysisLambdaVersionGlfc2971ORWYvgUMX12QFBnpMgt9VD98dGn5HldFs"
+        "Ref": "ShowNiftyAnalysisLambdaVersionTPbFcmoCmUJy2kEwWOvndfEarlsWY0EtVuKxT7m0"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-ShowNiftyAnalysisLambdaFunctionQualifiedArn"
@@ -2939,7 +2939,7 @@
     "CallMainLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CallMainLambdaVersiono6kvM3l7EpmnsNCEN66imaDcdVIBYmilS14nV6h2Hg"
+        "Ref": "CallMainLambdaVersionX8wcXmORZKY2jxkrgqBkddX0E9FWTJlPbtj0HwecVw"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-CallMainLambdaFunctionQualifiedArn"
@@ -2948,7 +2948,7 @@
     "ExecuteDeepStockAnalysisLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ExecuteDeepStockAnalysisLambdaVersionpFb18XWSeZQFFUHykhE2ZHNQWk2IIQCjgx4IUjuQ"
+        "Ref": "ExecuteDeepStockAnalysisLambdaVersionvqh3J8w2BGdj99GdA0BCyyT3VgBZDEwIDSkGM358R8"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-ExecuteDeepStockAnalysisLambdaFunctionQualifiedArn"
@@ -2957,7 +2957,7 @@
     "TempTestingLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "TempTestingLambdaVersionFwN9P4XMiY4JvVXoE7kIObLGmaGQkyC3N7Ds85RIFVg"
+        "Ref": "TempTestingLambdaVersionh1wEynXOPcNFkVRAxg6ncoWAWJZPGhAicMMrXl1JDc0"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-TempTestingLambdaFunctionQualifiedArn"
@@ -2966,7 +2966,7 @@
     "GetNewsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetNewsLambdaVersionwZQuhZCiWNMa4ciywZde8K0Z7MbM2lae48e9llN2ak"
+        "Ref": "GetNewsLambdaVersionnv1LyzW5u0ikrsEC4UNCbsWp0WtT9hNh8aUEgC4"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetNewsLambdaFunctionQualifiedArn"
@@ -2975,7 +2975,7 @@
     "GetmarketAnalysisLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetmarketAnalysisLambdaVersionepKFZXI2NnaNPYwwL4i75W0TIkVuUvI40sjBLfelzI"
+        "Ref": "GetmarketAnalysisLambdaVersioneREzzBAH4uCUXgk6gCbQaehi7GrqT29I7oKWyfVAs"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetmarketAnalysisLambdaFunctionQualifiedArn"
@@ -2984,7 +2984,7 @@
     "GetstocksAnalysisLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetstocksAnalysisLambdaVersionQ1f65KXsR4dkkT2b300WaGcEM43aoRpm92vCOw9M"
+        "Ref": "GetstocksAnalysisLambdaVersion2vSSsPNaxPVII1qKm5bdeqtOBOFl3BHlwd9fxYebPc"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GetstocksAnalysisLambdaFunctionQualifiedArn"
@@ -2993,7 +2993,7 @@
     "GeturlExtractionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GeturlExtractionLambdaVersionySGhDb3AtwRZGQOizKheG4gLW7kSKmpmkvEogsB5g"
+        "Ref": "GeturlExtractionLambdaVersionesKxi1E2eAjVGGoWjGXbU0vsxE1gUNskqKIDkJwdNOY"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-GeturlExtractionLambdaFunctionQualifiedArn"
@@ -3002,7 +3002,7 @@
     "CronJobLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CronJobLambdaVersionBERtaQyOI7ci0hrAIEdwOoiGxyzQ4oBF84yIt4Hvtgw"
+        "Ref": "CronJobLambdaVersion1DxhRDd3SWrfc5aUM6XCs1ZPwkaUmMQHp6RhHyPLVk"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-CronJobLambdaFunctionQualifiedArn"
@@ -3011,7 +3011,7 @@
     "BcronJobLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "BcronJobLambdaVersionJnYk0DaFcMgB0gjmJV7Ks5RMMvPcfGUU39Pe5vQKuE"
+        "Ref": "BcronJobLambdaVersionYHDMmQ3nEcjgMqnHoqWktkiuz13uVrNSWTVoqlsFbwE"
       },
       "Export": {
         "Name": "sls-SP-Node-Lambda-Functions-dev-BcronJobLambdaFunctionQualifiedArn"

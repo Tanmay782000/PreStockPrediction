@@ -1,6 +1,6 @@
 {
   "D:\\TMZ\\PreMarketStockPrediction\\PreStockPrediction\\serverless.yaml": {
-    "versionFramework": "4.34.0",
+    "versionFramework": "4.35.0",
     "servicePath": "D:\\TMZ\\PreMarketStockPrediction\\PreStockPrediction\\serverless.yaml",
     "serviceConfigFileName": "serverless.yaml",
     "service": {
@@ -979,7 +979,7 @@
     "serviceProviderAwsCfStackName": "SP-DynamoDB-Tables-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ap-south-1:332717545786:stack/SP-DynamoDB-Tables-dev/3fb797f0-f04d-11f0-80ef-0aa932e61479",
     "serviceProviderAwsCfStackCreated": "2026-01-13T06:58:22.159Z",
-    "serviceProviderAwsCfStackUpdated": "2026-04-13T12:40:51.071Z",
+    "serviceProviderAwsCfStackUpdated": "2026-04-28T09:47:33.395Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
