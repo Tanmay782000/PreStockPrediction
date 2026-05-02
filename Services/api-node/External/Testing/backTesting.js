@@ -3,61 +3,75 @@ import yahooFinance from "yahoo-finance2";
 
 const yf = new yahooFinance();
 
-const TWO_DAYS_MS   = 2 * 24 * 60 * 60 * 1000;
-const FIVE_DAYS_MS  = 5 * 24 * 60 * 60 * 1000; // enough to get yesterday's daily close
-const START_DATE_DAILY = Math.floor((Date.now() - FIVE_DAYS_MS)  / 1000);
-const START_DATE_15M   = Math.floor((Date.now() - TWO_DAYS_MS)   / 1000);
+const TWO_DAYS_MS      = 5 * 24 * 60 * 60 * 1000;
+const FIVE_DAYS_MS     = 5 * 24 * 60 * 60 * 1000;
+const START_DATE_DAILY = Math.floor((Date.now() - FIVE_DAYS_MS) / 1000);
+const START_DATE_15M   = Math.floor((Date.now() - TWO_DAYS_MS)  / 1000);
 
 const average = (arr) =>
     arr.length === 0 ? 0 : arr.reduce((a, b) => a + b, 0) / arr.length;
 
 // ================================================================
-//  TIME-ADJUSTED TARGETS — exact copy from live script
-//  candleDate is passed as a real Date object (candle.date)
+//  HELPERS — ported from live bullish script
+// ================================================================
+function toISTDateStr(date) {
+    return new Date(date).toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+}
+
+function isISTToday(date, todayStr) {
+    return toISTDateStr(date) === todayStr;
+}
+
+function validateCandleInterval(quotes, expectedMinutes = 15) {
+    if (quotes.length < 2) return false;
+    const diffs = [];
+    for (let i = 1; i < Math.min(quotes.length, 5); i++) {
+        const diff = (new Date(quotes[i].date) - new Date(quotes[i - 1].date)) / 60000;
+        diffs.push(diff);
+    }
+    const avg = diffs.reduce((a, b) => a + b, 0) / diffs.length;
+    return Math.abs(avg - expectedMinutes) < 2;
+}
+
+// ================================================================
+//  TIME-ADJUSTED TARGETS — exact mirror of live bullish script
+//  FIX: percentages now match live (flat 1.010 / 0.994 across all types/sessions)
 // ================================================================
 function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
-    const istString = candleDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-    const istTime   = new Date(istString);
-    const hour      = istTime.getHours();
-    const mins      = istTime.getMinutes();
-
-    const minutesLeft = (15 * 60 + 15) - (hour * 60 + mins);
+    const istTime   = new Date(candleDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+    const minutesLeft = (15 * 60 + 15) - (istTime.getHours() * 60 + istTime.getMinutes());
     const hoursLeft   = minutesLeft / 60;
 
     if (hoursLeft < 2.0) return null;
 
     if (signalType === "OPENING_DRIVE") {
-        if (hoursLeft >= 4.5) return { target: entryPrice * 1.0070, stopLoss: entryPrice * 0.9965, riskReward: "2.0", session: "EARLY DRIVE" };
-        if (hoursLeft >= 3.0) return { target: entryPrice * 1.0060, stopLoss: entryPrice * 0.9970, riskReward: "2.0", session: "MID DRIVE" };
+        if (hoursLeft >= 4.5) return { target: entryPrice * 1.010, stopLoss: entryPrice * 0.994, riskReward: "2.0", session: "EARLY DRIVE" };
+        if (hoursLeft >= 3.0) return { target: entryPrice * 1.010, stopLoss: entryPrice * 0.994, riskReward: "2.0", session: "MID DRIVE" };
         return null;
     }
 
     if (signalType === "BREAKOUT") {
-        if (hoursLeft >= 4.5) return { target: entryPrice * 1.0100, stopLoss: entryPrice * 0.9950, riskReward: "1.7", session: "EARLY BREAKOUT" };
-        if (hoursLeft >= 3.0) return { target: entryPrice * 1.0080, stopLoss: entryPrice * 0.9960, riskReward: "1.8", session: "MID BREAKOUT" };
-        return null; // late breakout → skip (33% WR proven bad)
+        if (hoursLeft >= 4.5) return { target: entryPrice * 1.010, stopLoss: entryPrice * 0.994, riskReward: "1.7", session: "EARLY BREAKOUT" };
+        if (hoursLeft >= 3.0) return { target: entryPrice * 1.010, stopLoss: entryPrice * 0.994, riskReward: "1.8", session: "MID BREAKOUT" };
+        return null;
     }
 
     if (signalType === "REVERSAL") {
-        if (hoursLeft >= 4.5) return { target: entryPrice * 1.0070, stopLoss: entryPrice * 0.9965, riskReward: "2.0", session: "EARLY REVERSAL" };
-        if (hoursLeft >= 3.0) return { target: entryPrice * 1.0100, stopLoss: entryPrice * 0.9950, riskReward: "1.8", session: "MID REVERSAL" };
-        return        { target: entryPrice * 1.0070, stopLoss: entryPrice * 0.9965, riskReward: "2.0", session: "LATE REVERSAL" };
+        if (hoursLeft >= 4.5) return { target: entryPrice * 1.010, stopLoss: entryPrice * 0.994, riskReward: "2.0", session: "EARLY REVERSAL" };
+        if (hoursLeft >= 3.0) return { target: entryPrice * 1.010, stopLoss: entryPrice * 0.994, riskReward: "1.8", session: "MID REVERSAL" };
+        return        { target: entryPrice * 1.010, stopLoss: entryPrice * 0.994, riskReward: "2.0", session: "LATE REVERSAL" };
     }
 
-    return { target: entryPrice * 1.0070, stopLoss: entryPrice * 0.9965, riskReward: "1.7", session: "DEFAULT" };
+    return { target: entryPrice * 1.007, stopLoss: entryPrice * 0.9965, riskReward: "1.7", session: "DEFAULT" };
 }
 
 // ================================================================
 //  NIFTY BULLISH CHECK — mirrors getNiftySentiment() in live script
-//  Uses a single Nifty candle at index i (same position as stock candle)
-//  Running VWAP computed up to candle i (not full-day, same as live
-//  which computes VWAP from all todayQuotes at scan time → approximated
-//  here as cumulative to avoid look-ahead)
+//  Cumulative VWAP up to candleIdx (no look-ahead)
 // ================================================================
 function isNiftyBullish(todayNiftyQuotes, candleIdx, yesterdayNiftyClose) {
     if (!todayNiftyQuotes[candleIdx]) return false;
 
-    // Compute VWAP from candle 0 → candleIdx (mirrors live: all todayQuotes)
     let tVal = 0, tVol = 0;
     for (let k = 0; k <= candleIdx; k++) {
         const q = todayNiftyQuotes[k];
@@ -66,37 +80,35 @@ function isNiftyBullish(todayNiftyQuotes, candleIdx, yesterdayNiftyClose) {
     }
     const vwap = tVal / tVol;
 
-    const nCandle    = todayNiftyQuotes[candleIdx];
-    const close      = nCandle.close;
-    const open       = nCandle.open;
-    const high       = nCandle.high;
-    const low        = nCandle.low;
+    const { close, open, high, low } = todayNiftyQuotes[candleIdx];
 
-    const isAbovePrev  = close > yesterdayNiftyClose;
-    const isAboveVWAP  = close > vwap * 0.9998;
-    const bodyToRange  = (high - low) > 0 ? Math.abs(close - open) / (high - low) : 0;
-    const isStrong     = bodyToRange > 0.3;
+    const isAbovePrev = close > yesterdayNiftyClose;
+    const isAboveVWAP = close > vwap * 0.9998;
+    const bodyToRange = (high - low) > 0 ? Math.abs(close - open) / (high - low) : 0;
+    const isStrong    = bodyToRange > 0.3;
 
     return isAbovePrev && (isAboveVWAP || isStrong);
 }
 
 // ================================================================
-//  HISTORICAL OPENING VOLUME — same logic as live script
+//  HISTORICAL OPENING VOLUME — mirrors live script
+//  FIX: uses isISTToday() helper and falls back to firstCandle.volume
+//       when no historical candles found (mirrors live fallback)
 // ================================================================
-function getHistoricalOpeningVolume(allStockQuotes, todayStr) {
+function getHistoricalOpeningVolume(allStockQuotes, todayStr, firstCandleVolume) {
     const openingCandles = allStockQuotes.filter(q => {
-        const istDate = new Date(q.date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
-        const dateStr = istDate.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
-        const hours   = istDate.getHours();
-        const mins    = istDate.getMinutes();
-        return dateStr !== todayStr && hours === 9 && mins === 15;
+        if (isISTToday(q.date, todayStr)) return false;
+        const ist = new Date(q.date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+        return ist.getHours() === 9 && ist.getMinutes() === 15;
     });
-    return average(openingCandles.map(q => q.volume));
+    // FIX: fallback to firstCandle.volume when no historical candles (mirrors live)
+    return openingCandles.length > 0
+        ? average(openingCandles.map(q => q.volume))
+        : firstCandleVolume;
 }
 
 // ================================================================
 //  SIMULATE SLIPPAGE — mirrors live limitPrice = price * 1.003
-//  Backtest enters at candle close * 1.003, same as live LIMIT order
 // ================================================================
 function applySlippage(price) {
     return price * 1.003;
@@ -104,17 +116,13 @@ function applySlippage(price) {
 
 // ================================================================
 //  OUTCOME RESOLUTION
-//  Checks subsequent candles for SL or target hit.
-//  If neither hit by EOD → only counts as WIN if close >= target
-//  (not just close > entry — fixes inflated WR from old script)
+//  Conservative: EOD with neither target nor SL hit → LOSS
 // ================================================================
 function resolveOutcome(quotes, fromIdx, entry, target, stopLoss) {
     for (let j = fromIdx; j < quotes.length; j++) {
         if (quotes[j].low  <= stopLoss) return "LOSS";
         if (quotes[j].high >= target)   return "WIN";
     }
-    // EOD: not hit either way — conservative: count as LOSS
-    // (live ROBO order squares off at market; rarely hits exact target at close)
     return "LOSS";
 }
 
@@ -128,7 +136,6 @@ async function backtestStrategy() {
     const stockEntries = Object.entries(Bullish_SYMBOL_MAP);
     console.log(`📊 Processing ${stockEntries.length} stocks...\n`);
 
-    // ── Aggregate counters ────────────────────────────────────────
     let totalWins = 0, totalLosses = 0, totalSkipped = 0;
     let breakoutWins = 0, breakoutLosses = 0;
     let reversalWins = 0, reversalLosses = 0;
@@ -148,10 +155,10 @@ async function backtestStrategy() {
     // ── Fetch Nifty data once ─────────────────────────────────────
     let allNiftyQuotes = [], allNiftyDaily = [];
     try {
-        const niftyIntra  = await yf.chart("^NSEI", { period1: START_DATE_15M,   interval: "15m" });
-        const niftyDaily  = await yf.chart("^NSEI", { period1: START_DATE_DAILY, interval: "1d"  });
-        allNiftyQuotes    = niftyIntra.quotes.filter(q => q.close);
-        allNiftyDaily     = niftyDaily.quotes.filter(q => q.close);
+        const niftyIntra = await yf.chart("^NSEI", { period1: START_DATE_15M,   interval: "15m" });
+        const niftyDaily = await yf.chart("^NSEI", { period1: START_DATE_DAILY, interval: "1d"  });
+        allNiftyQuotes   = niftyIntra.quotes.filter(q => q.close);
+        allNiftyDaily    = niftyDaily.quotes.filter(q => q.close);
         console.log(`✅ Nifty loaded: ${allNiftyQuotes.length} 15m candles\n`);
     } catch (e) {
         console.error("❌ Nifty data sync failed:", e.message);
@@ -170,11 +177,20 @@ async function backtestStrategy() {
 
             if (allStockQuotes.length === 0) { console.log(`⚠️  ${symbolKey}: no data`); continue; }
 
+            // FIX: validate interval — catch Yahoo returning 1m candles (mirrors live)
+            if (!validateCandleInterval(allStockQuotes, 15)) {
+                const actualInterval = (
+                    (new Date(allStockQuotes[1].date) - new Date(allStockQuotes[0].date)) / 60000
+                ).toFixed(0);
+                console.log(`⚠️  ${symbolKey}: wrong interval (${actualInterval}m) — skipping`);
+                continue;
+            }
+
             // Group 15m candles by IST date string
+            // FIX: use toISTDateStr() helper instead of inline date conversion
             const daysMap = {};
             allStockQuotes.forEach(q => {
-                const dateStr = new Date(q.date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
-                    .toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+                const dateStr = toISTDateStr(q.date);
                 if (!daysMap[dateStr]) daysMap[dateStr] = [];
                 daysMap[dateStr].push(q);
             });
@@ -190,101 +206,74 @@ async function backtestStrategy() {
             for (const todayStr of Object.keys(daysMap).sort()) {
                 const todayStockQuotes = daysMap[todayStr];
 
-                // Mirror live: need at least 3 candles
                 if (todayStockQuotes.length < 3) continue;
 
-                // Get today's Nifty candles (same date)
-                const todayNiftyQuotes = allNiftyQuotes.filter(q => {
-                    const d = new Date(q.date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
-                    return d.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" }) === todayStr;
-                });
+                // Get today's Nifty candles (same IST date)
+                // FIX: use isISTToday() helper
+                const todayNiftyQuotes = allNiftyQuotes.filter(q => isISTToday(q.date, todayStr));
 
                 if (todayNiftyQuotes.length < 3) continue;
 
                 // Yesterday's closes
-                const nDailyIdx = allNiftyDaily.findIndex(q =>
-                    new Date(q.date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
-                        .toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" }) === todayStr
-                );
+                const nDailyIdx = allNiftyDaily.findIndex(q => isISTToday(q.date, todayStr));
                 if (nDailyIdx <= 0) continue;
                 const yesterdayNiftyClose = allNiftyDaily[nDailyIdx - 1].close;
 
-                const sDailyIdx = allDailyQuotes.findIndex(q =>
-                    new Date(q.date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
-                        .toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" }) === todayStr
-                );
+                const sDailyIdx = allDailyQuotes.findIndex(q => isISTToday(q.date, todayStr));
                 if (sDailyIdx <= 0) continue;
                 const yesterdayStockClose = allDailyQuotes[sDailyIdx - 1].close;
 
-                // ── Gap filter — mirrors live script ──────────────
+                // Gap filter — mirrors live
                 const gapPercent = ((todayStockQuotes[0].open - yesterdayStockClose) / yesterdayStockClose) * 100;
                 if (gapPercent > 5.0) continue;
 
-                // ── Morning reference values — mirrors live ────────
-                const firstCandle  = todayStockQuotes[0];
-                const secondCandle = todayStockQuotes[1];
-                const morningHigh  = Math.max(firstCandle.high, secondCandle.high);
+                // Morning reference values — mirrors live
+                const firstCandle   = todayStockQuotes[0];
+                const secondCandle  = todayStockQuotes[1];
+                const morningHigh   = Math.max(firstCandle.high, secondCandle.high);
                 const avgMorningVol = (firstCandle.volume + secondCandle.volume) / 2;
 
-                // ── Historical opening volume — mirrors live ───────
-                const historicalAvgVol = getHistoricalOpeningVolume(allStockQuotes, todayStr);
-
-                // ── Opening Drive check — mirrors live exactly ─────
-                // Live checks: firstCandle, secondCandle, then lastCandle
-                // In live, lastCandle is whatever candle triggered the cron
-                // In backtest we scan every candle from index 2 onward as potential "lastCandle"
-                // to find the earliest trigger — same as live would find it candle by candle
-
-                const firstBody      = Math.abs(firstCandle.close - firstCandle.open);
-                const firstRange     = firstCandle.high - firstCandle.low;
-                const firstBodyRatio = firstRange > 0 ? firstBody / firstRange : 0;
-
-                // Candle 1 + 2 conditions (static per day)
-                const openingDriveBase =
-                    historicalAvgVol > 0 &&
-                    firstCandle.close > firstCandle.open &&   // candle 1 green
-                    firstBodyRatio > 0.6 &&                    // strong body
-                    firstCandle.volume > historicalAvgVol * 2.0 && // 2x hist vol
-                    secondCandle.close > secondCandle.open;   // candle 2 green
+                // FIX: pass firstCandle.volume as fallback (mirrors live historicalAvgVol fallback)
+                const historicalAvgVol = getHistoricalOpeningVolume(
+                    allStockQuotes, todayStr, firstCandle.volume
+                );
 
                 let tradedToday = false;
 
-                // Scan from candle index 2 onward (lastCandle in live)
+                // Scan from candle index 2 onward
                 for (let i = 2; i < todayStockQuotes.length; i++) {
                     if (tradedToday) break;
 
                     const lastCandle = todayStockQuotes[i];
                     const prevCandle = todayStockQuotes[i - 1];
 
-                    // ── VWAP: computed over all today's candles UP TO i ──
-                    // Live computes VWAP from ALL todayQuotes at scan time.
-                    // Since live runs at candle close, all candles 0→i are final.
+                    // Cumulative VWAP up to candle i (no look-ahead)
                     let sVal = 0, sVol = 0;
                     for (let k = 0; k <= i; k++) {
                         sVal += todayStockQuotes[k].close * todayStockQuotes[k].volume;
                         sVol += todayStockQuotes[k].volume;
                     }
-                    const stockVWAP = sVal / sVol;
+                    const stockVWAP = sVol > 0 ? sVal / sVol : 0;
 
-                    // ── Nifty sentiment at this candle index ──────
-                    // Use same index i — if Nifty has fewer candles, skip
+                    // Nifty sentiment at this candle index
                     const niftyOk = isNiftyBullish(todayNiftyQuotes, i, yesterdayNiftyClose);
                     if (!niftyOk) continue;
 
-                    // ── Signal conditions — exact copy of live ────
+                    // ── Signal conditions — exact mirror of live ──
                     const isBullishCandle = lastCandle.close > lastCandle.open;
 
                     // BREAKOUT
-                    const morningRange = Math.max(firstCandle.high, secondCandle.high)
-                                       - Math.min(firstCandle.low,  secondCandle.low);
+                    const morningRange =
+                        Math.max(firstCandle.high, secondCandle.high) -
+                        Math.min(firstCandle.low,  secondCandle.low);
                     const isMeaningfulMorningRange = morningRange > lastCandle.close * 0.003;
 
                     const isBreakout =
                         isBullishCandle &&
                         isMeaningfulMorningRange &&
-                        lastCandle.close > morningHigh * 1.001 &&  // meaningful break
-                        prevCandle.close <= morningHigh &&          // first candle to break
-                        lastCandle.close > stockVWAP;               // above VWAP
+                        lastCandle.close > morningHigh * 1.001 &&
+                        prevCandle.close <= morningHigh &&
+                        lastCandle.close > stockVWAP;
 
                     // REVERSAL (reclaimingValue)
                     const candleMid     = (lastCandle.high + lastCandle.low) / 2;
@@ -293,51 +282,62 @@ async function backtestStrategy() {
 
                     const isReclaimingValue =
                         isBullishCandle &&
-                        prevCandle.close < stockVWAP &&             // was below VWAP
-                        lastCandle.close > stockVWAP * 1.0005 &&   // meaningful close above
-                        testedVWAP &&                               // wick dipped into VWAP
-                        closeAboveMid;                              // closed upper half
+                        prevCandle.close < stockVWAP &&
+                        lastCandle.close > stockVWAP * 1.0005 &&
+                        testedVWAP &&
+                        closeAboveMid;
 
-                    // Volume + candle strength — exact thresholds from live
+                    // Volume + candle strength
                     const hasVolumeSurge = lastCandle.volume > avgMorningVol * 1.5;
                     const sBody = Math.abs(lastCandle.close - lastCandle.open);
                     const sRange = lastCandle.high - lastCandle.low;
                     const isStrongCandle = isBullishCandle && (sRange > 0 ? sBody / sRange > 0.5 : false);
 
-                    // OPENING DRIVE: candle 1+2 base + lastCandle conditions
+                    // FIX: OPENING DRIVE — mirrors live exactly:
+                    //   firstCandle.close > firstCandle.open (green)
+                    //   firstCandle.volume > historicalAvgVol * 1.5  (was 2.0x, removed secondCandle check)
+                    //   lastCandle.close > firstCandle.open           (still holding above open)
+                    //   lastCandle.close > stockVWAP                  (above VWAP)
+                    //   Removed: firstBodyRatio > 0.6, secondCandle.close > secondCandle.open
                     const isOpeningDrive =
-                        openingDriveBase &&
-                        lastCandle.close > lastCandle.open &&  // lastCandle green
-                        lastCandle.close > stockVWAP &&        // above VWAP
-                        lastCandle.close > firstCandle.open;   // above opening price
+                        firstCandle.close > firstCandle.open &&
+                        firstCandle.volume > historicalAvgVol * 1.5 &&
+                        lastCandle.close > firstCandle.open &&
+                        lastCandle.close > stockVWAP;
 
-                    const isRegularSignal      = hasVolumeSurge && isStrongCandle && (isReclaimingValue);
+                    // FIX: isRegularSignal now includes isBreakout (was missing)
+                    const isRegularSignal      = hasVolumeSurge && isStrongCandle && (isBreakout || isReclaimingValue);
                     const isOpeningDriveSignal = isOpeningDrive && isStrongCandle;
 
                     if (!isRegularSignal && !isOpeningDriveSignal) continue;
 
-                    // ── Signal fired — determine type ─────────────
+                    // Signal type — mirrors live priority order
                     const signalType = isBreakout
                         ? "BREAKOUT"
                         : isOpeningDriveSignal
                             ? "OPENING_DRIVE"
                             : "REVERSAL";
 
-                    // ── Time-adjusted targets ─────────────────────
+                    // Time-adjusted targets (calculated from raw lastCandle.close)
                     const targets = getTimeAdjustedTargets(lastCandle.close, signalType, lastCandle.date);
-                    if (!targets) { stats.skipped++; totalSkipped++; break; } // too late → skip day
+                    if (!targets) { stats.skipped++; totalSkipped++; break; }
 
-                    // ── Apply slippage (mirrors live limitPrice * 1.003) ──
+                    // FIX: apply slippage to get actual entry, then compute
+                    //   target and SL directly from entry — no ratio rescaling.
+                    //   Live: limitPrice = price * 1.003
+                    //         squareoffDiff = target - limitPrice
+                    //         stoplossDiff  = limitPrice - stopLoss
+                    //   So effective target = limitPrice + squareoffDiff = limitPrice * (target_pct)
+                    //   Cleanest mirror: recalculate targets from entry directly.
                     const entry    = applySlippage(lastCandle.close);
-                    // Recalculate target/SL from slippage-adjusted entry
-                    // (live calculates squareoffDiff = target - limitPrice)
-                    const target   = applySlippage(lastCandle.close) * (targets.target   / lastCandle.close);
-                    const stopLoss = applySlippage(lastCandle.close) * (targets.stopLoss / lastCandle.close);
+                    const targetPct  = targets.target   / lastCandle.close; // e.g. 1.010
+                    const slPct      = targets.stopLoss / lastCandle.close; // e.g. 0.994
+                    const target     = entry * targetPct;
+                    const stopLoss   = entry * slPct;
 
-                    // ── Resolve outcome from next candle onward ───
+                    // Resolve outcome from next candle onward
                     const outcome = resolveOutcome(todayStockQuotes, i + 1, entry, target, stopLoss);
 
-                    // ── Record result ─────────────────────────────
                     if (sessionStats[targets.session]) {
                         sessionStats[targets.session][outcome === "WIN" ? "wins" : "losses"]++;
                     }
@@ -354,15 +354,15 @@ async function backtestStrategy() {
                         if (signalType === "OPENING_DRIVE") { stats.openingDrive.losses++; openingDriveLosses++; }
                     }
 
-                    tradedToday = true; // one trade per stock per day (mirrors live DB cap)
+                    tradedToday = true;
                 }
             }
 
             totalWins   += stats.wins;
             totalLosses += stats.losses;
 
-            const total = stats.wins + stats.losses;
-            const wr    = total > 0 ? ((stats.wins / total) * 100).toFixed(1) : "0.0";
+            const total  = stats.wins + stats.losses;
+            const wr     = total > 0 ? ((stats.wins / total) * 100).toFixed(1) : "0.0";
             const odTotal = stats.openingDrive.wins + stats.openingDrive.losses;
             const odWR    = odTotal > 0 ? ((stats.openingDrive.wins / odTotal) * 100).toFixed(1) : "N/A";
 
@@ -397,7 +397,6 @@ async function backtestStrategy() {
     console.log(`🔄 REVERSAL      : ${revTotal} trades | WR: ${revTotal > 0 ? ((reversalWins  / revTotal) * 100).toFixed(2) : 0}%`);
     console.log(`🚀 OPENING DRIVE : ${odTotal}  trades | WR: ${odTotal  > 0 ? ((openingDriveWins / odTotal) * 100).toFixed(2) : 0}%`);
 
-    // Break-even WR at each RR (after slippage already baked into entry)
     console.log("\n📐 BREAK-EVEN REFERENCE:");
     console.log(`   RR 2.0 → need 33.3% WR | RR 1.8 → need 35.7% | RR 1.7 → need 37.0%`);
     console.log(`   (Add ~3-5% for brokerage; effective break-even ~37-42%)`);

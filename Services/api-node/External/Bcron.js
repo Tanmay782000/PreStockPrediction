@@ -39,7 +39,7 @@ const angelClient = axios.create({
 // ---------------- TECHNICAL HELPERS ----------------
 const average = (arr) =>
   arr.length === 0 ? 0 : arr.reduce((a, b) => a + b, 0) / arr.length;
-
+ 
 // ================================================================
 //  CANDLE-CLOSE GUARD
 // ================================================================
@@ -47,17 +47,43 @@ function isNearCandleClose() {
   const now = new Date(
     new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
   );
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
-  const secondsIntoInterval = (minutes % 15) * 60 + seconds;
-  return secondsIntoInterval <= 150;
+  const secondsIntoInterval = (now.getMinutes() % 15) * 60 + now.getSeconds();
+  return secondsIntoInterval <= 120;
 }
-
+ 
+// ================================================================
+//  HELPERS  ← ported from bullish script
+// ================================================================
+function toISTDateStr(date) {
+  return new Date(date).toLocaleDateString("en-CA", {
+    timeZone: "Asia/Kolkata",
+  });
+}
+ 
+function isISTToday(date, todayStr) {
+  return toISTDateStr(date) === todayStr;
+}
+ 
+function validateCandleInterval(quotes, expectedMinutes = 15) {
+  if (quotes.length < 2) return false;
+  const diffs = [];
+  for (let i = 1; i < Math.min(quotes.length, 5); i++) {
+    const diff = (new Date(quotes[i].date) - new Date(quotes[i - 1].date)) / 60000;
+    diffs.push(diff);
+  }
+  const avg = diffs.reduce((a, b) => a + b, 0) / diffs.length;
+  return Math.abs(avg - expectedMinutes) < 2;
+}
+ 
 // ================================================================
 //  NIFTY BEARISH SENTIMENT ENGINE — uses AngelOne API
 // ================================================================
 async function getNiftyBearishSentiment() {
-  const today = new Date().toISOString().split("T")[0];
+  // ← FIX: use IST date string, not UTC ISO string
+  const today = new Date().toLocaleDateString("en-CA", {
+    timeZone: "Asia/Kolkata",
+  });
+ 
   try {
     const intraDayRes = await angelClient.post(
       "/rest/secure/angelbroking/historical/v1/getCandleData",
@@ -69,7 +95,7 @@ async function getNiftyBearishSentiment() {
         todate: `${today} 15:30`,
       },
     );
-
+ 
     const dailyRes = await angelClient.post(
       "/rest/secure/angelbroking/historical/v1/getCandleData",
       {
@@ -80,33 +106,50 @@ async function getNiftyBearishSentiment() {
         todate: `${today} 15:30`,
       },
     );
-
+ 
     const quotes = intraDayRes.data?.data;
     const dailyQuotes = dailyRes.data?.data;
-
+ 
     if (!quotes || quotes.length === 0) {
       return { isBearish: false, reason: "Market Not Open" };
     }
-
+ 
     const yesterdayClose = dailyQuotes[dailyQuotes.length - 2][4];
-    const last = quotes[quotes.length - 1];
-    const [, open, high, low, close, volume] = last;
-
-    let tVal = 0,
-      tVol = 0;
-    quotes.forEach((q) => {
+ 
+    // ← FIX: drop live (unclosed) Nifty candle — mirrors bullish script
+    const closedQuotes = (() => {
+      if (quotes.length < 2) return quotes;
+      const last = quotes[quotes.length - 1];
+      const prev = quotes[quotes.length - 2];
+      const lastTs = new Date(last[0]).getTime();
+      const prevTs = new Date(prev[0]).getTime();
+      const intervalMs = lastTs - prevTs;
+      const candleCloseTime = lastTs + intervalMs;
+      if (candleCloseTime > Date.now()) return quotes.slice(0, -1);
+      return quotes;
+    })();
+ 
+    if (closedQuotes.length === 0) {
+      return { isBearish: false, reason: "Market Not Open" };
+    }
+ 
+    const last = closedQuotes[closedQuotes.length - 1];
+    const [, open, high, low, close] = last;
+ 
+    let tVal = 0, tVol = 0;
+    closedQuotes.forEach((q) => {
       tVal += q[4] * (q[5] || 1);
       tVol += q[5] || 1;
     });
     const vwap = tVal / tVol;
-
+ 
     const isBelowPrev = close < yesterdayClose;
     const isBelowVWAP = close < vwap * 1.0002;
     const isStrongRed =
       high - low > 0 ? Math.abs(close - open) / (high - low) > 0.3 : false;
-
+ 
     const isBearish = isBelowPrev && (isBelowVWAP || isStrongRed);
-
+ 
     return {
       isBearish,
       price: close.toFixed(2),
@@ -117,9 +160,9 @@ async function getNiftyBearishSentiment() {
     return { isBearish: false, status: "ERR" };
   }
 }
-
+ 
 // ===============================================================
-// Last price of stock — mirrors bullish script exactly
+//  LAST PRICE — SmartAPI LTP
 // ===============================================================
 async function getLastPrice(symboltoken, exchange = "NSE") {
   try {
@@ -127,327 +170,280 @@ async function getLastPrice(symboltoken, exchange = "NSE") {
       "/rest/secure/angelbroking/market/v1/quote/",
       {
         mode: "LTP",
-        exchangeTokens: {
-          [exchange]: [symboltoken],
-        },
+        exchangeTokens: { [exchange]: [symboltoken] },
       },
     );
-
-    const ltp = res.data?.data?.fetched?.[0]?.ltp;
-    return ltp;
+    return res.data?.data?.fetched?.[0]?.ltp ?? null;
   } catch (err) {
     console.error(`❌ LTP fetch failed — ${err.message}`);
     return null;
   }
 }
-
+ 
 // ================================================================
 //  BEARISH STOCK SIGNAL ENGINE — uses Yahoo Finance API
 // ================================================================
 async function getBearishExpertSignal(symbol, niftyStatus, smartAPISymbol) {
   try {
-    console.log("By Passing Nifty Filter", niftyStatus, symbol,smartAPISymbol);
-
-    // if (!niftyStatus.isBearish) {
-    //   return { status: "WAITING", reason: "Nifty Bullish/Strong" };
-    // }
-
+    console.log("Processing:", symbol, smartAPISymbol);
+ 
     const intradayData = await yf.chart(`${symbol}.NS`, {
-      period1: Math.floor(Date.now() / 1000) - 48 * 60 * 60,
-      interval: "15m",
-    });
-
-    const dailyData = await yf.chart(`${symbol}.NS`, {
       period1: Math.floor(Date.now() / 1000) - 5 * 24 * 60 * 60,
+      period2: Math.floor(Date.now() / 1000),
+      interval: "15m",
+      includePrePost: false,
+    });
+ 
+    const dailyData = await yf.chart(`${symbol}.NS`, {
+      period1: Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60,
       interval: "1d",
     });
-
+ 
     const iQuotes = intradayData.quotes.filter((q) => q.close && q.volume);
     const dQuotes = dailyData.quotes.filter((q) => q.close);
-
+ 
+    // ← FIX: IST-aware todayStr (was UTC .toISOString().split("T")[0])
     const todayStr = new Date().toLocaleDateString("en-CA", {
       timeZone: "Asia/Kolkata",
     });
-
-    const todayQuotes = iQuotes.filter((q) =>
-      new Date(q.date).toISOString().startsWith(todayStr),
-    );
-
-    if (todayQuotes.length < 3) {
-      return {
-        status: "WAITING",
-        reason: `Data Sync (${todayQuotes.length}/3)`,
-      };
+ 
+    // ── Step 1: filter today's candles using IST ──────────────────
+    // ← FIX: use isISTToday() helper (was .toISOString().startsWith(todayStr))
+    const allTodayQuotes = iQuotes.filter((q) => isISTToday(q.date, todayStr));
+ 
+    // ── Step 2: validate interval — catch Yahoo returning 1m candles ──
+    // ← FIX: added interval validation block (was missing in bearish)
+    if (allTodayQuotes.length >= 2 && !validateCandleInterval(allTodayQuotes, 15)) {
+      const actualInterval = (
+        (new Date(allTodayQuotes[1].date) - new Date(allTodayQuotes[0].date)) / 60000
+      ).toFixed(0);
+      console.error(`❌ Wrong interval for ${symbol}: got ${actualInterval}min candles`);
+      return { status: "REJECTED", reason: `Wrong interval (${actualInterval}m)` };
     }
-
+ 
+    // ── Step 3: drop live (unclosed) candle ───────────────────────
+    // ← FIX: added live-candle drop block (was missing in bearish)
+    const todayQuotes = (() => {
+      if (allTodayQuotes.length < 2) return allTodayQuotes;
+      const last = allTodayQuotes[allTodayQuotes.length - 1];
+      const prev = allTodayQuotes[allTodayQuotes.length - 2];
+      const intervalMs = new Date(last.date) - new Date(prev.date);
+      const candleCloseTime = new Date(last.date).getTime() + intervalMs;
+      if (candleCloseTime > Date.now()) {
+        console.log(
+          `⚠️ Dropping live candle: ${new Date(last.date).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" })}`,
+        );
+        return allTodayQuotes.slice(0, -1);
+      }
+      return allTodayQuotes;
+    })();
+ 
+    if (todayQuotes.length < 2)
+      return { status: "WAITING", reason: `Need 2 closed candles (${todayQuotes.length}/2)` };
+ 
+    if (dQuotes.length < 2)
+      return { status: "WAITING", reason: "Insufficient daily data" };
+ 
+    // ── Calculations ──────────────────────────────────────────────
     const yesterdayClose = dQuotes[dQuotes.length - 2].close;
-
-    const gapPercent =
-      ((todayQuotes[0].open - yesterdayClose) / yesterdayClose) * 100;
-    if (gapPercent < -5.0)
-      return { status: "REJECTED", reason: "High Gap Down" };
-
+    const gapPercent = ((todayQuotes[0].open - yesterdayClose) / yesterdayClose) * 100;
+    if (gapPercent < -5.0) return { status: "REJECTED", reason: "High Gap Down" };
+ 
     const morningLow = Math.min(todayQuotes[0].low, todayQuotes[1].low);
     const avgMorningVol = (todayQuotes[0].volume + todayQuotes[1].volume) / 2;
-
-const lastIdx = todayQuotes.length - 1;
-let sVal = 0, sVol = 0;
-for (let k = 0; k <= lastIdx; k++) {
-  sVal += todayQuotes[k].close * todayQuotes[k].volume;
-  sVol += todayQuotes[k].volume;
-}
-
-    const stockVWAP = sVal / sVol;
+ 
+    let sVal = 0, sVol = 0;
+    for (let k = 0; k < todayQuotes.length; k++) {
+      sVal += todayQuotes[k].close * todayQuotes[k].volume;
+      sVol += todayQuotes[k].volume;
+    }
+    const stockVWAP = sVol > 0 ? sVal / sVol : 0;
+ 
+    // lastCandle  = most recent CLOSED candle
+    // prevCandle  = one before that
     const lastCandle = todayQuotes[todayQuotes.length - 1];
     const prevCandle = todayQuotes[todayQuotes.length - 2];
-    const secondCandle = todayQuotes[1];
-
-    const isBearishCandle = lastCandle.close < lastCandle.open;
-
-    // ── BEARISH OPENING DRIVE LOGIC ───────────────────────────────────
-    const historicalOpeningCandles = iQuotes.filter((q) => {
-      const date = new Date(q.date);
-      const istDate = new Date(
-        date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
-      );
-      const hours = istDate.getHours();
-      const minutes = istDate.getMinutes();
-      const dateStr = istDate.toLocaleDateString("en-CA", {
-        timeZone: "Asia/Kolkata",
-      });
-      return dateStr !== todayStr && hours === 9 && minutes === 15;
-    });
-
-    const historicalAvgVol = average(
-      historicalOpeningCandles.map((q) => q.volume),
-    );
-
     const firstCandle = todayQuotes[0];
-    const firstBody = Math.abs(firstCandle.close - firstCandle.open);
-    const firstRange = firstCandle.high - firstCandle.low;
-    const firstBodyRatio = firstRange > 0 ? firstBody / firstRange : 0;
-
+ 
+    console.log(
+      `   lastCandle  : ${new Date(lastCandle.date).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" })} close=${lastCandle.close}`,
+    );
+    console.log(
+      `   prevCandle  : ${new Date(prevCandle.date).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" })} close=${prevCandle.close}`,
+    );
+ 
+    // ── Signal logic ──────────────────────────────────────────────
+    const isBearishCandle = lastCandle.close < lastCandle.open;
+ 
+    // ── BEARISH OPENING DRIVE ─────────────────────────────────────
+    const historicalOpeningCandles = iQuotes.filter((q) => {
+      if (isISTToday(q.date, todayStr)) return false;
+      const ist = new Date(
+        new Date(q.date).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+      );
+      return ist.getHours() === 9 && ist.getMinutes() === 15;
+    });
+ 
+    const historicalAvgVol =
+      historicalOpeningCandles.length > 0
+        ? average(historicalOpeningCandles.map((q) => q.volume))
+        : firstCandle.volume;
+ 
     const isOpeningDriveBearish =
-          firstCandle.close < firstCandle.open &&        // first candle is red
-          firstCandle.volume > historicalAvgVol * 1.5 && // above average volume
-          lastCandle.close < firstCandle.open;            // still holding below open
-
-    // ── REGULAR BEARISH CONDITIONS ────────────────────────────────────
+      firstCandle.close < firstCandle.open &&
+      firstCandle.volume > historicalAvgVol * 1.5 &&
+      lastCandle.close < firstCandle.open;
+ 
+    // ── REGULAR BEARISH CONDITIONS ────────────────────────────────
     const morningRange =
       Math.max(todayQuotes[0].high, todayQuotes[1].high) -
       Math.min(todayQuotes[0].low, todayQuotes[1].low);
     const isMeaningfulMorningRange = morningRange > lastCandle.close * 0.003;
-
+ 
     const isBreakdown =
       isBearishCandle &&
       isMeaningfulMorningRange &&
       lastCandle.close < morningLow * 0.999 &&
       prevCandle.close >= morningLow &&
       lastCandle.close < stockVWAP;
-
+ 
     const candleMid = (lastCandle.high + lastCandle.low) / 2;
     const testedVWAP = lastCandle.high >= stockVWAP * 0.9992;
     const closeBelowMid = lastCandle.close < candleMid;
-
+ 
     const isLosingValue =
       isBearishCandle &&
       prevCandle.close > stockVWAP &&
       lastCandle.close < stockVWAP * 0.9995 &&
       testedVWAP &&
       closeBelowMid;
-
+ 
     const hasVolumeSurge = lastCandle.volume > avgMorningVol * 1.5;
-
+ 
     const sBody = Math.abs(lastCandle.close - lastCandle.open);
     const sRange = lastCandle.high - lastCandle.low;
-
     const isStrongRed =
       isBearishCandle && (sRange > 0 ? sBody / sRange > 0.5 : false);
-
+ 
     const isRegularBearishSignal =
       hasVolumeSurge && isStrongRed && (isBreakdown || isLosingValue);
     const isOpeningDriveBearishSignal = isOpeningDriveBearish && isStrongRed;
-
+ 
     if (isRegularBearishSignal || isOpeningDriveBearishSignal) {
-      console.log("lastCandle.close", lastCandle.close);
-      console.log("stockVWAP", stockVWAP);
-      console.log("prevCandle.close", prevCandle.close);
-      console.log("lastCandle.volume", lastCandle.volume);
-      console.log("isStrongRed", sBody / sRange);
-      console.log("Stock is going to place SHORT");
-
-const signalType = isOpeningDriveBearishSignal
-  ? "OPENING_DRIVE"
-  : isBreakdown
-    ? "BREAKDOWN"
-    : "VALUE_LOSS";
-      
-      console.log("Signal Type:", signalType);
-      // ── Fetch live LTP via SmartAPI (mirrors bullish script) ──────────
+      const signalType = isOpeningDriveBearishSignal
+        ? "OPENING_DRIVE"
+        : isBreakdown
+          ? "BREAKDOWN"
+          : "VALUE_LOSS";
+ 
+      console.log(`\n🔥 SIGNAL: ${symbol} — ${signalType}`);
+      console.log(`   Closed candles  : ${todayQuotes.length}`);
+      console.log(`   lastCandle.close: ${lastCandle.close}`);
+      console.log(`   stockVWAP       : ${stockVWAP.toFixed(2)}`);
+      console.log(`   prevCandle.close: ${prevCandle.close}`);
+      console.log(`   volume surge    : ${lastCandle.volume} vs avg ${avgMorningVol.toFixed(0)}`);
+      console.log(`   body/range      : ${(sBody / sRange).toFixed(2)}`);
+      console.log(`   hist candles    : ${historicalOpeningCandles.length}`);
+ 
       const lastPrice = await getLastPrice(smartAPISymbol);
-
-            // ── Guard: LTP fetch failed ───────────────────────────────────────
-      if (lastPrice == null || lastPrice == undefined || lastPrice == 0) {
-        console.log(`⚠️ Failed to fetch LTP for ${symbol}. Using last candle close as fallback.`);
-        return { status: "Error", price: lastCandle.close.toFixed(2), reason: "LTP Fetch Failed" };
+ 
+      if (!lastPrice) {
+        console.log(`⚠️ LTP fetch failed for ${symbol}.`);
+        return {
+          status: "Error",
+          price: lastCandle.close.toFixed(2),
+          reason: "LTP Fetch Failed",
+        };
       }
-
-      const getTimeAdjustedTarget = await getTimeAdjustedTargets(
+ 
+      const timeAdjusted = await getTimeAdjustedTargets(
         lastPrice,
         signalType,
-        new Date(lastCandle.date)
+        new Date(lastCandle.date),
       );
-
-      // ── Guard: Too late to trade ──────────────────────────────────────
-      if (!getTimeAdjustedTarget) {
-        return { status: "WAITING", reason: "Too Late To Trade" };
+ 
+      if (!timeAdjusted) {
+        console.log(`⏭️ ${symbol} — outside valid trading window`);
+        return { status: "WAITING", reason: "Outside Trading Window" };
       }
-
-      const showDate = new Date().toLocaleString("en-IN", {
-        timeZone: "Asia/Kolkata",
-      });
-
+ 
       return {
         status: "TRIGGERED",
-        type: getTimeAdjustedTarget.session,
-        symbol: symbol,          // live LTP used as symbolKey (mirrors bullish)
+        type: timeAdjusted.session,
+        symbol,
         price: lastPrice.toFixed(2),
-        time: showDate,
+        time: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
         date: todayStr,
-        target: getTimeAdjustedTarget.target,
-        stopLoss: getTimeAdjustedTarget.stopLoss,
-        riskReward: getTimeAdjustedTarget.riskReward,
-        stockToken: smartAPISymbol, // stored for order placement
+        target: timeAdjusted.target,
+        stopLoss: timeAdjusted.stopLoss,
+        riskReward: timeAdjusted.riskReward,
+        stockToken: smartAPISymbol,
       };
     }
-
+ 
     return { status: "WAITING", price: lastCandle.close.toFixed(2) };
   } catch (err) {
+    console.error(`❌ Error in getBearishExpertSignal(${symbol}):`, err.message);
     return { status: "ERROR", message: err.message };
   }
 }
-
+ 
 // ================================================================
 //  TIME-ADJUSTED TARGETS — BEARISH (SHORT) VERSION
-//  Target / SL percentages now mirror bullish mode exactly.
-//  Direction is inverted: target goes DOWN, stopLoss goes UP.
 // ================================================================
 async function getTimeAdjustedTargets(entryPrice, signalType, candleDate) {
-  const istString = candleDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-  const istTime   = new Date(istString);
-  const hour      = istTime.getHours();
-  const minutes   = istTime.getMinutes();
-
-  const minutesLeft = (15 * 60 + 15) - (hour * 60 + minutes);
-  const hoursLeft   = minutesLeft / 60;
-
+  const istTime = new Date(
+    candleDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+  );
+  const minutesLeft = 15 * 60 + 15 - (istTime.getHours() * 60 + istTime.getMinutes());
+  const hoursLeft = minutesLeft / 60;
+ 
   if (hoursLeft < 2.0) return null;
-
-  // ── OPENING DRIVE ─────────────────────────────────────────────
-  // Mirrors bull: 0.70% target / 0.35% SL = 2.0 RR (inverted for short)
+ 
   if (signalType === "OPENING_DRIVE") {
-    if (hoursLeft >= 4.5) {
-      return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
-        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
-        riskReward: "2.0",
-        session:    "EARLY DRIVE",
-      };
-    } else if (hoursLeft >= 3.0) {
-      return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
-        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
-        riskReward: "2.0",
-        session:    "MID DRIVE",
-      };
-    } else {
-      return null;
-    }
+    if (hoursLeft >= 4.5) return { target: (entryPrice * (1 - 0.0100)).toFixed(2), stopLoss: (entryPrice * (1 + 0.0060)).toFixed(2), riskReward: "2.0", session: "EARLY DRIVE" };
+    if (hoursLeft >= 3.0) return { target: (entryPrice * (1 - 0.0100)).toFixed(2), stopLoss: (entryPrice * (1 + 0.0060)).toFixed(2), riskReward: "2.0", session: "MID DRIVE" };
+    return null;
   }
-
-  // ── BREAKDOWN (mirrors BREAKOUT) ───────────────────────────────
-  // Mirrors bull: 1.0% target / 0.5% SL early; 0.8% / 0.4% mid
+ 
   if (signalType === "BREAKDOWN") {
-    if (hoursLeft >= 4.5) {
-      return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
-        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
-        riskReward: "1.7",
-        session:    "EARLY BREAKDOWN",
-      };
-    } else if (hoursLeft >= 3.0) {
-      return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
-        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
-        riskReward: "1.8",
-        session:    "MID BREAKDOWN",
-      };
-    } else {
-      return null;
-    }
+    if (hoursLeft >= 4.5) return { target: (entryPrice * (1 - 0.0100)).toFixed(2), stopLoss: (entryPrice * (1 + 0.0060)).toFixed(2), riskReward: "1.7", session: "EARLY BREAKDOWN" };
+    if (hoursLeft >= 3.0) return { target: (entryPrice * (1 - 0.0100)).toFixed(2), stopLoss: (entryPrice * (1 + 0.0060)).toFixed(2), riskReward: "1.8", session: "MID BREAKDOWN" };
+    return null;
   }
-
-  // ── VALUE LOSS (mirrors REVERSAL) ──────────────────────────────
-  // Mirrors bull REVERSAL: early tight, mid wide, late tight
+ 
   if (signalType === "VALUE_LOSS") {
-    if (hoursLeft >= 4.5) {
-      return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
-        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
-        riskReward: "2.0",
-        session:    "EARLY VALUE LOSS",
-      };
-    } else if (hoursLeft >= 3.0) {
-      return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
-        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
-        riskReward: "1.8",
-        session:    "MID VALUE LOSS",
-      };
-    } else {
-      return {
-        target:     (entryPrice * (1 - 0.0100)).toFixed(2), // -1.0%
-        stopLoss:   (entryPrice * (1 + 0.0060)).toFixed(2), // +0.60%
-        riskReward: "2.0",
-        session:    "LATE VALUE LOSS",
-      };
-    }
+    if (hoursLeft >= 4.5) return { target: (entryPrice * (1 - 0.0100)).toFixed(2), stopLoss: (entryPrice * (1 + 0.0060)).toFixed(2), riskReward: "2.0", session: "EARLY VALUE LOSS" };
+    if (hoursLeft >= 3.0) return { target: (entryPrice * (1 - 0.0100)).toFixed(2), stopLoss: (entryPrice * (1 + 0.0060)).toFixed(2), riskReward: "1.8", session: "MID VALUE LOSS" };
+    return { target: (entryPrice * (1 - 0.0100)).toFixed(2), stopLoss: (entryPrice * (1 + 0.0060)).toFixed(2), riskReward: "2.0", session: "LATE VALUE LOSS" };
   }
-
-  // ── FALLBACK ──────────────────────────────────────────────────
-  return {
-    target:     (entryPrice * (1 - 0.0070)).toFixed(2),
-    stopLoss:   (entryPrice * (1 + 0.0035)).toFixed(2),
-    riskReward: "2.0",
-    session:    "DEFAULT",
-  };
+ 
+  return { target: (entryPrice * (1 - 0.0070)).toFixed(2), stopLoss: (entryPrice * (1 + 0.0035)).toFixed(2), riskReward: "2.0", session: "DEFAULT" };
 }
-
-// ---------------- DATABASE OPERATION ----------------
+ 
+// ================================================================
+//  DATABASE OPERATION
+// ================================================================
 async function insertStock(signal) {
   const getStocks = await client.send(
     new ScanCommand({ TableName: PlaceStocks ?? "BearPlacedStocks" }),
   );
-
+ 
   if (getStocks.Items.length >= 2) {
     console.log("⚠️ Already have 2 stocks in the system. Skipping insertion.");
     return false;
   }
-
-  console.log("SIGNAL TO INSERT", signal);
-
-  const alreadyExists = getStocks.Items.some(
-    (s) => s.symbolKey === signal.symbol,
-  );
+ 
+  const alreadyExists = getStocks.Items.some((s) => s.symbolKey === signal.symbol);
   if (alreadyExists) {
     console.log(`⚠️ ${signal.symbol} already tracked. Skipping.`);
     return false;
   }
-
+ 
   const c_date = new Date(
     new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
   );
-
+ 
   const isInserted = await client.send(
     new PutCommand({
       TableName: PlaceStocks ?? "BearPlacedStocks",
@@ -458,9 +454,9 @@ async function insertStock(signal) {
         transactiontype: "SELL",
         riskReward: signal.riskReward,
         stopLoss: signal.stopLoss,
-        signalToken: signal.stockToken,   // ← added (mirrors bullish)
+        signalToken: signal.stockToken,
         limitPrice: "0",
-        lots: "0",                          // ← added (mirrors bullish)
+        lots: "0",
         type: signal.type,
         status: 0,
         createdAt: c_date.toString(),
@@ -468,37 +464,37 @@ async function insertStock(signal) {
       },
     }),
   );
-
+ 
   if (isInserted) {
     console.log(`✅ Signal for ${signal.symbol} stored in DB.`);
     await placeStock(signal);
     return true;
   }
-
+ 
   console.log(`❌ Failed to store signal for ${signal.symbol}.`);
   return false;
 }
-
-// ---------------- ORDER PLACEMENT ----------------
+ 
+// ================================================================
+//  ORDER PLACEMENT
+// ================================================================
 async function placeStock(signal) {
-  // ── Lot calculation (mirrors bullish calculateLots) ───────────
   const qty = await calculateLots(signal);
-
+ 
   if (!qty || qty < 1) {
     console.log(`⚠️ Qty < 1 for ${signal.symbol}. Skipping.`);
     return;
   }
-
-  // For shorts: limit price is 0.3% BELOW current price (better fill on SELL)
+ 
   const limitPrice    = parseFloat((parseFloat(signal.price) * 0.997).toFixed(2));
-  const squareoffDiff = parseFloat((limitPrice - parseFloat(signal.target)).toFixed(2));  // price drops → profit
-  const stoplossDiff  = parseFloat((parseFloat(signal.stopLoss) - limitPrice).toFixed(2)); // price rises → loss
-
+  const squareoffDiff = parseFloat((limitPrice - parseFloat(signal.target)).toFixed(2));
+  const stoplossDiff  = parseFloat((parseFloat(signal.stopLoss) - limitPrice).toFixed(2));
+ 
   if (squareoffDiff <= 0 || stoplossDiff <= 0) {
     console.log(`⚠️ Invalid SL/Target for ${signal.symbol}. Skipping.`);
     return;
   }
-
+ 
   const payload = {
     variety:          "ROBO",
     tradingsymbol:    `${signal.symbol}-EQ`,
@@ -514,79 +510,58 @@ async function placeStock(signal) {
     trailingStopLoss: "0",
     quantity:         qty.toString(),
   };
-
-  // const res = await angelClient.post(
-  //   "/rest/secure/angelbroking/order/v1/placeOrder",
-  //   payload,
-  // );
-
-  // if (res.data?.status === true) {
-  //   console.log(`✅ SHORT order placed : ${signal.symbol} @ ₹${limitPrice}`);
-  //   console.log(`   Order ID          : ${res.data?.data?.orderid}`);
-  //   console.log(`   Qty               : ${qty}`);
-  //   console.log(`   Target            : ₹${signal.target} (-₹${squareoffDiff})`);
-  //   console.log(`   Stop Loss         : ₹${signal.stopLoss} (+₹${stoplossDiff})`);
-  // } else {
-  //   console.log(`❌ Order failed : ${signal.symbol}`);
-  //   console.log(`   Reason       : ${res.data?.message || "Unknown"}`);
-  //   return null;
-  // }
-
-  // ── Update DB status to Executed (1) ──────────────────────────
+ 
+  // const res = await angelClient.post('/rest/secure/angelbroking/order/v1/placeOrder', payload);
+  // if (res.data?.status === true) { ... }
+ 
   const getStockInfo = await client.send(
     new GetCommand({
       TableName: PlaceStocks ?? "BearPlacedStocks",
       Key: { symbolKey: signal.symbol },
     }),
   );
-
+ 
   if (!getStockInfo.Item) {
-    console.log(`⚠️ No record found for ${signal.symbol}. Cannot update status.`);
+    console.log(`⚠️ No record found for ${signal.symbol}.`);
     return;
   }
-
+ 
   const c_date = new Date(
     new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
   );
-
+ 
   await client.send(
     new PutCommand({
       TableName: PlaceStocks ?? "BearPlacedStocks",
       Item: {
-        symbolKey:       getStockInfo.Item.symbolKey,
-        price:           getStockInfo.Item.price,
-        target:          getStockInfo.Item.target,
-        stopLoss:        getStockInfo.Item.stopLoss,
-        riskReward:      getStockInfo.Item.riskReward,
-        signalToken:     getStockInfo.Item.signalToken,
-        transactiontype: "SELL",
-        limitPrice:      limitPrice.toString(),
+        ...getStockInfo.Item,
         lots:            qty.toString(),
-        type:            getStockInfo.Item.type,
-        status:          1, // 0 = Placed, 1 = Executed, 2 = Closed
-        createdAt:       getStockInfo.Item.createdAt,
+        limitPrice:      limitPrice.toString(),
+        transactiontype: "SELL",
+        status:          1,
         updatedAt:       c_date.toString(),
       },
     }),
   );
 }
-
-// ----------------- LOT CALCULATION (mirrors bullish) ----------------
+ 
+// ================================================================
+//  LOT CALCULATION
+// ================================================================
 async function calculateLots(signal) {
   const capital = parseFloat(CONFIG.capital);
   const risk_per_trade = parseFloat(CONFIG.risk_per_trade);
   const amount = (capital * risk_per_trade) / 100;
-  const qty = Math.floor((amount * 5) / parseFloat(signal.price));
-  return qty;
+  return Math.floor((amount * 5) / parseFloat(signal.price));
 }
-
+ 
 // ================================================================
 //  MAIN CRON — Entry Point
 // ================================================================
 export const Bcron = async () => {
   const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
   console.log(`\n🔍 Bearish Scan Started: ${time}`);
-
+ 
   if (!isNearCandleClose()) {
     console.log(
       `⏭️  Skipping — not near a 15m candle close. Next candle closes at :${String(
@@ -594,58 +569,48 @@ export const Bcron = async () => {
           new Date(
             new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
           ).getMinutes() / 15,
-        ) +
-          1) *
-          15,
+        ) + 1) * 15,
       ).padStart(2, "0")}`,
     );
     return;
   }
-
+ 
   console.log("━".repeat(55));
-
-  // ── Step 1: Nifty Bearish Sentiment via AngelOne ────────────────
+ 
   const nifty = await getNiftyBearishSentiment();
-
   console.log(`NIFTY: ${nifty.status || "N/A"} @ ₹${nifty.price || "?"}`);
-
+ 
   if (nifty.status === "ERR") {
     console.error("❌ Aborted: Could not fetch Nifty data.");
     return;
   }
-
+ 
   console.log("━".repeat(55));
-
-  // ── Step 2: Scan stocks via Yahoo Finance ──────────────────────
+ 
   for (const [symbolKey, stockData] of Object.entries(Barish_STOCKS)) {
     try {
       const signal = await getBearishExpertSignal(symbolKey, nifty, stockData.token);
-
+ 
       if (signal.status === "TRIGGERED") {
         console.log(
           `🔥 [${signal.type}] SHORT: ${symbolKey} @ ₹${signal.price} | 🎯 ${signal.target} | 🛑 ${signal.stopLoss}`,
         );
         await insertStock(signal);
       } else {
-        const statusLabel =
-          {
-            WAITING: `⏳ ${signal.reason || "Monitoring"}`,
-            REJECTED: `🚫 ${signal.reason}`,
-            SYNCING: "🔄 Syncing",
-            ERROR: `❌ ${signal.message || "Error"}`,
-          }[signal.status] || signal.status;
-
-        console.log(`${symbolKey.padEnd(14)}: ${statusLabel}`);
+        const label = {
+          WAITING:  `⏳ ${signal.reason || "Monitoring"}`,
+          REJECTED: `🚫 ${signal.reason}`,
+          SYNCING:  "🔄 Syncing",
+          ERROR:    `❌ ${signal.message || "Error"}`,
+        }[signal.status] || signal.status;
+ 
+        console.log(`${symbolKey.padEnd(14)}: ${label}`);
       }
     } catch (err) {
       console.error(`Error processing ${symbolKey}:`, err.message);
     }
   }
-
+ 
   console.log("━".repeat(55));
-  console.log(
-    `🔍 Bearish Scan Complete: ${new Date().toLocaleTimeString("en-IN")}\n`,
-  );
+  console.log(`🔍 Bearish Scan Complete: ${new Date().toLocaleTimeString("en-IN")}\n`);
 };
-
-// await Bcron();

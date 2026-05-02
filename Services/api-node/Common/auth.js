@@ -49,5 +49,5 @@ export const tokengeneration = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify({ token }),
-  };
+  };  
 };
